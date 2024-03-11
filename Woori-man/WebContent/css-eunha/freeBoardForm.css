@@ -1,0 +1,23 @@
+@charset "UTF-8";
+div.board-title-div {margin-top: 10px;}
+div.board-content-div {margin-top: 10px;}
+form.board-insert-form {margin: 0px 100px;}
+input.board-title {background-color: #f5f6f8; border: none; border-radius: 10px; min-height: 48px; padding: 13px 16px; width: 100%;}
+textarea.board-content {resize: none; width: 100%; min-height: 600px; border: 1px solid #d5d5d5; border-radius: 5px; padding: 20px;}
+button.board-form-btn {border: 1px solid #e4e4e4; background-color: #fff; padding: 6px 14px; margin: 3px 10px;}
+button.submit-btn {background-color: #ff9a34;}
+button.submit-btn:hover {background-color: #ff8000;}
+button.cancel-btn:hover {background-color: #f2f2f2;}
+div.warning-info {color: #8f8f8f; font-size: 11pt; margin: 20px 0px; text-align: left;}
+div.board-attach-div {text-align: left;}
+input.board-attach {display: block; margin: 5px 0px;}
+i.bi-plus-square {font-size: 15pt; color: #929292;}
+i.bi-plus-square:hover {color: black;}
+
+@media screen and (max-width: 900px)
+{
+	div.container {margin: 0px; max-width: 900px; width: 100%;}
+	form.board-insert-form {margin: 0px;}
+	input.board-title {width: 95%;}
+	textarea.board-content {width: 95%;}
+}

@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/* [그룹명] 게시판명 */
+div.board-title {font-size: 23pt; display: flex; align-items: center; font-family: 라인Seed;}
+span.group-name {color: #ff8000; font-size: 30pt;}
+div.count-article {font-family: 맑은 고딕; display: flex; align-items: center; margin: 0px 10px;}
+#new-article, #total-article {padding: 0px 5px;}
+
+/* 검색 메뉴창 */
+div.content-search {margin-bottom: 10px; text-align: right; display: flex; justify-content: space-between;}
+button.btn-search {background-color: #ff8000; border-radius: 30px; width: 50px; border: none;}
+button.btn-search:hover {background-color: #FF6F0F;}
+i.bi-search {color: white; font-size: 12pt;}
+.search-bar {height: 25px;}
+
+/* 게시판 컬럼 목록 */
+div.content-column
+{
+	font-size: 12pt; font-weight: bold; font-family: 라인Seed; border-bottom: 1px solid #ff8000;
+	border-top: 1px solid #ff8000; display: flex; justify-content: space-between; text-align: center;
+}
+.content-column-name {padding: 5px 0px;}
+.content-column-name, .article {display: inline-block; padding: 5px 0px;}
+
+/* 게시글 목록 요소들 */
+div.article {border-bottom: 1px solid #ddd; display: flex; text-align: center; justify-content: space-between; align-items: center;}
+.article:hover {background-color: #fff2ea;}
+div.article-element {display: inline-block; font-size: 11pt;}
+div.article-number.article-element {font-size: small; color: gray;}
+.content-column-name, .article-element {margin: 2px 5px;}
+.article-title {width: 450px;}
+.article-title > a {text-decoration: none; color: black;}
+.write-user {width: 100px;}
+.write-date {width: 120px;}
+.article-number {width: 80px;}
+
+/* 하단 버튼 */
+div.button-div {display: flex; justify-content: space-between; margin: 10px 0px; font-family: 맑은 고딕; font-weight: bold;}
+button.article-button { border: 1px solid #ff8000; margin: 0px 3px; background-color: white;}
+button.article-button:hover {background-color: #ff8000; color: white; font-weight: bold;}
+
+/* 모임 발의 모달 */
+.btn-secondary {font-size: 10pt; padding: 2px 5px;}
+div.modal-body {display: flex; justify-content: space-around;}
+div.meeting-category-div {display: inline-block; border: 1px solid #ddd; padding: 5px 10px; }
+div.meeting-category-div:hover {background-color: #fff2ea;}
+a {text-decoration: none;}
+a:visited {text-decoration: none; color: black;}

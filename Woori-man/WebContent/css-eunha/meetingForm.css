@@ -1,0 +1,18 @@
+@charset "UTF-8";
+div.meeting-date-div, div.submit-btn-div, div.sub-content-div {display: none;}
+span.meeting-writer, form>div>span.group-name, form>div>span.meeting-category, form>div>.meeting-title, span.meeting-region
+{
+	display: inline-block; background-color: #ffdbb8; font-family: 라인Seed; font-size: 20pt;
+	padding: 5px 13px 0px 13px; border-radius: 10px; margin: 5px 7px; color: black;
+}
+form>div>.meeting-title {border: none; font-size: 15pt; text-align: center; width: 500px;}
+div.meeting-region-div {display: flex; justify-content: center;}
+div.list-column {width: 200px;}
+div.list-column-name {padding: 8px; border-bottom: 1px solid #d2d2d2; text-align: center; font-size: 10.5pt; font-weight: bold;}
+ul.select-list {max-height: 180px; overflow-y: auto; font-size: 11pt; padding: 0px; margin-top: 4px; margin-right: 5px;}
+li.region-item, li.city-item {padding: 8px 16px; text-align: left; list-style: none; display: flex; align-items: center;}
+.selected-item {background-color: #fff8f6; color: #ff8000;}
+ul.city-list {display: none;}
+div.meeting-region-info {display: none; align-items: center;}
+div.etc-write {width: inherit; display: flex; flex-direction: column; align-items: flex-end; align-content: space-around; flex-wrap: wrap;}
+textarea.meeting-etc-input {resize: none; width: 500px;}

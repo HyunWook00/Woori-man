@@ -1,0 +1,24 @@
+@charset "UTF-8";
+div.article-title>div.meeting-title, div.article-title>div.meeting-category { display: inline-block;}
+span.meeting-badge {display: inline-block; border-radius: 20px; font-family: 라인Seed; color: white; background: #ff8000; padding: 1px 7px;}
+span.meeting-regular {background-color: #ff8a3d;}
+span.meeting-irregular {background-color: #ffd400;}
+
+/* 투표 영역 */
+canvas#vote-status {width: 250px;}
+div.article-detail, div.article-vote {display: inline-block; vertical-align: top; margin: 50px;}
+input.vote-title {border: none; display: block; width: 100%; text-align: center;}
+label {margin:0px 20px 0px 5px; display: inline-block;}
+div.update-date {display: inline-block; font-size: 10pt; font-family: 맑은 고딕; }
+.vote-submit-btn {font-family: 라인Seed; background: white; border: 1px solid #ff8000; padding: 2px 8px 1px 8px; font-size: 20pt; border-radius: 5px; margin: 5px 20px;}
+.vote-submit-btn:hover, .selected-btn {background-color: #ff8000; color: white;}
+table {margin: 5px 0px 30px 0px;}
+td {text-align: left; padding: 5px;}
+td>span {font-family: 라인Seed; font-size: 18pt; background-color: #ebebeb; display: inline-block; border-radius: 5px; padding: 2px 7px;}
+div.vore-end {font-family: 맑은 고딕; font-size: 13pt; margin-bottom: 20px;}
+div.vote-end>span {font-family: 라인Seed; font-size: 14pt; border-bottom: 1px solid #ff8000;}
+th.visit-place {font-family: 라인Seed; font-size: 14pt; padding: 0px 10px;}
+span.place-name {display: inline-block; background-color: #ebebeb; font-family: 맑은 고딕; font-size: 13pt; font-weight: bold;}
+div.meeting-memo {background-color: #fff173; border-radius: 5px; text-align: center; padding: 10px; margin: 0px 50px 0px 50px;}
+span.memo-title {display: inline-block; font-family: 라인Seed; font-size: 14pt; border-bottom: 1px solid #ff8000; margin-bottom: 15px;}
+div.writer-message {font-size: 10pt; font-family: 맑은 고딕; color: red; margin: 5px 0px;}
