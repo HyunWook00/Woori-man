@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 2024-03-08 노은하 -->
+ <mapper namespace="com.test.mvc.IHistoryDAO">
+ 
+ 	<select id="getHistoryList" resultType="com.test.mvc.HistoryDTO">
+ 		SELECT HIS_CODE, HIS_DATE, HIS_VIEW, HIS_CONTENT, AO_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, MT_CODE, MT_TITLE, CG_CODE, HIS_LIKE
+ 		FROM HISTORY_LIST_VIEW
+ 		WHERE CG_CODE = #{cg_code}
+ 	</select>
+ 	
+ 	<select id="getHistoryArticle" resultType="com.test.mvc.HistoryDTO">
+ 		SELECT HIS_CODE, HIS_DATE, HIS_VIEW, HIS_CONTENT, AO_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, MT_CODE, MT_TITLE, CG_CODE, HIS_LIKE
+ 		FROM HISTORY_LIST_VIEW
+ 		WHERE HIS_CODE = #{his_code}
+ 	</select>
+ 	
+ 	<select id="getArticleLike" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) FROM HISTORY_LIKE
+ 		WHERE HIS_CODE = ${param1}
+ 		AND GM_CODE = ${param2}
+ 	</select>
+ 	
+ 	<insert id="insertArticleLike">
+ 		INSERT INTO HISTORY_LIKE(HL_CODE, HIS_CODE, GM_CODE)
+ 		VALUES(SEQ_HISTORY_LIKE.NEXTVAL, #{param1}, #{param2})
+ 	</insert>
+ 	
+ 	<update id="updateArticleView">
+ 		UPDATE HISTORY
+ 		SET HIS_VIEW = HIS_VIEW + 1
+ 		WHERE HIS_CODE = #{his_code}
+ 	</update>
+ 	
+ 	<delete id="deleteArticleLike">
+ 		DELETE
+ 		FROM HISTORY_LIKE
+ 		WHERE HIS_CODE = #{param1}
+ 		AND GM_CODE = #{param2}
+ 	</delete>
+ 	
+ 	<select id="getMeetingList" resultType="com.test.mvc.MeetingDTO">
+ 		SELECT ROW_NUMBER() OVER(ORDER BY MT_DATE DESC) AS NUM
+ 		, MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME
+ 		FROM VIEW_MEETING_LIST
+ 		WHERE MT_STATUS = 2
+ 		AND CG_CODE = #{cg_code}
+ 	</select>
+ 
+ </mapper>
+ 

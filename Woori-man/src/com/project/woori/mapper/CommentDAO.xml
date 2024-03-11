@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 2024-02-27 노은하 -->
+<mapper namespace="com.test.mvc.ICommentDAO"> <!-- 인터페이스 경로 -->
+
+	<insert id="insertComment">
+		INSERT INTO MEETING_COMMENT(MCM_CODE, MCM_DATE, MCM_CONTENT, MT_CODE, GM_CODE)
+		VALUES(SEQ_MEETING_COMMENT.NEXTVAL, SYSDATE, #{commentContent}, #{articleCode}, #{commentWriterCode})
+	</insert>
+	
+	<insert id="insertBoardComment">
+		INSERT INTO BOARD_COMMENT(BC_CODE, BC_DATE, BC_CONTENT, BRD_CODE, GM_CODE)
+		VALUES(SEQ_BOARD_COMMENT.NEXTVAL, SYSDATE, #{commentContent}, #{articleCode}, #{commentWriterCode})
+	</insert>
+	
+	<insert id="insertRecomment">
+		INSERT INTO MEETING_RECOMMENT(MRC_CODE, MRC_DATE, MRC_CONTENT, MCM_CODE, GM_CODE)
+		VALUES(SEQ_MEETING_RECOMMENT.NEXTVAL, SYSDATE, #{recommentContent}, #{commentCode}, #{recommentWriterCode})
+	</insert>
+
+	<update id="updateComment">
+		UPDATE MEETING_COMMENT
+		SET MCM_CONTENT = #{commentContent}
+		WHERE MCM_CODE = #{commentCode} AND GM_CODE = #{commentWriterCode}
+	</update>
+	
+	<update id="updateRecomment">
+		UPDATE MEETING_RECOMMENT
+		SET MRC_CONTENT = #{recommentContent}
+		WHERE MRC_CODE = #{recommentCode} AND GM_CODE = #{recommentWriterCode}
+	</update>
+	
+	<delete id="deleteComment">
+		DELETE
+		FROM MEETING_COMMENT
+		WHERE MCM_CODE = #{commentCode}
+	</delete>
+	
+	<delete id="deleteRecomment">
+		DELETE FROM MEETING_RECOMMENT
+		WHERE MRC_CODE = #{recommentCode}
+	</delete>
+	
+	<select id="countCommentLike" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COMMENT_LIKE
+		FROM MEETING_COMMENT_LIKE
+		WHERE MCM_CODE = #{commentCode}
+	</select>
+	
+	<select id="countRecommentLike" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS RECOMMENT_LIKE
+		FROM MEETING_RECOMMENT_LIKE
+		WHERE MRCM_CODE = #{recommentCode}
+	</select>
+	
+	<select id="searchComment" resultType="com.test.mvc.CommentDTO">
+		SELECT MC.MCM_CODE AS COMMENTCODE
+		, MC.MCM_DATE AS MCM_DATE
+		, MC.MCM_CONTENT AS COMMENTCONTENT
+		, GM.GM_CODE AS COMMENTWRITERCODE
+		, GM.GM_NICKNAME AS COMMENTWRITERNAME
+		FROM MEETING_COMMENT MC, GROUP_MEMBER GM
+		WHERE MC.GM_CODE = GM.GM_CODE
+		AND MC.MCM_CODE = #{commentCode}
+	</select>
+	
+</mapper>

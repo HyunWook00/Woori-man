@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 2024-03-04 노은하 -->
+ <mapper namespace="com.test.mvc.IBoardDAO">
+ 
+ 	<select id="getBoardList" resultType="com.test.mvc.BoardDTO">
+ 		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
+ 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
+ 		FROM VIEW_BOARD_LIST
+ 		WHERE CG_CODE = #{cg_code}
+ 	</select>
+ 	
+ 	<select id="getNewArticle" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS NEW
+		FROM BOARD
+		WHERE CG_CODE = #{cg_code}
+		AND TRUNC(BRD_DATE) = TRUNC(SYSDATE)
+		AND BRD_CODE NOT IN (SELECT BRD_CODE FROM BOARD_REPORT)
+ 	</select>
+ 	
+ 	<insert id="insertArticle">
+ 		INSERT INTO BOARD(BRD_CODE, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, GM_CODE, CG_CODE)
+ 		VALUES(SEQ_BOARD.NEXTVAL, SYSDATE, #{brd_subject}, #{brd_content}, 0, #{gm_code}, #{cg_code})
+ 	</insert>
+ 	
+ 	<select id="getBoardArticle" resultType="com.test.mvc.BoardDTO">
+ 		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
+ 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
+ 		FROM VIEW_BOARD_LIST
+ 		WHERE BRD_CODE = #{brd_code}
+ 	</select>
+ 	
+ 	<update id="updateArticleView">
+ 		UPDATE BOARD
+ 		SET BRD_VIEW = BRD_VIEW + 1
+ 		WHERE BRD_CODE = #{brd_code}
+ 	</update>
+ 	
+ 	<update id="updateArticle">
+ 		UPDATE BOARD
+ 		SET BRD_SUBJECT = #{brd_subject}, BRD_CONTENT = #{brd_content}
+ 		WHERE BRD_CODE = #{brd_code}
+ 	</update>
+ 	
+ 	<delete id="deleteArticle">
+ 		DELETE
+ 		FROM BOARD
+ 		WHERE BRD_CODE = #{brd_code}
+ 	</delete>
+ 
+ </mapper>
+ 
+ 
