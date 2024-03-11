@@ -10,11 +10,11 @@
 <meta charset="UTF-8">
 <title>AdminMain</title>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -46,8 +46,110 @@
 		div.profile {display: block; text-align: center;}
 		div.task {padding: 10px 0px; margin: 10px 0px;}
 	}
+	
+	
+	/* 모달 부분 css */
+	.pwdinfo
+	{
+		color: #343a40; font-size: small;
+	}
+	.errDiv
+	{
+	  	display: flex;
+   	 	padding-bottom: 20px;
+    	color: red;
+    	align-items: center;
+    	padding-left: 15px;
+	}
+	.modalImg
+	{
+		width: 30px; height: 30px;
+	}
+	
+	.errImg
+	{
+		width: 20px; height: 20px;
+		display: none;
+	}
+	
+	.err1
+	{
+		margin-left: 5px;
+		display: none;
+	}
+	
+	.err2
+	{
+		margin-left: 5px;
+		display: none;
+	}
+	.modal-top
+	{
+	    margin-top: 5px;
+    	font-size: 20px;
+	}
+	
+	
 </style>
+ <!-- 부트스트랩 js -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- 제이쿼리 적용 JS -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
 
+
+	// 모달 부분 스크립 영역
+	$(document).ready(function()
+	{
+		var count = '${count}';
+		var msg = '${msg}';
+		
+		if (msg == "true")
+		{
+			alert("비밀번호 변경이 완료 되었습니다.")
+		}
+		
+		
+		if (count == 1)
+		{
+			$(".modal").modal("show");
+			
+			$(".updateBtn").click(function()
+			{
+				//alert("확인");
+				
+				var ad_pwd1 = $("#ad_pwd1").val();
+				var ad_pwd2 = $("#ad_pwd2").val();
+				//alert(ad_pwd1 + ad_pwd2);
+				
+				$(".err1").css("display", "none");
+				$(".err2").css("display", "none");
+				$(".errImg").css("display", "none");
+				
+				
+				if (!$.trim(ad_pwd1) || !$.trim(ad_pwd2))
+				{
+					$(".err1").css("display", "inline-block");
+					$(".errImg").css("display", "inline-block");
+					return;
+				}
+				
+				if (ad_pwd1 != ad_pwd2)
+				{
+					$(".err2").css("display", "inline-block");
+					$(".errImg").css("display", "inline-block");
+					return;
+				}
+				
+				$("#modalForm").submit();
+				
+			});
+			
+		}
+		
+	});
+
+</script>
 </head>
 <body>
 
@@ -208,6 +310,59 @@
 	
 
 </div>
+
+
+<!-- 모달 부분 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog">
+  	
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"><img src="images/siren.png" class="modalImg"></h1>
+        <div class="modal-top">알림</div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="updateadpwd.woori" method="post" id="modalForm" >
+          <div class="mb-3">
+            <div class="pwdinfo">※현재 생년월일과 동일한 비밀번호로 설정되어 있습니다.</div>
+            <div class="pwdinfo">보안을 위해 새로운 비밀번호를 설정을 권장합니다.</div>
+          </div>
+          <div class="mb-3">
+            <label for="ad_pwd1" class="col-form-label">새 비밀번호</label>
+            <input type="password" class="form-control" id="ad_pwd1" name="ad_pwd1">
+          </div>
+          <div class="mb-3">
+            <label for="ad_pwd2" class="col-form-label">새 비밀번호 확인</label>
+            <input type="password" class="form-control" id="ad_pwd2" name="ad_pwd2">
+          </div>
+        </form>
+      </div>
+      
+      <div class="errDiv">
+      	<img src="images/exclamation.png" class="errImg" >
+      	<span class="err1">올바른 비밀번호를 입력해주세요.</span>
+      	<span class="err2">비밀번호가 일치하지 않습니다.</span>
+      </div>
+      
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary updateBtn">변경</button>
+        <button type="button" class="btn btn-secondary closeBtn" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
