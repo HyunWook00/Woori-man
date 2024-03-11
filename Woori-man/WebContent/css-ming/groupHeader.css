@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: '라인Seed';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.groupHeader
+{
+	border: 1px solid #ff8000;
+	text-align: center;
+	width: 1625px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50px;
+}
+
+.groupHeader div
+{
+    font-family: 라인Seed;
+    color: #ff8000;
+    display: inline-block;
+    padding-top: 15px;
+    width: 300px;
+    padding: 12px;
+}
+
+.groupHeader a
+{
+	color: #ff8000;
+	text-decoration: none;
+}
+
+.groupHeader_title
+{
+    float: inline-start;
+    padding-top: 3px;
+    margin-left: 18px;
+}

@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: '라인Seed';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 10;
+  box-sizing: border-box;
+  font-family:'라인Seed';
+}
+
+/*#5 */
+.myPageCalender 
+{
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px #ddd;
+}
+ 
+.myPageCalender .nav button {
+  font-size: 15px;
+  color: #878787;
+  border: none;
+  background-color: transparent;
+}
+
+/*#7*/
+.myCalendar ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  text-align: center;
+  padding-left: 0 !important;
+}
+.myCalendar .myWeek li 
+{
+  font-weight: 500;
+  border: 1px solid #ddd;
+}
+.myCalendar .date {
+  margin-bottom: 20px;
+}
+.myCalendar ul li 
+{
+  width: calc(100% / 7);
+  position: relative;
+}
+.myCalendar .date li {
+  z-index: 1;
+  padding-top:10px;
+  padding-bottom: 80px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  height: 110px;
+}
+  
+}
+ 
+/*#11*/
+.date li.inactive {
+  color: #aaa;
+}
+
+.date li.active {
+  color: #fff;
+}
+
+.myPoint > span
+{
+	margin: 10px;
+}
+
+.myCalendar .date li::before {
+    position: absolute;
+    content: '';
+    height: 30px;
+    width: 30px;
+    top: 19px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.date li.myPoint::before {
+  background: #ff8000;
+}
+
+.point
+{
+ 	position: relative;
+ 
+}
+.myPointmeet
+{
+    position: absolute;
+    font-size: 13px;
+    width: 137px;
+    padding-top: 5px;
+    margin-top: 33px;
+}
+
+#myPrevBtn, #myNextBtn, #myCurrentMonth
+{
+    cursor: pointer;
+    margin-inline: 16px;
+    padding: 10px;
+    height: 80px;
+    font-size: 20px;
+    align-content: center;
+    padding-top: 20px;
+	
+}
+
+.myNav
+{
+	display: flex;
+    justify-content: center;
+}

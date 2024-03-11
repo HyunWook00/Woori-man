@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+.sideCalender
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 280px;
+}
+
+.wrapper {
+  width: 90%;
+  background: #fff;
+  border-radius: 10px;
+}
+ 
+.wrapper .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 280px;
+}
+
+.nav
+{
+	font-family: 라인Seed;
+}
+
+.wrapper .nav button 
+{
+  font-size: 15px;
+  color: #343434;
+  border: none;
+  background-color: transparent;
+}
+
+.calendar ul 
+{
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  padding: 0;
+  text-align: center;
+  font-family: 라인Seed;
+}
+.calendar .weeks li 
+{
+  font-weight: 500;
+  font-family: 라인Seed;
+}
+.calendar .currentDays 
+{
+  margin-bottom: 20px;
+}
+.calendar ul li 
+{
+  width: calc(100% / 7);
+  position: relative;
+}
+.calendar .currentDays li {
+  /*#10*/
+  z-index: 1;
+  margin-top: 10px;
+  cursor: pointer;
+  position: relative;
+}
+ 
+/*#11*/
+.currentDays li.inactive {
+  color: #aaa;
+}
+
+.currentDays li.active {
+  color: #fff;
+}
+.calendar .currentDays li::before {
+    position: absolute;
+    content: '';
+    height: 24px;
+    width: 24px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.currentDays li.point::before {
+  background: #ff8000;
+}
+
+.point:hover 
+{
+    display: inline;
+    z-index: 2 !important;
+}
+
+.point .pointMt
+{
+	display: none;
+}
+.point:hover .pointMt
+{
+	display: inline-block;
+	position: absolute;
+	width: 200px;
+	height: 100px;
+	padding: 5px;
+	background-color: white;
+	border: 1px solid #ddd;
+}
+
+
+

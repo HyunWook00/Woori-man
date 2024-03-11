@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+
+	@font-face {
+    font-family: '라인Seed';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+
+
+	.inquiryPost, .NoticesPost
+	{
+		width: 1240px;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	table
+	{
+		font-family: 라인Seed;
+		border: 1px solid ;
+		box-shadow: 3px 3px 3px #ddd;
+	}
+	
+	td
+	{
+		font-family: 맑은 고딕;
+	    font-size: 13pt;
+   		text-align: left;
+		padding:  10px !important;
+	}
+	
+	.aaa
+	{
+		font-family: 라인Seed;
+		text-align: left;
+	}
+	
+	
+	.admin
+	{
+		text-align: right;
+	}
+	
+	.content
+	{
+		height: 200px;
+		padding: 10px;
+	}
+	
+	.content th
+	{
+		border-right: 1px solid #ddd;
+	}
+	
+	.mbtn
+	{
+		font-size: 15pt;
+		padding: 10px;
+		width: 100pt;
+		color: white;
+		border: 1px solid #ff8000;
+		border-radius: 10px;
+		background-color:  #ff8000;
+	}
+	
+	.mbtn:hover
+	{
+		background-color: #e97501;
+		color: white;
+	}
+	
+	
+	
+	
