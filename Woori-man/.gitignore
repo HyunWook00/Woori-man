@@ -81,7 +81,7 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar#
 *.war
 *.nar
 *.ear
@@ -120,6 +120,7 @@ $RECYCLE.BIN/
 *.lnk
 
 dispatcher-servlet.xml
-web.xml
+DBConn.java
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
+/build/
