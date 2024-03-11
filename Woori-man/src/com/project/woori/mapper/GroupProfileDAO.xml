@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IGroupDAO">
+
+	<select id="groupList" resultType="com.test.mybatis.GroupDTO">
+		SELECT CG_NAME, CG_INTRO, TO_CHAR(TRUNC(CG_DATE)) AS CG_DATE, CG_PROFILE
+		FROM CREATE_GROUP
+		WHERE CG_CODE = #{cg_code}
+	</select>
+
+	<!-- 	
+	<select id="groupPoint" resultType="com.test.mybatis.GroupDTO">
+		SELECT TO_NUMBER(누적포인트) - TO_NUMBER(사용포인트) AS GROUP_POINT
+		FROM 
+		(    
+		    SELECT (SELECT SUM(GP_SCORE)
+		            FROM GROUP_POINT
+		            WHERE PS_CODE = 2)  AS 누적포인트
+		            ,
+		            (SELECT SUM(GP_SCORE)
+		             FROM GROUP_POINT
+		             WHERE PS_CODE = 1) AS 사용포인트
+		    FROM CREATE_GROUP
+		    WHERE CG_CODE = #{cg_code}
+		)
+	</select>
+ 	-->	
+	
+	<select id="groupPosition" resultType="com.test.mybatis.GroupDTO">
+		SELECT P.POS_NAME AS POS_NAME , M.GM_NICKNAME AS GM_NICKNAME
+		FROM POSITION_APPOINT A JOIN POSITION P
+		     ON A.POS_CODE = P.POS_CODE
+		     JOIN GROUP_MEMBER M
+		     ON A.GM_CODE1 = M.GM_CODE
+		     JOIN GROUP_INVITE I
+		     ON M.GI_CODE = I.GI_CODE
+		WHERE I.CG_CODE = #{cg_code}
+		AND P.POS_CODE IN (1,2)
+	</select>
+	
+	<select id="groupCount" resultType="java.lang.Integer">
+		SELECT COUNT(GM_CODE) AS GM_COUNT
+		FROM GROUP_MEMBER
+		WHERE GI_CODE IN ( SELECT GI_CODE
+                  		   FROM GROUP_INVITE
+                   		   WHERE CG_CODE = #{cg_code})
+	</select>
+	
+	<select id="myGroupProfile" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT M.GM_NICKNAME AS GM_NICKNAME, P.POS_NAME AS POS_NAME,TO_CHAR(TRUNC(M.GM_REGDATE)) AS GM_REGDATE
+    		 , M.GM_INTRO AS GM_INTRO, M.GM_PROFILE AS GM_PROFILE
+		FROM POSITION_APPOINT A JOIN POSITION P
+		     ON A.POS_CODE = P.POS_CODE
+		     JOIN GROUP_MEMBER M
+		     ON A.GM_CODE1 = M.GM_CODE
+		WHERE M.GM_CODE = #{gm_code}
+	</select>
+
+</mapper>

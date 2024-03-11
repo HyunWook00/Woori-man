@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IReportDAO">
+
+	<select id="allReportList" resultType="com.test.mybatis.ReportDTO">
+		SELECT REPORT_CODE, REPORT_DATE, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE
+		FROM ALL_REPORTLIST
+		WHERE US_CODE1 = #{us_code} OR US_CODE2 = #{us_code}
+		ORDER BY REPORT_DATE DESC
+	</select>
+	
+	<select id="groupReportList" resultType="com.test.mybatis.ReportDTO">
+		SELECT REPORT_CODE, TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE
+        FROM GROUP_REPORT_VIEW     
+        WHERE US_CODE1 = #{us_code} OR US_CODE2 = #{us_code}
+        ORDER BY REPORT_DATE DESC
+	</select>
+	
+	<select id="meetingReportList" resultType="com.test.mybatis.ReportDTO">
+		 SELECT REPORT_CODE, TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE
+	     FROM MEETING_REPORT_LIST_VIEW
+	     WHERE US_CODE1 = #{us_code} OR US_CODE2 = #{us_code}
+	     ORDER BY REPORT_DATE DESC
+	</select>
+	
+	<select id="historyReportList" resultType="com.test.mybatis.ReportDTO">
+		SELECT REPORT_CODE, TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE
+		FROM HISTORY_REPORT_LIST_VIEW
+		WHERE US_CODE1 = #{us_code} OR US_CODE2 = #{us_code}
+		ORDER BY REPORT_DATE DESC
+	</select>
+	
+	<select id="boardportList" resultType="com.test.mybatis.ReportDTO">
+		SELECT REPORT_CODE, TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE
+        FROM BOARD_REPORT_LIST_VIEW 
+        WHERE US_CODE1 = #{us_code} OR US_CODE2 = #{us_code}
+        ORDER BY REPORT_DATE DESC
+	</select>
+
+</mapper>

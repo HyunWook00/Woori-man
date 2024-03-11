@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IGroupDAO">
+
+	<select id="newBorad" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT BRD_NAME, BRD_SUBJECT, BRDR_CODE
+		FROM (
+		    SELECT G.BRD_NAME AS BRD_NAME, B.BRD_SUBJECT AS BRD_SUBJECT, BR.BRDR_CODE AS BRDR_CODE ,RANK() OVER(ORDER BY B.BRD_CODE DESC) AS RANK
+		    FROM BOARD B JOIN CREATE_GROUP G 
+		         ON B.CG_CODE = G.CG_CODE
+		         LEFT JOIN BOARD_REPORT BR
+		         ON BR.BRD_CODE = B.BRD_CODE
+		    WHERE G.CG_CODE = #{cg_code}
+		)
+		WHERE RANK <![CDATA[<=]]> 5  
+		ORDER BY RANK
+	</select>
+	
+	<select id="newHistory" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT HIS_TITLE, HR_CODE
+		FROM (
+		    SELECT '[' || M.MT_TITLE ||']모임의 '|| M.GM_NICKNAME ||'님이 작성한 히스토리입니다.' AS HIS_TITLE
+		          ,HR.HR_CODE AS HR_CODE
+		          ,RANK() OVER(ORDER BY HR_CODE DESC) AS RANK
+		    FROM MEETING M JOIN ATTEND_OPINION A
+		         ON M.MT_CODE = A.MT_CODE
+		         JOIN HISTORY H
+		         ON A.AO_CODE = H.AO_CODE
+		         JOIN GROUP_MEMBER M
+		         ON M.GM_CODE = A.GM_CODE
+		         JOIN GROUP_INVITE I
+		         ON M.GI_CODE = I.GI_CODE
+		         LEFT JOIN HISTORY_REPORT HR
+		         ON HR.HIS_CODE = H.HIS_CODE  
+		    WHERE I.CG_CODE = #{cg_code}     
+		)
+		WHERE RANK <![CDATA[<=]]> 5
+		ORDER BY RANK
+	</select>
+
+	<select id="noticesList" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT NF_TITLE
+		FROM NOTIFICATION
+		ORDER BY NF_CODE DESC
+	</select>
+	
+	<select id="impromptuMeeting" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT M.MT_TITLE AS MT_TITLE, M.MT_MEET AS MT_MEET, C.CT_NAME AS CT_NAME
+     		 , M.MT_DATE ||' ~ '|| TRUNC(M.MT_MEET-6) AS AO_DATE
+     		 , RANK () OVER(ORDER BY MT_MEET) AS MT_RANK
+		FROM MEETING M JOIN GROUP_MEMBER G
+		     ON M.GM_CODE = G.GM_CODE
+		     JOIN GROUP_INVITE I
+		     ON I.GI_CODE = G.GI_CODE
+		     JOIN CITY C
+		     ON C.CT_CODE = M.CT_CODE
+		WHERE I.CG_CODE = #{cg_code}
+		AND MC_CODE = 2
+		AND  5 <![CDATA[<]]> (M.MT_MEET - SYSDATE)
+	</select>
+	
+	<select id="regularMeeting" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT M.MT_TITLE AS MT_TITLE, M.MT_MEET AS MT_MEET, C.CT_NAME AS CT_NAME
+		     , M.MT_DATE ||' ~ '|| TRUNC(M.MT_MEET-6) AS AO_DATE
+		     , RANK () OVER(ORDER BY MT_MEET) AS MT_RANK
+		FROM MEETING M JOIN GROUP_MEMBER G
+		     ON M.GM_CODE = G.GM_CODE
+		     JOIN GROUP_INVITE I
+		     ON I.GI_CODE = G.GI_CODE
+		     JOIN CITY C
+		     ON C.CT_CODE = M.CT_CODE
+		WHERE I.CG_CODE = #{cg_code}
+		AND MC_CODE = 1
+		AND  5 <![CDATA[<]]> (M.MT_MEET - SYSDATE)
+	</select>
+
+</mapper>

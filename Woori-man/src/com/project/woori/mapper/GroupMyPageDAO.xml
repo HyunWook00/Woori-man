@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IGroupMyPageDAO">
+
+	<select id="myGroupProfileList" resultType="com.test.mybatis.GroupDTO_ming">
+		SELECT M.GM_NICKNAME AS GM_NICKNAME, P.POS_NAME AS POS_NAME,TO_CHAR(TRUNC(M.GM_REGDATE),'YYYY-MM-DD') AS GM_REGDATE
+    		 , M.GM_INTRO AS GM_INTRO, M.GM_PROFILE AS GM_PROFILE
+		FROM POSITION_APPOINT A JOIN POSITION P
+		     ON A.POS_CODE = P.POS_CODE
+		     JOIN GROUP_MEMBER M
+		     ON A.GM_CODE1 = M.GM_CODE
+		WHERE M.GM_CODE = #{gm_code}
+	</select>
+	
+	<select id="myProfileList" resultType="com.test.mybatis.UserDTO">
+		SELECT U.US_ID AS US_ID , U.US_PWD AS US_PWD, I.US_BIRTHDAY AS US_BIRTHDAY, I.US_TEL AS US_TEL
+    	     , I.US_NAME AS US_NAME, I.US_NAME AS US_NAME, I.US_ZIPCODE AS US_ZIPCODE, I.US_ADDR1 AS US_ADDR, I.US_ADDR2 AS US_ADDR2
+    	     , I.US_EMAIL AS US_EMAIL
+    	     , I.US_PROFILE AS US_PROFILE
+		FROM USERS U JOIN USER_INFO I 
+		     ON U.US_CODE = I.US_CODE
+		WHERE U.US_CODE = #{us_code}
+	</select>
+
+	<select id="regularBoard" resultType="com.test.mybatis.BoardDTO">
+		SELECT MT_TITLE, TO_CHAR(MT_DATE,'YYYY-MM-DD') AS MT_DATE,  MT_CODE
+		FROM MEETING
+		WHERE GM_CODE = #{gm_code}
+		  AND MC_CODE = 1
+		ORDER BY MT_DATE DESC
+	</select>
+	
+	<select id="impromptuBoard" resultType="com.test.mybatis.BoardDTO">
+		SELECT MT_TITLE, TO_CHAR(MT_DATE,'YYYY-MM-DD') AS MT_DATE,  MT_CODE
+		FROM MEETING
+		WHERE GM_CODE = #{gm_code}
+		  AND MC_CODE = 2
+		ORDER BY MT_DATE DESC
+	</select>
+	
+	<select id="historyBorad" resultType="com.test.mybatis.BoardDTO">
+		SELECT M.MT_TITLE AS MT_TITLE, H.HIS_VIEW AS HIS_VIEW, TO_CHAR(H.HIS_DATE,'YYYY-MM-DD') AS HIS_DATE, G.GM_NICKNAME AS GM_NICKNAME , H.HIS_CODE
+		FROM HISTORY H JOIN ATTEND_OPINION A
+		     ON H.AO_CODE = A.AO_CODE
+		     JOIN MEETING M 
+		     ON M.MT_CODE = A.MT_CODE
+		     JOIN GROUP_MEMBER G
+		     ON G.GM_CODE = A.GM_CODE
+		WHERE A.GM_CODE = #{gm_code}
+		ORDER BY H.HIS_DATE DESC
+	</select>
+	
+	<select id="board" resultType="com.test.mybatis.BoardDTO">
+		SELECT B.BRD_SUBJECT AS BRD_SUBJECT , B.BRD_VIEW AS BRD_VIEW, TO_CHAR(B.BRD_DATE,'YYYY-MM-DD') AS BRD_DATE, b.brd_code AS BRD_CODE
+		FROM BOARD B
+		WHERE GM_CODE = #{gm_code}
+		ORDER BY B.BRD_DATE DESC
+	</select>
+	
+</mapper>
