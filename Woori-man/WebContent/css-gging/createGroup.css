@@ -1,0 +1,280 @@
+@charset "UTF-8";
+
+
+.create_group
+{
+    text-align: center;
+    color: #ff8000;
+    font-weight: bold;
+    font-size: 26pt;
+    background-color: #fff3cd75;
+    padding: 20px;
+    border-radius: 100px;
+}
+
+
+input[type=radio]
+{
+	display: none;
+}
+
+
+
+
+.txt
+{
+	Position: relative;
+    width: 80%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    background: 0 0;
+    font-size: 18px;
+    padding-bottom: 10px;
+    background-color: #f5f6f8;
+    border-radius: 5px;
+	
+}
+
+div
+{
+	text-align: center;
+}
+
+
+.content
+{
+	max-width: 900px !important;
+}
+
+hr
+{
+	color: #ff8000 !important;
+}
+
+.Nametxt:focus-visible
+{
+    outline: unset;	
+}
+
+
+.main_cover
+{
+    border: 1px solid;
+    max-width: 302px !important;
+    padding-left: 0 !important;
+    /* padding-right: 0 !important; */
+    height: 233px;
+    margin-top: 30px;	
+}
+
+.selectCoverDiv
+{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select_img
+{
+    margin-left: 25px;
+}
+
+.imageUpload
+{
+    opacity: 0;
+    font-size: 8px;
+}
+
+ul
+{
+	padding-left: 0 !important;
+}
+
+.list
+{
+    margin-top: 10px;	
+}
+
+li
+{
+	list-style: none;
+	
+}
+
+.labelAddPhoto
+{
+	width: 125px;
+	background-color: #ebebeb;
+    height: 92.5px;
+}
+
+.img_list, .img_list_m
+{
+    text-align: center;
+    display: inline-blo;
+    float: left;
+    padding-right: 12px;
+    padding-bottom: 12px;
+}
+
+.MainCover
+{
+    height: 231px;	
+}
+
+
+.img_list_m
+{
+    height: 106px;
+    width: 136px;	
+}
+
+.bi-camera-fill
+{
+	font-size: 40px !important;
+    color: gray !important;	
+}
+.plus_img
+{
+    font-size: 14px;
+    margin-bottom: -17px;	
+}
+
+.img_btn
+{
+    border: unset;
+    padding: 2px;
+}
+
+
+/* ------------------------------------------------------------------------- */
+
+
+.items
+{
+  	 max-width: 500px !important;
+}
+
+.select_category
+{
+	text-align: center;
+}
+
+label
+{
+	font-weight: bold;
+	
+}
+
+.category_title
+{
+	text-align: center;
+	margin-top: 70px;
+}
+.caseItem
+{
+    padding-bottom: 5px;
+    border: 1px solid;
+    width: 30%;
+    margin-bottom: 10px;
+    background-color: #F7F7F8
+}
+
+.category_img
+{
+    width: 130px;
+    height: 90px;
+    display: list-item;
+}
+
+em
+{
+	
+}
+.c_list
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+	
+}
+
+.item_btn
+{
+    width: 130px;
+    height: 141px;
+    padding: 0;
+    border: unset;
+   	margin-top: 20px;
+}
+
+.friend
+{
+    margin: auto;
+    width: 100px;
+    height: 50px;
+    color: red !important;
+    margin-top: 30px;
+    margin-bottom: 9px;	
+}
+
+/* ------------------------------------------------ */
+
+
+
+
+.title
+{
+	padding-top: 40px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    text-align: left;
+    margin-left: 90px;
+}
+
+.emplaintxt:focus-visible
+{
+    outline: unset;	
+}
+
+
+
+.G0_Create
+{
+	margin-top: 50px;
+	padding: 50px;
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+
+.create
+{
+    width: 20%;
+    height: 55px;
+    border: unset;
+    border-radius: 15px;
+    background-color: #ff8000;
+    color: white;	
+}
+
+.create:hover
+{
+	color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

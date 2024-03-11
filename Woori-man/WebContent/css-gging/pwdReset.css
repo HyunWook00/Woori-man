@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+body 
+{
+    font-family: 'Arial', sans-serif;
+}
+
+
+.tabs 
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #ff8000;
+    padding: 20px;
+    margin: auto;
+    width: 70%;
+    border-radius: 10px;
+    
+}
+
+.tab 
+{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.activeTab 
+{
+    font-weight: bold;
+}
+
+
+th
+{
+	text-align: left;
+}
+
+.txt 
+{
+    padding: 8px;
+    
+}
+
+.btn 
+{
+    padding: 8px;
+    cursor: pointer;
+    background-color: #ff8000;
+    color: #fff;
+    border: none;
+    width: 41%;
+}
+
+.btn:hover
+{
+    color: black;
+}
+
+a
+{
+	text-decoration: none;
+	color: black;
+}
+
+
+
+h2
+{
+	width: 800px;
+   	margin: auto;
+   	margin-bottom: 30px;
+	margin-top: 2%;
+}
+
+hr
+{
+	width: 800px;
+}
+
+
+#tblDiv
+{
+	width: 700px;
+	margin: auto;
+    padding: 3%;
+    border-radius: 25px;
+    border: 1px solid #aeafb1;
+    margin-top: 2%;
+    
+}
+
+p
+{
+	font-weight: bold;
+}
+
+span
+{
+	font-size: small;
+}
+
+
+#hr2
+{
+	width: 100%;
+}
+
+#id
+{
+     width: 43%;
+}
+

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+.cal_main
+{
+		max-width: 227px !important;
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    padding: unset;
+}
+
+th
+{
+	text-align: center !important;
+}
+
+.sun
+{
+	color: red;
+}
+
+.sat
+{
+	color: blue;
+}
+.meetday
+{
+	
+	
+}
+
+.prev_next
+{
+    display: flex;
+    justify-content: space-between;	
+}
+
+.change_date
+{
+	
+}
+
+td
+{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
