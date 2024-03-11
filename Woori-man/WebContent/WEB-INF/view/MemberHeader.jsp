@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <title>MemberHeader.jsp</title>
 
-<!-- 경로 수정 확인~! -->
 <link rel="stylesheet" href="<%=cp %>/css/memberHeader.css">
 
 </head>
@@ -20,7 +19,7 @@
 <!-- 2023-02-09 노은하 -->
 
 <div class="header-menu row">
-	<nav class="navbar bg-body-tertiary">
+	<nav class="navbar member-header bg-body-tertiary">
 	
 		<div>
 			<a class="icon-main"><img alt="logo" src="<%=cp%>/images/로고5_80-40.png"></a>
@@ -28,11 +27,11 @@
 		</div>
 		
 		<div>
-			<ul class="nav justify-content-end">
+			<ul class="nav member-header justify-content-end">
 			
-				<li class="nav-item">
-					<div class="icon position-relative">
-						<i class="bi bi-envelope-fill"></i>
+				<li class="nav-item member-header-item">
+					<div class="icon member-header-icon-div position-relative">
+						<i class="bi bi-envelope-fill member-header-icon"></i>
 						<!-- 미확인 쪽지 갯수 -->
 						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 							5
@@ -43,19 +42,19 @@
 				
 				<!-- 웹 브라우저가 625 이상 일때 보여지는 메뉴들 -->
 				<li class="nav-item default-menu">
-					<div class="icon"><i class="bi bi-person-circle"></i></div>
+					<div class="icon member-header-icon-div"><i class="bi bi-person-circle member-header-icon"></i></div>
 					<div class="hover-text">정보 수정</div>
 				</li>
 				<li class="nav-item default-menu">
-					<div class="icon"><i class="bi bi-door-open-fill"></i></div>
+					<div class="icon member-header-icon-div"><i class="bi bi-door-open-fill member-header-icon"></i></div>
 					<div class="hover-text">로그아웃</div>
 				</li>
 				
 				<!-- 웹 브라우저가 625 이하 일때 보여지는 메뉴 -->
 				<li class="nav-item small-menu">
-					<div class="icon dropdown">
-						<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-list"></i>
+					<div class="icon member-header-icon-div dropdown">
+						<button class="btn dropdown-toggle member-header-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-list member-header-icon"></i>
 						</button>
 						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
 							<li><a href="" class="dropdown-item">정보수정</a></li>
