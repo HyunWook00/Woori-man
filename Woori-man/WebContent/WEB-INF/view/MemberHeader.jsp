@@ -19,17 +19,6 @@
 <!-- 로그인 성공한 회원들 페이지에 띄워주는 헤더 메뉴들 -->
 <!-- 2023-02-09 노은하 -->
 
-<!--
-아래 구문들 헤드 영역에 삽입 필요
-
-부트스트랩 5.3.2
-<%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css"> --%>
-
-부트스트랩 아이콘
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
--->
-
 <div class="header-menu row">
 	<nav class="navbar bg-body-tertiary">
 	

@@ -11,7 +11,7 @@
 <title>모임 발의하기 - 우리만</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b35408bccc20d37942f3ecd3c0ff44b3"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">

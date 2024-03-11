@@ -1,5 +1,5 @@
-<%@page import="com.test.mvc.GroupMemberDTO"%>
-<%@page import="com.test.mvc.CommentDTO"%>
+<%@page import="com.project.woori.GroupMemberDTO"%>
+<%@page import="com.project.woori.CommentDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

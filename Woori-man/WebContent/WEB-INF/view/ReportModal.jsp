@@ -9,8 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>ReportModal</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
