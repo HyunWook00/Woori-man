@@ -2,7 +2,6 @@ package com.project.woori;
 
 public class UserDTO
 {
-	
 	// UserDTO  관련 속성
 	private String us_code;		// 회원 코드
 	private String us_id;		// 회원 아이디
@@ -15,7 +14,7 @@ public class UserDTO
 	private String us_signup;	// 회원 가입일 
 	private String us_zipcode;  // 우편번호
 	private String us_addr1;	// 주소
-	private String us_addr2;	// 상세주고
+	private String us_addr2;	// 상세주소
 	
 	
 	// getter / setter 구성
