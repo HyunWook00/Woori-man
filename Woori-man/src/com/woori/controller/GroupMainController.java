@@ -137,7 +137,7 @@ public class GroupMainController
 			System.out.println(e.toString());
 		}
 		
-		return "GroupMain.jsp";
+		return "/WEB-INF/view/GroupMain.jsp";
 	}
 	
 	// 그룹 마이페이지 접속 시 실행되는 컨트롤러
@@ -196,7 +196,7 @@ public class GroupMainController
 		
 		session.setAttribute("myInfo", dao.myProfileList(us_code));
 		
-		return "GroupMyPage.jsp";
+		return "/WEB-INF/view/GroupMyPage.jsp";
 	}
 	
 	

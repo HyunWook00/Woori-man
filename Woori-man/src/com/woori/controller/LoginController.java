@@ -42,7 +42,7 @@ public class LoginController
 		
 		model.addAttribute("count", count);
 		
-		return "checkIdAjax.jsp";
+		return "/WEB-INF/view/checkIdAjax.jsp";
 	}
 	
 	// 회원가입 전화번호 중복체크
@@ -61,7 +61,7 @@ public class LoginController
 		
 		model.addAttribute("count", count);
 		
-		return "checkTelAjax.jsp";
+		return "/WEB-INF/view/checkTelAjax.jsp";
 	}
 	
 	
@@ -155,7 +155,7 @@ public class LoginController
 	@RequestMapping(value = "/loginform.woori")
 	public String loginform(HttpSession session)
 	{
-		return "/Login.jsp";
+		return "/WEB-INF/view/Login.jsp";
 	}
 	
 	
@@ -163,14 +163,14 @@ public class LoginController
 	@RequestMapping(value = "/idfindform.woori")
 	public String findIdForm(HttpSession session, Model model)
 	{
-		return "/IdFindForm.jsp";
+		return "/WEB-INF/view/IdFindForm.jsp";
 	}
 	
 	// 비밀번호 찾기 폼으로 연결해주는 메소드
 	@RequestMapping(value = "/pwdfindform.woori")
 	public String	findPwdForm()
 	{			
-		return "/PwdFindForm.jsp";
+		return "/WEB-INF/view/PwdFindForm.jsp";
 	}
 	
 	
@@ -179,7 +179,7 @@ public class LoginController
 	public String pwdRestForm()
 	{
 		
-		return "pwdResetForm.jsp";
+		return "/WEB-INF/view/pwdResetForm.jsp";
 	}
 	
 	
@@ -216,7 +216,7 @@ public class LoginController
 		}
 		
 		
-		return "MemberMain.jsp";
+		return "/WEB-INF/view/MemberMain.jsp";
 	}
 	
 	
@@ -243,7 +243,7 @@ public class LoginController
 			us_id = "회원정보가 존재하지 않습니다.";
 			
 			model.addAttribute("us_id", us_id);
-			return "findIdAjax.jsp";
+			return "/WEB-INF/view/findIdAjax.jsp";
 		}
 		
 		if (us_id.length() < 10)
@@ -291,7 +291,7 @@ public class LoginController
 		System.out.println(us_id);
 		
 		model.addAttribute("us_id", us_id);
-		return "findIdAjax.jsp";
+		return "/WEB-INF/view/findIdAjax.jsp";
 	}
 	
 	
@@ -313,7 +313,7 @@ public class LoginController
 		
 		if (us_pwd == null)
 		{
-			return "/PwdFindForm.jsp";
+			return "/WEB-INF/view/PwdFindForm.jsp";
 		}
 		
 		model.addAttribute("us_code", us_code);
@@ -340,7 +340,7 @@ public class LoginController
 		
 		dao.close();
 		
-		return "/Login.jsp";
+		return "/WEB-INF/view/Login.jsp";
 	}
 
 }

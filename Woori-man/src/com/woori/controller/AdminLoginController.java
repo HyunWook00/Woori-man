@@ -21,7 +21,7 @@ public class AdminLoginController
 	@RequestMapping(value = "/adminloginform.woori")
 	public String adminLoginForm()
 	{
-		return "AdminLogin.jsp";
+		return "/WEB-INF/view/AdminLogin.jsp";
 	}
 	
 	// AdminMain 이동
@@ -46,7 +46,7 @@ public class AdminLoginController
 			session.removeAttribute("msg");
 		}
 		
-		return "AdminMain.jsp";
+		return "/WEB-INF/view/AdminMain.jsp";
 		
 	}
 	

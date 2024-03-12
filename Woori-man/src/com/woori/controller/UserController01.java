@@ -61,7 +61,7 @@ public class UserController01
 		model.addAttribute("addr2", myProfile.getUs_addr2());
 		
 		
-		return "PlatformMypageMain2.jsp";
+		return "/WEB-INF/view/PlatformMypageMain2.jsp";
 		// return "/WEB-INF/PlatformMypageMain.jsp";
 	}
 
@@ -240,7 +240,7 @@ public class UserController01
 		model.addAttribute("userId", userId);
 		// 직위가 있는지 확인 메소드 보내기
 		model.addAttribute("userPos", userPos);
-		return "AccountWithdrawal.jsp";
+		return "/WEB-INF/view/AccountWithdrawal.jsp";
 	}
 	
 	

@@ -34,7 +34,7 @@ public class AdminNotificationController
 		
 		model.addAttribute("noticeList", noticeList);
 		
-		return "Notification.jsp";
+		return "/WEB-INF/view/Notification.jsp";
 	}
 	
 	
@@ -42,7 +42,7 @@ public class AdminNotificationController
 	@RequestMapping(value = "/noticeinsertform.woori")
 	public String noticeInsertForm()
 	{
-		return "NotificationInsertForm.jsp";
+		return "/WEB-INF/view/NotificationInsertForm.jsp";
 	}
 	
 	
@@ -93,7 +93,7 @@ public class AdminNotificationController
 		
 		model.addAttribute("notice", notice);
 		
-		return "NotificationRead.jsp";
+		return "/WEB-INF/view/NotificationRead.jsp";
 	}
 
 }

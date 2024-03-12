@@ -58,7 +58,7 @@ public class FreeBoardController
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("newArticle", newArticle);
 		
-		return "FreeBoardList.jsp";
+		return "/WEB-INF/view/FreeBoardList.jsp";
 	}
 	
 	// 자유게시판 작성 폼 페이지 요청
@@ -67,7 +67,7 @@ public class FreeBoardController
 	public String freeBoardInsertForm(Model model)
 	{
 		
-		return "FreeBoardInsertForm.jsp";
+		return "/WEB-INF/view/FreeBoardInsertForm.jsp";
 	}
 	
 	// 자유게시판 작성 요청
@@ -166,7 +166,7 @@ public class FreeBoardController
 		model.addAttribute("checkArticleLike", checkArticleLike);
 		model.addAttribute("checkCommentLike", checkCommentLike);
 		
-		return "FreeBoardArticle.jsp";
+		return "/WEB-INF/view/FreeBoardArticle.jsp";
 	}
 	
 	// 자유게시글 좋아요 입력 관련 컨트롤러
@@ -199,7 +199,7 @@ public class FreeBoardController
 			}
 		}
 		model.addAttribute("articleLike", articleLike);
-		return "ArticleLikeAjax.jsp";
+		return "/WEB-INF/view/ArticleLikeAjax.jsp";
 	}
 	
 	// 자유게시판 좋아요 취소 관련 컨트롤러
@@ -231,7 +231,7 @@ public class FreeBoardController
 			}
 		}
 		model.addAttribute("articleLike", articleLike);
-		return "ArticleLikeAjax.jsp";
+		return "/WEB-INF/view/ArticleLikeAjax.jsp";
 	}
 	
 	// 2024-03-06 노은하 이어서 작업
@@ -258,7 +258,7 @@ public class FreeBoardController
 		
 		model.addAttribute("boardArticle", boardArticle);
 		
-		return "FreeBoardUpdateForm.jsp";
+		return "/WEB-INF/view/FreeBoardUpdateForm.jsp";
 	}
 	
 	// 자유게시판 게시글 수정 요청 관련 컨트롤러
@@ -352,7 +352,7 @@ public class FreeBoardController
 		model.addAttribute("type", 1);
 		model.addAttribute("commentCount", commentCount);
 		
-		return "CommentLikeAjax.jsp";
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 	
 	// 자유게시판 댓글 좋아요 취소 관련 컨트롤러
@@ -387,6 +387,6 @@ public class FreeBoardController
 		model.addAttribute("type", 2);
 		model.addAttribute("commentCount", commentCount);
 		
-		return "CommentLikeAjax.jsp";
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 }

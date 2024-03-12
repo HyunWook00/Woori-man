@@ -42,7 +42,7 @@ public class MemberMainController
 	public String createGroupForm()
 	{
 		
-		return "/CreateGroupForm.jsp";
+		return "/WEB-INF/view/CreateGroupForm.jsp";
 	}
 	
 	// 그룹 개설 액션 메소드
@@ -132,7 +132,7 @@ public class MemberMainController
 		
 		dao.close();
 		
-		return "ChangeGroupInfo.jsp";
+		return "/WEB-INF/view/ChangeGroupInfo.jsp";
 	}
 	
 	
@@ -187,7 +187,7 @@ public class MemberMainController
 		ArrayList<GroupMemberDTO> groupMemberDTO = (ArrayList<GroupMemberDTO>) session.getAttribute("groupMemberDTO");
 		model.addAttribute("groupMemberDTO", groupMemberDTO);
 		
-		return "NewFile.jsp";
+		return "/WEB-INF/view/NewFile.jsp";
 	}
 	
 	
@@ -208,7 +208,7 @@ public class MemberMainController
 		model.addAttribute("us_name", us_name);
 		model.addAttribute("friends", friends);
 		
-		return "friendAjax.jsp";
+		return "/WEB-INF/view/friendAjax.jsp";
 			
 	}
 	
@@ -226,7 +226,7 @@ public class MemberMainController
 		session.setAttribute("us_code", us_code);
 		model.addAttribute("dto", dto);
 		
-		return "cal3.jsp";
+		return "/WEB-INF/view/cal3.jsp";
 	}
 	
 	
@@ -247,7 +247,7 @@ public class MemberMainController
 		model.addAttribute("month", month);
 		model.addAttribute("year", year);
 		
-		return "cal3.jsp";
+		return "/WEB-INF/view/cal3.jsp";
 	}
 	
 	

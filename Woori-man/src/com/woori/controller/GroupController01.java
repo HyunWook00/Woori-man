@@ -70,7 +70,7 @@ public class GroupController01
 		//model.addAttribute("recentDate", recentDate);
 		
 		
-		return "TotalGroupList2.jsp";
+		return "/WEB-INF/view/TotalGroupList2.jsp";
 		
 	}
 	

@@ -61,7 +61,7 @@ public class CsController
 		// 자주 묻는 질문 리스트 조회 DAO
 		model.addAttribute("faqList", dao.faqList(fc_code));
 		
-		return "Faq.jsp";
+		return "/WEB-INF/view/Faq.jsp";
 	}
 	
 	// 1:1 문의사항 접수 페이지 접속시 사용되는 컨트롤러
@@ -73,7 +73,7 @@ public class CsController
 		// 문의사항 카테고리 조회 DAO
 		model.addAttribute("inquiryCategory",dao.inquiryCategory());
 		
-		return "InquiryInsertForm.jsp";
+		return "/WEB-INF/view/InquiryInsertForm.jsp";
 	}
 	
 	// 1:1 문의사항 접수(INSERT)시 사용 되는 컨트롤러
@@ -109,7 +109,7 @@ public class CsController
 		// 문의사항 내역 조회 DAO
 		model.addAttribute("inquiryList",dao.inquiryList(us_code));	
 		
-		return "InquiryList.jsp";
+		return "/WEB-INF/view/InquiryList.jsp";
 	}
 	
 	
@@ -127,7 +127,7 @@ public class CsController
 		model.addAttribute("meetingReportList", dao.meetingReportList(us_code));
 		model.addAttribute("historyReportList", dao.historyReportList(us_code));
 		
-		return "ReportList.jsp";
+		return "/WEB-INF/view/ReportList.jsp";
 	}
 	
 	
@@ -139,7 +139,7 @@ public class CsController
 		
 		model.addAttribute("searchFaqList",dao.searchFaqList(searchKeyword));
 		
-		return "SearchFaqList.jsp";
+		return "/WEB-INF/view/SearchFaqList.jsp";
 	}
 	
 	// 문의사항 게시글 조회 컨트롤러
@@ -150,7 +150,7 @@ public class CsController
 		
 		model.addAttribute("inquirypost", dao.inquiryPost(iq_code));
 		
-		return "InquiryPost.jsp";
+		return "/WEB-INF/view/InquiryPost.jsp";
 	}
 	
 	// 공지사항 게시판 컨트롤러
@@ -162,7 +162,7 @@ public class CsController
 		model.addAttribute("noticesList", dao.noticesList());
 		
 		
-		return "NoticesList.jsp";
+		return "/WEB-INF/view/NoticesList.jsp";
 	}
 	
 	@RequestMapping(value = "/noticespost.woori" ,method = RequestMethod.GET)
@@ -172,7 +172,7 @@ public class CsController
 		
 		model.addAttribute("noticespost", dao.noticesListPost(nf_code));
 		
-		return "NoticesPost.jsp";
+		return "/WEB-INF/view/NoticesPost.jsp";
 	}
 	
 }

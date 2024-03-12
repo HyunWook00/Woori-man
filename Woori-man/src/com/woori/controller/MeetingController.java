@@ -76,7 +76,7 @@ public class MeetingController
 		model.addAttribute("articleCount", articleCount);
 		
 		// 연결시켜줄 뷰 호출
-		return "MeetingList.jsp";
+		return "/WEB-INF/view/MeetingList.jsp";
 	}
 	
 	//모임 게시글 상세정보 페이지 요청
@@ -193,10 +193,9 @@ public class MeetingController
 		model.addAttribute("cancelReason", cancelReason);
 		
 		// 뷰 호출
-		return "MeetingArticle.jsp";
+		return "/WEB-INF/view/MeetingArticle.jsp";
 	}
 	
-	// 2024-02-27 노은하 이어서 작업
 	//모임 댓글 입력 요청
 	//meetingcommentinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingcommentinsert.woori", method = RequestMethod.POST)
@@ -332,7 +331,6 @@ public class MeetingController
 		
 	}
 	
-	// 2024-02-28 노은하
 	// 모임 댓글 좋아요 클릭 ajax
 	// meetingcommentlike.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingcommentlike.woori", method = RequestMethod.GET)
@@ -365,7 +363,7 @@ public class MeetingController
 		model.addAttribute("type", 1);
 		model.addAttribute("commentCount", commentCount);
 		
-		return "CommentLikeAjax.jsp";
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 	
 	// 모임 대댓글 좋아요 클릭 ajax
@@ -401,7 +399,7 @@ public class MeetingController
 		model.addAttribute("commentCount", commentCount);
 		model.addAttribute("type", "insert");
 		
-		return "CommentLikeAjax.jsp";
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 	
 	// 모임 댓글 좋아요 취소 ajax
@@ -436,7 +434,7 @@ public class MeetingController
 		model.addAttribute("type", 2);
 		model.addAttribute("commentCount", commentCount);
 		
-		return "CommentLikeAjax.jsp";
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 	
 	// 모임 대댓글 좋아요 취소 ajax
@@ -463,11 +461,9 @@ public class MeetingController
 		model.addAttribute("commentCount", commentCount);
 		model.addAttribute("type", "delete");
 		
-		return "CommentLikeAjax.jsp";
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 	
-	// 2024-02-29 노은하
-	// 이어서 작업
 	
 	// 신고용 모임 댓글 정보 불러오기 ajax
 	// reportcommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
@@ -489,7 +485,7 @@ public class MeetingController
 		model.addAttribute("comment", comment);
 		model.addAttribute("repoter", gm_code);
 		
-		return "CommentReportAjax.jsp";
+		return "/WEB-INF/view/CommentReportAjax.jsp";
 	}
 	
 	// 댓글 신고 처리
@@ -520,8 +516,6 @@ public class MeetingController
 		
 		return "redirect:meetingarticle.woori?meeting=" + articleCode;
 	}
-	
-	// 2024-03-02 노은하
 	
 	// 모임 발의 폼
 	// meetinginsertform.woori 라는 요청이 들어오면 연결되는 컨트롤러
@@ -559,10 +553,9 @@ public class MeetingController
 		model.addAttribute("regionList", regionList);
 		model.addAttribute("cityList", cityList);
 		
-		return "MeetingInsertForm.jsp";
+		return "/WEB-INF/view/MeetingInsertForm.jsp";
 	}
 	
-	// 2024-03-04 노은하
 	
 	// 모임 발의 insert 액션
 	// meetinginsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
@@ -595,7 +588,6 @@ public class MeetingController
 		return "meetinglist.woori";
 	}
 	
-	// 2024-03-11 노은하
 	
 	// 모임 참석 여부 확인 insert 액션
 	// meetingvoteinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러

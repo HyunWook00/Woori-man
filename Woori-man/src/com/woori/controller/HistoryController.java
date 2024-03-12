@@ -57,7 +57,7 @@ public class HistoryController
 		model.addAttribute("meetingList", meetingList);
 		model.addAttribute("historyList", historyList);
 		
-		return "HistoryList.jsp";
+		return "/WEB-INF/view/HistoryList.jsp";
 	}
 	
 	// 히스토리 게시글 페이지 요청
@@ -123,7 +123,7 @@ public class HistoryController
 		model.addAttribute("meetingArticle", meetingArticle);
 		model.addAttribute("checkArticleLike", checkArticleLike);
 		
-		return "HistoryArticle.jsp";
+		return "/WEB-INF/view/HistoryArticle.jsp";
 	}
 	
 	// 히스토리 게시글 좋아요 입력
@@ -146,7 +146,7 @@ public class HistoryController
 		
 		model.addAttribute("articleLike", articleLike);
 		
-		return "ArticleLikeAjax.jsp";
+		return "/WEB-INF/view/ArticleLikeAjax.jsp";
 		
 	}
 	
@@ -170,7 +170,7 @@ public class HistoryController
 		
 		model.addAttribute("articleLike", articleLike);
 		
-		return "ArticleLikeAjax.jsp";
+		return "/WEB-INF/view/ArticleLikeAjax.jsp";
 	}
 	
 	// 히스토리 게시글 댓글 입력
