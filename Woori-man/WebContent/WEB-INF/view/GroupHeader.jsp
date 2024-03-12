@@ -11,7 +11,6 @@
 <head>
 <meta charset="UTF-8">
 <title>GrouHeader.jsp (그룹 헤더)</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/font.css">
 <link rel="stylesheet" type="text/css" href="css/groupHeader.css">
 </head>

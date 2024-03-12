@@ -218,6 +218,7 @@
 					<th>상태</th>
 				</tr>
 				<c:forEach var="inquiryList" items="${inquiryList }">
+				<c:if test="${inquiryList.iq_state=='접수완료' }">
 				<tr onclick="location.href='inquirypost.woori?iq_code=${inquiryList.iq_code }'">
 					<td>${inquiryList.iq_code }</td>
 					<td>${inquiryList.iqc_name }</td>
@@ -225,6 +226,51 @@
 					<td>${inquiryList.iq_date }</td>
 					<td>${inquiryList.iq_state }</td>
 				</tr>
+				</c:if>
+				</c:forEach>
+			</table>
+		 </div>
+		 <div class="tab-pane fade" id="inquiryReview" role="tabpanel" aria-labelledby="nav-review-tab">
+			<table class="table table-hover">
+				<tr>
+					<th>문의번호</th>
+					<th>문의유형</th>
+					<th>제목</th>
+					<th>문의날짜</th>
+					<th>상태</th>
+				</tr>
+				<c:forEach var="inquiryList" items="${inquiryList }">
+				<c:if test="${inquiryList.iq_state=='관리자 검토중' }">
+				<tr onclick="location.href='inquirypost.woori?iq_code=${inquiryList.iq_code }'">
+					<td>${inquiryList.iq_code }</td>
+					<td>${inquiryList.iqc_name }</td>
+					<td>${inquiryList.iq_title }</td>
+					<td>${inquiryList.iq_date }</td>
+					<td>${inquiryList.iq_state }</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+			</table>
+		 </div>
+		 <div class="tab-pane fade" id="inquiryCompleted" role="tabpanel" aria-labelledby="nav-completed-tab">
+			<table class="table table-hover">
+				<tr>
+					<th>문의번호</th>
+					<th>문의유형</th>
+					<th>제목</th>
+					<th>문의날짜</th>
+					<th>상태</th>
+				</tr>
+				<c:forEach var="inquiryList" items="${inquiryList }">
+				<c:if test="${inquiryList.iq_state=='처리완료' }">
+				<tr onclick="location.href='inquirypost.woori?iq_code=${inquiryList.iq_code }'">
+					<td>${inquiryList.iq_code }</td>
+					<td>${inquiryList.iqc_name }</td>
+					<td>${inquiryList.iq_title }</td>
+					<td>${inquiryList.iq_date }</td>
+					<td>${inquiryList.iq_state }</td>
+				</tr>
+				</c:if>
 				</c:forEach>
 			</table>
 		 </div>

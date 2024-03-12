@@ -116,7 +116,7 @@
 <meta charset="UTF-8">
 <title>사이드 메뉴 캘린더</title>
 <link rel="stylesheet" type="text/css" href="css/font.css">
-<link rel="stylesheet" type="text/css" href="css/calender.css">
+<link rel="stylesheet" type="text/css" href="css/calendar.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 		

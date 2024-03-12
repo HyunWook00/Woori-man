@@ -116,7 +116,7 @@
 <meta charset="UTF-8">
 <title>마이페이지 캘린더</title>
 <link rel="stylesheet" type="text/css" href="css/font.css">
-<link rel="stylesheet" type="text/css" href="css/myCalender.css">
+<link rel="stylesheet" type="text/css" href="css/myCalendar.css">
 <!-- 3. jquery -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 

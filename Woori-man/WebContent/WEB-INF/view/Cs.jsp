@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
@@ -258,6 +258,7 @@
 		window.location.href="cs.woori?fc_code="+fc_code;
 	}
 	
+	/* js 파일로 분리 완료  */
 	/* function searchFaqList()
 	{
 		
@@ -338,7 +339,7 @@
 </head>
 <body>
 
-<!-- 임시 헤더 영역 -->
+<!-- 헤더 영역 -->
 <div>
 	<br>
 	<c:import url="MemberHeader.jsp"></c:import>

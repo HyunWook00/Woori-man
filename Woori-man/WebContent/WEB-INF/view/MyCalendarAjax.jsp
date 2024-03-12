@@ -88,8 +88,8 @@
 				i++;
 				//break;
 				
-				System.out.println(myMeeting.get(m).getMt_title());
-				System.out.println(myMeeting.get(m).getCt_name());
+				//System.out.println(myMeeting.get(m).getMt_title());
+				//System.out.println(myMeeting.get(m).getCt_name());
 
 			}
 		}	

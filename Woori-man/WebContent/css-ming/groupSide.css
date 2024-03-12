@@ -3,7 +3,8 @@
 
 .SideBarBody
 {
-	width: 280px;
+    width: 280px;
+    margin-top: 30px;
 }
 
 .profile1 
@@ -164,7 +165,7 @@ hr
 }
 .menulist a
 {
-	color: black;
+	padding-left: 8px;
 }
 .menulist i
 {
