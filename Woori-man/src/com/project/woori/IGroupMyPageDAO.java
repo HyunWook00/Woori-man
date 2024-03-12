@@ -2,6 +2,9 @@ package com.project.woori;
 
 import java.util.ArrayList;
 
+import com.woori.dto.BoardDTO;
+import com.woori.dto.UserDTO;
+
 public interface IGroupMyPageDAO
 {
 	public GroupDTO_ming myGroupProfileList(String gm_code);					// 그룹 마이 프로필 조회

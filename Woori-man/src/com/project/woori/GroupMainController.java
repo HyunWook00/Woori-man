@@ -13,6 +13,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.MeetingDTO;
+import com.woori.dto.UserDTO;
+
 @Controller
 public class GroupMainController
 {

@@ -2,6 +2,8 @@ package com.project.woori;
 
 import java.util.ArrayList;
 
+import com.woori.dto.CsDTO;
+
 public interface ICsDAO
 {
 	public ArrayList<CsDTO> noticesList();							// 공지사항 내역 조회

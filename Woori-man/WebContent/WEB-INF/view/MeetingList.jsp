@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.project.woori.MeetingDTO"%>
+<%@page import="com.woori.dto.MeetingDTO"%>
 <%@page import="com.project.woori.PagingUtil"%>
 <%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>

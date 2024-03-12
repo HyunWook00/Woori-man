@@ -2,6 +2,8 @@ package com.project.woori;
 
 import java.util.ArrayList;
 
+import com.woori.dto.ReportDTO;
+
 public interface IReportDAO
 {
 	public ArrayList<ReportDTO> allReportList (String us_code);		// 전체 신고 내역

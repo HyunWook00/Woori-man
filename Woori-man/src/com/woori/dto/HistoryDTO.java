@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 // 2024-03-08 노은하
 // 히스토리 관련 사용자 정의 자료형

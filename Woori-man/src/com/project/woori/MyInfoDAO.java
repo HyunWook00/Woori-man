@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.test.util.DBConn;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.UserDTO;
 
 public class MyInfoDAO
 {

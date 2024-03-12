@@ -2,6 +2,12 @@ package com.project.woori;
 
 import java.util.ArrayList;
 
+import com.woori.dto.BoardDTO;
+import com.woori.dto.CsDTO;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.HistoryDTO;
+import com.woori.dto.MeetingDTO;
+
 public interface IGroupDAO
 {
 	public GroupDTO groupPoint (String cg_code);						// 그룹 포인트 조회

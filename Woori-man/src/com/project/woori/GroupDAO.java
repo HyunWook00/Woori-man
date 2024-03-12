@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.test.util.DBConn;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.MeetingDTO;
 
 public class GroupDAO
 {

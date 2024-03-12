@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 // 2024-03-04 노은하
 // 자유게시판 관련 사용자 정의 자료형
