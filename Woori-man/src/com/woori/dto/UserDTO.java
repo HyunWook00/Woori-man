@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 public class UserDTO
 {

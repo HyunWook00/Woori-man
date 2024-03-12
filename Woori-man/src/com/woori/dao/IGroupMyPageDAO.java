@@ -1,6 +1,9 @@
-package com.project.woori;
+package com.woori.dao;
 
 import java.util.ArrayList;
+
+import com.woori.dto.BoardDTO;
+import com.woori.dto.UserDTO;
 
 public interface IGroupMyPageDAO
 {

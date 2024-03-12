@@ -1,4 +1,4 @@
-<%@page import="com.project.woori.BoardDTO"%>
+<%@page import="com.woori.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.project.woori.PagingUtil"%>
 <%@page import="java.net.URLDecoder"%>

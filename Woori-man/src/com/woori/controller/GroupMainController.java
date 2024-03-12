@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.controller;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.woori.dao.ICsDAO;
+import com.woori.dao.IGroupDAO;
+import com.woori.dao.IGroupMyPageDAO;
+import com.woori.dao.MyInfoDAO;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.MeetingDTO;
+import com.woori.dto.UserDTO;
 
 @Controller
 public class GroupMainController

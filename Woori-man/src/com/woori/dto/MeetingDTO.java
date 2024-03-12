@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 // 2024-02-23 노은하
 public class MeetingDTO

@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 //2024-02-26 노은하
 //사용자 정의 자료형 댓글 DTO

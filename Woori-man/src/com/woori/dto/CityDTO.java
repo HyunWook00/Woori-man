@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 //2024-03-03 노은하
 //모임에서 활용할 도시 정보를 담은 사용자 정의 자료형

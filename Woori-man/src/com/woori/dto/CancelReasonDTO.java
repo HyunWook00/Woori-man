@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dto;
 
 // 2024-03-11 노은하
 // 모임 철회 사유 DTO
