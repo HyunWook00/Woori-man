@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dao;
 
 import java.util.ArrayList;
 

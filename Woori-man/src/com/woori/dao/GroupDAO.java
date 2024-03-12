@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
