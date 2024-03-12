@@ -2,7 +2,7 @@
 	FriendsDAO.java
 ====================*/
 
-package com.project.woori;
+package com.woori.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.project.woori.FriendsDTO;
+import com.project.woori.NoteDTO;
 import com.test.mvc.DBConn;
 
 public class FriendsDAO

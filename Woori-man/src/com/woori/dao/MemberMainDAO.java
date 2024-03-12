@@ -1,5 +1,5 @@
 
-package com.project.woori;
+package com.woori.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

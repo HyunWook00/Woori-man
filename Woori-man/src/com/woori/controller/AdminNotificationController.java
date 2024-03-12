@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
-import com.project.woori.AdminNotificationDAO;
+import com.woori.dao.AdminNotificationDAO;
 
 import sun.nio.fs.DefaultFileTypeDetector;
 

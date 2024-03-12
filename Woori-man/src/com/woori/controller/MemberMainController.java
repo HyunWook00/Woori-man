@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project.woori.MemberMainDAO;
+import com.woori.dao.MemberMainDAO;
 
 @Controller
 public class MemberMainController

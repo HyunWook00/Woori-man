@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project.woori.AdminNoteDAO;
-import com.project.woori.AdminNoteDTO;
+import com.woori.dao.AdminNoteDAO;
+import com.woori.dao.AdminNoteDTO;
 
 @Controller
 public class AdminNoteController
