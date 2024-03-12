@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.controller;
 
 
 import java.sql.SQLException;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.woori.MemberMainDAO;
 
 @Controller
 public class MemberMainController

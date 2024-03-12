@@ -1,4 +1,4 @@
-package com.project.woori;
+package com.woori.controller;
 
 
 import java.io.File;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
+
+import com.project.woori.AdminNotificationDAO;
 
 import sun.nio.fs.DefaultFileTypeDetector;
 

@@ -3,7 +3,7 @@
 	- 사용자 정의 컨트롤러 클래스
 ==========================================================================*/
 
-package com.project.woori;
+package com.woori.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.woori.AdminInquiryDAO;
 
 @Controller
 public class AdminInquiryController

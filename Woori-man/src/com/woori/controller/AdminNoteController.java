@@ -12,7 +12,7 @@
 	- 『memberinsert.action』 → 요청 → memberInsert() 처리
 ==========================================================================*/
 
-package com.project.woori;
+package com.woori.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.woori.AdminNoteDAO;
+import com.project.woori.AdminNoteDTO;
 
 @Controller
 public class AdminNoteController
