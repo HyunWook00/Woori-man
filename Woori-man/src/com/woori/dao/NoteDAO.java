@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.test.mvc.DBConn;
+import com.woori.util.DBConn;
 import com.woori.dto.NoteDTO;
 
 public class NoteDAO

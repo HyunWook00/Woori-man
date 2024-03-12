@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.GroupDTO;
+import com.woori.dto.UserDTO;
+import com.woori.util.DBConn;
+
 
 public class LoginDAO 
 {

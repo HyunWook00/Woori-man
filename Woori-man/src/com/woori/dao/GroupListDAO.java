@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import com.woori.dto.GroupDTO;
+import com.woori.util.DBConn;
+
 public class GroupListDAO
 {
 	private DataSource dataSource;

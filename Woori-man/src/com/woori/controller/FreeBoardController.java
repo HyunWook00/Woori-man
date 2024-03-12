@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-// 2024-03-04 노은하
+import com.woori.dao.BoardDAO;
+import com.woori.dao.IBoardDAO;
+import com.woori.dao.ICommentDAO;
+import com.woori.dto.BoardDTO;
+import com.woori.dto.CommentDTO;
+
 // 자유게시판 관련 컨트롤러
 @Controller
 public class FreeBoardController

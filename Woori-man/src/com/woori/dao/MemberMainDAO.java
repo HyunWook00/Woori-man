@@ -8,12 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.MeetingDTO;
+import com.woori.util.DBConn;
+
 public class MemberMainDAO 
 {
 	
-
-	
-
 	private Connection conn;
 	
 	// 데이터베이스 연결

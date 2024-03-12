@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.AdminInquiryDAO;
+import com.woori.dto.InquiryDTO;
 
 @Controller
 public class AdminInquiryController

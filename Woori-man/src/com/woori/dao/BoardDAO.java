@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-// 2024-03-05 노은하
+import com.woori.dto.CommentDTO;
+import com.woori.util.DBConn;
+
 // 자유게시글 관련 dao
 public class BoardDAO
 {

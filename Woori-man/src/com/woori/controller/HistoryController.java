@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-// 2024-03-07 노은하
+import com.woori.dao.IHistoryDAO;
+import com.woori.dao.MeetingDAO;
+import com.woori.dto.HistoryDTO;
+import com.woori.dto.MeetingDTO;
+
 // 히스토리 페이지 관련 컨트롤러
 
 @Controller

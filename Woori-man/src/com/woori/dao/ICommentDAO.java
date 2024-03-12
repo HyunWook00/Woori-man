@@ -1,7 +1,8 @@
 package com.woori.dao;
 
+import com.woori.dto.CommentDTO;
+import com.woori.dto.RecommentDTO;
 
-// 2024-02-27 노은하
 // 댓글, 대댓글 쿼리문용 dao
 public interface ICommentDAO
 {

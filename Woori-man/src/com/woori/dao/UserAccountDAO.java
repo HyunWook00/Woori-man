@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.UserDTO;
+import com.woori.util.DBConn;
+
 public class UserAccountDAO
 {
 	// 나의 플랫폼 계정정보 조회
@@ -40,7 +43,7 @@ public class UserAccountDAO
 			result.setUs_tel(rs.getString("US_TEL"));
 			result.setUs_email(rs.getString("US_EMAIL"));
 			
-			result.setUs_zipCode(rs.getString("US_ZIPCODE"));
+			result.setUs_zipcode(rs.getString("US_ZIPCODE"));
 			result.setUs_addr1(rs.getString("US_ADDR1"));
 			result.setUs_addr2(rs.getString("US_ADDR2"));
 			
@@ -77,11 +80,11 @@ public class UserAccountDAO
 			
 			pstmt.setString(1, dto.getUs_profile());
 			pstmt.setString(2, dto.getUs_tel());
-			pstmt.setString(3, dto.getUs_zipCode());
+			pstmt.setString(3, dto.getUs_zipcode());
 			pstmt.setString(4, dto.getUs_addr1());
 			pstmt.setString(5, dto.getUs_addr2());
 			pstmt.setString(6, dto.getUs_email());
-			pstmt.setInt(7, dto.getUs_lunar());
+			pstmt.setString(7, dto.getUs_lunar());
 
 			result = pstmt.executeUpdate();
 
@@ -186,7 +189,7 @@ public class UserAccountDAO
 			CallableStatement cstmt = null;
 			cstmt = conn.prepareCall(sql);
 			
-			cstmt.setInt(1, dto.getUs_code());
+			cstmt.setString(1, dto.getUs_code());
 			cstmt.setString(2, dto.getUs_pwd());
 			cstmt.setString(3, dto.getUs_pwd2());
 			
@@ -252,7 +255,7 @@ public class UserAccountDAO
 			
 			CallableStatement cstmt = conn.prepareCall(sql);
 			
-			cstmt.setInt(1, dto.getUs_code());
+			cstmt.setString(1, dto.getUs_code());
 				
 			result = cstmt.executeUpdate();
 			

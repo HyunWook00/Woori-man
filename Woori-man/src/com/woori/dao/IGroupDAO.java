@@ -2,7 +2,8 @@ package com.woori.dao;
 
 import java.util.ArrayList;
 
-// 2024-02-28 노은하
+import com.woori.dto.GroupMemberDTO;
+
 // 그룹 데이터 처리 dao
 public interface IGroupDAO
 {

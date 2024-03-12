@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.test.util.DBConn;
+import com.woori.util.DBConn;
 import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.UserDTO;
 
@@ -101,7 +101,7 @@ public class MyInfoDAO
 				
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, dto.getUs_zipcode());
-				pstmt.setString(2, dto.getUs_addr());
+				pstmt.setString(2, dto.getUs_addr1());
 				pstmt.setString(3, dto.getUs_addr2());
 				pstmt.setString(4, dto.getUs_tel());
 				pstmt.setInt(5, Integer.parseInt(dto.getUs_code()));
@@ -118,7 +118,7 @@ public class MyInfoDAO
 			
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, dto.getUs_zipcode());
-				pstmt.setString(2, dto.getUs_addr());
+				pstmt.setString(2, dto.getUs_addr1());
 				pstmt.setString(3, dto.getUs_addr2());
 				pstmt.setString(4, dto.getUs_profile());
 				pstmt.setString(5, dto.getUs_tel());

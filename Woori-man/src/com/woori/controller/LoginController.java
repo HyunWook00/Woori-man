@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.LoginDAO;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.UserDTO;
 
 
 

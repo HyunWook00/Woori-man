@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.ReportDTO;
+import com.woori.util.DBConn;
+
 public class AdminReportDAO
 {
 	private Connection conn;

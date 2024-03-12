@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.woori.dao.GroupDAO;
 import com.woori.dao.ICsDAO;
 import com.woori.dao.IGroupDAO;
 import com.woori.dao.IGroupMyPageDAO;

@@ -2,7 +2,8 @@ package com.woori.dao;
 
 import java.util.ArrayList;
 
-// 2024-03-04 노은하
+import com.woori.dto.BoardDTO;
+
 // 자유게시판 쿼리문 관련 dao
 public interface IBoardDAO
 {

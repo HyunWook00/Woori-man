@@ -2,7 +2,9 @@ package com.woori.dao;
 
 import java.util.ArrayList;
 
-// 2024-03-08 노은하
+import com.woori.dto.HistoryDTO;
+import com.woori.dto.MeetingDTO;
+
 // 히스토리 관련 dao
 
 public interface IHistoryDAO

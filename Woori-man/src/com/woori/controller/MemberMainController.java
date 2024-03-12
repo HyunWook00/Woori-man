@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.MemberMainDAO;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.MeetingDTO;
+import com.woori.dto.UserDTO;
 
 @Controller
 public class MemberMainController

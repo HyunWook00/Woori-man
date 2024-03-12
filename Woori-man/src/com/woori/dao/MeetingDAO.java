@@ -7,6 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.CancelReasonDTO;
+import com.woori.dto.CommentDTO;
+import com.woori.dto.MeetingDTO;
+import com.woori.dto.RecommentDTO;
+import com.woori.util.DBConn;
+
 // 2024-02-23 노은하
 public class MeetingDAO
 {
