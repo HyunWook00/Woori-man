@@ -1,6 +1,6 @@
 <%@page import="com.woori.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.project.woori.PagingUtil"%>
+<%@page import="com.woori.util.PagingUtil"%>
 <%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

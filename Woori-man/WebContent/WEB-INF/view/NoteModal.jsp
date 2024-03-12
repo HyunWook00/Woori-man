@@ -1,4 +1,4 @@
-<%@page import="com.test.mvc.NoteDTO"%>
+<%@page import="com.woori.dto.NoteDTO"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%

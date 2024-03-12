@@ -1,5 +1,5 @@
+<%@page import="com.woori.dto.MeetingDTO"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="com.test.mybatis.MeetingDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>

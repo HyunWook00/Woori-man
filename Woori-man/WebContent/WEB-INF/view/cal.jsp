@@ -1,4 +1,4 @@
-<%@page import="com.test.mvc.MeetingDTO"%>
+<%@page import="com.woori.dto.MeetingDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
