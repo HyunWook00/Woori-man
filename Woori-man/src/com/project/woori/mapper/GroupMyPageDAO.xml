@@ -4,16 +4,6 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mybatis.IGroupMyPageDAO">
 
-	<select id="myGroupProfileList" resultType="com.test.mybatis.GroupDTO_ming">
-		SELECT M.GM_NICKNAME AS GM_NICKNAME, P.POS_NAME AS POS_NAME,TO_CHAR(TRUNC(M.GM_REGDATE),'YYYY-MM-DD') AS GM_REGDATE
-    		 , M.GM_INTRO AS GM_INTRO, M.GM_PROFILE AS GM_PROFILE
-		FROM POSITION_APPOINT A JOIN POSITION P
-		     ON A.POS_CODE = P.POS_CODE
-		     JOIN GROUP_MEMBER M
-		     ON A.GM_CODE1 = M.GM_CODE
-		WHERE M.GM_CODE = #{gm_code}
-	</select>
-	
 	<select id="myProfileList" resultType="com.test.mybatis.UserDTO">
 		SELECT U.US_ID AS US_ID , U.US_PWD AS US_PWD, I.US_BIRTHDAY AS US_BIRTHDAY, I.US_TEL AS US_TEL
     	     , I.US_NAME AS US_NAME, I.US_NAME AS US_NAME, I.US_ZIPCODE AS US_ZIPCODE, I.US_ADDR1 AS US_ADDR, I.US_ADDR2 AS US_ADDR2
