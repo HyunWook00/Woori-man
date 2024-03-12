@@ -1,7 +1,7 @@
 package com.woori.dto;
 
-//2024-03-03 노은하
-//모임에서 활용할 도시 정보를 담은 사용자 정의 자료형
+// 2024-03-03 노은하
+// 모임에서 활용할 도시 정보를 담은 사용자 정의 자료형
 public class CityDTO
 {
 	private String rg_code;		// 지역 코드

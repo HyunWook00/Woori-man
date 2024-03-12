@@ -1,18 +1,19 @@
 package com.woori.dto;
 
-//2024-02-26 노은하
-//사용자 정의 자료형 댓글 DTO
+// 2024-02-26 노은하
+// 사용자 정의 자료형 댓글 DTO
 
 public class CommentDTO
 {
-	private String commentCode;				// 댓글 코드
-	private String commentDate;				// 댓글 작성일
-	private String commentContent;			// 댓글 내용
-	private String commentWriterName;		// 댓글 작성자 닉네임
-	private String commentWriterCode;		// 댓글 작성자 코드
-	private String commentWriterProfile;	// 댓글 작성자 프로필
-	private String articleCode;				// 댓글 달린 게시글 코드
-	private String commentLikeCount;		// 댓글 좋아요 갯수
+	private String commentCode;
+	private String commentDate;
+	private String commentContent;
+	private String commentWriterName;
+	private String commentWriterCode;
+	private String commentWriterProfile;
+	private String articleCode;
+	private String commentLikeCount;
+	private String commentLikeCheck;
 	
 	// getter / setter 구성
 	
@@ -79,5 +80,13 @@ public class CommentDTO
 	public void setCommentLikeCount(String commentLikeCount)
 	{
 		this.commentLikeCount = commentLikeCount;
+	}
+	public String getCommentLikeCheck()
+	{
+		return commentLikeCheck;
+	}
+	public void setCommentLikeCheck(String commentLikeCheck)
+	{
+		this.commentLikeCheck = commentLikeCheck;
 	}
 }

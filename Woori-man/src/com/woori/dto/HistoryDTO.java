@@ -8,6 +8,7 @@ public class HistoryDTO
 	private String his_code;		// 히스토리 코드
 	private String his_date;		// 히스토리 작성일
 	private String his_view;		// 히스토리 조회수
+	private String his_like;		// 히스토리 좋아요 수
 	private String his_content;		// 히스토리 내용
 	private String ao_code;			// 히스토리 작성자 참석확인 코드
 	private String gm_code;			// 히스토리 작성자 그룹원 코드
@@ -107,5 +108,14 @@ public class HistoryDTO
 	{
 		this.cg_code = cg_code;
 	}
+	public String getHis_like()
+	{
+		return his_like;
+	}
+	public void setHis_like(String his_like)
+	{
+		this.his_like = his_like;
+	}
+	
 	
 }

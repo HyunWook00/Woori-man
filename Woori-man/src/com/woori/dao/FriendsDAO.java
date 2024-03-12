@@ -11,9 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.project.woori.FriendsDTO;
-import com.project.woori.NoteDTO;
 import com.test.mvc.DBConn;
+import com.woori.dto.FriendsDTO;
+import com.woori.dto.NoteDTO;
 
 public class FriendsDAO
 {

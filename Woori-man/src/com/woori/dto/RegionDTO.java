@@ -1,7 +1,7 @@
 package com.woori.dto;
 
-//2023-03-02 노은하
-//모임에서 활용할 지역 정보를 담을 사용자 정의 자료형
+// 2023-03-02 노은하
+// 모임에서 활용할 지역 정보를 담을 사용자 정의 자료형
 public class RegionDTO
 {
 	private String rg_code;		// 지역 코드

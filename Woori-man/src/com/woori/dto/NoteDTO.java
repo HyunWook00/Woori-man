@@ -2,7 +2,7 @@
 	FriendsDTO.java
 ====================*/
 
-package com.project.woori;
+package com.woori.dto;
 
 public class NoteDTO
 {

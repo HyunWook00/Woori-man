@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project.woori.FriendsDTO;
-import com.project.woori.NoteDTO;
 import com.woori.dao.FriendsDAO;
+import com.woori.dto.FriendsDTO;
+import com.woori.dto.NoteDTO;
 
 @Controller
 public class FriendsController
