@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+
+.SideBarBody
+{
+	width: 280px;
+}
+
+.profile1 
+{
+	font-family: 라인Seed;
+    height: 125px;
+    float: right;
+    text-align: left;
+    padding: 5px;
+    display: inline-block;
+    width: 182px;
+    font-size: 12pt;
+}
+
+.myProfile1
+{
+	font-family: 라인Seed;
+    float: right;
+    text-align: left;
+    padding: 5px;
+    display: inline-block;
+    width: 182px;
+    font-size: 12pt;
+}
+
+.profile2 
+{
+    font-size: 12pt;
+    text-align: center;
+    margin-top: 46px;
+    font-family: 라인Seed;
+}
+
+.profileButton {
+    display: inline-block;
+    margin-left: 53px;
+}
+
+.cgName
+{
+	text-align: center;
+	font-family: 라인Seed;
+}
+
+.nav-tabs
+{
+	margin: 0;
+	width: 280px;
+}
+
+.nav_tabs > button
+{
+	border: 1px solid #ddd !important;
+}
+
+.nav-tabs .nav-link 
+{
+	color: #747474;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:hover 
+{
+    color: #ff8000 !important;
+	
+}
+
+.nav-tabs > button.active, .nav-tabs > button.active
+{
+    color: #ff8000 !important;
+}
+
+ .mySideBtn:hover
+{
+	font-size: 13px;
+	border: solid 2px #ff8000;
+	border-radius: 5px;
+	color: #ff8000;
+	background-color: white;
+	padding: 8px;
+}
+
+.mySideBtn
+{
+	font-size: 13px;
+	border: solid 2px #ffffff;
+	border-radius: 5px;
+	color: #ffffff;
+	background-color: #ff8000;
+	padding: 8px;
+	
+}
+
+#groupProfile ,#groupMyProfile	
+{
+	font-size:12pt;
+	font-family: 라인Seed;
+	padding: 5px;
+}
+
+.myProfile1 span
+{
+	font-size:12pt;
+	font-family: 라인Seed;
+	padding: 5px;
+}
+
+.sidetab
+{
+	text-align: center;
+}
+
+.sidetab hr 
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 2px solid gray;
+}
+
+hr
+{
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    width: 280px;
+    float: inline-end;
+}
+
+.profileimg
+{
+	display:inline-block;
+}
+
+.profileimg img
+{
+    width: 80px;
+    border-radius: 50%;
+}
+
+.mtab
+{
+	color: #ddd;
+}
+	
+#groupProfile span
+{
+	margin: 10px; 	
+}
+
+.menulist
+{
+	line-height: 20px;
+}
+
+.menulist #versionUp
+{
+	text-align: center;
+}
+.menulist a
+{
+	color: black;
+}
+.menulist i
+{
+	float: left;
+	color: black;
+	font-size: 15px;
+}
+
+.mtab > a
+{
+    color: dimgray;
+}
+
+.wthdrBtn
+{
+	font-size: 12px;
+    border: solid 1px #ff8000;
+    color: #ff8000;
+    background-color: white;
+    padding: 7px;
+    margin-inline-start: 100px;
+	
+}
+
+.wthdrBtn:hover
+{
+	font-size: 12px;
+    border: solid 1px #ff8000;
+    color: white;
+    background-color: #ff8000;
+    padding: 7px;
+    margin-inline-start: 100px;
+}
+

@@ -11,7 +11,7 @@
 {
 	border: 1px solid #ff8000;
 	text-align: center;
-	width: 1625px;
+	width: 1680px;
 	margin-left: auto;
 	margin-right: auto;
 	height: 50px;
@@ -31,6 +31,8 @@
 {
 	color: #ff8000;
 	text-decoration: none;
+    font-family: '라인Seed' !important;
+    font-size: 15pt;
 }
 
 .groupHeader_title
