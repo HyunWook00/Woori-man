@@ -193,7 +193,8 @@ public class UserAccountDAO
 			
 			cstmt.setString(1, dto.getUs_code());
 			cstmt.setString(2, dto.getUs_pwd());
-			cstmt.setString(3, dto.getUs_pwd2());
+			//cstmt.setString(3, dto.getUs_pwd2());
+			cstmt.setString(3, dto.getUs_pwd());
 			
 			result = cstmt.executeUpdate();
 			

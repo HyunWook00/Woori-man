@@ -3,11 +3,12 @@ package com.woori.dao;
 import java.util.ArrayList;
 
 import com.woori.dto.BoardDTO;
+import com.woori.dto.GroupDTO;
 import com.woori.dto.UserDTO;
 
 public interface IGroupMyPageDAO
 {
-	public GroupDTO_ming myGroupProfileList(String gm_code);					// 그룹 마이 프로필 조회
+	public GroupDTO myGroupProfileList(String gm_code);					// 그룹 마이 프로필 조회
 	public UserDTO myProfileList(String us_code);								// 계정 정보 조회
 	
 	public ArrayList<BoardDTO> regularBoard(String gm_code);					// 정기 모임 조회

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.AdminNoteDAO;
-import com.woori.dao.AdminNoteDTO;
+import com.woori.dto.AdminNoteDTO;
 
 @Controller
 public class AdminNoteController
@@ -122,7 +122,7 @@ public class AdminNoteController
 		
 		AdminNoteDTO adminNoteArticle = null;
 		
-		AdminDAO dao = new AdminDAO();
+		AdminNoteDAO dao = new AdminNoteDAO();
 								
 		try
 		{

@@ -1,4 +1,4 @@
-<%@page import="com.test.mybatis.GroupDTO_ming"%>
+<%@page import="com.woori.dto.GroupDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%

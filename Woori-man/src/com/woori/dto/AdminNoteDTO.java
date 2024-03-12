@@ -1,4 +1,4 @@
-package com.woori.dao;
+package com.woori.dto;
 
 public class AdminNoteDTO
 {
