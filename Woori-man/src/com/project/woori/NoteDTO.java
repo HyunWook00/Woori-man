@@ -7,8 +7,20 @@ package com.project.woori;
 public class NoteDTO
 {
 	// 주요 속성 구성
-	private String fr_code, sender, receiver, senderid, receiverid, note_title, note_content, note_date, status
-				 , note_read, note_senddelete, note_receivedelete, note_status, note_code;
+	private String fr_code;
+	private String sender;
+	private String receiver;
+	private String senderid;
+	private String receiverid;
+	private String note_title;
+	private String note_content;
+	private String note_date;
+	private String status;
+	private String note_read;
+	private String note_senddelete;
+	private String note_receivedelete;
+	private String note_status;
+	private String note_code;
 	
 
 	

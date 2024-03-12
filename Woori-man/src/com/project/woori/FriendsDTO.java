@@ -7,7 +7,17 @@ package com.project.woori;
 public class FriendsDTO
 {
 	// 주요 속성 구성
-	private String fr_code, fd_code, us_code, us_profile, us_name, us_id, us_signup, us_number, us_code1, us_code2, fd_date;
+	private String fr_code;			// 친구 코드
+	private String us_code;			// 회원 코드
+	private String us_profile;		// 회원 프로필	
+	private String us_name;			// 회원 이름
+	private String us_id;			// 회원 아이디
+	private String us_signup;		// 회원 가입일
+	private String us_number;		// 회원 번호(난수)
+	private String us_code1;		// (친구)회원 코드1
+	private String us_code2;		// (친구)회원 코드2
+	private String fd_code;			// 친구 삭제코드
+	private String fd_date;			// 회원 삭제일
 
 	
 	// getter / setter 구성

@@ -3,8 +3,21 @@ package com.woori.dto;
 public class InquiryDTO
 {
 	// 주요 속성 구성
-	private String iq_code, ad_code, as_code, iqa_code, iqc_code, iqc_name, iq_title, us_id, iq_date, iq_status
-		 , iq_content, iqa_name, as_content, as_date, iq_read;
+	private String iq_code;		// 문의사항 코드
+	private String iqc_code;	// 문의사항 카테고리 코드
+	private String iqc_name;	// 문의사항 카테고리 명	
+	private String iq_title;	// 문의사항 제목
+	private String iq_content;	// 문의사항 내용
+	private String iqa_code;	// 문의사항 첨부파일 코드	
+	private String iqa_name;	// 문의사항 첨부파일 명(경로)
+	private String iq_read;		// 문의사항 열람일
+	private String us_id;		// 문의사항 작성한 회원 아이디
+	private String ad_code;		// 담당 관리자 코드
+	private String iq_date;		// 문의사항 작성일
+	private String iq_status;	// 문의사항 처리상태
+	private String as_code;		// 문의사항 답변 코드
+	private String as_content;	// 문의사항 답변 내용
+	private String as_date;		// 문의사항 답변 날짜
 
 	
 	// getter / setter 구성
@@ -158,7 +171,6 @@ public class InquiryDTO
 		this.iq_read = iq_read;
 	}
 	
-
 	
 	
 	

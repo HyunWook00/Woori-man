@@ -3,7 +3,11 @@ package com.project.woori;
 public class AdminNoteDTO
 {
 	// 주요 속성 구성
-	private String an_code, ad_code, an_title, an_send, an_content;
+	private String an_code;		// 관리자 쪽지 코드
+	private String ad_code;		// 관리자 코드(작성자)
+	private String an_title;	// 관리자 쪽지 제목
+	private String an_send;		// 관리자 쪽지 보낸 날짜
+	private String an_content;	// 관리자 쪽지 내용
 
 	// getter / setter 구성
 	public String getAn_code()
