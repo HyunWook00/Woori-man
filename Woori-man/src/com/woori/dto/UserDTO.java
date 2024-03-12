@@ -5,6 +5,7 @@ public class UserDTO
 	// UserDTO  관련 속성
 	private String us_code;		// 회원 코드
 	private String us_id;		// 회원 아이디
+	private String us_pwd;		// 회원 비밀번호
 	private String us_name;		// 회원 이름
 	private String us_birthday;	// 회원 생년월일
 	private String us_lunar;	// 양/음력
@@ -112,6 +113,14 @@ public class UserDTO
 	public void setUs_addr2(String us_addr2)
 	{
 		this.us_addr2 = us_addr2;
+	}
+	public String getUs_pwd()
+	{
+		return us_pwd;
+	}
+	public void setUs_pwd(String us_pwd)
+	{
+		this.us_pwd = us_pwd;
 	}
 	
 }

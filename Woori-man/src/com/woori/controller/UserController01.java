@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.woori.dao.UserAccountDAO;
+import com.woori.dto.UserDTO;
 
 @Controller
 public class UserController01
@@ -55,7 +56,7 @@ public class UserController01
 		model.addAttribute("email1", myProfile.getUs_email().substring(0, idx));	// 이메일 주소 보내기
 		model.addAttribute("tel2", myProfile.getUs_tel().substring(3,7));			// 핸드폰 번호 보내기
 		model.addAttribute("tel3", myProfile.getUs_tel().substring(7, 11));
-		model.addAttribute("zipCode", myProfile.getUs_zipCode());
+		model.addAttribute("zipCode", myProfile.getUs_zipcode());
 		model.addAttribute("addr1", myProfile.getUs_addr1());																			// 주소 보내기
 		model.addAttribute("addr2", myProfile.getUs_addr2());
 		
@@ -136,7 +137,7 @@ public class UserController01
 			// → ● 3/7 뷰페이지 수정 후 양음력 추가
 			//dto.setUs_profile(us_profile);
 			dto.setUs_tel(Tel);
-			dto.setUs_zipCode(zipCode);
+			dto.setUs_zipcode(zipCode);
 			dto.setUs_addr1(addr1);
 			dto.setUs_addr2(addr2);
 			dto.setUs_email(Email);
@@ -192,7 +193,7 @@ public class UserController01
 		try
 		{
 			UserAccountDAO dao = new UserAccountDAO();
-			UserDTO dto = new UserDTO();
+			//UserDTO dto = new UserDTO();
 			
 			pwdCheck = dao.pwdCheck(pwd);	// 복호화가 되면 userpwd1 , 안되면 특수문자가 출력된 값을 pwdCheck 변수에 담기
 			//System.out.println("컨트롤러에서 복호화된 비밀번호 확인 : " + pwdCheck);
@@ -200,8 +201,8 @@ public class UserController01
 			if (now_pwd.equals(pwdCheck))		// 입력한 현재 비번 (userpwd1) = pwdCheck메소드로 복호화된 비번(userpwd1)이 같으면 수정 메소드 호출
 			{
 				//System.out.println("수정 과정 거침");
-				dto.setUs_pwd(newpwd);
-				dto.setUs_pwd2(newpwd);
+				//dto.setUs_pwd(newpwd);
+				//dto.setUs_pwd2(newpwd);
 				dao.pwdModify(newpwd);
 			}
 			else							// 같지 않다면 안돼

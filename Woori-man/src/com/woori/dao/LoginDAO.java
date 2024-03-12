@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.woori.dto.GroupDTO;
+import com.woori.dto.LoginDTO;
 import com.woori.dto.UserDTO;
 import com.woori.util.DBConn;
 
@@ -72,7 +73,7 @@ public class LoginDAO
 
 	// 회원가입 처리 메소드
 	//
-	public int membership(LoginDTO dto) throws SQLException 
+	public int membership(UserDTO dto) throws SQLException 
 	{
 		int result = 0;
 		
@@ -275,32 +276,4 @@ public class LoginDAO
 	}
 
 
-	// 프로필 정보를 위한 메소드
-	// → 회원코드, id, 가입일, 프로필사진
-	public LoginDTO profile(String us_code) throws SQLException
-	{
-		LoginDTO result = new LoginDTO();
-		
-		
-		String sql = "SELECT US_CODE, US_ID, US_SIGNUP, US_PROFILE FROM USERS WHERE US_CODE = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, us_code);
-		
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next())
-		{
-			result.setUs_code(rs.getString("US_CODE"));
-			result.setUs_id(rs.getString("US_ID"));
-			result.setUs_signup(rs.getString("US_SIGNUP"));
-			result.setUs_profile(rs.getString("US_PROFILE"));
-			
-		}
-		
-		rs.close();
-		pstmt.close();
-		return result;
-	}
-	
-
-	
 }

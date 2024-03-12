@@ -20,6 +20,10 @@ public class GroupDTO
 	private String gc_code;		// 그룹 카테고리 코드
 	private String gc_name;		// 그룹 카테고리명
 	
+	private int gb_code;
+	private String gm_code;
+	private int g_count;
+	
 	// getter / setter 구성
 	public String getCg_code()
 	{
@@ -109,5 +113,29 @@ public class GroupDTO
 	{
 		this.gc_name = gc_name;
 	}
-	  
+	public int getGb_code()
+	{
+		return gb_code;
+	}
+	public void setGb_code(int gb_code)
+	{
+		this.gb_code = gb_code;
+	}
+	public String getGm_code()
+	{
+		return gm_code;
+	}
+	public void setGm_code(String gm_code)
+	{
+		this.gm_code = gm_code;
+	}
+	public int getG_count()
+	{
+		return g_count;
+	}
+	public void setG_count(int g_count)
+	{
+		this.g_count = g_count;
+	}
+	
 }

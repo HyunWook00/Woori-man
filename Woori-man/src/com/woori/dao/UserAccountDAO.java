@@ -148,16 +148,18 @@ public class UserAccountDAO
 		{
 			Connection conn = null;
 			conn = DBConn.getConnection();
-			UserDTO dto = new UserDTO();
+			//UserDTO dto = new UserDTO();
 			
-			dto.setUs_pwd(us_pwd);
-			dto.setUs_pwd2(us_pwd);
+			//dto.setUs_pwd(us_pwd);
+			//dto.setUs_pwd2(us_pwd);
 			
 			String sql = "UPDATE USERS SET US_PWD = CRYPTPACK.ENCRYPT(?, ?) WHERE US_CODE = 2393726";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getUs_pwd());	// 새로운 비밀번호
-			pstmt.setString(2, dto.getUs_pwd2());   // 새로운 비밀번호 복호화 키
+			//pstmt.setString(1, dto.getUs_pwd());	// 새로운 비밀번호
+			//pstmt.setString(2, dto.getUs_pwd2());   // 새로운 비밀번호 복호화 키
+			pstmt.setString(1, us_pwd);	// 새로운 비밀번호
+			pstmt.setString(2, us_pwd);   // 새로운 비밀번호 복호화 키
 			
 			result = pstmt.executeUpdate();
 			
