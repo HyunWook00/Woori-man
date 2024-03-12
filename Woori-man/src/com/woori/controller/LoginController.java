@@ -14,10 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.woori.dao.LoginDAO;
-import com.woori.dto.GroupDTO;
-import com.woori.dto.UserDTO;
-
 
 
 // ※ Spring 의 『Controller』 인터페이스를 구현하는 방법을 통해
@@ -81,7 +77,7 @@ public class LoginController
 										) throws ClassNotFoundException, SQLException	
 	{
 		LoginDAO dao = new LoginDAO();
-		LoginDTO dto = new LoginDTO();
+		UserDTO dto = new UserDTO();
 		dao.connection();
 		
 		
@@ -223,7 +219,7 @@ public class LoginController
 	
 	// 아이디 찾기 액션 처리
 	@RequestMapping(value = "/idfind.woori")
-	public String findId(HttpSession session ,Model model, @RequestParam("us_name") String us_name
+	public String findId(Model model, @RequestParam("us_name") String us_name
 									, @RequestParam("us_birthday") String us_birthday
 									, @RequestParam("us_tel") String us_tel) throws ClassNotFoundException, SQLException
 	{
@@ -286,6 +282,8 @@ public class LoginController
 			mid = sb.toString(); 
 			us_id = us_id.substring(0, 4) + mid + us_id.substring(us_id.length()-4, us_id.length()); // 끝 두자리
 		}
+		
+		System.out.println(us_id);
 		
 		model.addAttribute("us_id", us_id);
 		return "findIdAjax.jsp";
