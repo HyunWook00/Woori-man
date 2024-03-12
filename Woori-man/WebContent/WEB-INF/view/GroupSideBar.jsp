@@ -94,7 +94,7 @@
 	<p><a><i class="bi bi-file-text"></i>전체글 보기</a></p>
 	<p><a><i class="bi bi-calendar-event"></i>모임</a></p>
 	<p><a><i class="bi bi-file-text"></i>후기</a></p>
-	<p><a><i class="bi bi-file-text"></i>자유게시판</a></p>
+	<p><a><i class="bi bi-file-text"></i>${groupInfo.brd_name }</a></p>
 	<hr>
 	<p><a><i class="bi bi-currency-dollar"></i>회비</a></p>
 	<p><a><i class="bi bi-people-fill"></i>그룹원</a></p>

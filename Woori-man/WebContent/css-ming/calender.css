@@ -1,24 +1,37 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: '라인Seed';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 .sideCalender
 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   width: 280px;
+  font-family: 라인Seed;
 }
 
 .wrapper {
   width: 90%;
   background: #fff;
   border-radius: 10px;
+  font-family: 라인Seed;
+  font-size: 18pt;
 }
  
 .wrapper .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 280px;
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
+    font-size: 17px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .nav
@@ -28,7 +41,7 @@
 
 .wrapper .nav button 
 {
-  font-size: 15px;
+  font-size: 15pt;
   color: #343434;
   border: none;
   background-color: transparent;
@@ -42,6 +55,11 @@
   padding: 0;
   text-align: center;
   font-family: 라인Seed;
+}
+
+ul.week 
+{
+    margin: 0;
 }
 .calendar .weeks li 
 {
@@ -76,9 +94,9 @@
 .calendar .currentDays li::before {
     position: absolute;
     content: '';
-    height: 24px;
-    width: 24px;
-    top: 45%;
+    height: 30px;
+    width: 30px;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
@@ -98,6 +116,8 @@
 .point .pointMt
 {
 	display: none;
+	font-size: 12pt;
+    font-family: '라인Seed';
 }
 .point:hover .pointMt
 {

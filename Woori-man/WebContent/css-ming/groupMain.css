@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+*
+{
+	font-family: 라인Seed;
+}
+
+h4
+{
+	font-family: 라인Seed;
+	background-color: white;
+	padding: 10px;
+	border-bottom: 1px solid #ff8000;
+	border-top: 1px solid #ff8000;
+	color: #ff8000 !important;
+}
+
+.groupMain_side
+{
+	width: 280px;
+    margin-inline-start: 140px;
+}
+
+.groupMain_main {
+    width: 1280px;
+    position: absolute;
+    top: 120px;
+    /* float: right; */
+    margin-inline-start: 475px;
+}   
+
+.groupMain_main hr
+{
+	border: 0;
+    border-top: 1px solid #213245;
+}
+.groupMain_main h3
+{
+	font-family: 라인Seed !important;
+}
+
+.button:hover
+{
+	font-size: 14px;
+    font-family: '라인Seed';
+	border: solid 2px #ff8000;
+	border-radius: 5px;
+	color: #ff8000;
+	background-color: white;
+	padding: 8px;
+}
+
+.button
+{
+	border: solid 2px #ffffff;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: '라인Seed';
+    color: #ffffff;
+    background-color: #ff8000;
+    padding: 8px;
+}
+
+/* 캐러셀 CSS */
+.carousel
+{
+	padding: 10px;
+	width: 49%;
+	text-align: center;
+	display: inline-block;
+}
+
+.carousel-caption {
+
+    padding-bottom: 30px !important;
+    width: 100%;
+    right: 0 !important;
+    left: 0 !important;
+    top: -45px !important;
+}
+
+.carousel-caption p
+{
+	color: #ff8000;
+	font-weight: bold;
+	font-family: 라인seed;
+	font-size: 13pt;
+}
+
+.carousel-caption h4
+{
+	color: #ff8000 !important;
+	background-color: transparent;
+	font-weight: bold;
+	font-family: 라인seed;
+	border: none;
+}
+
+.carousel-control-prev , .carousel-control-next
+{
+	border: 1px solid #ff8000;
+}
+
+/* 최신글 CSS */
+.newArticle
+{
+    width: 615px;
+    padding-left: 12px;
+    display: inline-block;
+    text-align: center;
+    margin: 4px;
+}
+
+.newArticle li
+{
+ 	 font-family: 라인Seed;
+ 	 padding: 5px;
+}
+
+.notices 
+{
+ 	text-align: left;
+ 	font-family: '라인Seed';
+}
+
+.notices li
+{
+ 	text-align: left;
+ 	font-family: '라인Seed';
+    font-size: 12pt;
+}
+
+.more
+{
+	color: black;
+	text-decoration: none;
+	text-align: right;		
+}
