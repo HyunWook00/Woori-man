@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
-import com.test.mvc.AdminNotificationDTO;
+import com.woori.dto.AdminNotificationDTO;
 import com.woori.dao.AdminNotificationDAO;
 import com.woori.dto.AdminDTO;
 

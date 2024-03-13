@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.test.mvc.AdminNotificationDTO;
+import com.woori.dto.AdminNotificationDTO;
 import com.woori.dto.AdminDTO;
 import com.woori.util.DBConn;
 
