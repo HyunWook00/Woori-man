@@ -31,12 +31,6 @@ public class MemberMainController
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 	// 그룹 개설 폼으로 이동 메소드
 	@RequestMapping(value = "/creategroupform.woori")
 	public String createGroupForm()
@@ -137,7 +131,7 @@ public class MemberMainController
 	
 	
 	
-	
+	/*
 	// 선택 그룹 들어갈 때 찾아야 하는 정보들 (GroupDTO, GroupMemberDTO 구성)
 	@RequestMapping(value = "/entergroup.woori")
 	public String enterGroup(HttpSession session, Model model, @RequestParam("cg_code") String cg_code) throws ClassNotFoundException, SQLException
@@ -173,7 +167,7 @@ public class MemberMainController
 		
 		return "newfile.woori";
 	}
-	
+	*/
 	
 	// 설정한 DTO session 테스트
 	@RequestMapping(value = "/newfile.woori")
