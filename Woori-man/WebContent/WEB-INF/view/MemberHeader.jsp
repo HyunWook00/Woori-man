@@ -46,7 +46,7 @@
 					<div class="hover-text">정보 수정</div>
 				</li>
 				<li class="nav-item default-menu">
-					<div class="icon member-header-icon-div"><i class="bi bi-door-open-fill member-header-icon"></i></div>
+					<div class="icon member-header-icon-div"><i class="bi bi-door-open-fill member-header-icon" onclick="location.href='logout.woori'"></i></div>
 					<div class="hover-text">로그아웃</div>
 				</li>
 				
@@ -57,8 +57,8 @@
 							<i class="bi bi-list member-header-icon"></i>
 						</button>
 						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
-							<li><a href="" class="dropdown-item">정보수정</a></li>
-							<li><a href="" class="dropdown-item">로그아웃</a></li>
+							<li><a href="" class="dropdown-item header-info-modify">정보수정</a></li>
+							<li><a href="logout.woori" class="dropdown-item header-logout">로그아웃</a></li>
 						</ul>
 					</div>
 				</li>

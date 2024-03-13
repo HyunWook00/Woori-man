@@ -10,6 +10,7 @@
 .icon.member-header-icon-div {display: initial; margin: 1px 12px; padding-top: 5px;}
 .icon-main:hover + .hover-text {display: block;}
 .icon.member-header-icon-div:hover + .hover-text {display: block;}
+.header-info-modify, .header-logout {color: black !important;}
 
 /* 화면 크기 클때 css */
 @media screen and (min-width: 625px)
