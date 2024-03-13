@@ -1,5 +1,6 @@
 package com.woori.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,16 +16,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.CityDAO;
+import com.woori.dao.GroupDAO;
 import com.woori.dao.ICommentDAO;
 import com.woori.dao.IGroupDAO;
 import com.woori.dao.MeetingDAO;
 import com.woori.dto.CancelReasonDTO;
 import com.woori.dto.CityDTO;
 import com.woori.dto.CommentDTO;
+import com.woori.dto.GroupDTO;
 import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.MeetingDTO;
 import com.woori.dto.RecommentDTO;
 import com.woori.dto.RegionDTO;
+import com.woori.dto.UserDTO;
 
 // 모임 페이지 관련 컨트롤러 클래스
 
@@ -37,23 +41,25 @@ public class MeetingController
 	//모임 리스트 페이지 요청
 	//meetinglist.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetinglist.woori")
-	public String meetingList(Model model, HttpServletRequest request)
+	public String meetingList(Model model, HttpSession session)
 	{
-		HttpSession session = request.getSession();
-		GroupMemberDTO member = new GroupMemberDTO();
-		member.setCg_code("1");
-		member.setGm_code("3");
-		member.setPos_code("3");
-		session.setAttribute("member", member);
-		
 		MeetingDAO dao = new MeetingDAO();
+		GroupDAO groupDAO = new GroupDAO();
 		
+		GroupDTO groupDTO = null;
+		GroupMemberDTO groupMemberDTO = null;
 		ArrayList<MeetingDTO> meetingList = null;	// 등록된 모임 정보 리스트
+		ArrayList<GroupMemberDTO> groupPostition = null;
 		int articleCount = 0;						// 새글수 정보
+		
 		try
 		{
-			meetingList = dao.getMeetingList(member.getCg_code());
-			articleCount = dao.getArticleCount(member.getCg_code());
+			groupDAO.connection();
+			groupDTO = groupDAO.groupInfo("1", "1");
+			groupMemberDTO = groupDAO.groupMyInfo(groupDTO.getGm_code());
+			groupPostition = groupDAO.groupPosition(groupDTO.getCg_code());
+			meetingList = dao.getMeetingList(groupDTO.getCg_code());
+			articleCount = dao.getArticleCount(groupDTO.getCg_code());
 			
 		} catch (Exception e)
 		{
@@ -63,6 +69,7 @@ public class MeetingController
 		{
 			try
 			{
+				groupDAO.close();
 				dao.close();
 				
 			} catch (Exception e)
@@ -70,6 +77,11 @@ public class MeetingController
 				System.out.println(e.toString());
 			}
 		}
+		
+		// 테스트용 세션 구성
+		session.setAttribute("groupDTO", groupDTO);
+		session.setAttribute("groupMemberDTO", groupMemberDTO);
+		session.setAttribute("groupPosition", groupPostition);
 		
 		// 모델에 객체 담아 뷰로 보내기
 		model.addAttribute("meetingList", meetingList);
@@ -109,16 +121,15 @@ public class MeetingController
 		{
 			// 철회 사유
 			cancelReason = dao.getCancelReasonList();
-			IGroupDAO gDao = sqlSession.getMapper(IGroupDAO.class);
 			
 			// 그룹원 총 인원수
-			totalMemberCount = gDao.countGroupMember(member.getCg_code());
+			//totalMemberCount = gDao.countGroupMember(member.getCg_code());
 			
 			// 모임 참여 인원수
-			attendMemberCount = gDao.countAttendMember(mt_code);
+			//attendMemberCount = gDao.countAttendMember(mt_code);
 			
 			// 모임 불참 인원수
-			notAttendMemberCount = gDao.countNotAttendMember(mt_code);
+			//notAttendMemberCount = gDao.countNotAttendMember(mt_code);
 			
 			// 모임 참여 인원 목록
 			//attendMemberList = gDao.searchAttendMemberList(mt_code);

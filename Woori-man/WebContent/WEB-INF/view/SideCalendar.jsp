@@ -184,7 +184,7 @@
 			$.ajax(
 			{
 				type : "get"
-				,url : "SideCalendarAjax.jsp"
+				,url : "sidecalendarajax.woori"
 				,data : params
 				,success : function(args)
 				{
@@ -225,7 +225,7 @@
 			$.ajax(
 			{
 				type : "get"
-				,url : "SideCalenderAjax.jsp"
+				,url : "sidecalendarajax.woori"
 				,data : params
 				,success : function(args)
 				{

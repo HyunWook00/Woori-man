@@ -41,8 +41,5 @@
 	</div>
 </div>
 
-<button type="button" class="btn btn-primary" id="modal-btn" data-bs-toggle="modal" data-bs-target="#meetingCategoryModal">
-</button>
-
 </body>
 </html>

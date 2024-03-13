@@ -12,9 +12,16 @@
 body
 { text-align: center;}
 
-div.mainContent, div.container
+div.container
 {
-	display: inline-flex;
+	display: display;
+    justify-content: center;
+}
+div.mainContent
+{
+	display: flex;
+	justify-content: center;
+    align-items: baseline;
 }
 
 /* 호버 텍스트 */
@@ -22,7 +29,7 @@ div.hover-text
 {
 	display: none; border: 1px solid black; position: absolute;
 	padding: 2px 5px; font-size: 9pt; background-color: white; margin-top: 2px;
-	z-index: 1;
+	z-index: 1; font-family: 맑은 고딕;
 }
 
 div.paging
@@ -78,7 +85,6 @@ div.leftMenu
 	width: 315px;
 	padding: 0px 15px;
 	margin: 10px;
-	border: 1px solid black;
 }
 
 .centerContent
@@ -101,4 +107,10 @@ div.leftMenu
 @media screen and (max-width: 770px)
 {
 	div.container {max-width: 720px; width: 720px;}
+}
+
+.groupMain_side
+{
+    width: 280px;
+    margin-inline-start: 35px;
 }

@@ -101,14 +101,14 @@ public class GroupMainController
 	public String groupMain(ModelMap model, HttpSession session)
 	{
 		// 세션에서 필요한 값 받아오기
-		GroupDTO groupInfo = (GroupDTO)session.getAttribute("groupDTO");
-		GroupMemberDTO groupMyInfo = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
-		ArrayList<GroupMemberDTO> groupPostition = (ArrayList<GroupMemberDTO>) session.getAttribute("groupPosition");
+		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
+		//GroupMemberDTO groupMyInfo = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		//ArrayList<GroupMemberDTO> groupPostition = (ArrayList<GroupMemberDTO>) session.getAttribute("groupPosition");
 		
-		String cg_code = groupInfo.getCg_code();
+		String cg_code = groupDTO.getCg_code();
 		
-		System.out.println(cg_code);
-		System.out.println(groupInfo.getGm_code());
+		//System.out.println(cg_code);
+		//System.out.println(groupInfo.getGm_code());
 		
 		try
 		{
@@ -128,9 +128,9 @@ public class GroupMainController
 			model.addAttribute("noticesList", csDao.noticesList());
 			
 			// 그룹정보(groupInfo), 그룹 마이정보(groupMyInfo)
-			model.addAttribute("groupInfo", groupInfo);
-			model.addAttribute("groupMyInfo", groupMyInfo);
-			model.addAttribute("groupPosition", groupPostition);
+			//model.addAttribute("groupInfo", groupInfo);
+			//model.addAttribute("groupMyInfo", groupMyInfo);
+			//model.addAttribute("groupPosition", groupPostition);
 			
 		} catch (Exception e)
 		{
@@ -145,31 +145,31 @@ public class GroupMainController
 	public String groupMyPage(ModelMap model, HttpSession session)
 	{
 		// 세션에서 필요한 값 받아오기
-		GroupDTO groupInfo = (GroupDTO)session.getAttribute("groupDTO");
-		GroupMemberDTO groupMyInfo = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
+		GroupMemberDTO groupMemberDTO = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		ArrayList<GroupMemberDTO> groupPostition = (ArrayList<GroupMemberDTO>) session.getAttribute("groupPosition");
 		
 		String us_code = (String) session.getAttribute("us_code");
-		String cg_code = groupInfo.getCg_code();
-		String gm_code = groupMyInfo.getGm_code();
+		String cg_code = groupDTO.getCg_code();
+		String gm_code = groupMemberDTO.getGm_code();
 		
 		// 마이 페이지에서 필요한 내가 참석하는 모임
-		ArrayList<MeetingDTO> myMeeting = null; 
+		ArrayList<MeetingDTO> myPageMeeting = null; 
 		
 		// 필요한 DAO 호출
 		IGroupMyPageDAO dao = sqlSession.getMapper(IGroupMyPageDAO.class);
 		GroupDAO groupDAO = new GroupDAO();									// GroupDAO 인스턴스 생성 (세션에 담기는 메소드)
-		
+
 		try
 		{
 			// 계정 정보 조회
 			model.addAttribute("myInfo",dao.myProfileList(us_code));	
 			// 그룹 정보 조회
-			model.addAttribute("groupInfo", groupInfo);
+			//model.addAttribute("groupInfo", groupInfo);
 			// 그룹 마이 정보 조회
-			model.addAttribute("groupMyInfo", groupMyInfo);
+			//model.addAttribute("groupMyInfo", groupMyInfo);
 			// 그룹 포지션 정보 조회
-			model.addAttribute("groupPosition", groupPostition);
+			//model.addAttribute("groupPosition", groupPostition);
 			
 			// 내가 작성한 글 조회
 			model.addAttribute("regularBoard", dao.regularBoard(gm_code));
@@ -180,10 +180,10 @@ public class GroupMainController
 			// 개인 일정 조회 (2024-03-11 추가완료)
 			groupDAO.connection();
 			
-			myMeeting = groupDAO.myMetting(gm_code);
-			System.out.println(myMeeting.get(0).getMt_meet());
-			System.out.println(myMeeting.get(0).getCt_name());
-			System.out.println(myMeeting.get(0).getMt_title());
+			myPageMeeting = groupDAO.myMetting(gm_code);
+			//System.out.println(myPageMeeting.get(0).getMt_meet());
+			//System.out.println(myPageMeeting.get(0).getCt_name());
+			//System.out.println(myPageMeeting.get(0).getMt_title());
 
 			groupDAO.close();
 			
@@ -194,6 +194,7 @@ public class GroupMainController
 			System.out.println(e.toString());
 		}
 		
+		session.setAttribute("myPageMeeting", myPageMeeting);
 		session.setAttribute("myInfo", dao.myProfileList(us_code));
 		
 		return "/WEB-INF/view/GroupMyPage.jsp";
@@ -205,10 +206,9 @@ public class GroupMainController
 	public String updateGroupMyInfo(GroupMemberDTO updateDTO , HttpSession session)
 	{	
 		// 세션에서 필요한 데이터 받기
-		GroupMemberDTO groupMyInfo = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
-		String gm_code = groupMyInfo.getGm_code();
-		updateDTO.setGm_regdate(groupMyInfo.getGm_regdate());
-		
+		GroupMemberDTO groupMemberDTO = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		String gm_code = groupMemberDTO.getGm_code();
+		updateDTO.setGm_regdate(groupMemberDTO.getGm_regdate());
 		try
 		{
 			// 필요한 DAO 생성
@@ -267,6 +267,18 @@ public class GroupMainController
 		session.setAttribute("myInfo", updateDTO);
 		
 		return "redirect:groupmypage.woori";
+	}
+	
+	@RequestMapping(value = "/mypagecalendarajax.woori")
+	public String myPageCalendarAjax(ModelMap model)
+	{
+		return "/WEB-INF/view/MyCalendarAjax.jsp";
+	}
+	
+	@RequestMapping(value = "/sidecalendarajax.woori")
+	public String sideCalendarAjax(ModelMap model)
+	{
+		return "/WEB-INF/view/SideCalendarAjax.jsp";
 	}
 	
 }

@@ -22,8 +22,8 @@ import com.woori.dto.CsDTO;
 @Controller
 public class CsController
 {	
-	@Autowired
-	private SqlSession sqlsession;
+	@Autowired 
+	private SqlSession sqlSession;
 	
 	// 고객센터 메인 접속 시 사용되는 컨트롤러
 	@RequestMapping(value="/cs.woori", method=RequestMethod.GET)
@@ -35,7 +35,7 @@ public class CsController
 			fc_code = "1";
 		}	
 		
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		// 공지사항 제목 조회 DAO
 		model.addAttribute("noticesTitle", dao.noticesList());
@@ -43,7 +43,7 @@ public class CsController
 		// 자주묻는 질문 제목 조회 DAO
 		model.addAttribute("faqList",dao.faqList(fc_code));
 
-		return "Cs.jsp";
+		return "/WEB-INF/view/Cs.jsp";
 	}
 	
 	// 자주 묻는 질문 페이지 접속시 사용되는 컨트롤러
@@ -56,7 +56,7 @@ public class CsController
 			fc_code = "1";
 		}	
 
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		// 자주 묻는 질문 리스트 조회 DAO
 		model.addAttribute("faqList", dao.faqList(fc_code));
@@ -68,7 +68,7 @@ public class CsController
 	@RequestMapping(value = "/inquiryinsertform.woori", method = RequestMethod.GET)
 	public String inquiryForm(ModelMap model)
 	{
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		// 문의사항 카테고리 조회 DAO
 		model.addAttribute("inquiryCategory",dao.inquiryCategory());
@@ -84,7 +84,7 @@ public class CsController
 		
 		System.out.println(us_code);
 		
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		dto.setIq_content(dto.getIq_content().replaceAll("\n", "<br>"));
 		
 		dto.setUs_code(us_code);
@@ -102,7 +102,7 @@ public class CsController
 	@RequestMapping(value = "/inquirylist.woori", method = RequestMethod.GET)
 	public String iquiryList(ModelMap model, HttpSession session)
 	{
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		String us_code = (String)session.getAttribute("us_code");
 		
@@ -117,7 +117,7 @@ public class CsController
 	@RequestMapping(value = "/reportlist.woori", method = RequestMethod.GET)
 	public String reportList(ModelMap model, HttpSession session)
 	{
-		IReportDAO dao = sqlsession.getMapper(IReportDAO.class);
+		IReportDAO dao = sqlSession.getMapper(IReportDAO.class);
 		String us_code = (String)session.getAttribute("us_code");
 		
 		// 신고 내역 조회 DAO
@@ -135,7 +135,7 @@ public class CsController
 	@RequestMapping(value = "/searchfaqlist.woori", method = RequestMethod.POST)
 	public String searchFaqList(ModelMap model, String searchKeyword)
 	{
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		model.addAttribute("searchFaqList",dao.searchFaqList(searchKeyword));
 		
@@ -146,7 +146,7 @@ public class CsController
 	@RequestMapping(value = "/inquirypost.woori", method = RequestMethod.GET)
 	public String inquiryBoard(ModelMap model, String iq_code)
 	{
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		model.addAttribute("inquirypost", dao.inquiryPost(iq_code));
 		
@@ -157,10 +157,10 @@ public class CsController
 	@RequestMapping(value="/noticeslist.woori" ,method = RequestMethod.GET)
 	public String noticesList(ModelMap model)
 	{
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		model.addAttribute("noticesList", dao.noticesList());
-		
+		    
 		
 		return "/WEB-INF/view/NoticesList.jsp";
 	}
@@ -168,7 +168,7 @@ public class CsController
 	@RequestMapping(value = "/noticespost.woori" ,method = RequestMethod.GET)
 	public String noticesListBoard(ModelMap model , String nf_code)
 	{
-		ICsDAO dao = sqlsession.getMapper(ICsDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		model.addAttribute("noticespost", dao.noticesListPost(nf_code));
 		

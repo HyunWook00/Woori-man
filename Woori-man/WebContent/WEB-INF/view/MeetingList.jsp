@@ -76,13 +76,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MeetingList</title>
+<title>${groupDTO.cg_name } - 모임게시판</title>
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/articleList.css" />
 
 <style type="text/css">
@@ -114,6 +114,8 @@
 		.container {max-width: 1320px; width: 1320px;}
 	}
 	
+	
+	
 </style>
 <script type="text/javascript">
 
@@ -123,9 +125,9 @@
 		// 정기모임 발의가 가능한 직위는 정기모임, 번개모임 무엇을 발의할것인지 분기
 		$(".create-article").click(function()
 		{
-			var position = ${member.pos_code};
+			var position = ${groupMemberDTO.pos_code};
 			if (position == '1' || position == '2')
-				$("#modal-btn").click();
+				$("#meetingCategoryModal").modal("show");
 			else
 				window.location.href="meetinginsertform.woori?mc_code=2";
 		});
@@ -146,14 +148,16 @@
 
 <!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <div class="mainContent">
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴가 들어갑ㄴ미다
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 영역 -->
@@ -163,7 +167,7 @@
 		<div class="board-info">
 		
 			<!-- 추후 세션에서 그룹명 받아오기 -->
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 모임 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] 모임 게시판</div>
 		
 		</div>
 		
@@ -239,7 +243,7 @@
 			<div class="content-list">
 			
 				<!-- 컨트롤러에서 받아온 게시글 정보 배열 lists에서 하나씩 꺼내오기 -->
-				<c:forEach var='meeting' items="<%=lists %>">
+				<c:forEach var='meeting' items="${meetingList }">
 				
 				<div class="article">
 				

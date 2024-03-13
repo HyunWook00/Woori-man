@@ -16,7 +16,7 @@
     width: 1270px;
     position: absolute;
     top: 135px;
-    height: 830px;
+    height: 900px;
     margin-left: 480px;
     border: 1px solid #ddd;
     box-shadow: 3px 3px 3px #ddd;
@@ -40,7 +40,7 @@
 {
 	border-right: 1px solid #ddd;
 	width: 270px;
-	height: 830px;
+	height: 900px;
 	float: left;
 	font-size: 15px;
 }

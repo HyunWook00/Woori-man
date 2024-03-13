@@ -10,7 +10,7 @@
 %>
 <%
 	// 모임 날짜 받아오기
-	ArrayList<MeetingDTO> myMeeting = (ArrayList<MeetingDTO>)session.getAttribute("myMeeting");
+	ArrayList<MeetingDTO> myMeeting = (ArrayList<MeetingDTO>)session.getAttribute("myPageMeeting");
 
 	String[] MyGroupYear = new String[myMeeting.size()]; 	
 	String[] MyGroupMonth = new String[myMeeting.size()];	

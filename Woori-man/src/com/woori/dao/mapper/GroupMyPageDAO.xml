@@ -6,7 +6,7 @@
 
 	<select id="myProfileList" resultType="com.woori.dto.UserDTO">
 		SELECT U.US_ID AS US_ID , U.US_PWD AS US_PWD, I.US_BIRTHDAY AS US_BIRTHDAY, I.US_TEL AS US_TEL
-    	     , I.US_NAME AS US_NAME, I.US_NAME AS US_NAME, I.US_ZIPCODE AS US_ZIPCODE, I.US_ADDR1 AS US_ADDR, I.US_ADDR2 AS US_ADDR2
+    	     , I.US_NAME AS US_NAME, I.US_NAME AS US_NAME, I.US_ZIPCODE AS US_ZIPCODE, I.US_ADDR1 AS US_ADDR1, I.US_ADDR2 AS US_ADDR2
     	     , I.US_EMAIL AS US_EMAIL
     	     , I.US_PROFILE AS US_PROFILE
 		FROM USERS U JOIN USER_INFO I 
@@ -14,15 +14,15 @@
 		WHERE U.US_CODE = #{us_code}
 	</select>
 
-	<select id="regularBoard" resultType="com.woori.dto.BoardDTO">
-		SELECT MT_TITLE, TO_CHAR(MT_DATE,'YYYY-MM-DD') AS MT_DATE,  MT_CODE
+	<select id="regularBoard" resultType="com.woori.dto.MeetingDTO">
+		SELECT MT_TITLE, TO_CHAR(MT_DATE,'YYYY-MM-DD') AS MT_DATE, MT_CODE
 		FROM MEETING
 		WHERE GM_CODE = #{gm_code}
 		  AND MC_CODE = 1
 		ORDER BY MT_DATE DESC
 	</select>
 	
-	<select id="impromptuBoard" resultType="com.woori.dto.BoardDTO">
+	<select id="impromptuBoard" resultType="com.woori.dto.MeetingDTO">
 		SELECT MT_TITLE, TO_CHAR(MT_DATE,'YYYY-MM-DD') AS MT_DATE,  MT_CODE
 		FROM MEETING
 		WHERE GM_CODE = #{gm_code}
@@ -30,7 +30,7 @@
 		ORDER BY MT_DATE DESC
 	</select>
 	
-	<select id="historyBorad" resultType="com.woori.dto.BoardDTO">
+	<select id="historyBorad" resultType="com.woori.dto.HistoryDTO">
 		SELECT M.MT_TITLE AS MT_TITLE, H.HIS_VIEW AS HIS_VIEW, TO_CHAR(H.HIS_DATE,'YYYY-MM-DD') AS HIS_DATE, G.GM_NICKNAME AS GM_NICKNAME , H.HIS_CODE
 		FROM HISTORY H JOIN ATTEND_OPINION A
 		     ON H.AO_CODE = A.AO_CODE
