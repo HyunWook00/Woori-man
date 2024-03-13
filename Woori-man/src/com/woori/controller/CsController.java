@@ -160,7 +160,7 @@ public class CsController
 		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		model.addAttribute("noticesList", dao.noticesList());
-		
+		    
 		
 		return "/WEB-INF/view/NoticesList.jsp";
 	}
