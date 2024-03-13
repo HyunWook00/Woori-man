@@ -53,7 +53,7 @@ public class MemberMainDAO
 
 
 	// 그룹 개설을 위한 메소드
-	public int createGroup(MemberMainDTO member) throws SQLException
+	public int createGroup(GroupDTO group) throws SQLException
 	{
 		int result = 0;
 		
@@ -62,12 +62,12 @@ public class MemberMainDAO
 		
 		CallableStatement cstmt = conn.prepareCall(sql);
 		
-		cstmt.setString(1, member.getCg_name());
-		cstmt.setString(2, member.getGc_code());
-		cstmt.setString(3, member.getCg_intro());
-		cstmt.setString(4, member.getBrd_name());
-		cstmt.setString(5, member.getCg_profile());
-		cstmt.setString(6, member.getUs_code());
+		cstmt.setString(1, group.getCg_name());
+		cstmt.setString(2, group.getGc_code());
+		cstmt.setString(3, group.getCg_intro());
+		cstmt.setString(4, group.getBrd_name());
+		cstmt.setString(5, group.getCg_profile());
+		cstmt.setString(6, group.getUs_code());
 		
 		result = cstmt.executeUpdate();
 		
@@ -203,6 +203,7 @@ public class MemberMainDAO
 	
 
 	// 친구 찾기 
+	/*
 	public MemberMainDTO findFriends(String us_id) throws SQLException
 	{
 		MemberMainDTO result = new MemberMainDTO();
@@ -224,6 +225,7 @@ public class MemberMainDAO
 		
 		return result;
 	}
+	*/
 
 	
 	

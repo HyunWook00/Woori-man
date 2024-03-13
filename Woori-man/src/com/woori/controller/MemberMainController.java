@@ -46,44 +46,44 @@ public class MemberMainController
 	}
 	
 	// 그룹 개설 액션 메소드
-	@RequestMapping(value = "/creategroup.woori")
-	public String createGroup(Model model, HttpSession session, @RequestParam("cg_name") String cg_name
-										 					  , @RequestParam("cg_intro") String cg_intro
-										 					  , @RequestParam("gc_code") String gc_code
-										 					  , @RequestParam("cg_profile") String cg_profile
-										 					  , @RequestParam("brd_name") String brd_name) throws SQLException, ClassNotFoundException
-	{
-		// 액션 코드
-		MemberMainDAO dao = new MemberMainDAO();
-		MemberMainDTO member = new MemberMainDTO();
-		
-		String us_code = (String) session.getAttribute("us_code");
-		
-		System.out.println(us_code);
-		
-		dao.connection();		
-		if (cg_profile == null || cg_profile == "")
+		@RequestMapping(value = "/creategroup.woori")
+		public String createGroup(Model model, HttpSession session, @RequestParam("cg_name") String cg_name
+											 					  , @RequestParam("cg_intro") String cg_intro
+											 					  , @RequestParam("gc_code") String gc_code
+											 					  , @RequestParam("cg_profile") String cg_profile
+											 					  , @RequestParam("brd_name") String brd_name) throws SQLException, ClassNotFoundException
 		{
-			cg_profile = "기본프로필";
-		}
-		
-		if (brd_name == "" || brd_name == null)
-		{
-			brd_name = "자유 게시판";
-		}
-		
-		
-			member.setUs_code(us_code);
-			member.setCg_name(cg_name);
-			member.setCg_intro(cg_intro);
-			member.setGc_code(gc_code);
-			member.setCg_profile(cg_profile);
-			member.setBrd_name(brd_name);
+			// 액션 코드
+			MemberMainDAO dao = new MemberMainDAO();
+			GroupDTO dto = new GroupDTO();
 			
-			dao.createGroup(member);
+			String us_code = (String) session.getAttribute("us_code");
+			
+			System.out.println(us_code);
+			
+			dao.connection();		
+			if (cg_profile == null || cg_profile == "")
+			{
+				cg_profile = "기본프로필";
+			}
+			
+			if (brd_name == "" || brd_name == null)
+			{
+				brd_name = "자유 게시판";
+			}
+			
+			
+				dto.setUs_code(us_code);
+				dto.setCg_name(cg_name);
+				dto.setCg_intro(cg_intro);
+				dto.setGc_code(gc_code);
+				dto.setCg_profile(cg_profile);
+				dto.setBrd_name(brd_name);
 				
-			
-		return "membermain.woori";
+				dao.createGroup(dto);
+					
+				
+			return "membermain.woori";
 	}
 	
 	// 그룹 수정 메소드 
@@ -191,7 +191,7 @@ public class MemberMainController
 	}
 	
 	
-	
+	/*
 	// 친구찾기
 	@RequestMapping(value = "/findfriends.woori")
 	public String findFriends(Model model, @RequestParam("us_id") String us_id) throws ClassNotFoundException, SQLException
@@ -211,7 +211,7 @@ public class MemberMainController
 		return "/WEB-INF/view/friendAjax.jsp";
 			
 	}
-	
+	*/
 	
 	@RequestMapping(value = "/cal.woori")
 	public String cal(HttpSession session, Model model, @RequestParam("us_code") String us_code) throws ClassNotFoundException, SQLException

@@ -14,6 +14,7 @@ public class GroupDTO
 	private String gm_count;	// 총 그룹원 수
 	private String brd_name;	// 그룹 자유게시판명
 	private int group_point;	// 그룹 포인트
+	private String us_code;
 	
 	// 노은하
 	// GroupDTO 필요한 요소 추가
@@ -25,6 +26,16 @@ public class GroupDTO
 	private int g_count;
 	
 	// getter / setter 구성
+	
+	public String getUs_code()
+	{
+		return us_code;
+	}
+	public void setUs_code(String us_code)
+	{
+		this.us_code = us_code;
+	}
+
 	public String getCg_code()
 	{
 		return cg_code;
