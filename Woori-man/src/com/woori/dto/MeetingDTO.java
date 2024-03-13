@@ -23,6 +23,11 @@ public class MeetingDTO
 	private String mc_code;		// 모임 카테고리 코드
 	private String mc_name;		// 모임 카테고리명 (번개 or 정기)
 	
+	// 김경태 추가
+	private String ao_code;		// 참여 의사표현코드
+	private String ao_date;		// 의사표현 날짜
+	private String aoc_code;	// 참석상태 코드 
+	
 	// getter / setter 구성
 	public String getMt_code()
 	{
@@ -176,6 +181,31 @@ public class MeetingDTO
 	{
 		this.mc_name = mc_name;
 	}
+	public String getAo_code()
+	{
+		return ao_code;
+	}
+	public void setAo_code(String ao_code)
+	{
+		this.ao_code = ao_code;
+	}
+	public String getAo_date()
+	{
+		return ao_date;
+	}
+	public void setAo_date(String ao_date)
+	{
+		this.ao_date = ao_date;
+	}
+	public String getAoc_code()
+	{
+		return aoc_code;
+	}
+	public void setAoc_code(String aoc_code)
+	{
+		this.aoc_code = aoc_code;
+	}
+	
 	
 	
 }
