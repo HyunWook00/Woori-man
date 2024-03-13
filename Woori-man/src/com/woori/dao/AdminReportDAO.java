@@ -62,6 +62,33 @@ public class AdminReportDAO
 		return result;
 	}		
 	
+	// 신고 처리 결과 
+	public ArrayList<ReportDTO> ReportResult() throws SQLException
+	{
+		ArrayList<ReportDTO> result = new ArrayList<ReportDTO>();
+		
+		String sql = "SELECT RR_CODE, RR_STATUS FROM REPORT_RESULT";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+				
+		while (rs.next())
+		{
+			ReportDTO dto = new ReportDTO();
+					
+			dto.setRr_code(rs.getString("RR_CODE"));
+			dto.setRr_status(rs.getString("RR_STATUS"));
+			
+			result.add(dto);
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return result;
+	}
+	
 	// 그룹 신고 상세 페이지
 	public ReportDTO GroupReportArticle(String report_code) throws SQLException
 	{
@@ -73,9 +100,9 @@ public class AdminReportDAO
 				+ " FROM GROUP_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		
+		pstmt.setInt(1, Integer.parseInt(report_code));
+
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -111,9 +138,9 @@ public class AdminReportDAO
 				+ " FROM BOARD_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -149,9 +176,9 @@ public class AdminReportDAO
 				+ " FROM BOARD_COMMENT_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -187,9 +214,9 @@ public class AdminReportDAO
 				+ " FROM BOARD_RECOMMENT_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -225,9 +252,9 @@ public class AdminReportDAO
 				+ " FROM MEETING_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -263,9 +290,9 @@ public class AdminReportDAO
 				+ " FROM MEETING_COMMENT_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -301,9 +328,9 @@ public class AdminReportDAO
 				+ " FROM MEETING_RECOMMENT_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -339,9 +366,9 @@ public class AdminReportDAO
 				+ " FROM HISTORY_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -377,9 +404,9 @@ public class AdminReportDAO
 				+ " FROM HISTORY_COMMENT_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			
@@ -415,9 +442,9 @@ public class AdminReportDAO
 				+ " FROM HISTORY_RECOMMENT_REPORT_VIEW WHERE REPORT_CODE = ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(report_code));
 		
 		ResultSet rs = pstmt.executeQuery();
-		pstmt.setString(1, report_code);
 		
 		while (rs.next())
 		{			

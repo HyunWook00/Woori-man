@@ -156,11 +156,24 @@
 		background: #f3f3f1;
 	}
 	
-	
+	#title {cursor: pointer;}
 	
 </style>
 
+<script type="text/javascript">
 
+	/* $(function()
+	{	
+		var report_code = $("#report_code").html();
+		var ad_code = $("#ad_code").html();
+		
+		$("#title").click(function()
+		{
+			$(location).attr("href", "adminreportarticle.woori?report_code=" + report_code + "&ad_code=" + ad_code);
+		});
+	}); */
+
+</script>
 
 </head>
 <body>
@@ -237,12 +250,12 @@
 	    type="button" role="tab" aria-controls="allReport" aria-selected="true">전체</button>
 	    <button class="nav-link" id="nav-group-tab" data-bs-toggle="tab" data-bs-target="#groupReport" 
 	    type="button" role="tab" aria-controls="groupReport" aria-selected="false">그룹</button>
+	    <button class="nav-link" id="nav-board-tab" data-bs-toggle="tab" data-bs-target="#boardReport" 
+	    type="button" role="tab" aria-controls="boardReport" aria-selected="false">자유게시판</button>
 	    <button class="nav-link" id="nav-meeting-tab" data-bs-toggle="tab" data-bs-target="#meetingReport" 
 	    type="button" role="tab" aria-controls="meetingReport" aria-selected="false">모임</button>
 	    <button class="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#historyReport" 
-	    type="button" role="tab" aria-controls="historyReport" aria-selected="false">히스토리</button>
-	    <button class="nav-link" id="nav-board-tab" data-bs-toggle="tab" data-bs-target="#boardReport" 
-	    type="button" role="tab" aria-controls="boardReport" aria-selected="false">자유게시판</button>
+	    type="button" role="tab" aria-controls="historyReport" aria-selected="false">히스토리</button>	    
 	</div>
 </nav>
 
@@ -260,6 +273,7 @@
 		    <tr>
 	            <th scope="col">NO</th>
 	            <th scope="col">신고콘텐츠</th>
+	            <th scope="col">제목</th>
 	            <th scope="col">신고자</th>
 	            <th scope="col">신고일</th>
 	            <th scope="col">담당자</th>
@@ -275,21 +289,23 @@
 		</thead>
 		
 		<tbody class="tab-pane fade in active" id="allReport" role="tabpanel" aria-labelledby="nav-all-tab">
-			<c:forEach var="report" items="${Report }" >
+			<c:forEach var="all" items="${Report }" >
 			<c:set var="n" value="${n+1 }"></c:set>
-				<tr onclick="location.href='adminreportarticle.woori'">
+				<tr>
 					<td>${n }</td>
 					<%-- <td>${report.report_type }</td> --%>
 					<!-- 만약에 reportType 이라는 HashMap 객체를 넘겨주었다 치고 -->
-					<td>${reportType[report.report_type] }</td>
-					<td>${report.gm_code }</td>
-					<td>${report.report_date }</td>
-					<td>${report.ad_code }</td>
+					<td>${reportType[all.report_type] }</td>
+					<td><a href="adminreportarticle.woori?report_code=${all.report_code }
+					&ad_code=${all.ad_code }&report_type=${all.report_type }">${all.report_title }</a></td>
+					<td>${all.us_code1 }</td>
+					<td>${all.report_date }</td>
+					<td>${all.ad_code }</td>
 					<c:choose>
-						<c:when test="${report.report_status==1 }">
+						<c:when test="${all.report_status==1 }">
 							<td><span class="badge bg-danger">접수완료</span></td>
 						</c:when>
-						<c:when test="${report.report_status==2 }">
+						<c:when test="${all.report_status==2 }">
 							<td><span class="badge bg-primary">검토중</span></td>
 						</c:when>
 						<c:otherwise>
@@ -304,10 +320,12 @@
 			<c:forEach var="group" items="${Report }" >
 			<c:if test="${group.report_type == '1' }">
 			<c:set var="i" value="${i+1 }"></c:set>
-				<tr onclick="location.href='adminreportarticle.woori'">
+				<tr>
 					<td>${i }</td>
 					<td>${reportType[group.report_type] }</td>
-					<td>${group.gm_code }</td>
+					<td><a href="adminreportarticle.woori?report_code=${group.report_code }
+					&ad_code=${group.ad_code }&report_type=${group.report_type }">${group.report_title }</a></td>
+					<td>${group.us_code1 }</td>
 					<td>${group.report_date }</td>
 					<td>${group.ad_code }</td>
 					<c:choose>
@@ -333,7 +351,9 @@
 				<tr>
 					<td>${j }</td>
 					<td>${reportType[board.report_type] }</td>
-					<td>${board.gm_code }</td>
+					<td><a href="adminreportarticle.woori?report_code=${board.report_code }
+					&ad_code=${board.ad_code }&report_type=${board.report_type }">${board.report_title }</a></td>
+					<td>${board.us_code1 }</td>
 					<td>${board.report_date }</td>
 					<td>${board.ad_code }</td>
 					<c:choose>
@@ -359,7 +379,9 @@
 				<tr>
 					<td>${k }</td>
 					<td>${reportType[meeting.report_type] }</td>
-					<td>${meeting.gm_code }</td>
+					<td><a href="adminreportarticle.woori?report_code=${meeting.report_code }
+					&ad_code=${meeting.ad_code }&report_type=${meeting.report_type }">${meeting.report_title }</a></td>
+					<td>${meeting.us_code1 }</td>
 					<td>${meeting.report_date }</td>
 					<td>${meeting.ad_code }</td>
 					
@@ -387,7 +409,9 @@
 				<tr>
 					<td>${l }</td>
 					<td>${reportType[history.report_type] }</td>
-					<td>${history.gm_code }</td>
+					<td><a href="adminreportarticle.woori?report_code=${history.report_code }
+					&ad_code=${history.ad_code }&report_type=${history.report_type }">${history.report_title }</a></td>
+					<td>${history.us_code1 }</td>
 					<td>${history.report_date }</td>
 					<td>${history.ad_code }</td>
 					<c:choose>
