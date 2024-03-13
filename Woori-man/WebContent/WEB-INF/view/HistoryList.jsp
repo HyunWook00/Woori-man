@@ -15,7 +15,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/articleList.css" />
 <style type="text/css">
 
@@ -101,7 +101,7 @@
 
 <!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <!-- 주요 콘텐츠 영역 -->

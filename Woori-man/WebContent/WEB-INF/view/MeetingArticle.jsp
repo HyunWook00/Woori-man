@@ -156,7 +156,7 @@
 		<div class="board-info">
 			
 			<!-- 추후 세션에서 그룹명 받아오기 -->
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 모임 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupInfo.gm_name }</span> ] 모임 게시판</div>
 			
 			<div class="button-zone">
 				<!-- 목록으로 / 이전글 / 다음글 버튼 영역 -->
@@ -167,14 +167,14 @@
 				</div>
 				<div class="button-div">
 					<c:choose>
-					<c:when test="${meetingArticle.gm_code ==  member.gm_code && meetingArticle.mt_status!=3}">
+					<c:when test="${meetingArticle.gm_code ==  groupMyInfo.gm_code && meetingArticle.mt_status!=3}">
 					<button type="button" class="article-button article-modify" value="${meetingArticle.mt_code }">수정하기</button>
 					<c:if test="${meetingArticle.mt_status==1 }">
 					<button type="button" class="article-button article-delete" value="${meetingArticle.mt_code }">철회하기</button>
 					</c:if>
 					</c:when>
 					
-					<c:when test="${meetingArticle.gm_code !=  member.gm_code}">
+					<c:when test="${meetingArticle.gm_code !=  groupMyInfo.gm_code}">
 					<button type="button" class="article-button" value="${meetingArticle.mt_code }">신고하기</button>
 					</c:when>
 					</c:choose>
@@ -259,10 +259,10 @@
 					<form action="" class="meeting-vote-form">
 						<div class="vote-zone">
 							<button type="button" class="vote-attend vote-submit-btn attend ${attendStatus == 1 ? 'selected-btn' : '' }"  ${attendStatus == 1 ? 'disabled=\"disabled\"' : '' } onclick="voteAttend(${meetingArticle.mt_code}, 1)"
-							${member.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>참석</button>
+							${groupMyInfo.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>참석</button>
 							<button type="button" class="vote-attend vote-submit-btn not-attend ${attendStatus == 2 ? 'selected-btn' : '' }" ${attendStatus == 2 ? 'disabled=\"disabled\"' : '' } onclick="voteAttend(${meetingArticle.mt_code}, 2)"
-							${member.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>불참석</button>
-							<c:if test="${member.gm_code == meetingArticle.gm_code}">
+							${groupMyInfo.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>불참석</button>
+							<c:if test="${groupMyInfo.gm_code == meetingArticle.gm_code}">
 								<div class="writer-message">발의자는 자동으로 참석 처리됩니다.</div>
 							</c:if>
 						</div>
@@ -327,15 +327,15 @@
 							<!-- 메뉴 목록 -->
 							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
 								<c:choose>
-									<c:when test="${member.gm_code == comment.commentWriterCode }">
+									<c:when test="${groupMyInfo.gm_code == comment.commentWriterCode }">
 										<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
 										<li><a class="dropdown-item" onclick="modifyMyComment(${comment.commentCode})">수정하기</a></li>
 										<li><a href="meetingcommentdelete.woori?articleCode=${meetingArticle.mt_code }&commentCode=${comment.commentCode}" class="dropdown-item">삭제하기</a></li>
 									</c:when>
 									
-									<c:when test="${member.gm_code != comment.commentWriterCode }">
+									<c:when test="${groupMyInfo.gm_code != comment.commentWriterCode }">
 										<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
-										<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode}, ${member.gm_code }, ${meetingArticle.mt_code })">신고하기</a></li>
+										<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode}, ${groupMyInfo.gm_code }, ${meetingArticle.mt_code })">신고하기</a></li>
 									</c:when>
 								</c:choose>
 							</ul><!-- .dropdown-menu -->
@@ -402,7 +402,7 @@
 						<form action="meetingrecommentinsert.woori" method="post" class="write-recomment">
 						<div class="write-area">
 							<textarea class="comment-input" name="mrc_content" id="mrc_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
-							<input type="hidden" name="gm_code" id="gm_code" value="${member.gm_code }">
+							<input type="hidden" name="gm_code" id="gm_code" value="${groupMyInfo.gm_code }">
 							<input type="hidden" name="mcm_code" id="mcm_code" value="${comment.commentCode }">
 							<input type="hidden" name="mt_code" id="mt_code" value="${meetingArticle.mt_code }">
 						</div>
