@@ -27,7 +27,6 @@ public class GroupListDAO
 	
 	
 	// 3/6 그룹 검색 메소드 추가
-	
 
 	// 나의 가입그룹 상세조회 리스트 → 폐쇄된 그룹인지 확인 후 조회되도록 수정
 	public ArrayList<GroupDTO> myGrouplist(int us_code) throws SQLException, ClassNotFoundException

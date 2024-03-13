@@ -40,7 +40,7 @@ function enterGroup(cg_code)
 	// 그룹 코드를 잘 받아오는지 확인
 	//alert(cg_code);
 	
-	$(location).attr("href", "entergroup.action?cg_code="+cg_code);
+	$(location).attr("href", "entergroup.woori?cg_code="+cg_code);
 	
 	
 }
@@ -336,7 +336,7 @@ function deleteFriends(fr_code, us_id)
             </div>
             
             <div>
-            <h5 class="mb-2">망곰탱이 <img src="https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff5d7b9d3-6faa-4fbd-92fb-abc13883f4ac%2Fkakao.png&blockId=845a0760-d543-46ae-965d-018c4289eb32&width=256" 
+            <h5 class="mb-2">${userDTO.us_name } <img src="https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff5d7b9d3-6faa-4fbd-92fb-abc13883f4ac%2Fkakao.png&blockId=845a0760-d543-46ae-965d-018c4289eb32&width=256" 
              class="log_Api kakao_log profile_img"  /></h5>
             </div>
         
