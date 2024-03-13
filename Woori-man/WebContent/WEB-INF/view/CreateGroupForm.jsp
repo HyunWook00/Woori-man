@@ -11,18 +11,16 @@
 <title>CreateGroupForm.jsp</title>
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/css/MemberMain.css"> --%>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/createGroup.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
  
-<style type="text/css">
-
-
-
-</style>
+<!-- 1. 부트스트랩 js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 2. 부트스트랩 css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-
-
+<!-- 4. 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+ 
 <script type="text/javascript">
 
 	$(document).ready(function()
@@ -85,7 +83,7 @@
 
 <!-- container -->
 <div class="container content">
-	<form id="createForm" action="creategroup.action" method="post">
+	<form id="createForm" action="creategroup.woori" method="post">
 	
 	
 		<!-- 그룹 이름 및 한 줄 소개 -->

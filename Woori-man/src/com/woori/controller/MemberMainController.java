@@ -129,46 +129,6 @@ public class MemberMainController
 		return "/WEB-INF/view/ChangeGroupInfo.jsp";
 	}
 	
-	
-	
-	/*
-	// 선택 그룹 들어갈 때 찾아야 하는 정보들 (GroupDTO, GroupMemberDTO 구성)
-	@RequestMapping(value = "/entergroup.woori")
-	public String enterGroup(HttpSession session, Model model, @RequestParam("cg_code") String cg_code) throws ClassNotFoundException, SQLException
-	{
-		ArrayList<GroupMemberDTO> groupMemberDTO = new ArrayList<GroupMemberDTO>();
-		MemberMainDAO dao = new MemberMainDAO(); 					// dao 인스턴스 생성
-		GroupDTO groupDTO = new GroupDTO();							// dto 인스턴스 생성
-		
-		dao.connection(); 											// 서버 연결
-		
-		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");  // 세션을통해 유저 코드 가져오기 
-		
-		try
-		{
-			// 로그인 세션 정보가 없을 시 로그인 페이지 실행
-			if (userDTO.getUs_code() == null)
-			{
-				return "loginform.action";
-			}
-			
-			
-			groupDTO = dao.groupInfo(userDTO.getUs_code(), cg_code); 			// groupDTO에 필요한 속성 set
-			groupMemberDTO = dao.groupMemberInfo(cg_code);			// groupMemberDTO 에 필요한 속성 set 
-
-			
-			session.setAttribute("groupDTO", groupDTO);				// groupDTO(GroupDTO)를 세션에 set
-			session.setAttribute("groupMemberDTO", groupMemberDTO);	// groupMemberDTO(GroupMemberDTO)를 세션에 set
-			
-		} catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-		
-		return "newfile.woori";
-	}
-	*/
-	
 	// 설정한 DTO session 테스트
 	@RequestMapping(value = "/newfile.woori")
 	public String test(HttpSession session, Model model)

@@ -271,7 +271,7 @@ function deleteFriends(fr_code, us_id)
 					<div class="group col-6 col-md-6 col-lg-4">
 						<div class="gr_option">
 							<div class="make_gr">
-								<button onclick="location.href='creategroupform.action'"><i class="bi bi-plus-circle-fill"></i></button>
+								<button onclick="location.href='creategroupform.woori'"><i class="bi bi-plus-circle-fill"></i></button>
 								<br>
 								만들기
 							</div>
@@ -282,7 +282,7 @@ function deleteFriends(fr_code, us_id)
 					
 					<c:forEach var="list" items="${groupList }">
 							<div class="group col-6 col-md-6 col-lg-4">
-								<form action="membermain.action">  
+								<form action="membermain.woori">  
 									<div  class="gr_option" >
 									<div class="gr_img">
 										<img onclick="enterGroup(${list.cg_code})" src="https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800">
@@ -371,7 +371,7 @@ function deleteFriends(fr_code, us_id)
            			</button>
             	</div>
             	<div class="logout col-6">
-	            <button type="button" class="btn btn-secondary btn-rounded  btns" onclick="location.href='logout.action'">
+	            <button type="button" class="btn btn-secondary btn-rounded  btns" onclick="location.href='logout.woori'">
 	             Logout
 	            </button>
             	</div>
