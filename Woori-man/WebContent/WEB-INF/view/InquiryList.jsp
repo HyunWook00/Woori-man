@@ -1,8 +1,22 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="sun.misc.Cleaner"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+%>
+<%
+
+	Calendar cal = Calendar.getInstance();
+	String date = "";
+	date += cal.get(cal.YEAR);
+	date += "-";
+	date += cal.get(cal.MONTH);
+	date += "-";
+	date += cal.get(cal.DAY_OF_MONTH);
+			
+
 %>
 <!DOCTYPE html>
 <html>
@@ -165,7 +179,7 @@
 			<option value="24">2년</option>
 			<option value="">직접설정</option>
 		</select>
-		<input type="date" /> ~ <input type="date" />
+		<input type="date" id="date1" value="<%=date %>"/> ~ <input type="date" />
 		<button class="btn btnSelect">조회</button>
 		<button class="btn btnInsert" onclick="location.href='inquiryinsertform.woori'">1:1문의 작성</button>
 	</div>

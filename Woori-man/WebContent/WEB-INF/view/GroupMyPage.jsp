@@ -40,7 +40,7 @@
 <script type="text/javascript">
 	
 	// 내 정보 변경을 눌렀을 때 호출되는 함수 (display 변경)
-	function updateMyInfo()
+	function updateFormMyInfo()
 	{
 	 	var myInfo =  document.getElementById("myInfo");
 	 	var updateInfo = document.getElementById("updateMyInfo");
@@ -50,7 +50,7 @@
 	}
 	
 	// 계정 정보 변경을 눌렀을 때 호출되는 함수 (display 변경)
-	function updateAccoountInfo()
+	function updateAccoountFormInfo()
 	{
 	 	var myAccoountInfo =  document.getElementById("myAccoountInfo");
 	 	var updateAccoountInfo = document.getElementById("updateMyAccoountInfo");
@@ -58,7 +58,7 @@
 	 	myAccoountInfo.className = "myPage_AccountInfo";
 	 	updateAccoountInfo.className = "myPage_AccountInfo active";
 	}
-	
+		
 	// 우편번호 및 주소를 입력해주는 함수
 	function execDaumPostcode()
 	{
@@ -112,6 +112,15 @@
         }).open();
 	}
 	
+		$(function()
+			{
+				$("#updateMyInfo").click(function()
+				{
+					//alert($("#iqc_code").val());
+				});
+				
+			});
+	
 	
 </script>
 </head>
@@ -127,7 +136,7 @@
 <div class="d-flex align-items-start">
 		<div class="myPage_side">
 			<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-				<p><img src="img/cat3.jpg" alt="프로필 사진" /></p>
+				<p><img src="<%=cp %>/images/cat3.jpg" alt="프로필 사진" /></p>
 				<p>${groupMyInfo.gm_nickname }</p>
 				    <button class="nav-link groupMyNav active" id="myPageMain-tab" data-bs-toggle="tab" data-bs-target="#myPageMain" 
 				    type="button" role="tab" aria-controls="myPageMain" aria-selected="true" tabindex="-1">내 정보</button>
@@ -149,36 +158,36 @@
 					</p>
 				</div>
 				<div>
-					<p><span class="header">닉네임</span> <span class="body">${groupMyInfo.gm_nickname }</span></p>
+					<p><span class="header">닉네임</span> <span class="body">${groupMemberDTO.gm_nickname }</span></p>
 				</div>
 				<div>
-					<p><span class="header">상태메세지</span> <span class="body">${groupMyInfo.gm_intro } </span></p>
+					<p><span class="header">상태메세지</span> <span class="body">${groupMemberDTO.gm_intro } </span></p>
 				</div>
 				<div>
 					<p>
-						<span class="header">그룹가입일</span> <span class="body">${groupMyInfo.gm_regdate }</span>
-						<button type="button" class="mybtn" onclick="updateMyInfo()">정보 변경</button>				
+						<span class="header">그룹가입일</span> <span class="body">${groupMemberDTO.gm_regdate }</span>
+						<button type="button" class="mybtn" onclick="updateFormMyInfo()">정보 변경</button>				
 					</p>
 				</div>
 			</div>
 			<div class="myPage_MyInfo" id="updateMyInfo">
-			<form action="mypageupdate.woori" method="GET">
+			<form action="mypageupdate.woori" method="GET" id="updateMyForm">
 				<div>
 					<p> <span class="header">프로필 사진 </span>
-						<img alt="프로필 사진" src="<%=cp %>/images/${groupMyInfo.gm_profile }">
+						<img alt="프로필 사진" src="<%=cp %>/images/${groupMemberDTO.gm_profile }">
 						<input type="file" name="gm_profile"/>
 					</p>
 				</div>
 				<div>
-					<p><span class="header">닉네임</span><span class="body"><input type="text" name="gm_nickname" value="${groupMyInfo.gm_nickname }" placeholder="닉네임을 변경하세요!"/></span></p>
+					<p><span class="header">닉네임</span><span class="body"><input type="text" name="gm_nickname" value="${groupMemberDTO.gm_nickname }" placeholder="닉네임을 변경하세요!"/></span></p>
 				</div>
 				<div>
-					<p><span class="header">상태메세지</span> <span class="body"><input type="text" name="gm_intro" value="${groupMyInfo.gm_intro }" placeholder="상태메세지를 변경하세요" /> </span></p>
+					<p><span class="header">상태메세지</span> <span class="body"><input type="text" name="gm_intro" value="${groupMemberDTO.gm_intro }" placeholder="상태메세지를 변경하세요" /> </span></p>
 				</div>
 				<div>
 					<p>
-						<span class="header">그룹가입일</span> <span class="body">${groupMyInfo.gm_regdate }</span>
-						<button type="submit" class="mybtn">정보 변경</button>				
+						<span class="header">그룹가입일</span> <span class="body">${groupMemberDTO.gm_regdate }</span>
+						<button type="submit" class="mybtn" id="updateMyInfo" >변경하기</button>				
 						<button type="button" class="mybtn" onclick="location.href='groupmypage.woori'">취소</button>				
 					</p>
 				</div>
@@ -211,7 +220,7 @@
 				<p>
 					<span class="header">비밀번호</span>	
 					<button class="mybtn pwdbtn">변경</button>
-					<button class="mybtn" onclick="updateAccoountInfo()">정보 변경</button>			
+					<button class="mybtn" onclick="updateAccoountFormInfo()">정보 변경</button>			
 				</p>
 				</div>
 				</div>
@@ -252,7 +261,7 @@
 				<p>
 					<span class="header">비밀번호</span>	
 					<button class="mybtn pwdbtn">변경</button>
-					<button type="submit" class="mybtn" onclick="()">정보 변경</button>		
+					<button type="submit" class="mybtn" id="updateAccoountInfo">변경하기</button>		
 					<button type="button" class="mybtn" onclick="location.href='groupmypage.woori'">취소</button>	
 				</p>
 				</div>

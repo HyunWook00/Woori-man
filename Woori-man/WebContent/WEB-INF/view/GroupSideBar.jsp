@@ -127,8 +127,8 @@
 		  <div>탈퇴를 해야할 경우 모임 발의자에게 문의하여 상태를 변경하시길 바랍니다.</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Understood</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary">그룹 탈퇴</button>
 	      </div>
 	    </div>
 	  </div>

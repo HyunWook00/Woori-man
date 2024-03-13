@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .SideBarBody
 {
     width: 280px;
@@ -198,5 +197,11 @@ hr
     background-color: #ff8000;
     padding: 7px;
     margin-inline-start: 100px;
+}
+
+.groupWthdr
+{
+	color: red;
+	font-weight: bold;
 }
 

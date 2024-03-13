@@ -38,16 +38,20 @@ public class GroupMainController
 		GroupMemberDTO groupMemberDTO = null;			// GroupMemberDTO 변수 생성
 		ArrayList<MeetingDTO> groupMeetingDTO = null;	// ArrayList<MeetingDTO> 변수 생성
 		ArrayList<GroupMemberDTO> groupPostition = null;
-		String us_codeTemp = "8872984";				// 로그인 연결 전 임시 데이터
-		session.setAttribute("us_code", us_codeTemp);
-		String us_code = (String)session.getAttribute("us_code");
+		//String us_codeTemp = "8872984";					// 로그인 연결 전 임시 데이터
+		//session.setAttribute("us_code", us_codeTemp);
+		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
+		String us_code = usdto.getUs_code();
+		
+		//System.out.println(us_code);
 		
 		try
 		{
 			 // 로그인 세션 정보가 없을 시 로그인 페이지 실행
 	         if (us_code == null)
 	         {
-	            return "loginform.action";
+	        	//System.out.println("로그인 풀림");
+	            return "loginform.woori";
 	         }
 	         
 	         // 데이터 베이스 연결 (DBConn)
