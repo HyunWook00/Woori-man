@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 2024-02-27 노은하 -->
-<mapper namespace="com.test.mvc.ICommentDAO"> <!-- 인터페이스 경로 -->
+<mapper namespace="com.woori.dao.ICommentDAO"> <!-- 인터페이스 경로 -->
 
 	<insert id="insertComment">
 		INSERT INTO MEETING_COMMENT(MCM_CODE, MCM_DATE, MCM_CONTENT, MT_CODE, GM_CODE)
@@ -56,7 +56,7 @@
 		WHERE MRCM_CODE = #{recommentCode}
 	</select>
 	
-	<select id="searchComment" resultType="com.test.mvc.CommentDTO">
+	<select id="searchComment" resultType="com.woori.dto.CommentDTO">
 		SELECT MC.MCM_CODE AS COMMENTCODE
 		, MC.MCM_DATE AS MCM_DATE
 		, MC.MCM_CONTENT AS COMMENTCONTENT

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.test.mybatis.IGroupDAO">
+<mapper namespace="com.woori.dao.IGroupDAO">
 
-	<select id="newBorad" resultType="com.test.mybatis.BoardDTO">
+	<select id="newBorad" resultType="com.woori.dto.BoardDTO">
 		SELECT BRD_NAME, BRD_SUBJECT, BRD_CODE
 		FROM (
 		    SELECT G.BRD_NAME AS BRD_NAME, B.BRD_SUBJECT AS BRD_SUBJECT, BR.BRDR_CODE AS BRDR_CODE 
@@ -19,7 +19,7 @@
 		ORDER BY RANK
 	</select>
 	
-	<select id="newHistory" resultType="com.test.mybatis.HistoryDTO">
+	<select id="newHistory" resultType="com.woori.dto.HistoryDTO">
 		SELECT MT_TITLE, HIS_CODE, GM_NICKNAME 
 		FROM (
 		    SELECT M.MT_TITLE, M.GM_NICKNAME 
@@ -42,7 +42,7 @@
 		ORDER BY RANK
 	</select>
 	
-	<select id="impromptuMeeting" resultType="com.test.mybatis.MeetingDTO">
+	<select id="impromptuMeeting" resultType="com.woori.dto.MeetingDTO">
 		SELECT ROW_NUMBER() OVER(ORDER BY MT_DATE DESC) AS NUM, MT_CODE
 		     , MT_DATE, MT_MEET, MT_VOTE, MT_TITLE, CT_NAME, RG_NAME
 		     , MT_STATUS, MT_ETC
@@ -50,7 +50,7 @@
 		AND MT_STATUS = 1 AND MC_CODE = 2
 	</select>
 	
-	<select id="regularMeeting" resultType="com.test.mybatis.MeetingDTO">
+	<select id="regularMeeting" resultType="com.woori.dto.MeetingDTO">
 		SELECT ROW_NUMBER() OVER(ORDER BY MT_DATE DESC) AS NUM, MT_CODE
 		     , MT_DATE, MT_MEET, MT_VOTE, MT_TITLE
 		     , CT_NAME, RG_NAME, MT_ETC

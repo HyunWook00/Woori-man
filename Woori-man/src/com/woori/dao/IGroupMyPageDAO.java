@@ -2,9 +2,14 @@ package com.woori.dao;
 
 import java.util.ArrayList;
 
+import com.woori.dto.BoardDTO;
+import com.woori.dto.HistoryDTO;
+import com.woori.dto.MeetingDTO;
+import com.woori.dto.UserDTO;
+
+// 마이페이지 접속 시 필요한 dao - 민지 
 public interface IGroupMyPageDAO
 {
-	public GroupDTO_ming myGroupProfileList(String gm_code);					// 그룹 마이 프로필 조회
 	public UserDTO myProfileList(String us_code);								// 계정 정보 조회
 	
 	public ArrayList<MeetingDTO> regularBoard(String gm_code);					// 정기 모임 조회

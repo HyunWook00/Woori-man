@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.test.mybatis.IGroupDAO">
+<mapper namespace="com.woori.dao.IGroupDAO">
 
-	<select id="groupList" resultType="com.test.mybatis.GroupDTO">
+	<select id="groupList" resultType="com.woori.dto.GroupDTO">
 		SELECT CG_NAME, CG_INTRO, TO_CHAR(TRUNC(CG_DATE)) AS CG_DATE, CG_PROFILE
 		FROM CREATE_GROUP
 		WHERE CG_CODE = #{cg_code}
 	</select>
 	
-	<select id="groupPosition" resultType="com.test.mybatis.GroupDTO">
+	<select id="groupPosition" resultType="com.woori.dto.GroupDTO">
 		SELECT P.POS_NAME AS POS_NAME , M.GM_NICKNAME AS GM_NICKNAME
 		FROM POSITION_APPOINT A JOIN POSITION P
 		     ON A.POS_CODE = P.POS_CODE
