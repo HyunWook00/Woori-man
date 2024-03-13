@@ -2,29 +2,29 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.test.mybatis.ICsDAO">
+<mapper namespace="com.woori.dao.ICsDAO">
 
-	<select id="noticesList" resultType="com.test.mybatis.CsDTO">
+	<select id="noticesList" resultType="com.woori.dto.CsDTO">
 		SELECT N.NF_CODE AS NF_CODE , N.NF_TITLE AS NF_TITLE, N.NF_CONTENT AS NF_CONTENT, TO_CHAR(N.NF_DATE, 'YYYY-MM-DD') AS NF_DATE, AI.AD_NAME AS AD_NAME
 		FROM NOTIFICATION N JOIN ADMIN_INFO AI
 		     ON N.AD_CODE = AI.AD_CODE
 		ORDER BY NF_CODE DESC
 	</select>
 	
-	<select id="noticesListPost" resultType="com.test.mybatis.CsDTO">
+	<select id="noticesListPost" resultType="com.woori.dto.CsDTO">
 		SELECT N.NF_CODE AS NF_CODE , N.NF_TITLE AS NF_TITLE, N.NF_CONTENT AS NF_CONTENT, TO_CHAR(N.NF_DATE, 'YYYY-MM-DD') AS NF_DATE, AI.AD_NAME AS AD_NAME
 		FROM NOTIFICATION N JOIN ADMIN_INFO AI
 		     ON N.AD_CODE = AI.AD_CODE
 		WHERE NF_CODE = #{uf_code} 
 	</select>
 	
-	<select id="faqList" resultType="com.test.mybatis.CsDTO">
+	<select id="faqList" resultType="com.woori.dto.CsDTO">
 		SELECT FAQ_TITLE, FAQ_CONTENT, FAQ_CODE
 		FROM FAQ
 		WHERE FC_CODE = #{fc_code}
 	</select>
 	
-	<select id="inquiryCategory" resultType="com.test.mybatis.CsDTO">
+	<select id="inquiryCategory" resultType="com.woori.dto.CsDTO">
 		SELECT IQC_NAME, IQC_CODE
 		FROM INQUIRY_CATEGORY
 	</select>
@@ -34,7 +34,7 @@
 		VALUES (SEQ_INQUIRY.NEXTVAL,#{iqc_code},#{iq_title},#{iq_content},#{us_code},NULL)
 	</insert>
 	
-	<select id="inquiryList" resultType="com.test.mybatis.CsDTO">
+	<select id="inquiryList" resultType="com.woori.dto.CsDTO">
 		SELECT I.IQ_TITLE AS IQ_TITLE, I.IQ_CONTENT AS IQ_CONTENT,  TO_CHAR(TRUNC(I.IQ_DATE),'YYYY-MM-DD') AS IQ_DATE, C.IQC_NAME AS IQC_NAME
 		      ,CASE WHEN IQ_READ IS NULL THEN '접수완료'
 		       WHEN I.IQ_CODE = A.IQ_CODE THEN '처리완료' 
@@ -50,13 +50,13 @@
 		WHERE US_CODE = #{us_code}
 	</select>
 	
-	<select id="searchFaqList" resultType="com.test.mybatis.CsDTO">
+	<select id="searchFaqList" resultType="com.woori.dto.CsDTO">
 		SELECT FAQ_CODE, FAQ_TITLE, FAQ_CONTENT, FAQ_DATE, FC_CODE, AD_CODE
 		FROM FAQ
 		WHERE FAQ_TITLE LIKE '%'||#{searchKeyword}||'%'
 	</select>
 	
-	<select id="inquiryPost" resultType="com.test.mybatis.CsDTO">
+	<select id="inquiryPost" resultType="com.woori.dto.CsDTO">
 		SELECT I.IQ_TITLE AS IQ_TITLE, I.IQ_CONTENT AS IQ_CONTENT, TO_CHAR(TRUNC(I.IQ_DATE),'YYYY-MM-DD') AS IQ_DATE, C.IQC_NAME AS IQC_NAME
 		      ,CASE WHEN IQ_READ IS NULL THEN '접수완료'
 		       WHEN I.IQ_CODE = A.IQ_CODE THEN '처리완료' 
