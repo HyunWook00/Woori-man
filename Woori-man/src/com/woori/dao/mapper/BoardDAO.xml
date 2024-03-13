@@ -4,9 +4,9 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <!-- 2024-03-04 노은하 -->
- <mapper namespace="com.test.mvc.IBoardDAO">
+ <mapper namespace="com.woori.dao.IBoardDAO">
  
- 	<select id="getBoardList" resultType="com.test.mvc.BoardDTO">
+ 	<select id="getBoardList" resultType="com.woori.dto.BoardDTO">
  		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
  		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
  		FROM VIEW_BOARD_LIST
@@ -26,7 +26,7 @@
  		VALUES(SEQ_BOARD.NEXTVAL, SYSDATE, #{brd_subject}, #{brd_content}, 0, #{gm_code}, #{cg_code})
  	</insert>
  	
- 	<select id="getBoardArticle" resultType="com.test.mvc.BoardDTO">
+ 	<select id="getBoardArticle" resultType="com.woori.dto.BoardDTO">
  		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
  		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
  		FROM VIEW_BOARD_LIST
