@@ -49,36 +49,36 @@
 	</nav>	
 	  <div class="tab-content" id="nav-tabContent">
 		  <div class="tab-pane fade show active" id="groupProfile" role="tabpanel" aria-labelledby="nav-groupProfile">
-	 		<div class="cgName">[ ${groupInfo.cg_name } ]</div>
+	 		<div class="cgName">[ ${groupDTO.cg_name } ]</div>
 		 	<div class="profileimg">
 		 		<!-- 추후 프로필 사진 추가 -->
-		 		<img alt="깜찍한 고양이 사진" src="img/cat3.jpg">
+		 		<img alt="깜찍한 고양이 사진" src="<%=cp %>/images/cat3.jpg">
 		 	</div>
 	 		<div class="profile1">
 		 	<c:forEach var="position" items="${groupPosition }">
 		 		${position.pos_name } : ${position.gm_nickname } <br>
 		 	</c:forEach> 
-		 		${groupInfo.cg_date} 개설 <br>
-		 		멤버 : ${groupInfo.gm_count }명 <br>
+		 		${groupDTO.cg_date} 개설 <br>
+		 		멤버 : ${groupDTO.gm_count }명 <br>
 		 		<hr>
 		 	</div>
 		 	<div class="profile2">
-		 		${groupInfo.cg_intro }<br>
-		 		포인트 : ${groupInfo.group_point }pt<br>	
+		 		${groupDTO.cg_intro }<br>
+		 		포인트 : ${groupDTO.group_point }pt<br>	
 		 		<hr>
 		 	</div>
 		  </div>
 		  <div class="tab-pane fade" id="groupMyProfile" role="tabpanel" aria-labelledby="nav-groupMyProfile">
 			<div class="profileimg">
-				<img alt="깜찍한 고양이 사진" src="img/cat2.jpg"><br> 
+				<img alt="깜찍한 고양이 사진" src="<%=cp %>/images/cat2.jpg"><br> 
 	 		</div>
 				<div class="myProfile1">
 		 		<!-- <span>밍</span> 그룹원 <br>
 		 		2019.01.01 가입 <br>
 		 		 안녕 반가워용>.< <br> -->
-		 		<span>${groupMyInfo.gm_nickname } </span>${groupMyInfo.pos_name } <br>
-		 		${groupMyInfo.gm_regdate } 가입 <br>
-		 		${groupMyInfo.gm_intro } <br>
+		 		<span>${groupMemberDTO.gm_nickname } </span>${groupMemberDTO.pos_name } <br>
+		 		${groupMemberDTO.gm_regdate } 가입 <br>
+		 		${groupMemberDTO.gm_intro } <br>
 		 	</div>
 			 <div class="profileButton">
 				<button class="mySideBtn">모임 발의</button>
@@ -94,7 +94,7 @@
 	<p><a><i class="bi bi-file-text"></i>전체글 보기</a></p>
 	<p><a><i class="bi bi-calendar-event"></i>모임</a></p>
 	<p><a><i class="bi bi-file-text"></i>후기</a></p>
-	<p><a><i class="bi bi-file-text"></i>${groupInfo.brd_name }</a></p>
+	<p><a><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
 	<hr>
 	<p><a><i class="bi bi-currency-dollar"></i>회비</a></p>
 	<p><a><i class="bi bi-people-fill"></i>그룹원</a></p>

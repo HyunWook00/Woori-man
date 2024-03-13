@@ -9,17 +9,32 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터 - 우리만</title>
-<link rel="stylesheet" href="<%=cp%>/css/font.css">
-<link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<%-- <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
 <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
-<script type="text/javascript" src="<%=cp%>/js/ajax.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> --> --%>
+
+<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<link rel="stylesheet" href="<%=cp%>/css/font.css">
+<link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+
+<!-- 1. 부트스트랩 js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 2. 부트스트랩 css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<!-- 3. jquery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<!-- 4. 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<style type="text/css">
+
+
+
 <style type="text/css">
 
 	*
@@ -249,7 +264,7 @@
 	
 	
 </style>
-<script type="text/javascript" src="js/searchFaq.js"></script>
+<script type="text/javascript" src="<%=cp %>/js/searchFaq.js"></script>
 <script type="text/javascript">
 	
 	// 자주 묻는 질문 카테고리 클릭시 실행되는 함수
@@ -377,35 +392,26 @@
 </div>
 <hr />
 
-
-<ul class="list-group">
-  <a href="faq.woori" class="more">더보기 > </a>
-  	<div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-        <c:forEach var="faqList" items="${faqList }">
-       		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${faqList.faq_code }" aria-expanded="false" aria-controls="${faqList.faq_code }">
-         		${faqList.faq_title }
-         	</button>
-	        </h2>
-	        <div id="${faqList.faq_code }" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
-	          <div class="accordion-body answer">
-	            ${faqList.faq_content }
-	          </div>
-	        </div>
-        </c:forEach>
+<div class="accordion" id="accordionExample">
+	<c:forEach var="faqList" items="${faqList }">
+		<div class="accordion-item">
+        	<h2 class="accordion-header">
+	        	<button class="accordion-button collapsed" type="button" data-bs-toggle="${faqList.faq_code }" 
+	        	data-bs-target="#${faqList.faq_code }" aria-expanded="false" aria-controls="collapseTwo">
+	        	${faqList.faq_title }
+	        	</button>
+        	</h2>
+        	<div id="${faqList.faq_code }" class="accordion-collapse collapse" 
+        	data-bs-parent="#accordionExample">
+	        	<div class="accordion-body answer">
+	        	${faqList.faq_content }
+	        	</div>
+        	</div>
         </div>
-     </div>
-  <%-- <c:forEach var="faqList" items="${faqList}">
-  	<li class="list-group-item qnaList">${faqList.faq_title }</li>
-  </c:forEach> --%>
-  <!-- <li class="list-group-item qnaList"> Q. 회원 탈퇴 후 재가입이 바로 가능한가요?</li>
-  <li class="list-group-item qnaList"> Q. 아이디를 여러개 사용할 수 있나요? </li>
-  <li class="list-group-item qnaList"> Q. 로그인에 문제가 있어요</li> -->
-</ul>
+	</c:forEach>
+</div>
 
-
-<br><br>
+<br><br> 
 <br><br>
 
 <div class="grid text-center">

@@ -53,7 +53,7 @@ String cp = request.getContextPath();
 				<h4>정기 모임</h4>
 				<c:forEach var="regular" items="${regularMeeting }">
 				<div class="${regular.num == 1 ? 'carousel-item active' : 'carousel-item'}">
-					<img src="<%=cp %>/img/gray_back3.png" alt="" width="100%" height="250">
+					<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
 					 <div class="carousel-caption"
 					  style="text-shadow: none; bottom: 0px">
 					 <br>
@@ -80,7 +80,7 @@ String cp = request.getContextPath();
 			<h4>번개 모임</h4>
 				<c:forEach var="impromptu" items="${impromptuMeeting }">
 					<div class="${impromptu.num == 1 ? 'carousel-item active' : 'carousel-item'}">
-						<img src="img/gray_back3.png" alt="" width="100%" height="250">
+						<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
 						 <div class="carousel-caption"  style="text-shadow: none; bottom: 0px">
 						 <br>
 		              		 <h4>${impromptu.mt_title }</h4>
@@ -104,7 +104,7 @@ String cp = request.getContextPath();
 			<h4>왁자지껄 최신글</h4>
 			<c:forEach var="newborad" items="${newBorad }">
 				<li class="list-group-item list" 
-				onclick="loaction.href='freeboardarticle.woori?article=${newborad.brd_code}'">${newborad.brd_subject }</li>
+				onclick="loaction.href='freeboardarticle.woori?article=${newborad.brd_code }'">${newborad.brd_subject }</li>
 			</c:forEach>
 			</ul>	
      	 </div>

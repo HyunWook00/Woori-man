@@ -10,7 +10,7 @@
 %>
 <%
 	// 모임 날짜 받아오기
-	ArrayList<MeetingDTO> myMeeting = (ArrayList<MeetingDTO>)session.getAttribute("myMeeting");
+	ArrayList<MeetingDTO> myMeeting = (ArrayList<MeetingDTO>)session.getAttribute("myPageMeeting");
 
 	String[] MyGroupYear = new String[myMeeting.size()]; 	
 	String[] MyGroupMonth = new String[myMeeting.size()];	
@@ -89,6 +89,10 @@
 				i++;
 				//break;
 			}
+		
+			//System.out.println(myMeeting.get(m).getMt_title());
+			//System.out.println(myMeeting.get(m).getCt_name());
+			
 		}	
 		
 		myLi += "<li>"+i+"</li>";			// 기본 날짜 뽑는거 
@@ -115,8 +119,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 캘린더</title>
-<link rel="stylesheet" type="text/css" href="css/font.css">
-<link rel="stylesheet" type="text/css" href="css/myCalendar.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/font.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/myCalendar.css">
 <!-- 3. jquery -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
@@ -137,7 +141,7 @@
 			$.ajax(
 			{
 				type : "get"
-				,url : "MyCalenderAjax.jsp"
+				,url : "mypagecalendarajax.woori"
 				,data : params
 				,success : function(args)
 				{	
@@ -171,7 +175,7 @@
 			$.ajax(
 			{
 				type : "get"
-				,url : "MyCalendarAjax.jsp"
+				,url : "mypagecalendarajax.woori"
 				,data : params
 				,success : function(args)
 				{

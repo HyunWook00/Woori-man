@@ -145,7 +145,7 @@
 			<div class="myPage_MyInfo active" id="myInfo">
 				<div>
 					<p> <span class="header">프로필 사진 </span>
-						<img alt="프로필 사진" src="img/cat3.jpg">
+						<img alt="프로필 사진" src="<%=cp %>/images/cat3.jpg">
 					</p>
 				</div>
 				<div>
@@ -165,7 +165,7 @@
 			<form action="mypageupdate.woori" method="GET">
 				<div>
 					<p> <span class="header">프로필 사진 </span>
-						<img alt="프로필 사진" src="img/${groupMyInfo.gm_profile }">
+						<img alt="프로필 사진" src="<%=cp %>/images/${groupMyInfo.gm_profile }">
 						<input type="file" name="gm_profile"/>
 					</p>
 				</div>
@@ -189,7 +189,7 @@
 				<div class="myPage_AccountInfo active" id="myAccoountInfo">
 				<div>
 					<p> <span class="header">프로필 사진 </span>
-						<img alt="프로필 사진" src="img/${myInfo.us_profile }">
+						<img alt="프로필 사진" src="<%=cp %>/images/${myInfo.us_profile }">
 					</p>
 				</div>
 				<div>
@@ -205,7 +205,7 @@
 					 <p><span class="header">전화번호</span><span class="body">${myInfo.us_tel }</span></p>
 				</div>
 				<div>
-					 <p><span class="header">주소</span><span class="body">[${myInfo.us_zipcode}] ${myInfo.us_addr} ${myInfo.us_addr2}</span></p>
+					 <p><span class="header">주소</span><span class="body">[${myInfo.us_zipcode}] ${myInfo.us_addr1} ${myInfo.us_addr2}</span></p>
 				</div>
 				<div>
 				<p>
@@ -242,7 +242,7 @@
 						 <input type="text" id="postcode" name="us_zipcode" placeholder="우편번호" value="${myInfo.us_zipcode}">
 						 <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 					 <div id="addr">
-						 <input type="text" id="address" name="us_addr" placeholder="주소" value="${myInfo.us_addr}"><br>
+						 <input type="text" id="address" name="us_addr" placeholder="주소" value="${myInfo.us_addr1}"><br>
 						 <input type="text" id="detailAddress" name="us_addr2" placeholder="상세주소" value="${myInfo.us_addr2 }">
 					 </div>
 					 </span>
