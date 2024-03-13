@@ -629,6 +629,49 @@ public class MeetingDAO
 		return result;
 	}
 	
+	// 특정 모임 참여 인원수 출력
+	public int countAttendMember(String mt_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "SELECT COUNT(*) AS ATTEND FROM ATTEND_OPINION WHERE MT_CODE = ? AND AOC_CODE = 1 AND GM_CODE NOT IN (SELECT GM_CODE FROM GROUP_WTHDR)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(mt_code));
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				result = rs.getInt("ATTEND");
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 특정 모임 불참 인원수 출력
+	public int countNotAttendMember(String mt_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "SELECT COUNT(*) AS NOTATTEND FROM ATTEND_OPINION WHERE MT_CODE = ? AND AOC_CODE = 2 AND GM_CODE NOT IN (SELECT GM_CODE FROM GROUP_WTHDR)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(mt_code));
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				result = rs.getInt("NOTATTEND");
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
 	
 	public void close() throws SQLException
 	{

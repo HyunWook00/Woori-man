@@ -9,12 +9,9 @@ $(function()
 	// 대댓글 달기, 내 댓글 수정하기 취소 버튼
 	$(".comment-cancel-btn").click(function()
 	{
-		// 대댓글 달기 메뉴 div
-		$(".write-recomment").css("display", "none");
-		// 댓글 수정하기 메뉴 div
-		$(".modify-comment").css("display", "none");
-		// 대글 수정하기 때 지워놨던 메뉴들 다시 보여주기
-		$(".comment-detail").css("display","inline-block");
+		$(".write-recomment-div").css("display", "none");
+		$(".modify-comment-div").css("display", "none");
+		$(".comment-detail").css("display", "inline-block");
 		$(".comment-like").css("display", "inline-block");
 	});
 	
@@ -33,13 +30,42 @@ $(function()
 		nowCount.text($(this).val().length);
 	});
 	
+	// 모임 철회
 	$(".article-delete").click(function()
 	{
 		$("#cancelReasonModal").modal("show");
 	});
 });
 
-// 모임 참석 여부 투표
+//----- 나의 댓글 & 대댓글 수정하기, 대댓글 달기 폼 오픈 완료 ----------------------------
+//내 댓글 수정하기
+function modifyComment(commentCode)
+{
+	document.getElementsByClassName("comment-cancel-btn")[0].click();
+	var id = "#" + commentCode + "-modify";
+	$(id).nextAll().css("display", "none");
+	$(id).css("display", "block");
+}
+
+// 내 대댓글 수정하기
+function modifyRecomment(recommentCode)
+{
+	document.getElementsByClassName("comment-cancel-btn")[0].click();
+	var id = "#" + recommentCode + "-modify-recomment";
+	$(id).nextAll().css("display", "none");
+	$(id).css("display", "block");
+}
+
+//대댓글 달기
+function insertRecomment(commentCode)
+{
+	document.getElementsByClassName("comment-cancel-btn")[0].click();
+	var id = "#" + commentCode + "-recomment";
+	$(id).css("display", "block");
+}
+//----------------------------------------------------------------------------------------
+
+// 모임 참석 여부 투표 -------------------------------------------------------------------
 function voteAttend(mt_code, value)
 {
 	var message = "해당 모임에 ";
@@ -50,37 +76,63 @@ function voteAttend(mt_code, value)
 	
 	if(confirm(message))
 		window.location.href = "meetingvoteinsert.woori?mt_code=" + mt_code + "&aoc_code=" + value;
-	
 }
+//----------------------------------------------------------------------------------------
 
 //2024-02-28 노은하
-// 댓글 좋아요 입력
-function commentLikeInsert(commentCode, gm_code)
+// 댓글 좋아요 입력 ok
+function insertCommentLike(obj)
 {
-	var gmCode = gm_code;
-	var params = "mcmCode=" + commentCode + "&gmCode=" + gm_code;
-	var obj = document.getElementById("comment-like-btn-" + commentCode);
-	var objId = "#comment-like-btn-" + commentCode;
+	var commentCode = obj.value;
+	var params = "commentCode=" + commentCode;
 	 
 	$.ajax(
 	{
 		type: "GET"
-		, url: "commentlikeajax.woori"
+		, url: "meetingcommentlike.woori"
 		, data: params
 		, success: function(args)
 		{
-			obj.innerHTML = args;
-			 
-			$(objId).removeClass("comment-like-btn");
-			$(objId).addClass("comment-unlike-btn");
-			$(objId).attr("onclick", "commentLikeDelete(" + commentCode + "," + gm_code + ")");
-			 
+			$(obj).find("i").removeClass("bi-heart").addClass("bi-heart-fill");
+			$(obj).attr("onclick", "deleteCommentLike(this)");
+			$(obj).next().remove();
+			$(obj).after(args);
 		}
 		, error: function(e)
 		{
 			alert(e.responseText);
 		}
 	});
+}
+
+// 댓글 좋아요 삭제
+function deleteCommentLike(obj)
+{
+	var commentCode = obj.value;
+	var params = "commentCode=" + commentCode;
+	
+	$.ajax(
+	{
+		type: "GET"
+		, url: "meetingcommentunlike.woori"
+		, data: params
+		, success: function(args)
+		{
+			$(obj).find("i").removeClass("bi-heart-fill").addClass("bi-heart");
+			$(obj).attr("onclick", "insertCommentLike(this)");
+			$(obj).next().remove();
+			$(obj).after(args);
+		}
+		, beforeSend: function()
+		{
+			return true;
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+	
 }
 
 // 대댓글 좋아요 입력

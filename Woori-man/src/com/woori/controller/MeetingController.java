@@ -44,20 +44,20 @@ public class MeetingController
 	public String meetingList(Model model, HttpSession session)
 	{
 		MeetingDAO dao = new MeetingDAO();
-		GroupDAO groupDAO = new GroupDAO();
+		//GroupDAO groupDAO = new GroupDAO();
 		
-		GroupDTO groupDTO = null;
-		GroupMemberDTO groupMemberDTO = null;
+		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
+		//GroupMemberDTO groupMemberDTO = null;
 		ArrayList<MeetingDTO> meetingList = null;	// 등록된 모임 정보 리스트
-		ArrayList<GroupMemberDTO> groupPostition = null;
+		//ArrayList<GroupMemberDTO> groupPostition = null;
 		int articleCount = 0;						// 새글수 정보
 		
 		try
 		{
-			groupDAO.connection();
-			groupDTO = groupDAO.groupInfo("1", "1");
-			groupMemberDTO = groupDAO.groupMyInfo(groupDTO.getGm_code());
-			groupPostition = groupDAO.groupPosition(groupDTO.getCg_code());
+			//groupDAO.connection();
+			//groupDTO = groupDAO.groupInfo("1", "1");
+			//groupMemberDTO = groupDAO.groupMyInfo(groupDTO.getGm_code());
+			//groupPostition = groupDAO.groupPosition(groupDTO.getCg_code());
 			meetingList = dao.getMeetingList(groupDTO.getCg_code());
 			articleCount = dao.getArticleCount(groupDTO.getCg_code());
 			
@@ -69,7 +69,6 @@ public class MeetingController
 		{
 			try
 			{
-				groupDAO.close();
 				dao.close();
 				
 			} catch (Exception e)
@@ -79,9 +78,9 @@ public class MeetingController
 		}
 		
 		// 테스트용 세션 구성
-		session.setAttribute("groupDTO", groupDTO);
-		session.setAttribute("groupMemberDTO", groupMemberDTO);
-		session.setAttribute("groupPosition", groupPostition);
+		//session.setAttribute("groupDTO", groupDTO);
+		//session.setAttribute("groupMemberDTO", groupMemberDTO);
+		//session.setAttribute("groupPosition", groupPostition);
 		
 		// 모델에 객체 담아 뷰로 보내기
 		model.addAttribute("meetingList", meetingList);
@@ -96,7 +95,9 @@ public class MeetingController
 	@RequestMapping(value = "/meetingarticle.woori", method = RequestMethod.GET)
 	public String meetingArticle(Model model, @RequestParam("mt_code") String mt_code, HttpSession session)
 	{
-		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("member");
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
+		
 		MeetingDAO dao = new MeetingDAO();
 		
 		MeetingDTO meetingArticle = null;																		// 모임 상세정보
@@ -105,7 +106,7 @@ public class MeetingController
 		int totalCommentCount = 0;																				// 댓글과 대댓글 합산
 		
 		//HashMap<String, String> commentLike = new HashMap<String, String>();									// 댓글별 좋아요 눌렀는지 안 눌렀는지
-		//HashMap<String, String> recommentLike = new HashMap<String, String>();									// 대댓글별 좋아요 눌렀는지 안 눌렀는지
+		//HashMap<String, String> recommentLike = new HashMap<String, String>();								// 대댓글별 좋아요 눌렀는지 안 눌렀는지
 		
 		int totalMemberCount = 0;																				// 그룹원 인원수
 		int attendMemberCount = 0;																				// 참석자 인원수
@@ -123,13 +124,13 @@ public class MeetingController
 			cancelReason = dao.getCancelReasonList();
 			
 			// 그룹원 총 인원수
-			//totalMemberCount = gDao.countGroupMember(member.getCg_code());
+			totalMemberCount = Integer.parseInt(group.getGm_count());
 			
 			// 모임 참여 인원수
-			//attendMemberCount = gDao.countAttendMember(mt_code);
+			attendMemberCount = dao.countAttendMember(mt_code);
 			
 			// 모임 불참 인원수
-			//notAttendMemberCount = gDao.countNotAttendMember(mt_code);
+			notAttendMemberCount = dao.countNotAttendMember(mt_code);
 			
 			// 모임 참여 인원 목록
 			//attendMemberList = gDao.searchAttendMemberList(mt_code);

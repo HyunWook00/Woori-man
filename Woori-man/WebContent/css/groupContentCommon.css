@@ -14,12 +14,13 @@ body
 
 div.container
 {
-	display: display;
-    justify-content: center;
+	display: inline-flex;
+	justify-content: center;
+    align-items: baseline;
 }
 div.mainContent
 {
-	display: flex;
+	display: inline-flex;
 	justify-content: center;
     align-items: baseline;
 }
@@ -82,7 +83,6 @@ a.first-page-control, a.last-page-control
 div.leftMenu
 {
 	display: inline-block;
-	width: 315px;
 	padding: 0px 15px;
 	margin: 10px;
 }

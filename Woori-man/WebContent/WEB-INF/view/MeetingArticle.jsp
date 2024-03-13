@@ -26,44 +26,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css">
-<script type="text/javascript" src="<%=cp %>/js/article.js"></script>
 <link rel="stylesheet" href="<%=cp %>/css/meetingArticle.css" />
 <script type="text/javascript" src="<%=cp %>/js/meetingArticle.js"></script>
 <script type="text/javascript">
 
-	function commentLikeDelete(commentCode, gm_code)
-	{
-		var gmCode = gm_code;
-		var params = "mcmCode=" + commentCode + "&gmCode=" + gm_code;
-		var obj = document.getElementById("comment-like-btn-" + commentCode);
-		var objId = "#comment-like-btn-" + commentCode;
-		$.ajax(
-		{
-			type: "GET"
-			, url: "commentunlikeajax.woori"
-			, data: params
-			, success: function(args)
-			{
-				obj.innerHTML = args;
-				 
-				$(objId).removeClass("comment-unlike-btn");
-				$(objId).addClass("comment-like-btn");
-				$(objId).attr("onclick", "commentLikeInsert(" + commentCode + "," + gm_code + ")");
-			}
-			, beforeSend: function()
-			{
-				return true;
-			}
-			, error: function(e)
-			{
-				alert(e.responseText);
-			}
-		});
-		
-	}
-	
 	function recommentLikeDelete( recommentCode, gm_code)
 	{
 		var gmCode = gm_code;
@@ -136,9 +104,9 @@
 	<c:import url="MemberHeader.jsp"></c:import>
 </div>
 
-<!-- 상단메뉴 -->
+<!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 
@@ -146,7 +114,9 @@
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴 들어가용
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 -->
@@ -156,7 +126,7 @@
 		<div class="board-info">
 			
 			<!-- 추후 세션에서 그룹명 받아오기 -->
-			<div class="board-title">[ <span class="group-name">${groupInfo.gm_name }</span> ] 모임 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] 모임 게시판</div>
 			
 			<div class="button-zone">
 				<!-- 목록으로 / 이전글 / 다음글 버튼 영역 -->
@@ -167,14 +137,14 @@
 				</div>
 				<div class="button-div">
 					<c:choose>
-					<c:when test="${meetingArticle.gm_code ==  groupMyInfo.gm_code && meetingArticle.mt_status!=3}">
+					<c:when test="${meetingArticle.gm_code ==  groupMemberDTO.gm_code && meetingArticle.mt_status!=3}">
 					<button type="button" class="article-button article-modify" value="${meetingArticle.mt_code }">수정하기</button>
 					<c:if test="${meetingArticle.mt_status==1 }">
 					<button type="button" class="article-button article-delete" value="${meetingArticle.mt_code }">철회하기</button>
 					</c:if>
 					</c:when>
 					
-					<c:when test="${meetingArticle.gm_code !=  groupMyInfo.gm_code}">
+					<c:when test="${meetingArticle.gm_code !=  groupMemberDTO.gm_code}">
 					<button type="button" class="article-button" value="${meetingArticle.mt_code }">신고하기</button>
 					</c:when>
 					</c:choose>
@@ -259,18 +229,15 @@
 					<form action="" class="meeting-vote-form">
 						<div class="vote-zone">
 							<button type="button" class="vote-attend vote-submit-btn attend ${attendStatus == 1 ? 'selected-btn' : '' }"  ${attendStatus == 1 ? 'disabled=\"disabled\"' : '' } onclick="voteAttend(${meetingArticle.mt_code}, 1)"
-							${groupMyInfo.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>참석</button>
+							${groupMemberDTO.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>참석</button>
 							<button type="button" class="vote-attend vote-submit-btn not-attend ${attendStatus == 2 ? 'selected-btn' : '' }" ${attendStatus == 2 ? 'disabled=\"disabled\"' : '' } onclick="voteAttend(${meetingArticle.mt_code}, 2)"
-							${groupMyInfo.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>불참석</button>
-							<c:if test="${groupMyInfo.gm_code == meetingArticle.gm_code}">
+							${groupMemberDTO.gm_code == meetingArticle.gm_code || meetingArticle.mt_status!= 1 ? 'disabled=\"disabled\"' : '' }>불참석</button>
+							<c:if test="${groupMemberDTO.gm_code == meetingArticle.gm_code}">
 								<div class="writer-message">발의자는 자동으로 참석 처리됩니다.</div>
 							</c:if>
 						</div>
 					</form>
 					<div class="vote-chart">
-					<c:forEach items="${attendMemberList }" var="attned">
-						${attned.gm_nickname }
-					</c:forEach>
 						<canvas id="vote-status">
 						</canvas>
 						<script type="text/javascript">
@@ -296,14 +263,14 @@
 		
 		<!-- 댓글 -->
 		<div class="comment-list">
-		
 			<!-- 댓글 몇개인지 -->
 			<div class="comment-title">
 				댓글 <span>${totalCommentCount}</span>개
 			</div>
 			
+			<!-- 개별 댓글 영역 -->
 			<c:forEach var="comment" items="<%=comments %>">
-			<div class="comment ${meetingArticle.gm_code == comment.commentWriterCode ? 'my-comment' : '' }">
+			<div class="comment ${groupMemberDTO.gm_code == comment.commentWriterCode ? 'my-comment' : '' }">
 		
 			 	<!-- 작성자 프로필사진 -->
 				<div class="commenter-profile">
@@ -326,22 +293,18 @@
 							
 							<!-- 메뉴 목록 -->
 							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
+								<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
 								<c:choose>
-									<c:when test="${groupMyInfo.gm_code == comment.commentWriterCode }">
-										<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
-										<li><a class="dropdown-item" onclick="modifyMyComment(${comment.commentCode})">수정하기</a></li>
-										<li><a href="meetingcommentdelete.woori?articleCode=${meetingArticle.mt_code }&commentCode=${comment.commentCode}" class="dropdown-item">삭제하기</a></li>
-									</c:when>
-									
-									<c:when test="${groupMyInfo.gm_code != comment.commentWriterCode }">
-										<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
-										<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode}, ${groupMyInfo.gm_code }, ${meetingArticle.mt_code })">신고하기</a></li>
-									</c:when>
+								<c:when test="${comment.commentWriterCode == groupMemberDTO.gm_code }">
+									<li><a class="dropdown-item" onclick="modifyComment(${comment.commentCode})">수정하기</a></li>
+									<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode})">삭제하기</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode})">신고하기</a></li>
+								</c:otherwise>
 								</c:choose>
 							</ul><!-- .dropdown-menu -->
-							 
 						</div><!-- .comment-menu -->
-						 
 					</div><!-- .commenter-info -->
 						
 						 
@@ -352,10 +315,9 @@
 						<div class="modify-comment-div" id="${comment.commentCode }-modify">
 							<form action="meetingcommentupdate.woori" method="post" class="write-recomment write-area update-comment-form" >
 								<div class="write-area">
-									<textarea class="comment-input" name="mcm_content" id="mcm_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${comment.commentContent }</textarea>
-									<input type="hidden" name="mcm_code" id="mcm_code" value="${comment.commentCode }">
-									<input type="hidden" name="gm_code" id="gm_code" value="${comment.commentWriterCode }">
-									<input type="hidden" name="mt_code" id="mt_code" value="${comment.articleCode }">
+									<textarea class="comment-input" name="commentContent" id="commentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${comment.commentContent }</textarea>
+									<input type="hidden" name="commentCode" id="commentCode" value="${comment.commentCode }">
+									<input type="hidden" name="articleCode" id="articleCode" value="${comment.articleCode }">
 								</div>
 								<button type="submit" class="comment-submit-btn">수정</button>
 								<button type="button" class="comment-cancel-btn">취소</button>
@@ -368,43 +330,34 @@
 						<!-- 댓글 좋아요 정보 -->
 						<div class="comment-like">
 							<div class="like-button position-relative">
-							
-							<c:choose>
-								<c:when test="${checkCommentLike[comment.commentCode] != '' }">
-									<button class="comment-unlike-btn position-relative" id="comment-like-btn-${comment.commentCode }" onclick="commentLikeDelete(${comment.commentCode },${member.gm_code})">
-										<i class="bi bi-heart-fill"></i>
-										<c:if test="${comment.commentLikeCount != 0 }">
-											<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
-												${comment.commentLikeCount }
-											</span>						
-										</c:if>
-									</button>
+								<c:choose>
+								<c:when test="${comment.commentLikeCheck == '0' }">
+								<button type="button" class="comment-like-btn position-relative" onclick="insertCommentLike(this)" value="${comment.commentCode }">
+									<i class="bi bi-heart"></i>
+								</button>
 								</c:when>
 								
 								<c:otherwise>
-									<button class="comment-like-btn position-relative" id="comment-like-btn-${comment.commentCode }" onclick="commentLikeInsert(${comment.commentCode },${member.gm_code})">
-										<i class="bi bi-heart"></i>
-										<c:if test="${comment.commentLikeCount != 0 }">
-											<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
-												${comment.commentLikeCount }
-											</span>
-										</c:if>
-									</button>
+								<button type="button" class="comment-like-btn position-relative" onclick="deleteCommentLike(this)" value="${comment.commentCode }">
+									<i class="bi bi-heart-fill"></i>
+								</button>
 								</c:otherwise>
-							</c:choose>
-							
+								</c:choose>
+								
+								<c:if test="${comment.commentLikeCount != '0' }">
+								<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">${comment.commentLikeCount }</span>	
+								</c:if>
 							</div><!-- .like-button -->
 						</div><!-- .comment-like -->
 					</div><!-- temp -->
 					
 					<!-- 대댓글 달기 -->
-					<div class="write-recomment" id="${comment.commentCode }-recomment">
+					<div class="write-recomment-div" id="${comment.commentCode }-recomment">
 						<form action="meetingrecommentinsert.woori" method="post" class="write-recomment">
 						<div class="write-area">
-							<textarea class="comment-input" name="mrc_content" id="mrc_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
-							<input type="hidden" name="gm_code" id="gm_code" value="${groupMyInfo.gm_code }">
-							<input type="hidden" name="mcm_code" id="mcm_code" value="${comment.commentCode }">
-							<input type="hidden" name="mt_code" id="mt_code" value="${meetingArticle.mt_code }">
+							<textarea class="comment-input" name="recommentContent" id="recommentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
+							<input type="hidden" name="commentCode" id="commentCode" value="${comment.commentCode }">
+							<input type="hidden" name="articleCode" id="articleCode" value="${meetingArticle.mt_code }">
 						</div>
 						<button type="submit" class="comment-submit-btn">등록</button>
 						<button type="button" class="comment-cancel-btn">취소</button>
@@ -414,7 +367,6 @@
 					<!-- 대댓글 뽑아내기 -->
 					<c:forEach var="recomment" items="${recomments[comment.commentCode] }">
 					<div class="recomment">
-					
 						<!-- 대댓글 프사 -->
 						<div class="commenter-profile">
 							<img src="${comment.commentWriterProfile == null ? 'images/basic-profile.png' : comment.commentWriterProfile }" alt="profile" class="profile-img" />
@@ -430,11 +382,11 @@
 									</button>
 									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
 										<c:choose>
-											<c:when test="${member.gm_code == recomment.recommentWriterCode }">
-												<li><a class="dropdown-item" onclick="modifyMyComment(${recomment.recommentCode})">수정하기</a></li>
+											<c:when test="${groupMemberDTO.gm_code == recomment.recommentWriterCode }">
+												<li><a class="dropdown-item" onclick="modifyRecomment(${recomment.recommentCode})">수정하기</a></li>
 												<li><a href="/meetingrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${meetingArticle.mt_code}" class="dropdown-item">삭제하기</a></li>
 											</c:when>
-											<c:when test="${member.gm_code != recomment.recommentWriterCode }">
+											<c:when test="${groupMemberDTO.gm_code != recomment.recommentWriterCode }">
 												<li><a href="" class="dropdown-item">신고하기</a></li>
 											</c:when>
 										</c:choose>
@@ -443,7 +395,7 @@
 							</div><!-- .commenter-info -->
 							
 							<!-- 나의 대댓글 수정하기 메뉴창이다. -->
-							<div class="modify-comment" id="${recomment.recommentCode }-modify">
+							<div class="modify-comment-div" id="${recomment.recommentCode }-modify-recomment">
 								<form action="meetingrecommentupdate.woori" method="get" class="write-recomment write-area update-comment-form" >
 									<div class="write-area">
 									<textarea class="comment-input" name="mrc_content" id="mrc_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${recomment.recommentContent }</textarea>
@@ -467,8 +419,8 @@
 								<div class="like-button position-relative">
 								
 									<c:choose>
-										<c:when test="${recommentLike[recomment.recommentCode] != '' }">
-											<button class="recomment-unlike-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="recommentLikeDelete(${recomment.recommentCode },${member.gm_code})">
+										<c:when test="${recomment.recommentLikeCheck == '0'}">
+											<button class="recomment-unlike-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="recommentLikeDelete(${recomment.recommentCode },${groupMemberDTO.gm_code})">
 												<i class="bi bi-heart-fill"></i>
 												<c:if test="${recomment.recommentLikeCount != 0 }">
 													<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
@@ -479,7 +431,7 @@
 										</c:when>
 										
 										<c:otherwise>
-											<button class="recomment-like-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="recommentLikeInsert(${recomment.recommentCode },${member.gm_code})">
+											<button class="recomment-like-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="recommentLikeInsert(${recomment.recommentCode },${groupMemberDTO.gm_code})">
 												<i class="bi bi-heart"></i>
 												<c:if test="${recomment.recommentLikeCount != 0 }">
 													<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
@@ -512,7 +464,7 @@
 			<form action="meetingcommentinsert.woori" method="post" class="write-area">
 					<textarea class="comment-input" name="mcm_content" id="mcm_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
 					<input type="hidden" name="mt_code" id="mt_code" value="${meetingArticle.mt_code }">
-					<input type="hidden" name="gm_code" id="gm_code" value="${member.gm_code }">
+					<input type="hidden" name="gm_code" id="gm_code" value="${groupMemberDTO.gm_code }">
 					<div class="submit-and-count">
 						<button type="submit" class="comment-submit-btn">등록</button>
 						<span class="count"><span class="now-count">0</span> / 200</span>
