@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.woori.dao.FriendsDAO;
+import com.woori.dto.FriendsDTO;
 import com.woori.dao.LoginDAO;
 import com.woori.dto.GroupDTO;
 import com.woori.dto.LoginDTO;
@@ -193,27 +195,51 @@ public class LoginController
 	{
 	
 		ArrayList<GroupDTO> groupList = new ArrayList<GroupDTO>();
-		LoginDAO dao = new LoginDAO();
+		ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();
 		
+		FriendsDAO friendDao = new FriendsDAO(); // 친구 DAO
+		LoginDAO dao = new LoginDAO();			// 로그인 dao
+		
+		friendDao.connection();
 		dao.connection();
 		
-		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO"); // 세션에 있는 userDTO가져오기
+		String us_code = userDTO.getUs_code();
+				
 		
-		if (userDTO.getUs_code()==null)			//-- 로그인이 되어있지 않은 상황
+		if (String.valueOf(us_code)==null || String.valueOf(us_code) =="")			//-- 로그인이 되어있지 않은 상황
 		{
 			return "redirect:loginform.woori";
 			
 		}
 		else
 		{
+			
+			// 액션이 처리됐다면 값을 membermain에 넘겨줌 
+			// 모달을 자동으로 띄워주는 조건문을 만들기 위함
+			// model 에 값을 담고 session 에서는 삭제
+			if (session.getAttribute("delCount") != null)
+			{
+				model.addAttribute("delCount", session.getAttribute("delCount"));
+				session.removeAttribute("delCount");
+			}
+			else if (session.getAttribute("addCount") != null)
+			{
+				model.addAttribute("addCount", session.getAttribute("addCount"));
+				session.removeAttribute("addCount");
+			}
+			
 			// 로그인한 회원의 그룹정보 담기
-			groupList = dao.groupList(userDTO.getUs_code());
+			groupList = dao.groupList(us_code);
+			
+			// 친구 목록 뽑기 
+			friendsList = friendDao.list(us_code);
 			
 			dao.close();
 			
 			model.addAttribute("userDTO", userDTO);
 			model.addAttribute("groupList", groupList);
-			
+			model.addAttribute("friendsList", friendsList);
 		}
 		
 		

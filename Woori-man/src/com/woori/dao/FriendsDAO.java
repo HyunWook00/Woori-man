@@ -61,15 +61,15 @@ public class FriendsDAO
 	}
 	
 	// 친구 목록
-	public ArrayList<FriendsDTO> list(String us_code1) throws SQLException
+	public ArrayList<FriendsDTO> list(String us_code) throws SQLException
 	{
 		ArrayList<FriendsDTO> result = new ArrayList<FriendsDTO>();
 
 		String sql = "SELECT FR_CODE, US_NAME, US_CODE2, US_ID, US_PROFILE FROM FRIENDS_LIST_VIEW WHERE US_CODE1 = ? AND US_CODE2 != ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, Integer.parseInt(us_code1));
-		pstmt.setInt(2, Integer.parseInt(us_code1));
+		pstmt.setString(1, us_code);
+		pstmt.setString(2, us_code);
 		
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -182,6 +182,23 @@ public class FriendsDAO
 		CallableStatement cstmt = conn.prepareCall(sql);
 		cstmt.setString(1, dto.getUs_code1());		
 		cstmt.setString(2, dto.getUs_code2());
+		
+		result = cstmt.executeUpdate();
+		
+		return result;
+		
+	}
+	
+	// 모달 친구 추가
+	public int friendAdd2(String us_code1,  String us_code2) throws SQLException
+	{
+		int result = 0;
+		
+		String sql = "{call PRC_FRIEND_INSERT(?, ?)}";
+		
+		CallableStatement cstmt = conn.prepareCall(sql);
+		cstmt.setString(1, us_code1);		
+		cstmt.setString(2, us_code2);
 		
 		result = cstmt.executeUpdate();
 		

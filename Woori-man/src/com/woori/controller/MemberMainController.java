@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.woori.dao.FriendsDAO;
 import com.woori.dao.MemberMainDAO;
+import com.woori.dto.FriendsDTO;
 import com.woori.dto.GroupDTO;
 import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.MeetingDTO;
@@ -91,8 +93,6 @@ public class MemberMainController
 		GroupDTO dto = new GroupDTO();
 		dao.connection();
 		
-		System.out.println(cg_profile);
-		
 		if (cg_profile == null)
 		{
 			cg_profile = "기본프로필";
@@ -145,27 +145,64 @@ public class MemberMainController
 	}
 	
 	
-	/*
 	// 친구찾기
-	@RequestMapping(value = "/findfriends.woori")
-	public String findFriends(Model model, @RequestParam("us_id") String us_id) throws ClassNotFoundException, SQLException
-	{
-		MemberMainDTO friends = new MemberMainDTO();
-		MemberMainDAO dao = new MemberMainDAO();
-		dao.connection();
-		
-		friends = dao.findFriends(us_id);
-		String us_code = friends.getUs_code();
-		String us_name = friends.getUs_name();
-		
-		model.addAttribute("us_code", us_code);
-		model.addAttribute("us_name", us_name);
-		model.addAttribute("friends", friends);
-		
-		return "/WEB-INF/view/friendAjax.jsp";
+		@RequestMapping(value = "/findfriends.woori")
+		public String findFriends(HttpSession session, Model model, @RequestParam("shearchValue") String shearchValue) throws ClassNotFoundException, SQLException
+		{
 			
-	}
-	*/
+			ArrayList<FriendsDTO> friends = new ArrayList<FriendsDTO>();
+			MemberMainDAO dao = new MemberMainDAO();
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+			String us_code = userDTO.getUs_code();
+			dao.connection();
+			
+			
+			friends = dao.findFriends(us_code, shearchValue);
+			
+			model.addAttribute("friends", friends);
+			
+			return "/WEB-INF/view/friendAjax.jsp";
+				
+		}
+		// 친구 삭제
+		@RequestMapping("/deletefriend.woori")
+		public String friendDelete(HttpSession session, Model model, @RequestParam("fr_code") String fr_code) throws SQLException, ClassNotFoundException
+		{
+			System.out.println(fr_code);
+			FriendsDAO dao = new FriendsDAO();
+			dao.connection();	
+			int delCount = 0;
+			
+			
+			
+			delCount = dao.friendDelete(fr_code);
+			if (delCount == 1)
+			{
+				session.setAttribute("delCount", delCount);
+			}
+			
+			return "redirect:membermain.woori";
+		}
+		
+		// 친구 추가
+		@RequestMapping("/addfriend.woori")
+		public String friendAdd(HttpSession session, Model model, @RequestParam("us_code2") String us_code2) throws ClassNotFoundException, SQLException
+		{
+			FriendsDAO dao = new FriendsDAO();
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+			String us_code1 = userDTO.getUs_code();
+			int addCount = 0; // 친구추가 액션처리 카운트
+			
+			dao.connection();
+			
+			addCount = dao.friendAdd2(us_code1, us_code2);
+			if (addCount == 1)
+			{
+				session.setAttribute("addCount", addCount);
+			}
+			
+			return "redirect:membermain.woori";
+		}
 	
 	@RequestMapping(value = "/cal.woori")
 	public String cal(HttpSession session, Model model, @RequestParam("us_code") String us_code) throws ClassNotFoundException, SQLException

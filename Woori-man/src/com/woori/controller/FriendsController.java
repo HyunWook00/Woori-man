@@ -13,6 +13,8 @@ package com.woori.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.woori.dao.FriendsDAO;
 import com.woori.dto.FriendsDTO;
 import com.woori.dto.NoteDTO;
+import com.woori.dto.UserDTO;
 
 @Controller
 public class FriendsController
@@ -76,7 +79,7 @@ public class FriendsController
 	
 	// 회원 검색
 	@RequestMapping("/usersearch.woori")
-	public String userSearch(Model model, @RequestParam("type") String type, @RequestParam("value") String value) throws SQLException, ClassNotFoundException
+	public String userSearch(HttpSession session, Model model, @RequestParam("type") String type, @RequestParam("value") String value) throws SQLException, ClassNotFoundException
 	{
 		String result = "";
 		
@@ -85,13 +88,15 @@ public class FriendsController
 		
 		FriendsDAO dao = new FriendsDAO();
 		
-		String us_code1 = "6843881";
+		// 세션의 담긴 유저 코드 가져오기
+		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+		String us_code = userDTO.getUs_code();
 		
 		try
 		{
 			dao.connection();
 			userSearch = dao.userSearch(type, value);		
-			count = dao.friendCheck(us_code1, userSearch.getUs_code2());
+			count = dao.friendCheck(us_code, userSearch.getUs_code2());
 			
 		} catch (Exception e)
 		{

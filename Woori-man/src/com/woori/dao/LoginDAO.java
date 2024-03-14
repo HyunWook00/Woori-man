@@ -166,7 +166,7 @@ public class LoginDAO
 	{
 		String result = null;
 		
-		String sql = "SELECT US_ID FROM FIND_USER_VIEW WHERE US_NAME = ? AND US_BIRTHDAY = ? AND US_TEL = ?";
+		String sql = "SELECT US_ID FROM USER_VIEW WHERE US_NAME = ? AND US_BIRTHDAY = ? AND US_TEL = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, us_name);
 		pstmt.setString(2, us_birthday);

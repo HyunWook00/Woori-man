@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.FriendsDTO;
 import com.woori.dto.GroupDTO;
 import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.MeetingDTO;
@@ -203,29 +204,51 @@ public class MemberMainDAO
 	
 
 	// 친구 찾기 
-	/*
-	public MemberMainDTO findFriends(String us_id) throws SQLException
-	{
-		MemberMainDTO result = new MemberMainDTO();
-		
-		String sql = "SELECT US_CODE, US_ID, US_NAME FROM USER_VIEW WHERE US_ID = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, us_id);
-		
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next())
+		public ArrayList<FriendsDTO> findFriends(String us_code, String shearchValue) throws SQLException
 		{
-			result.setUs_code(rs.getString("US_CODE"));
-			result.setUs_id(rs.getString("US_ID"));
-			result.setUs_name(rs.getString("US_NAME"));
+			ArrayList<FriendsDTO> result = new ArrayList<FriendsDTO>();
+			
+			String sql = "SELECT US_CODE, US_ID, US_NAME "
+					+ " FROM USER_VIEW WHERE US_CODE = ? OR US_ID = ? OR US_NAME = ?"
+					+ " AND US_CODE NOT IN (SELECT US_CODE2 FROM FRIENDS_LIST_VIEW WHERE US_CODE1 = ? AND US_CODE2 != ?)";
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			if (!shearchValue.matches("[+-]?\\d*(\\.\\d+)?"))
+			{
+				String val = "0";
+				pstmt.setString(1, val);
+				pstmt.setString(2, shearchValue);
+				pstmt.setString(3, shearchValue);
+				pstmt.setString(4, us_code);
+				pstmt.setString(5, us_code);
+			}
+			else
+			{
+				pstmt.setString(1, shearchValue);
+				pstmt.setString(2, shearchValue);
+				pstmt.setString(3, shearchValue);
+				pstmt.setString(4, us_code);
+				pstmt.setString(5, us_code);
+			}
+			
+			
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				FriendsDTO dto = new FriendsDTO();
+				dto.setUs_code(rs.getString("US_CODE"));
+				dto.setUs_id(rs.getString("US_ID"));
+				dto.setUs_name(rs.getString("US_NAME"));
+				
+				result.add(dto);
+			}
+			
+			rs.close();
+			pstmt.close();
+			
+			return result;
 		}
-		
-		rs.close();
-		pstmt.close();
-		
-		return result;
-	}
-	*/
 
 	
 	
