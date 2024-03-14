@@ -88,10 +88,35 @@
    	{
    		text-align: center;
    	}
+	
 	textarea{resize: none;}
+	
+	.modal-body
+	{	overflow-y: auto; /* 수직 스크롤바 설정 */
+        max-height: 400px; /* 최대 높이 설정 */
+    }
+     
+    ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+	    background: #f1f1f1;
+	}
+	
+	::-webkit-scrollbar-thumb {
+	    background: #888;
+	    border-radius: 5px;
+	}
+	
+	::-webkit-scrollbar-thumb:hover {
+	    background: #555;
+	}
 	
 	
 	</style>
+	
 	<script type="text/javascript">
 	
 		$(function()
@@ -108,54 +133,58 @@
 				}
 			});
 			
+			
+			$("#modal-btn").css("display", "none");
+			$("#search").click(function()
+			{
+				var type = $("#type").val();
+				var value = $("#value").val();
+				
+				if (value == "") 
+				{
+		            alert("검색어를 입력해주세요.");
+		            return;
+		        } 
+				
+				else
+				{
+					$("#modal-btn").click();
+					
+				}
+				
+				var param = "type=" + type + "&value=" + value; 
+				//alert(type + ", " + value);
+				
+				$.ajax(
+				{
+					type: "GET"
+					, url: "usersearch.woori"
+					, data: param
+					, success: function(args)
+					{
+						//alert("다녀옴");
+						//alert(args);
+						$("#modal-search-result").html(args);
+						$("#messageModal1").modal("show");
+					}
+					
+					, error: function(e)
+					{
+						alert(e.responseText);
+					}
+				});
+				
+			});
+			
+			
 		});
 	
 	</script>
 	
 </head>
 <body>
-<div class="header-menu row">
-    <nav class="navbar bg-body-tertiary">
-    
-        <div>
-            <a class="icon-main"><img alt="logo" src=""></a>
-            <div class="hover-text">메인 홈페이지로 이동</div>
-        </div>
-        
-        <div>
-            <ul class="nav justify-content-end">
-            
-                <li class="nav-item">
-                    <div class="icon"><i class="bi bi-bell-fill"></i></div>
-                    <div class="hover-text">알림 보기</div>
-                </li>
-                
-                <!-- 웹 브라우저가 625 이상 일때 보여지는 메뉴들 -->
-                <li class="nav-item default-menu">
-                    <div class="icon"><i class="bi bi-person-circle"></i></div>
-                    <div class="hover-text">정보 수정</div>
-                </li>
-                <li class="nav-item default-menu">
-                    <div class="icon"><i class="bi bi-door-open-fill"></i></div>
-                    <div class="hover-text">로그아웃</div>
-                </li>
-                
-                <!-- 웹 브라우저가 625 이하 일때 보여지는 메뉴 -->
-                <li class="nav-item small-menu">
-                    <div class="icon dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-list"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
-                            <li><a href="" class="dropdown-item">정보수정</a></li>
-                            <li><a href="" class="dropdown-item">로그아웃</a></li>
-                        </ul>
-                    </div>
-                </li>
-                
-            </ul>
-        </div>
-    </nav>
+<div class="header">
+	<c:import url="MemberHeader.jsp"></c:import>
 </div>
 
     <div class="container">
@@ -170,7 +199,8 @@
                     <div class="input-group col-md-6">
 				        <input type="text" class="form-control" id="searchRecipient" placeholder="수신자를 입력하세요"
 				        value = "${code }">
-				        <button type="button" class="btn bi bi-search"></button>
+				        <button type="button" class="btn bi bi-search" id="search"></button>
+				        <button type="button" id="modal-btn" data-toggle="modal" data-target="#messageModal1"></button>
 				    </div>
                 </div>
                 <div class="mb-3">
@@ -185,7 +215,7 @@
 				<input type="hidden" id="fr_code" name="fr_code" value="${fr_code }"> 
 				
                 <div class="btns">
-					<button type="button" class="list-btn" onclick="location.href='/receivenote.woori'">목록으로</button>
+					<button type="button" class="list-btn" onclick="location.href='/notelist.woori'">목록으로</button>
 					<button type="button" class="submit-btn">전송하기</button>
 				</div>
 				
@@ -193,6 +223,9 @@
             </form>
     </div>
 </div>
+
+
+
 
 </body>
 </html>

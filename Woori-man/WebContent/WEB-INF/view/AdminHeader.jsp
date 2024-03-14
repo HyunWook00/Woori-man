@@ -55,7 +55,7 @@
 			
 			<!-- 신고내역 관리 메뉴 -->
 			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-shield-fill-exclamation"></i><span class="menu-title">신고내역 관리</span></a></div>
+				<div class="icon"><a href="adminreportlist.woori"><i class="bi bi-shield-fill-exclamation"></i><span class="menu-title">신고내역 관리</span></a></div>
 				<div class="hover-text">신고내역 관리</div>
 			</li>
 			
@@ -67,13 +67,13 @@
 			
 			<!-- 문의사항 관리 메뉴 -->
 			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-question-octagon-fill"></i><span class="menu-title">문의사항 관리</span></a></div>
+				<div class="icon"><a href="admininquirylist.woori"><i class="bi bi-question-octagon-fill"></i><span class="menu-title">문의사항 관리</span></a></div>
 				<div class="hover-text">문의사항 관리</div>
 			</li>
 			
 			<!-- 관리자 쪽지 관리 메뉴 -->
 			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-envelope-fill"></i><span class="menu-title">관리자 쪽지 관리</span></a></div>
+				<div class="icon"><a href="adminnotelist.woori"><i class="bi bi-envelope-fill"></i><span class="menu-title">관리자 쪽지 관리</span></a></div>
 				<div class="hover-text">관리자 쪽지 관리</div>
 			</li>
 		</ul>

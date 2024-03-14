@@ -38,7 +38,8 @@ public class AdminNoteDAO
 	{
 		ArrayList<AdminNoteDTO> result = new ArrayList<AdminNoteDTO>();
 		
-		String sql = "SELECT AN_CODE, AN_TITLE, AD_CODE, AN_SEND FROM ADMIN_NOTE";
+		String sql = "SELECT AN_CODE, AN_TITLE, AD_CODE, TO_CHAR(AN_SEND, 'YYYY-MM-DD') AS AN_SEND"
+				+ " FROM ADMIN_NOTE ORDER BY AN_SEND DESC";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
@@ -74,11 +75,12 @@ public class AdminNoteDAO
 		CallableStatement cstmt = conn.prepareCall(sql);
 		cstmt.setString(1, dto.getAn_title());
 		cstmt.setString(2, dto.getAn_content());
-		cstmt.setInt(3, 224726);
+		cstmt.setString(3, dto.getAd_code());
 		
 		result = cstmt.executeUpdate();
 		
 		cstmt.close();
+		
 		
 		return result;
 		

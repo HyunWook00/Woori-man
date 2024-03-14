@@ -25,7 +25,7 @@ public class AdminInquiryController
 {			
 	// 문의사항 리스트를 읽어오는 액션 처리
 	@RequestMapping(value = "/admininquirylist.woori", method = RequestMethod.GET)
-	public String inquiryList(Model model) throws SQLException, ClassNotFoundException
+	public String inquiryList(Model model, HttpSession session) throws SQLException, ClassNotFoundException
 	{
 		String result = "";
 		
@@ -38,6 +38,7 @@ public class AdminInquiryController
 		try
 		{
 			dao.connection();
+			
 			count = dao.inquiryCount();
 			inquiryList = dao.inquiryList();
 			inquiryCategory = dao.inquiryCategory();
@@ -172,23 +173,23 @@ public class AdminInquiryController
 	// 문의사항 상세
 	@RequestMapping(value = "/admininquiryarticle.woori", method = RequestMethod.GET)
 	public String inquiryArticle(Model model, InquiryDTO inquiry, @RequestParam("iq_code") String iq_code
-			, @RequestParam("ad_code") String ad_code, HttpSession session) throws SQLException
+			, HttpSession session) throws SQLException
 	{
 	    
 		String result = "";
 	    InquiryDTO inquiryArticle = null;
 	    InquiryDTO inquiryAttach = null;
-	    //String ad_code = ((AdminDTO)session.getAttribute("admin")).getAd_code();
 	    
 	    AdminInquiryDAO dao = new AdminInquiryDAO();	    	    
+	    
+	    String ad_code = (String)session.getAttribute("ad_code");
 	    
 	    try 
 	    {
 	        dao.connection();	        	        	        	     
 	        
 	        if (inquiry.getAd_code() == null || inquiry.getAd_code().equals(""))
-	        {
-	        	ad_code = "224726";
+	        {	        	
 	        	dao.inquiryUpdate(ad_code, iq_code);
 	        	inquiryArticle = dao.inquiryArticle(iq_code);
 	        	inquiryAttach = dao.inquiryAttach(iq_code);
@@ -266,12 +267,14 @@ public class AdminInquiryController
 	
 	// 문의사항 답변 입력
 	@RequestMapping(value = "/admininquiryanswer.woori", method = RequestMethod.GET)
-	public String inquiryAnswer(Model model, @RequestParam("iq_code") String iq_code, @RequestParam("ad_code") String ad_code
+	public String inquiryAnswer(Model model, @RequestParam("iq_code") String iq_code, HttpSession session 
 			, @RequestParam("as_content") String as_content) throws SQLException, ClassNotFoundException 
 	{
 	    String result = "";		
 	    
 	    AdminInquiryDAO dao = new AdminInquiryDAO();	    	    	    	    
+	    
+	    String ad_code = (String)session.getAttribute("ad_code");
 	    
 	    try
 		{
@@ -293,7 +296,7 @@ public class AdminInquiryController
 			}
 		}
 	    
-	    result = "redirect:admininquiryarticle.woori?iq_code=" + iq_code + "&ad_code=" + ad_code;
+	    result = "redirect:admininquiryarticle.woori?iq_code=" + iq_code;
 	    
 	    return result;
 	}

@@ -14,8 +14,8 @@ public class FriendsDTO
 	private String us_id;			// 회원 아이디
 	private String us_signup;		// 회원 가입일
 	private String us_number;		// 회원 번호(난수)
-	private String us_code1;		// (친구)회원 코드1
-	private String us_code2;		// (친구)회원 코드2
+	private String us_code1;		// 회원 코드1(발신자)
+	private String us_code2;		// 회원 코드2(수신자)
 	private String fd_code;			// 친구 삭제코드
 	private String fd_date;			// 회원 삭제일
 

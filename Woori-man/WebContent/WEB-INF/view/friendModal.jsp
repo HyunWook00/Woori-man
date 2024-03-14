@@ -1,3 +1,4 @@
+<%@page import="com.woori.dto.UserDTO"%>
 <%@page import="com.woori.dto.FriendsDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -10,7 +11,9 @@
 	FriendsDTO user = (FriendsDTO)request.getAttribute("userSearch");
 	int count = (int)request.getAttribute("count");
 	
-	String action = "friendadd.woori?us_code1=" + "1" + "&us_code2=" + user.getUs_code2();
+	UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
+	
+	String action = "friendadd.woori?us_code1=" + userDTO.getUs_code() + "&us_code2=" + user.getUs_code2();
 	
 	if(user.getUs_code2()==null || user.getUs_code2().equals(""))
 		sb.append("검색 결과가 존재하지 않습니다.");	

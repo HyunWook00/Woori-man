@@ -17,6 +17,8 @@ package com.woori.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,11 +84,15 @@ public class AdminNoteController
 	
 	// 관리자 쪽지 작성 액션
 	@RequestMapping(value = "/adminnotewrite.woori", method = RequestMethod.POST)
-	public String AdminNoteWrite(Model model, AdminNoteDTO dto)
+	public String AdminNoteWrite(Model model, AdminNoteDTO dto, HttpSession session)
 	{
 		String result = "";
 		
 		AdminNoteDAO dao = new AdminNoteDAO();
+		
+		String ad_code = (String)session.getAttribute("ad_code");
+		
+		dto.setAd_code(ad_code);
 		
 		try
 		{
@@ -109,7 +115,7 @@ public class AdminNoteController
 			}
 		}
 		
-		result = "redirect:adminnote.woori";
+		result = "redirect:adminnotelist.woori";
 		
 		return result;
 	}

@@ -8,7 +8,6 @@
 	// note_title, senderid, receiver, note_date, note_content 
 	
 	NoteDTO dto = (NoteDTO)request.getAttribute("dto");
-	System.out.println(dto.getNote_code());
 	String temp = (String)request.getAttribute("temp");
 	
 	sb.append("<table class='table note-article'>");

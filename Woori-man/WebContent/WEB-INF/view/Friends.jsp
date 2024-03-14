@@ -64,7 +64,8 @@
             text-align: center;
         }
 
-        .search-container .search-input {
+        .search-container .search-input 
+        {
             width: 70%;
             border-radius: 30px;
             padding: 10px 20px;
@@ -231,48 +232,11 @@
 	</script>
 </head>
 <body>
-<div class="header-menu row">
-	<nav class="navbar bg-body-tertiary">
-	
-		<div>
-			<a class="icon-main"><img alt="logo" src=""></a>
-			<div class="hover-text">메인 홈페이지로 이동</div>
-		</div>
-		<div>
-			<ul class="nav justify-content-end">
-			
-				<li class="nav-item">
-					<div class="icon"><i class="bi bi-bell-fill"></i></div>
-					<div class="hover-text">알림 보기</div>
-				</li>
-				
-				<!-- 웹 브라우저가 625 이상 일때 보여지는 메뉴들 -->
-				<li class="nav-item default-menu">
-					<div class="icon"><i class="bi bi-person-circle"></i></div>
-					<div class="hover-text">정보 수정</div>
-				</li>
-				<li class="nav-item default-menu">
-					<div class="icon"><i class="bi bi-door-open-fill"></i></div>
-					<div class="hover-text">로그아웃</div>
-				</li>
-				
-				<!-- 웹 브라우저가 625 이하 일때 보여지는 메뉴 -->
-				<li class="nav-item small-menu">
-					<div class="icon dropdown">
-						<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-list"></i>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
-							<li><a href="" class="dropdown-item">정보수정</a></li>
-							<li><a href="" class="dropdown-item">로그아웃</a></li>
-						</ul>
-					</div>
-				</li>
-				
-			</ul>
-		</div>
-	</nav>
+
+<div class="header">
+	<c:import url="MemberHeader.jsp"></c:import>
 </div>
+
 <div><h1 class="nav justify-content-center" style="padding-top: 20px;">친구 관리</h1></div><br><hr>
 <div class="container">
     <div class="row">
@@ -305,10 +269,12 @@
                 <ul class="lists">
                 	<c:forEach var="friend" items="${friendsList }">
                 	<li>
-                		<div class="friend-profile"><img src="images/${friend.us_profile }" alt="profile picture">
+                		<div class="friend-profile"><img src="${friend.us_profile }" alt="profile picture">
 	                    # ${friend.us_code2 } ${friend.us_name } (${friend.us_id })</div>
 	                    <div class="btns">
-	                    <button type="button" class="message_btn" onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }'"><i class="bi bi-envelope"></i></button>
+	                    <button type="button" class="message_btn" 
+	                    onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }
+	                    &us_id=${friend.us_id }&us_name=${friend.us_name }'"><i class="bi bi-envelope"></i></button>
 	                    <button type="button" class="delete_btn" value="${friend.fr_code }"><i class="bi bi-x-circle"></i></button>
                     </div>
                 	</li>

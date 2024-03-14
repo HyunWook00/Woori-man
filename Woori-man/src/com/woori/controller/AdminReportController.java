@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,7 +88,7 @@ public class AdminReportController
 	@RequestMapping(value = "/adminreportarticle.woori", method = RequestMethod.GET)
 	public String AdminReportArticleForm(Model model
 			, @RequestParam("report_code") String report_code, @RequestParam("report_type") String report_type
-			, @RequestParam("ad_code") String ad_code) throws SQLException, ClassNotFoundException
+			, HttpSession session) throws SQLException, ClassNotFoundException
 	{
 		String result = "";
 		
@@ -94,81 +96,129 @@ public class AdminReportController
 		
 		ReportDTO reportArticle = null;
 		
-		//ad_code = "701614";
+		String ad_code = (String)session.getAttribute("ad_code");
 		
 		try
 		{
-			dao.connection();
-
+			dao.connection();						
+			
+			switch (report_type)
+			{
+				case "1":
+					// 그룹 신고 상세 열람 시 
+					dao.groupReportUpdate(ad_code, report_code);
+					reportArticle = dao.GroupReportArticle(report_code);
+					break;
+				case "2":
+					// 자유게시글 신고 상세 열람 시 
+					dao.boardReportUpdate(ad_code, report_code);
+			    	reportArticle = dao.BoardReportArticle(report_code); 
+					break;
+				case "3":
+					// 자유게시글 댓글 신고 상세 열람 시 
+					dao.boardCommentReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.boardCommentReportArticle(report_code); 
+					break;						
+				case "4":
+					// 자유게시글 대댓글 신고 상세 열람 시 
+					dao.boardRecommentReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.boardRecommentReportArticle(report_code); 
+					break;
+				case "5":
+					// 모임 글 신고 상세 열람 시
+					dao.MeetingReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.meetingReportArticle(report_code);
+					break;
+				case "6":
+					// 모임 댓글 신고 상세 열람 시
+					dao.MeetingCommentReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.meetingCommentReportArticle(report_code);
+					break;
+				case "7":
+					// 모임 대댓글 신고 상세 열람 시
+					dao.MeetingRecommentReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.meetingRecommentReportArticle(report_code);
+					break;
+				case "8":
+					// 히스토리 글 신고 상세 열람 시
+					dao.HistoryReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.historyReportArticle(report_code);
+					break;
+				case "9":
+					// 히스토리 댓글 신고 상세 열람 시
+					dao.HistoryCommentReportUpdate(ad_code, report_code);
+			    	reportArticle = dao.historyCommentReportArticle(report_code);
+					break;
+				case "10":
+					// 히스토리 대댓글 신고 상세 열람 시
+					dao.HistoryRecommentReportUpdate(ad_code, report_code); 
+			    	reportArticle = dao.historyRecommentReportArticle(report_code);
+					break;
+				
+			}
+			
+			/*
 			// 그룹 신고 상세 열람 시
 			if (report_type.equals("1"))
 			{
-				ad_code = "701614";				
 				dao.groupReportUpdate(ad_code, report_code);
 				reportArticle = dao.GroupReportArticle(report_code);						
 			} 
 		    // 자유게시글 신고 상세 열람 시 
 		    if (report_type.equals("2")) 
 		    { 
-		    	ad_code = "701614"; dao.boardReportUpdate(ad_code, report_code);
+		    	dao.boardReportUpdate(ad_code, report_code);
 		    	reportArticle = dao.BoardReportArticle(report_code); 
 	    	}
 		    // 자유게시글 댓글 신고 상세 열람 시
 		    else if (report_type.equals("3")) 
 		    { 
-		    	ad_code = "701614";
 		    	dao.boardCommentReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.boardCommentReportArticle(report_code); 
 	    	} 
 		    // 자유게시글 대댓글 신고 상세 열람 시 
 		    else if (report_type.equals("4")) 
 		    { 
-		    	ad_code = "701614";
 		    	dao.boardRecommentReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.boardRecommentReportArticle(report_code); 
 	    	} 
 		    // 모임 글 신고 상세 열람 시 
 		    else if (report_type.equals("5")) 
 		    { 
-		    	ad_code = "701614";
 		    	dao.MeetingReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.meetingReportArticle(report_code); 
 	    	} 
 		    // 모임 댓글 신고 상세 열람 시 
 		    else if (report_type.equals("6")) 
 		    { 
-		    	ad_code = "701614";
 		    	dao.MeetingCommentReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.meetingCommentReportArticle(report_code); 
 	    	} 
 		    // 모임 대댓글 신고 상세 열람 시 
 		    else if (report_type.equals("7")) 
 		    { 
-		    	ad_code = "701614";
 		    	dao.MeetingRecommentReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.meetingRecommentReportArticle(report_code); 
 	    	} 
 		    // 히스토리 글 신고 상세 열람 시 
 		    else if (report_type.equals("8")) 
 		    { 
-		    	ad_code = "701614";
 		    	dao.HistoryReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.historyReportArticle(report_code); 
 	    	} 
 		    // 히스토리 댓글 신고 상세 열람 시 
 		    else if (report_type.equals("9")) 
 		    {
-		    	ad_code = "701614";
 		    	dao.HistoryCommentReportUpdate(ad_code, report_code);
 		    	reportArticle = dao.historyCommentReportArticle(report_code); 
 	    	}
 		    // 히스토리 대댓글 신고 상세 열람 시 
 		    else if (report_type.equals("10")) 
 		    {
-		    	ad_code = "701614";
 		    	dao.HistoryRecommentReportUpdate(ad_code, report_code); 
 		    	reportArticle = dao.historyRecommentReportArticle(report_code); 
 	    	}
+	    	*/
 				 
 		} catch (Exception e)
 		{
@@ -209,6 +259,52 @@ public class AdminReportController
 		{
 			dao.connection();
 
+			switch (report_type)
+			{
+				case "1":
+					// 그룹 신고 상세 열람 시 
+					reportArticle = dao.GroupReportArticle(report_code);
+					break;
+				case "2":
+					// 자유게시글 신고 상세 열람 시 
+			    	reportArticle = dao.BoardReportArticle(report_code); 
+					break;
+				case "3":
+					// 자유게시글 댓글 신고 상세 열람 시 
+			    	reportArticle = dao.boardCommentReportArticle(report_code); 
+					break;						
+				case "4":
+					// 자유게시글 대댓글 신고 상세 열람 시 
+			    	reportArticle = dao.boardRecommentReportArticle(report_code); 
+					break;
+				case "5":
+					// 모임 글 신고 상세 열람 시
+			    	reportArticle = dao.meetingReportArticle(report_code);
+					break;
+				case "6":
+					// 모임 댓글 신고 상세 열람 시
+			    	reportArticle = dao.meetingCommentReportArticle(report_code);
+					break;
+				case "7":
+					// 모임 대댓글 신고 상세 열람 시
+			    	reportArticle = dao.meetingRecommentReportArticle(report_code);
+					break;
+				case "8":
+					// 히스토리 글 신고 상세 열람 시
+			    	reportArticle = dao.historyReportArticle(report_code);
+					break;
+				case "9":
+					// 히스토리 댓글 신고 상세 열람 시
+			    	reportArticle = dao.historyCommentReportArticle(report_code);
+					break;
+				case "10":
+					// 히스토리 대댓글 신고 상세 열람 시
+			    	reportArticle = dao.historyRecommentReportArticle(report_code);
+					break;
+				
+			}
+			
+			/*
 			// 그룹 신고 상세 열람 시
 			if (report_type.equals("1"))
 			{
@@ -259,6 +355,7 @@ public class AdminReportController
 		    {
 		    	reportArticle = dao.historyRecommentReportArticle(report_code); 
 	    	}
+	    	*/
 		    
 		    reportResult = dao.ReportResult();
 				 
@@ -290,11 +387,13 @@ public class AdminReportController
 	@RequestMapping(value = "/adminreportresult.woori", method = RequestMethod.GET)
 	public String AdminReportResult(Model model, @RequestParam("rr_code") String rr_code
 			, @RequestParam("report_code") String report_code, @RequestParam("report_type") String report_type
-			, @RequestParam("ad_code") String ad_code) throws SQLException, ClassNotFoundException
+			, HttpSession session) throws SQLException, ClassNotFoundException
 	{
 		String result = "";
 		
 		AdminReportDAO dao = new AdminReportDAO();
+		
+		String ad_code = (String)session.getAttribute("ad_code");
 		
 		try
 		{
@@ -302,6 +401,53 @@ public class AdminReportController
 			
 			// 신고 처리 액션 메소드
 			
+			switch (report_type)
+			{
+				case "1":
+					// 그룹 신고 결과 처리 
+					dao.GroupReportResult(rr_code, report_code);
+					break;
+				case "2":
+					// 자유게시글 신고 결과 처리 
+					dao.BoardReportResult(rr_code, report_code); 
+					break;
+				case "3":
+					// 자유게시글 댓글 신고 결과 처리 
+					dao.BoardCommentReportResult(rr_code, report_code); 
+					break;						
+				case "4":
+					// 자유게시글 대댓글 신고 상세 열람 시 
+					dao.BoardRecommentReportResult(rr_code, report_code); 
+					break;
+				case "5":
+					// 모임 글 신고 결과 처리
+					dao.MeetingReportResult(rr_code, report_code);
+					break;
+				case "6":
+					// 모임 댓글 신고 결과 처리
+					dao.MeetingCommentReportResult(rr_code, report_code);
+					break;
+				case "7":
+					// 모임 대댓글 신고 결과 처리
+					dao.MeetingRecommentReportResult(rr_code, report_code);
+					break;
+				case "8":
+					// 히스토리 글 신고 결과 처리
+					dao.HistoryReportResult(rr_code, report_code);
+					break;
+				case "9":
+					// 히스토리 댓글 신고 결과 처리
+					dao.HistoryCommentReportResult(rr_code, report_code);
+					break;
+				case "10":
+					// 히스토리 대댓글 신고 결과 처리
+					dao.HistoryRecommentReportResult(rr_code, report_code);
+					break;
+				
+			}
+			
+			
+			/*
 			// 그룹 신고 결과 처리
 			if (report_type.equals("1"))
 			{
@@ -352,6 +498,7 @@ public class AdminReportController
 			{
 				dao.HistoryRecommentReportResult(rr_code, report_code);
 			}
+			*/
 			
 		} catch (Exception e)
 		{

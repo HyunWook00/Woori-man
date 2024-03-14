@@ -436,6 +436,16 @@ public class NoteDAO
 		return result;
 	}
 	
+	// 쪽지 작성
+	public int noteWrite() throws SQLException  
+	{
+		int result = 0;
+		
+		String sql = "";
+		
+		return result;
+	}
+	
 	
 	
 }

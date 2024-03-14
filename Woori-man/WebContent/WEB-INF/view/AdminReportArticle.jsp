@@ -111,60 +111,35 @@
         .result-btn {margin-left: 10px;}
         .list-btn {margin-right: 10px;}
         
+        .admin-info {
+		    text-align: right;
+		    font-size: 15px;
+		    color: #6c757d;
+		}
+        
     </style>
+
+	<script type="text/javascript">
+    
+    	$(document).ready(function()
+		{
+			var as_content = $("#rr_status").html();
+			
+			if (rr_status != "")
+			{
+				$(".result-btn").css("display", "none");
+			}
+			
+		});	
+    
+    </script>
 
 </head>
 <body>
 
 
-<div class="header-menu row">
-
-	<nav class="navbar">
-		<ul class="nav justify-content-center">
-		
-			<!-- 관리자 계정관리 메뉴 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-person-badge"></i><span class="menu-title">관리자 계정관리</span></a></div>
-				<div class="hover-text">관리자 계정관리</div>
-			</li>
-			
-			<!-- 회원 계정관리 메뉴 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-people-fill"></i><span class="menu-title">회원 계정관리</span></a></div>
-				<div class="hover-text">회원 계정관리</div>
-			</li>
-			
-			<!-- 플랫폼 로고 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-house-fill"></i><span class="menu-title">우리만 Admin</span></a></div>
-				<div class="hover-text">관리자 메인으로 이동</div>
-			</li>
-			
-			<!-- 신고내역 관리 메뉴 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-shield-fill-exclamation"></i><span class="menu-title">신고내역 관리</span></a></div>
-				<div class="hover-text">신고내역 관리</div>
-			</li>
-			
-			<!-- 공지사항 관리 메뉴 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-card-text"></i><span class="menu-title">공지사항 관리</span></a></div>
-				<div class="hover-text">공지사항 관리</div>
-			</li>
-			
-			<!-- 문의사항 관리 메뉴 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-question-octagon-fill"></i><span class="menu-title">문의사항 관리</span></a></div>
-				<div class="hover-text">문의사항 관리</div>
-			</li>
-			
-			<!-- 로그아웃 버튼 -->
-			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-unlock-fill"></i><span class="menu-title">로그아웃</span></a></div>
-				<div class="hover-text">로그아웃</div>
-			</li>
-		</ul>
-	</nav>
+<div class="header">
+	<c:import url="AdminHeader.jsp"></c:import>
 </div>
 
 
@@ -190,13 +165,12 @@
 	            	작성자 : ${reportArticle.us_code2 }</td>
 	        </tr>
 	        <tr><th>신고 처리 결과</th>
-            <td>
+            <td id="rr_status">
             	${reportArticle.rr_status  }
 			</td>
             <tr class="admin-info">
             	<td colspan="2" style="text-align: right;">담당자: ${reportArticle.ad_code==0 ? "" : reportArticle.ad_code } 답변일 : ${reportArticle.report_process }</td>
         	</tr>
-	        </tr>
 	</table>
 	</div>
 	

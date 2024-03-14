@@ -240,7 +240,7 @@ String cp = request.getContextPath();
 			$.ajax(
 			{
 				type: "GET"
-				, url: "notearticle.action"
+				, url: "notearticle.woori"
 				, data: params
 				, success: function(args)
 				{
@@ -255,6 +255,8 @@ String cp = request.getContextPath();
 					alert(e.responseText);
 				}
 			});
+			
+			
 			
 			//var note_code = $("#receiveNote");
 			//alert(note_code);
@@ -286,6 +288,11 @@ String cp = request.getContextPath();
 				$(":checkbox").prop("checked",false);
 	        }
 		}); */
+		
+		$(".btn-close").click(function()
+		{
+			$(location).attr("href", "notelist.woori");
+		});
 
 			
 		// 누른 탭의 쪽지 전체 선택
@@ -360,49 +367,10 @@ String cp = request.getContextPath();
 
 </head>
 <body>
-	<%-- <c:import url="MemberHeader.jsp"></c:import> --%>
-	<div class="header-menu row">
-	<nav class="navbar bg-body-tertiary">
-	
-		<div>
-			<a class="icon-main"><img alt="logo" src=""></a>
-			<div class="hover-text">메인 홈페이지로 이동</div>
-		</div>
-		<div>
-			<ul class="nav justify-content-end">
-			
-				<li class="nav-item">
-					<div class="icon"><i class="bi bi-bell-fill"></i></div>
-					<div class="hover-text">알림 보기</div>
-				</li>
-				
-				<!-- 웹 브라우저가 625 이상 일때 보여지는 메뉴들 -->
-				<li class="nav-item default-menu">
-					<div class="icon"><i class="bi bi-person-circle"></i></div>
-					<div class="hover-text">정보 수정</div>
-				</li>
-				<li class="nav-item default-menu">
-					<div class="icon"><i class="bi bi-door-open-fill"></i></div>
-					<div class="hover-text">로그아웃</div>
-				</li>
-				
-				<!-- 웹 브라우저가 625 이하 일때 보여지는 메뉴 -->
-				<li class="nav-item small-menu">
-					<div class="icon dropdown">
-						<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-list"></i>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
-							<li><a href="" class="dropdown-item">정보수정</a></li>
-							<li><a href="" class="dropdown-item">로그아웃</a></li>
-						</ul>
-					</div>
-				</li>
-				
-			</ul>
-		</div>
-	</nav>
-</div>
+
+	<div class="header">
+		<c:import url="MemberHeader.jsp"></c:import>
+	</div>	
 	
 	<div class="container">
 		<h2>
@@ -659,7 +627,7 @@ String cp = request.getContextPath();
 		<div class="compose-btn">
 			<button type="button" class="btn btn-delete" onclick="deleteReceiveNote()">쪽지 삭제</button>
 			<button type="button" class="btn btn-write"
-				onclick="location.href='/notewriteform.action'">쪽지 작성</button>
+				onclick="location.href='notewriteform.woori'">쪽지 작성</button>
 		</div>
 	</div>
 
