@@ -85,7 +85,7 @@ $(document).ready(function()
         <div class="find">
       	  <a href="idfindform.woori" class="">ID</a> 
           <a href="pwdfindform.woori" class="">Password</a>  
-          <a href="membership.woori" class="">Sign up</a>
+          <a href="membershipform.woori" class="">Sign up</a>
       	</div>
              
       </form>
