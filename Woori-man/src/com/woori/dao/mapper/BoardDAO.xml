@@ -8,7 +8,7 @@
  
  	<select id="getBoardList" resultType="com.woori.dto.BoardDTO">
  		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
- 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
+ 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_TITLE, BRD_CONTENT, BRD_VIEW, BRD_LIKE
  		FROM VIEW_BOARD_LIST
  		WHERE CG_CODE = #{cg_code}
  	</select>
@@ -22,13 +22,13 @@
  	</select>
  	
  	<insert id="insertArticle">
- 		INSERT INTO BOARD(BRD_CODE, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, GM_CODE, CG_CODE)
+ 		INSERT INTO BOARD(BRD_CODE, BRD_DATE, BRD_TITLE, BRD_CONTENT, BRD_VIEW, GM_CODE, CG_CODE)
  		VALUES(SEQ_BOARD.NEXTVAL, SYSDATE, #{brd_subject}, #{brd_content}, 0, #{gm_code}, #{cg_code})
  	</insert>
  	
  	<select id="getBoardArticle" resultType="com.woori.dto.BoardDTO">
  		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
- 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
+ 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_TITLE, BRD_CONTENT, BRD_VIEW, BRD_LIKE
  		FROM VIEW_BOARD_LIST
  		WHERE BRD_CODE = #{brd_code}
  	</select>
@@ -41,7 +41,7 @@
  	
  	<update id="updateArticle">
  		UPDATE BOARD
- 		SET BRD_SUBJECT = #{brd_subject}, BRD_CONTENT = #{brd_content}
+ 		SET BRD_TITLE = #{brd_subject}, BRD_CONTENT = #{brd_content}
  		WHERE BRD_CODE = #{brd_code}
  	</update>
  	
