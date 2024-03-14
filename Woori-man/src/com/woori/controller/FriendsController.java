@@ -32,7 +32,7 @@ public class FriendsController
 {	
 	// 친구 페이지 읽어오는 액션 처리
 	@RequestMapping("/friends.woori")
-	public String friends(Model model) throws SQLException, ClassNotFoundException
+	public String friends(Model model, HttpSession session) throws SQLException, ClassNotFoundException
 	{
 		String result = "";
 		
@@ -42,15 +42,16 @@ public class FriendsController
 		
 		FriendsDAO dao = new FriendsDAO();
 		
-		String us_code1 = "6843881";
-		String us_code = "6843881";
+		UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
+		
+		String us_code = userDTO.getUs_code();
 		
 		try
 		{
 			dao.connection();
 			count = dao.count(us_code);
-			myprofile = dao.myProfile(us_code1);
-			friendsList = dao.list(us_code1);
+			myprofile = dao.myProfile(us_code);
+			friendsList = dao.list(us_code);
 			
 		} catch (Exception e)
 		{
