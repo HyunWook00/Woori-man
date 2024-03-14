@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>히스토리 게시판 - 우리만</title>
+<title>히스토리 게시판 - ${groupDTO.cg_name }</title>
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -17,61 +17,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/articleList.css" />
-<style type="text/css">
-
-	div.board-info {font-family: 라인Seed;}
-	
-	div.content-column
-	{
-		font-size: 12pt; font-weight: bold; font-family: 라인Seed; border-bottom: 1px solid #ff8000;
-		border-top: 1px solid #ff8000; display: flex; justify-content: space-between; text-align: center;
-	}
-	.content-column-name {padding: 5px 0px;}
-	.content-column-name, .article {display: inline-block; padding: 5px 0px;}
-	div.content-search {margin-bottom: 10px; text-align: right;}
-	button.btn-search {background-color: #ff8000; border-radius: 30px; width: 50px; border: none;}
-	button.btn-search:hover {background-color: #FF6F0F;}
-	
-	i.bi-search {color: white; font-size: 12pt;}
-	.search-bar {height: 25px;}
-	
-	div.meeting 
-	{
-		border: 1px solid #ddd; display: inline-flex;
-    	flex-direction: row; align-items: flex-start; width: 500px;
-    	justify-content: flex-start; margin: 5px 20px; max-height: 160px;
-	}
-	div.meeting-info {display: inline-block; width: 48%;}
-	div.article-list {display: flex; flex-direction: column; width: 48%;}
-	
-	div.article {border-bottom: 1px solid #ddd; font-size: 10.5pt;}
-	div.article-element {display: inline-block; font-size: 11pt;}
-	div.article-number.article-element {font-size: small; color: gray;}
-	
-	.content-column-name, .article-element {margin: 2px 5px;}
-	.article-number, .view-count, .like-count {width: 80px;}
-	.article-title {width: 450px;}
-	.write-user {width: 100px;}
-	.write-date {width: 120px;}
-	
-	@media screen and (max-width: 768px)
-	{
-		.container {max-width: 720px; width: 720px;}
-	}
-	
-	.article:hover {background-color: #fff2ea;}
-	.meeting-element {padding: 10px 20px; border-right: 1px solid #ddd; margin-right: 10px; width: 220px;}
-	.meeting-category {padding: 4px 2px; background-color: #ff8000; color: white; font-family: '라인SEED'; width: 25px; font-size: 10pt;}
-	.meeting-title { border-bottom: 1px solid #ff8000; margin: 10px 0px; padding: 0px 10px; font-size: 11pt;}
-	.meeting-date,.meeting-city {font-size: 10pt; background-color: #eee; border-radius: 5px; padding: 2px 5px; margin: 5px;}
-	.meeting-writer {font-family: '라인Seed'; margin: 5px;}
-	.none-history {font-size: 10pt; color: #aaa; padding: 50px 0%;}
-	
-	@media screen and (max-width: 1060px)
-	{
-		.content-list {display: flex; flex-direction: column;}
-	}
-</style>
+<link rel="stylesheet" href="<%=cp %>/css/historyList.css" />
+<script type="text/javascript" src="<%=cp %>/js/historyList.js"></script>
 <script type="text/javascript">
 
 	function goMeetingArticle(mt_code)
@@ -109,7 +56,9 @@
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴가 들어갑ㄴ미다
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 영역 -->
@@ -118,7 +67,7 @@
 		<!-- 게시판 정보 영역 -->
 		<div class="board-info">
 		
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 히스토리</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] 히스토리</div>
 			<!-- <div class="count-article">새글 <span id="new-article">23</span> / <span id="total-article">500</span></div> -->
 		</div>
 		
@@ -140,11 +89,11 @@
 			<!-- 게시글 목록 영역 -->
 			<div class="content-list">
 				<c:forEach items="${meetingList }" var="meeting">
-				<c:if test="${meeting.mt_status != 4 }">
+				<c:if test="${meeting.mt_status == 2 }">
 				<div class="meeting">
 					<div class="meeting-category">${fn:substring(meeting.mc_name, 0, 2)}</div>
-					<div class="meeting-element" role="button" onclick="goMeetingArticle(${meeting.mt_code})">
-						<div class="meeting-title">
+					<div class="meeting-element">
+						<div class="meeting-title" role="button" onclick="goMeetingArticle(${meeting.mt_code})">
 						<c:choose>
 						<c:when test="${fn:length(meeting.mt_title) >= 10 }">
 						${fn:substring(meeting.mt_title, 0, 9) } ···
@@ -157,6 +106,9 @@
 						<div class="meeting-writer">${meeting.gm_nickname }</div>
 						<div class="meeting-date">${meeting.mt_meet }</div>
 						<div class="meeting-city">${meeting.rg_name } ${meeting.ct_name }</div>
+						<c:if test="${attendStatus[meeting.mt_code] != null }">
+						<button type="button" class="article-button history-insert" value="${attendStatus[meeting.mt_code] }">후기 작성하기</button>
+						</c:if>
 					</div>
 					<div class="article-list">
 						<c:choose>

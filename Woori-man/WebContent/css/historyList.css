@@ -1,0 +1,54 @@
+@charset "UTF-8";
+div.board-info {font-family: 라인Seed;}
+
+div.content-column
+{
+	font-size: 12pt; font-weight: bold; font-family: 라인Seed; border-bottom: 1px solid #ff8000;
+	border-top: 1px solid #ff8000; display: flex; justify-content: space-between; text-align: center;
+}
+.content-column-name {padding: 5px 0px;}
+.content-column-name, .article {display: inline-block; padding: 5px 0px;}
+div.content-search {margin-bottom: 10px; text-align: right;}
+button.btn-search {background-color: #ff8000; border-radius: 30px; width: 50px; border: none;}
+button.btn-search:hover {background-color: #FF6F0F;}
+
+i.bi-search {color: white; font-size: 12pt;}
+.search-bar {height: 25px;}
+
+div.meeting 
+{
+	border: 1px solid #ddd; display: inline-flex;
+   	flex-direction: row; align-items: flex-start; width: 500px;
+   	justify-content: flex-start; margin: 5px 20px; max-height: 250px;
+}
+button.article-button {margin-top: 5px; border-radius: 5px;}
+div.meeting-info {display: inline-block; width: 48%;}
+div.article-list {display: flex; flex-direction: column; width: 48%;}
+
+div.article {border-bottom: 1px solid #ddd; font-size: 10.5pt;}
+div.article-element {display: inline-block; font-size: 11pt;}
+div.article-number.article-element {font-size: small; color: gray;}
+
+.content-column-name, .article-element {margin: 2px 5px;}
+.article-number, .view-count, .like-count {width: 80px;}
+.article-title {width: 450px;}
+.write-user {width: 100px;}
+.write-date {width: 120px;}
+
+@media screen and (max-width: 768px)
+{
+	.container {max-width: 720px; width: 720px;}
+}
+
+.article:hover {background-color: #fff2ea;}
+.meeting-element {padding: 10px 20px; border-right: 1px solid #ddd; margin-right: 10px; width: 220px;}
+.meeting-category {padding: 4px 2px; background-color: #ff8000; color: white; font-family: '라인SEED'; width: 25px; font-size: 10pt;}
+.meeting-title { border-bottom: 1px solid #ff8000; margin: 10px 0px; padding: 0px 10px; font-size: 11pt;}
+.meeting-date,.meeting-city {font-size: 10pt; background-color: #eee; border-radius: 5px; padding: 2px 5px; margin: 5px;}
+.meeting-writer {font-family: '라인Seed'; margin: 5px;}
+.none-history {font-size: 10pt; color: #aaa; padding: 50px 0%;}
+
+@media screen and (max-width: 1060px)
+{
+	.content-list {display: flex; flex-direction: column;}
+}

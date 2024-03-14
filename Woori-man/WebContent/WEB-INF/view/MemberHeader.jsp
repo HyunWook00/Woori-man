@@ -22,8 +22,8 @@
 	<nav class="navbar member-header bg-body-tertiary">
 	
 		<div>
-			<a class="icon-main"><img alt="logo" src="<%=cp%>/images/로고5_80-40.png"></a>
-			<div class="hover-text">메인 홈페이지로 이동</div>
+			<a class="icon-main" href="membermain.woori"><img alt="logo" src="<%=cp%>/images/로고5_80-40.png" class="member-header-icon"></a>
+			<div class="hover-text member-header-hover-text">메인 홈페이지로 이동</div>
 		</div>
 		
 		<div>
@@ -37,17 +37,17 @@
 							5
 						</span>
 					</div>
-					<div class="hover-text">쪽지 보기</div>
+					<div class="hover-text member-header-hover-text">쪽지 보기</div>
 				</li>
 				
 				<!-- 웹 브라우저가 625 이상 일때 보여지는 메뉴들 -->
-				<li class="nav-item default-menu">
+				<li class="nav-item default-menu member-header-item">
 					<div class="icon member-header-icon-div"><i class="bi bi-person-circle member-header-icon"></i></div>
-					<div class="hover-text">정보 수정</div>
+					<div class="hover-text member-header-hover-text">정보 수정</div>
 				</li>
-				<li class="nav-item default-menu">
+				<li class="nav-item default-menu member-header-item">
 					<div class="icon member-header-icon-div"><i class="bi bi-door-open-fill member-header-icon" onclick="location.href='logout.woori'"></i></div>
-					<div class="hover-text">로그아웃</div>
+					<div class="hover-text member-header-hover-text">로그아웃</div>
 				</li>
 				
 				<!-- 웹 브라우저가 625 이하 일때 보여지는 메뉴 -->

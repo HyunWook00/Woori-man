@@ -16,4 +16,5 @@ public interface IHistoryDAO
 	public int updateArticleView(String his_code);
 	public int deleteArticleLike(String param1, String param2);
 	public ArrayList<MeetingDTO> getMeetingList(String cg_code);
+	public String checkHistory(String param1, String param2);
 }

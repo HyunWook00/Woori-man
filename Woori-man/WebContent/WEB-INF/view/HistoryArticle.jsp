@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css" />
 <script type="text/javascript" src="<%=cp%>/js/historyArticle.js"></script>
 <link rel="stylesheet" href="<%=cp %>/css/historyArticle.css" />
@@ -34,7 +34,7 @@
 
 <!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <!-- 주요 콘텐츠 영역 -->
@@ -42,7 +42,9 @@
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴 들어가용
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 영역 -->
@@ -50,7 +52,7 @@
 	
 		<!-- 게시판 정보 영역 -->
 		<div class="board-info">
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 히스토리 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] ${meetingArticle.mt_title }의 히스토리</div>
 			
 			<div class="button-zone">
 				<!-- 목록으로 / 이전글 / 다음글 버튼 영역 -->
@@ -60,7 +62,7 @@
 				<div class="button-div">
 					<!-- 세션에서 회원코드 받아오고 작성자랑 분기 -->
 					<c:choose>
-					<c:when test="${historyArticle.gm_code ==  gm_code}">
+					<c:when test="${historyArticle.gm_code ==  groupMamberDTO.gm_code}">
 					<button type="button" class="article-button article-modify" value="${historyArticle.his_code }">수정하기</button>
 					<button type="button" class="article-button article-delete" value="${historyArticle.his_code }">삭제하기</button>
 					</c:when>
@@ -154,7 +156,7 @@
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
 									<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
 									<c:choose>
-									<c:when test="${comment.commentWriterCode == gm_code }">
+									<c:when test="${comment.commentWriterCode == groupMemebrDTO.gm_code }">
 										<li><a class="dropdown-item" onclick="modifyComment(${comment.commentCode})">수정하기</a></li>
 										<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode})">삭제하기</a></li>
 									</c:when>
@@ -216,7 +218,7 @@
 								<div class="">
 									<textarea name="br_content" id="br_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
 									<input type="hidden" name="bc_code" id="bc_code" value="${comment.commentCode }">
-									<input type="hidden" name="brd_code" id="brd_code" value="${boardArticle.brd_code }">
+									<input type="hidden" name="his_code" id="his_code" value="${historyArticle.his_code }">
 								</div>
 								<button type="submit" class="comment-submit-btn">등록</button>
 								<button type="button" class="comment-cancel-btn">취소</button>
@@ -234,8 +236,8 @@
 		<div class="write-comment">
 			<form action="historycommentinsert.woori" class="history-comment-form write-area" method="post"  id="historyCommentForm">
 				<textarea class="comment-input" id="commentContent" name="commentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
-				<input type="hidden" name="articleCode" id="articleCode" value="${historyArticle.brd_code }">
-				<input type="hidden" name="commentWriterCode" id="commentWriterCode" value="${gm_code }">
+				<input type="hidden" name="articleCode" id="articleCode" value="${historyArticle.his_code }">
+				<input type="hidden" name="commentWriterCode" id="commentWriterCode" value="${groupMemberDTO.gm_code }">
 				<div class="submit-and-count">
 					<button type="button" class="comment-submit-btn">등록</button>
 					<span class="count"><span class="now-count">0</span> / 200</span>

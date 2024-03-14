@@ -1,0 +1,27 @@
+@charset "UTF-8";
+div.content-column {display: block;}
+form.filter-form {display: flex; justify-content: space-between;}
+select.column-filter {background-color: #ff8a3d; border: none; text-align: center; color: white; border-radius: 30px; padding: 5px;}
+select.column-filter:hover {background-color: #ff6f0f;}
+option {background: white; text-align: center; color: black; font-family: 맑은 고딕;}
+
+span.meeting-vote {font-family: 라인Seed; background-color: red; border-radius: 50px; vertical-align: top; color: white;}
+span.meeting-complete {font-family: 라인Seed; background-color: blue; border-radius: 50px; vertical-align: top; color: white;}
+span.meeting-cancel {font-family: 라인Seed; background-color: gray; border-radius: 50px; vertical-align: top; color: white;}
+
+.meeting-category {width: 100px;}
+.article-title {width: 350px;}
+.meeting-date {width: 120px;}
+.meeting-status {width: 120px;}
+
+span.meeting-badge {display: inline-block; border-radius: 20px; font-family: 라인Seed; color: white; background: #ff8000; padding: 5px 7px 1px 7px;}
+span.meeting-regular {background-color: #ff8a3d;}
+span.meeting-irregular {background-color: #ffd400;}
+span.meeting-vote {background-color: #d1180b;}
+span.meeting-complete {background-color: #0067a3;}
+span.meeting-cancel {background-color: gray;}
+
+@media screen and (min-width: 0px)
+{
+	.container {max-width: 1320px; width: 1320px;}
+}

@@ -9,7 +9,7 @@
  	<select id="getHistoryList" resultType="com.woori.dto.HistoryDTO">
  		SELECT HIS_CODE, HIS_DATE, HIS_VIEW, HIS_CONTENT, AO_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, MT_CODE, MT_TITLE, CG_CODE, HIS_LIKE
  		FROM HISTORY_LIST_VIEW
- 		WHERE CG_CODE = #{cg_code}
+ 		WHERE MT_CODE = #{mt_code}
  	</select>
  	
  	<select id="getHistoryArticle" resultType="com.woori.dto.HistoryDTO">
@@ -48,6 +48,15 @@
  		FROM VIEW_MEETING_LIST
  		WHERE MT_STATUS = 2
  		AND CG_CODE = #{cg_code}
+ 	</select>
+ 	
+ 	<select id="checkHistory" resultType="java.lang.String">
+ 		SELECT AO_CODE
+ 		FROM ATTEND_OPINION
+ 		WHERE GM_CODE = #{param1}
+ 		AND AOC_CODE = 1
+ 		AND MT_CODE = #{param2}
+ 		AND AO_CODE NOT IN (SELECT AO_CODE FROM HISTORY)
  	</select>
  
  </mapper>

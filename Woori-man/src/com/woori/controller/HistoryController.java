@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.IHistoryDAO;
 import com.woori.dao.MeetingDAO;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.HistoryDTO;
 import com.woori.dto.MeetingDTO;
 
@@ -32,30 +34,43 @@ public class HistoryController
 	// 히스토리 리스트 페이지 요청
 	// historylist.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/historylist.woori")
-	public String historyList(Model model, HttpServletRequest request)
+	public String historyList(Model model, HttpSession session)
 	{
-		HttpSession session = request.getSession();
-		session.setAttribute("cg_code", "1");
-		session.setAttribute("gm_code", "1");
-		session.setAttribute("pos_code", "1");
-		String cg_code = (String)session.getAttribute("cg_code");
-		
+		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		ArrayList<MeetingDTO> meetingList = null;
 		HashMap<String, ArrayList<HistoryDTO>> historyList = new HashMap<String, ArrayList<HistoryDTO>>();
+		HashMap<String, String> attendStatus = new HashMap<String, String>();
+		MeetingDAO mDao = new MeetingDAO();
 		try
 		{
 			IHistoryDAO dao = sqlSession.getMapper(IHistoryDAO.class);
-			meetingList = dao.getMeetingList(cg_code);
+			meetingList = dao.getMeetingList(group.getCg_code());
 			for(MeetingDTO dto : meetingList)
+			{
 				historyList.put(dto.getMt_code(), dao.getHistoryList(dto.getMt_code()));
+				attendStatus.put(dto.getMt_code(), dao.checkHistory(member.getGm_code(), dto.getMt_code()));
+			}
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
+		finally 
+		{
+			try
+			{
+				mDao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
 		
 		model.addAttribute("meetingList", meetingList);
 		model.addAttribute("historyList", historyList);
+		model.addAttribute("attendStatus", attendStatus);
 		
 		return "/WEB-INF/view/HistoryList.jsp";
 	}
@@ -69,6 +84,7 @@ public class HistoryController
 		MeetingDTO meetingArticle = null;
 		MeetingDAO mDao = new MeetingDAO();
 		int checkArticleLike = 0;
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		
 		String articleCookie = "historyArticle" + his_code;
 		
@@ -77,7 +93,7 @@ public class HistoryController
 			IHistoryDAO hDao = sqlSession.getMapper(IHistoryDAO.class);
 			
 			meetingArticle = mDao.getMeetingArticle(mt_code);
-			checkArticleLike = hDao.getArticleLike(his_code, (String)session.getAttribute("gm_code"));
+			checkArticleLike = hDao.getArticleLike(his_code, member.getGm_code());
 			
 			// 조회수 처리용 쿠키 작업
 			Cookie[] cookie = request.getCookies();
