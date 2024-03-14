@@ -33,6 +33,8 @@
 
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<link rel="stylesheet" href="<%=cp %>/css/footer.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/csList.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
 <!-- 1. 부트스트랩 js -->
@@ -44,118 +46,36 @@
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
+<script type="text/javascript">
 
-
-<style type="text/css">
-
-	*
+/* 	$(function()
 	{
-		font-family: 라인Seed;
-		font-weight: bold;
-		text-align: center;
-	}
-	
-	.aaa
-	{
-		margin-left: 15%;
-		text-align: left;
-	}
-	
-	hr 
-	{
-		margin-left: auto;
-		margin-right: auto;
-		width: 70%;
-		height: 30%;
-	}
-	
-	.date
-	{
-		margin-left: 15%;
-		text-align: left;
-		width: 70%;
-		background-color: #f3f3f1;
-		border: solid 1px #f3f3f1;
-		border-radius: 10px;
-		padding: 15px;
-		font-size: 15pt;
-	}
-	
-	input
-	{
-		padding: 6px;
-		border: solid 1px;
-		border-radius: 5px;
-	}
-	
-	 select
-	 {
-	 	padding: 10px;
-	 	border: solid 1px;
-		border-radius: 5px;
-	 }
-	 
-	
-	.btn
-	{
-		font-size: 13pt;
-		padding: 10px;
-		width: 100pt;
-	}
-
-	.btnSelect
-	{
-		background-color:  #ff8000;
-		color: white;
-	}
-	
-	.btnSelect:hover
-	{
-		background-color: #e97501;
-		color: white;
-	}
-	
-	.nav-tabs
-	{
-		padding: 5px;
-	}
-	
-	.nav-link 
-	{
-		color: #343434;
-	}
-	
-	.nav-link.active, .nav-link:hover
-	{
-		color: #ff8000 !important;
-	}
-	
-	.table
-	{
-		margin-left: auto;
-		margin-right: auto;
-		width: 70%;
+		var start = moment.subtract(29,"days");
+		var end = moment();
 		
-	}
-	
-	/* footer CSS */
-
-	.footer
-	{
-		width:100%;
-		text-align: center;
+		function date(start, end)
+		{
+			$("#date").html(start.format("yyyy-mm-dd") + " - " + end.format("yyyy-mm-dd"));
+		}
 		
-	}
-	
-	.footer a
-	{
-		padding: 20px;
-		margin: 10px;
-		width: 30pt;
-	}
-	
-	
-</style>
+		$("#date").daterangepicker(function()
+		{
+			  startDate: "2024-03-14"
+		    , endDate: "2024-03-15"
+			, ranges : {
+				
+				"3개월" : [moment().subtract(1,"month").startOf("month"), moment().subtract(3,"month").endOf("month")]
+				,"6개월" : [moment().subtract(1,"month").startOf("month"), moment().subtract(6,"month").endOf("month")]
+				,"1년" : [moment().startOf("year"), moment().endOf("year")]
+				,"2년" : [moment().subtract(1,"year").startOf("year"), moment().subtract(2,"year").endOf("year")]
+			}
+			
+		},date);
+		
+		date(start,end);
+	}); */
+
+</script>
 
 </head>
 <body>
@@ -164,14 +84,13 @@
 <div>
 	<br>
 	<c:import url="MemberHeader.jsp"></c:import>
-	<hr />
 	<br>
 </div>
 
 <div>
 	<h3 class="aaa">1:1 문의 내역</h3>
 	<hr />
-	<div class="date">
+	<!-- <div class="date">
 		<select name="" id="">
 			<option value="3">3개월</option>
 			<option value="6">6개월</option>
@@ -179,12 +98,16 @@
 			<option value="24">2년</option>
 			<option value="">직접설정</option>
 		</select>
-		<input type="date" id="date1" value="<%=date %>"/> ~ <input type="date" />
+		<div id="date">
+			<i class="fa fa-calendar"></i>
+		</div>
 		<button class="btn btnSelect">조회</button>
+	</div> -->
+	<div class="date">
 		<button class="btn btnInsert" onclick="location.href='inquiryinsertform.woori'">1:1문의 작성</button>
 	</div>
 	<br>
-	<div class="aaa">
+	<div class="Mycontent">
 		<nav class="nav nav-tabs reporttab" role="tablist">
    			<div class="nav nav-tabs" id="nav-tab" role="tablist">
 			    <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#allInquiry" 
@@ -200,8 +123,8 @@
 			    type="button" role="tab" aria-controls="inquiryCompleted" aria-selected="false">처리완료</button>
 			</div>
 		</nav>	
-</div>
-	 <div class="tab-content" id="nav-tabContent">
+	</div>
+	 <div class="tab-content csList" id="nav-tabContent">
 		 <div class="tab-pane fade show active" id="allInquiry" role="tabpanel" aria-labelledby="nav-all-tab">
 			<table class="table table-hover">
 				<tr>
@@ -333,14 +256,10 @@
 
 
 
-<!-- footer 영역 추후 임포트 -->
-<div class="footer col-xs-12 col-sm-12 col-md-12">
-	<footer>
-		<br> 
-		<a>이용약관</a> <a>개인정보처리방침</a> <a>우리만 정책</a> <a href="cs.woori">고객센터</a> <a> ⓒ 우리만</a>
-	</footer>
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
 </div>
-<br>
 
 </body>
 </html>

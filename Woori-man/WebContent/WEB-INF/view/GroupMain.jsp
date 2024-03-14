@@ -52,20 +52,33 @@ String cp = request.getContextPath();
 			<div id="slideWrap" class="carousel slide" data-ride="carousel">			
 				<div class="carousel-inner">
 				<h4>정기 모임</h4>
-				<c:forEach var="regular" items="${regularMeeting }">
-				<div class="${regular.num == 1 ? 'carousel-item active' : 'carousel-item'}">
-					<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
-					 <div class="carousel-caption"
-					  style="text-shadow: none; bottom: 0px">
-					 <br>
-	            		 <h4>${regular.mt_title } </h4>
-	       				 <p>모임 날짜 : ${regular.mt_meet }</p>
-	       				 <p>모임 지역 : ${regular.rg_name } ${regular.ct_name }</p>
-	       				 <p>참석 여부 확인기간 : ${regular.mt_date } ~ ${regular.mt_vote }</p>
-	       				 <button class="button">참석 여부 선택하러 가기</button>
-	          		 </div>
-				</div>
-				</c:forEach> 
+				<c:choose>
+					<c:when test="${empty regularMeeting }">
+						<div class="carousel-item active nullMeeting">
+							<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
+							 <div class="carousel-caption"  style="text-shadow: none; bottom: 0px">
+							 <br>
+			              		 <h4>현재 발의 된 정기 모임이 없습니다. </h4>
+			           		 </div>
+						</div> 
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="regular" items="${regularMeeting }">
+						<div class="${regular.num == 1 ? 'carousel-item active' : 'carousel-item'}">
+							<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
+							 <div class="carousel-caption"
+							  style="text-shadow: none; bottom: 0px">
+							 <br>
+			            		 <h4>${regular.mt_title } </h4>
+			       				 <p>모임 날짜 : ${regular.mt_meet }</p>
+			       				 <p>모임 지역 : ${regular.rg_name } ${regular.ct_name }</p>
+			       				 <p>참석 여부 확인기간 : ${regular.mt_date } ~ ${regular.mt_vote }</p>
+			       				 <button class="button">참석 여부 선택하러 가기</button>
+			          		 </div>
+						</div>
+						</c:forEach> 
+					</c:otherwise>
+				</c:choose>
 				  <button class="carousel-control-prev" type="button" data-bs-target="#slideWrap" data-bs-slide="prev">
 				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				    <span class="visually-hidden">Previous</span>
@@ -79,19 +92,32 @@ String cp = request.getContextPath();
 		<div id="slideWrap2" class="carousel slide" data-ride="carousel">			
 			<div class="carousel-inner">
 			<h4>번개 모임</h4>
-				<c:forEach var="impromptu" items="${impromptuMeeting }">
-					<div class="${impromptu.num == 1 ? 'carousel-item active' : 'carousel-item'}">
-						<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
-						 <div class="carousel-caption"  style="text-shadow: none; bottom: 0px">
-						 <br>
-		              		 <h4>${impromptu.mt_title }</h4>
-		         				 <p>모임 날짜 : ${impromptu.mt_meet }</p>
-		         				 <p>모임 지역 : ${impromptu.rg_name} ${impromptu.ct_name}</p>
-		         				 <p>참석 여부 확인기간 :${impromptu.mt_date} ~ ${impromptu.mt_vote }</p>
-		         				 <button class="button">참석 여부 선택하러 가기</button>
-		           		   </div>
-					</div> 
-				</c:forEach>
+				<c:choose>
+					<c:when test="${empty impromptuMeeting}">
+						<div class="carousel-item active nullMeeting">
+							<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
+							 <div class="carousel-caption"  style="text-shadow: none; bottom: 0px">
+							 <br>
+			              		 <h4>현재 발의 된 번개 모임이 없습니다. </h4>
+			           		 </div>
+						</div> 
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="impromptu" items="${impromptuMeeting }">
+						<div class="${impromptu.num == 1 ? 'carousel-item active' : 'carousel-item'}">
+							<img src="<%=cp %>/images/gray_back3.png" alt="" width="100%" height="250">
+							 <div class="carousel-caption"  style="text-shadow: none; bottom: 0px">
+							 <br>
+			              		 <h4>${impromptu.mt_title }</h4>
+			         				 <p>모임 날짜 : ${impromptu.mt_meet }</p>
+			         				 <p>모임 지역 : ${impromptu.rg_name} ${impromptu.ct_name}</p>
+			         				 <p>참석 여부 확인기간 :${impromptu.mt_date} ~ ${impromptu.mt_vote }</p>
+			         				 <button class="button">참석 여부 선택하러 가기</button>
+			           		   </div>
+						</div> 
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<a class="carousel-control-prev" href="#slideWrap2" data-slide="prev">
 				<span class="carousel-control-prev-icon"></span>

@@ -33,16 +33,16 @@ public class GroupMainController
 	@RequestMapping("/entergroup.woori")
 	public String enterGroup(HttpSession session, ModelMap model, String cg_code)
 	{
-		GroupDAO groupDAO = new GroupDAO();				// GroupDAO 인스턴스 생성 (세션에 담기는 메소드)
-		GroupDTO groupDTO = null;						// GroupDTO 변수 생성
-		GroupMemberDTO groupMemberDTO = null;			// GroupMemberDTO 변수 생성
-		ArrayList<MeetingDTO> groupMeetingDTO = null;	// ArrayList<MeetingDTO> 변수 생성
+		GroupDAO groupDAO = new GroupDAO();					// GroupDAO 인스턴스 생성 (세션에 담기는 메소드)
+		GroupDTO groupDTO = null;							// GroupDTO 변수 생성
+		GroupMemberDTO groupMemberDTO = null;				// GroupMemberDTO 변수 생성
+		ArrayList<MeetingDTO> groupMeetingDTO = null;		// ArrayList<MeetingDTO> 변수 생성
 		ArrayList<GroupMemberDTO> groupPostition = null;
 		//String us_codeTemp = "8872984";					// 로그인 연결 전 임시 데이터
 		//session.setAttribute("us_code", us_codeTemp);
 		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
 		String us_code = usdto.getUs_code();
-		
+		//session.setAttribute("us_code", us_code);
 		//System.out.println(us_code);
 		
 		try
@@ -79,8 +79,6 @@ public class GroupMainController
 	         
 	         // 그룹 모임 정보 넣기
 	         groupMeetingDTO = groupDAO.Groupmetting(cg_code);
-	         
-	         //System.out.println(gm_code);
 	         
 	         // 데이터 베이스 연결 해제
 	         groupDAO.close();
@@ -152,8 +150,9 @@ public class GroupMainController
 		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
 		GroupMemberDTO groupMemberDTO = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		ArrayList<GroupMemberDTO> groupPostition = (ArrayList<GroupMemberDTO>) session.getAttribute("groupPosition");
+		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
 		
-		String us_code = (String) session.getAttribute("us_code");
+		String us_code = usdto.getUs_code();
 		String cg_code = groupDTO.getCg_code();
 		String gm_code = groupMemberDTO.getGm_code();
 		
@@ -246,7 +245,8 @@ public class GroupMainController
 	public String updateMyInfo (UserDTO updateDTO, HttpSession session)
 	{
 		// 세션에서 필요한 값 받기
-		String us_code = (String) session.getAttribute("us_code");
+		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
+		String us_code = usdto.getUs_code();
 		updateDTO.setUs_code(us_code);
 		
 		try
@@ -273,6 +273,8 @@ public class GroupMainController
 		return "redirect:groupmypage.woori";
 	}
 	
+	// 링크 연결 용
+	
 	@RequestMapping(value = "/mypagecalendarajax.woori")
 	public String myPageCalendarAjax(ModelMap model)
 	{
@@ -284,5 +286,27 @@ public class GroupMainController
 	{
 		return "/WEB-INF/view/SideCalendarAjax.jsp";
 	}
+	
+	
+	// 회비 페이지 컨트롤러
+	@RequestMapping(value = "/groupfee.woori")
+	public String groupFee(ModelMap model)
+	{	
+		
+		
+		
+		
+		return "/WEB-INF/view/GroupFee.jsp";
+	}
+	
+	@RequestMapping(value = "/groupfeeinsertform.woori")
+	public String groupFeeInsert(ModelMap model)
+	{	
+		
+		return "/WEB-INF/view/GroupFeeInsertForm.jsp";
+	}
+	
+	
+	
 	
 }

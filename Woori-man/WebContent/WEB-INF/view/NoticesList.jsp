@@ -18,6 +18,7 @@
  -->
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/footer.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
 <!-- 1. 부트스트랩 js -->
@@ -143,14 +144,11 @@
 	</div>
 </div> 
 
-
-<!-- footer 영역 추후 임포트 -->
-<div class="footer col-xs-12 col-sm-12 col-md-12">
-	<footer>
-		<br> 
-		<a>이용약관</a> <a>개인정보처리방침</a> <a>우리만 정책</a> <a>고객센터</a> <a> ⓒ 우리만</a>
-	</footer>
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
 </div>
+
 <br>
 
 </body>

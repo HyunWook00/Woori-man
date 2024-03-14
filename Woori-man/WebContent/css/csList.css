@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+	*
+	{
+		font-family: 라인Seed;
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	.aaa
+	{
+		margin-left: 15%;
+		text-align: left;
+		
+	}
+	
+	hr 
+	{
+		margin: 0 auto !important;
+		padding: 10px;
+		width: 70%;
+		height: 30%;
+	}
+	
+	.date
+	{
+		    margin-left: 17%;
+		    width: 70%;
+		    padding: 15px;
+		    font-size: 15pt;
+	}
+	
+	input
+	{
+		padding: 6px;
+		border: solid 1px;
+		border-radius: 5px;
+	}
+	
+	 select
+	 {
+	 	padding: 10px;
+	 	border: solid 1px;
+		border-radius: 5px;
+	 }
+	 
+	
+	.btn
+	{
+		font-size: 13pt;
+		padding: 10px;
+		width: 100pt;
+		float: right;
+	}
+
+	.btnInsert
+	{
+		background-color:  #ff8000;
+		color: white;
+	}
+	
+	.btnInsert:hover
+	{
+		background-color: #e97501;
+		color: white;
+	}
+	
+	.nav 
+	{
+	   	margin-left: 0px !important; 
+	}
+	
+	.nav-link.active, .nav-pills .show>.nav-link 
+	{
+    	color: #ff8000 !important;
+    	background: transparent;
+	}
+	
+	.tab-pane
+	{
+		text-align: left;
+	}
+	
+	.nav-link:hover
+	{
+    	color: #363636;
+	}
+	
+	.nav-link
+	{
+		color: dimgray; 
+		font-size: 21px;
+    	padding: 10px;
+	}
+	
+	.Mycontent
+	{
+	    width: 1350px;
+	    margin-left: 15%;
+	}
+	
+	.table
+	{
+		box-shadow: 3px 3px 3px #ddd;
+	}
+	.table th
+	{
+		color: #ff8000;
+	}
+	
+	.csList
+	{
+	    width: 1350px;
+    	margin-inline-start: 282px;
+	}
+

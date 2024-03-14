@@ -11,6 +11,8 @@
 <title>1:1 문의사항 등록 - 우리만</title>
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<link rel="stylesheet" href="<%=cp%>/css/insertForm.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/footer.css">
 <!-- 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -27,94 +29,6 @@
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
- 
- <style type="text/css">
-
-	* s
-	{
-		font-family: 라인Seed;
-		font-weight: bold;
-		text-align: center;
-	}
-	
-	
-	.table-bordered
-	{
-		width: 70%;
-	}
-	
-	.form-control, .form-select
-	{
-		padding: 10px;
-	}
-	
-	hr
-	{
-		margin-left: auto;
-		margin-right: auto;
-		width: 70%;
-		height: 30%;
-	}
-	
-	textarea
-	{
-		resize: none;
-	}
-	
-	.aaa
-	{
-		margin-left: 15%;
-		text-align: left;
-	}
-	
-	.btn
-	{
-		font-size: 15pt;
-		padding: 10px;
-		width: 100pt;
-	}
-
-	.btnSubmit
-	{
-		background-color:  #ff8000;
-		color: white;
-	}
-	
-	.btnSubmit:hover
-	{
-		background-color: #e97501;
-		color: white;
-	}
-	
-
-	
-	.bbb
-	{
-		background-color: #f3f3f1;
-		border: solid 1px #f3f3f1;
-		border-radius: 10px;
-		width: 70%;
-		padding: 20px;
-	}
-	
-	/* footer CSS */
-
-	.footer
-	{
-		width:100%;
-		text-align: center;
-		
-	}
-	
-	.footer a
-	{
-		padding: 20px;
-		margin: 10px;
-		width: 30pt;
-	}
-	
-	
-</style>
 <script type="text/javascript">
 
 	$(function()
@@ -158,7 +72,6 @@
 <div>
 	<br>
 	<c:import url="MemberHeader.jsp"></c:import>
-	<hr />
 	<br>
 </div>
 
@@ -226,14 +139,11 @@
 
 </div>
 
-<!-- footer 영역 추후 임포트 -->
-<div class="footer col-xs-12 col-sm-12 col-md-12">
-	<footer>
-		<br> 
-		<a>이용약관</a> <a>개인정보처리방침</a> <a>우리만 정책</a> <a>고객센터</a> <a> ⓒ 우리만</a>
-	</footer>
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
 </div>
-<br>
+
 
 </body>
 </html>

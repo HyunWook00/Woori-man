@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+	* 
+	{
+		font-family: 라인Seed;
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	.table-bordered
+	{
+		 width: 1335px !important;
+   		 margin-top: 20px;
+	}
+	
+	.form-control, .form-select
+	{
+		padding: 10px;
+	}
+	
+	hr
+	{
+		margin: 0 auto !important;
+		width: 70%;
+		height: 30%;
+	}
+	textarea
+	{
+		resize: none;
+	}
+	
+	.aaa
+	{
+		margin-left: 15%;
+		text-align: left;
+	}
+	
+	.btn
+	{
+		font-size: 15pt;
+		padding: 10px;
+		width: 100pt;
+	}
+
+	.btnSubmit
+	{
+		background-color:  #ff8000 !important;
+		color: white !important;
+	}
+	
+	.btnSubmit:hover
+	{
+		background-color: #e97501 !important;
+		color: white !important;
+	}
+	
+	.bbb
+	{
+	    background-color: #f3f3f3;
+	    border: solid 1px #f3f3f3;
+	    border-radius: 10px;
+	    width: 1338px;
+	    padding: 20px;
+	}
+	

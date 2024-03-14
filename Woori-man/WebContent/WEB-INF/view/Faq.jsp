@@ -11,6 +11,8 @@ String cp = request.getContextPath();
 <title>자주 묻는 질문(FAQ) - 우리만</title>
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<link rel="stylesheet" href="<%=cp%>/css/faq.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/footer.css">
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://getbootstrap.com/docs/5.3/assets/css/docs.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -28,128 +30,7 @@ String cp = request.getContextPath();
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<style type="text/css">
 
-	* {
-		text-align: center;
-		font-family: 라인Seed;
-		font-weight: bold;
-		font-size: 15pt;
-	}
-	
-	input {
-		width: 50%;
-		height: 40pt;
-		border-radius: 15px;
-		border: solid 2px #ff8a3d;
-		font-size: 15pt;
-	}
-	
-	.search {
-		position: relative;
-	}
-	
-	.search button {
-		position: absolute;
-		color: #ff8a3d;
-		left: 72%;
-		top: 9px;
-		background: none;
-		border: none;
-	}
-	
-	.accordion
-	{
-		margin-left: auto;
-		margin-right: auto;
-		width: 70%;
-	}
-
-	.answer
-	{
-		text-align: left;
-		font-family: 맑은 고딕;
-		font-weight: bold;
-		font-size: 11pt;
-		background-color: #d5d5d540;
-	}
-
-
-	.accordion-button:not(.collapsed)
-	{
-		background-color: #ff8000;
-		color: white;
-	}
-		/* 검색어 css */
-	#searchList
-	{	
-		border: 2px solid #ff8000;
-	    width: 50%;
-	    position: absolute;
-	    font-weight: bold;
-	    color: #343;
-	    display: none;
-	    background-color: white;
-	    margin-left: 25%;
-	    z-index: 1;
-	}
- 	#searchList a	
- 	{
-		padding: 2px;
-	    text-decoration: none;
-	    color: #343;
-	    font-size: 20px;
-	} 
-	#searchList #footer
-	{
-		height: 14px;
-		background-color: #DDD;
-		text-align: right;
-		padding: 5px;
-		font-size: small;
-	}
-		
-
-.bi-search 
-{
-	font-size: 20pt;
-}
-
-hr 
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 70%;
-	height: 30%;
-}
-
-
-.g-col-2 
-{
-	font-size: 15pt;
-}
-
-.more 
-{
-	color: black;
-	text-decoration: none;
-	text-align: right;
-	margin-right: 16%;
-}
-
-/* footer CSS */
-.footer
- {
-	width: 100%;
-	text-align: center;
-}
-
-.footer a 
-{
-	padding: 20px;
-	margin: 10px;
-}
-</style>
 <script type="text/javascript">
 
 	function faqSelect(fc_code)
@@ -332,14 +213,10 @@ hr
 <br>
 <br>
 
-	<!-- footer 영역 추후 임포트 -->
-	<div class="footer col-xs-12 col-sm-12 col-md-12">
-		<footer>
-			<br> <a>이용약관</a> <a>개인정보처리방침</a> <a>우리만 정책</a> <a>고객센터</a> <a>
-				ⓒ 우리만</a>
-		</footer>
-	</div>
-	<br>
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
+</div>
 
 </body>
 </html>

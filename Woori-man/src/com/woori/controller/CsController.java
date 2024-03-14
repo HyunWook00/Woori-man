@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.woori.dao.ICsDAO;
 import com.woori.dao.IReportDAO;
 import com.woori.dto.CsDTO;
+import com.woori.dto.UserDTO;
 
 @Controller
 public class CsController
@@ -80,16 +81,17 @@ public class CsController
 	@RequestMapping(value = "/inquiryinsert.woori", method = RequestMethod.POST)
 	public String iquiryInsert(ModelMap model, CsDTO dto, HttpSession session)
 	{
-		String us_code = (String) session.getAttribute("us_code");
+		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
+		String us_code = usdto.getUs_code();
 		
-		System.out.println(us_code);
+		//System.out.println(us_code);
 		
 		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		dto.setIq_content(dto.getIq_content().replaceAll("\n", "<br>"));
 		
 		dto.setUs_code(us_code);
 
-		System.out.println(us_code);
+		//System.out.println(us_code);
 		
 		// 문의사항 INSERT DAO
 		dao.inquiryInsert(dto);
@@ -103,8 +105,8 @@ public class CsController
 	public String iquiryList(ModelMap model, HttpSession session)
 	{
 		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
-		
-		String us_code = (String)session.getAttribute("us_code");
+		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
+		String us_code = usdto.getUs_code();
 		
 		// 문의사항 내역 조회 DAO
 		model.addAttribute("inquiryList",dao.inquiryList(us_code));	
@@ -118,7 +120,8 @@ public class CsController
 	public String reportList(ModelMap model, HttpSession session)
 	{
 		IReportDAO dao = sqlSession.getMapper(IReportDAO.class);
-		String us_code = (String)session.getAttribute("us_code");
+		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
+		String us_code = usdto.getUs_code();
 		
 		// 신고 내역 조회 DAO
 		model.addAttribute("allReportList", dao.allReportList(us_code));

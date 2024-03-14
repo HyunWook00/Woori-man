@@ -17,6 +17,8 @@
  -->
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/footer.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/csList.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
 <!-- 1. 부트스트랩 js -->
@@ -28,137 +30,6 @@
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
-
-<style type="text/css">
-	*
-	{
-		font-family: 라인Seed;
-		font-weight: bold;
-		text-align: center;
-	}
-	
-	.aaa
-	{
-		margin-left: 15%;
-		text-align: left;
-	}
-	
-	hr 
-	{
-		margin-left: auto;
-		margin-right: auto;
-		width: 70%;
-		height: 30%;
-	}
-	
-	.date
-	{
-		margin-left: 15%;
-		text-align: left;
-		width: 70%;
-		background-color: #f3f3f1;
-		border: solid 1px #f3f3f1;
-		border-radius: 10px;
-		padding: 15px;
-		font-size: 15pt;
-	}
-	
-	input
-	{
-		padding: 6px;
-		border: solid 1px;
-		border-radius: 5px;
-	}
-	
-	 select
-	 {
-	 	padding: 10px;
-	 	border: solid 1px;
-		border-radius: 5px;
-	 }
-	 
-	
-	.btn
-	{
-		font-size: 13pt;
-		padding: 10px;
-		width: 100pt;
-	}
-
-	.btnSelect
-	{
-		background-color:  #ff8000;
-		color: white;
-	}
-	
-	.btnSelect:hover
-	{
-		background-color: #e97501;
-		color: white;
-	}
-	
-	.nav 
-	{
-	   	margin-left: 0px !important; 
-	}
-	
-	.nav-link.active, .nav-pills .show>.nav-link 
-	{
-    	color: #ff8000 !important;
-    	background: transparent;
-	}
-	
-	.tab-pane
-	{
-		text-align: left;
-	}
-	
-	.nav-link:hover
-	{
-    	color: #363636;
-	}
-	
-	.nav-link
-	{
-		color: dimgray; 
-		font-size: 21px;
-    	padding: 10px;
-	}
-	
-	.Mycontent
-	{
-	    width: 1343px;
-	    margin-left: 15%;
-	}
-	
-	.table
-	{
-		box-shadow: 3px 3px 3px #ddd;
-	}
-	.table th
-	{
-		color: #ff8000;
-	}
-
-	/* footer CSS */
-
-	.footer
-	{
-		width:100%;
-		text-align: center;
-		
-	}
-	
-	.footer a
-	{
-		padding: 20px;
-		margin: 10px;
-		width: 30pt;
-	}
-	
-	
-</style>
-
 </head>
 <body>
 
@@ -166,7 +37,6 @@
 <div>
 	<br>
 	<c:import url="MemberHeader.jsp"></c:import>
-	<hr />
 	<br>
 </div>
 
@@ -174,6 +44,7 @@
 	<h3 class="aaa">신고 내역</h3>
 	<hr />
 	<div class="date">
+<!-- 	
 		<select name="" id="">
 			<option value="3">3개월</option>
 			<option value="6">6개월</option>
@@ -183,6 +54,7 @@
 		</select>
 		<input type="date" /> ~ <input type="date" />
 		<button class="btn btnSelect">조회</button>
+	 -->
 	</div>
 	<br>
 	<div class="Mycontent">
@@ -201,7 +73,7 @@
 				    type="button" role="tab" aria-controls="boardReport" aria-selected="false">자유게시판</button>
 				</div>
 			</nav>	
-			  <div class="tab-content" id="nav-tabContent">
+			  <div class="tab-content csList" id="nav-tabContent">
 				  <div class="tab-pane fade show active" id="allReport" role="tabpanel" aria-labelledby="nav-all-tab">
 					<table class="table table-hover">
 	  					<tr>
@@ -307,13 +179,11 @@
 	</div> <!-- Mycontent -->
 </div>
 
-<!-- footer 영역 추후 임포트 -->
-<div class="footer col-xs-12 col-sm-12 col-md-12">
-	<footer>
-		<br> 
-		<a>이용약관</a> <a>개인정보처리방침</a> <a>우리만 정책</a> <a>고객센터</a> <a> ⓒ 우리만</a>
-	</footer>
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
 </div>
+
 <br>
 
 </body>

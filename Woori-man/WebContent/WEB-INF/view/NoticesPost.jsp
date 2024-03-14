@@ -18,6 +18,7 @@
  -->
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/footer.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
 <!-- 1. 부트스트랩 js -->
@@ -61,6 +62,11 @@
 	</table>
 	</div>
 	<button class="mbtn" onclick="location.href='noticeslist.woori'">목록으로</button>
+</div>
+
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
 </div>
 	
 </body>
