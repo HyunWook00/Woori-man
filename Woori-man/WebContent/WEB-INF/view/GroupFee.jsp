@@ -36,6 +36,35 @@ String cp = request.getContextPath();
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<script type="text/javascript">
+
+	$(function()
+	{
+		$("#groupFeeInsertBtn").click(function()
+		{
+			
+			//alert($("#gf_start").val());
+			
+			if($.trim($("#gf_amount").val())=="")
+			{
+				alert("회비를 입력해주세요!");
+				$("#gf_amount").focus();
+				return 
+			}
+			else if($.trim($("#gf_start").val())=="")
+			{
+				alert("납부 개시일을 선택해주세요!");
+				$("#gf_start").focus();
+				return 
+			}
+			
+			$("#groupFeeForm").submit();
+			
+		});
+		
+	});
+
+</script>
 
 </head>
 <body>
@@ -47,31 +76,82 @@ String cp = request.getContextPath();
 			<c:import url="GroupSideBar.jsp"></c:import>
 		</div>	
 		<div class="groupMain_main">
-		<div class="newArticle" >
-	        <ul class="list-group list-group-flush">
-			<h4>회비 정보</h4>
-			<div>회비 관련 정보</div>
-			<div>회비 금액, 회비 납부일, 회비 설정한 사람, 회비 등록일</div> 
-			</ul>	
+		<div class="groupFee" >
+			<h4> 💰 회비 정보 </h4>
+			<c:choose>
+			<c:when test="${empty groupFeeList.gf_start }">
+			<div class="groupFeelist">
+				<div> 현재 설정한 회비가 없습니다. </div>
+     	 		<div>
+					<!-- 모달을 실행할 버튼 -->
+					<button type="button" class="groupFee" data-bs-toggle="modal" data-bs-target="#groupFeeInsert">
+						회비 설정
+					</button>
+     	 		</div>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="groupFeelist">
+					<div> 회비 금액 : ${groupFeeList.gf_amount }</div>
+					<div> 회비 납부일 : ${groupFeeList.gf_start }</div>
+					<div> 관련 총무 : ${groupFeeList.gm_nickname } </div>
+			</div>
+			</c:otherwise>
+			</c:choose>
      	 </div>
-     	 <button type="button" onclick="location.href='groupfeeinsertform.woori'">회비 설정하기</button>
-     	 <div class="newArticle">
+     	 <div class="groupFee">
 	        <ul class="list-group list-group-flush">
-	 		<h4>회비 납부 내역</h4>
-			<div>밍<input type="checkbox" name="" id="" checked="checked" /></div>
-			<div>낑<input type="checkbox" name="" id="" /></div>
-			<div>깡<input type="checkbox" name="" id="" /></div>
-			<div>욱<input type="checkbox" name="" id="" checked="checked"/></div>
-			<div>농<input type="checkbox" name="" id="" /></div>
+	 		<h4> 💰 회비 납부 내역 </h4>
+			<table class="groupFeetable">
+				<tr>
+					<th>그룹원 </th>
+					<th>납부 여부</th>
+					<th>처리</th>
+				</tr>
+				<tr>
+					<td>밍</td>
+					<td>납부완료</td>
+					<td><button>납부</button></td>
+				</tr>
+			</table> 
 			</ul>
      	 </div>
 		</div> <!-- groupMain_main -->
 </div> <!-- groupBody -->
 
+<!-- 모달 내용 및 처리 -->
+<div class="modal fade" id="groupFeeInsert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog .modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">회비 설정</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="groupFee">회비를 설정하세요</div><br>
+      <form action="groupfeeinsert.woori" method="get" id="groupFeeForm">
+			<div>회비 금액 : 
+				<input class="form-control" name="gf_amount" id="gf_amount" type="text" placeholder="회비 금액을 정해주세요"/>
+			</div>
+			<div> 납부 개시일 : 
+				<input class="form-control" name="gf_start" id="gf_start" type="date" placeholder="납부 개시일을 선택해주세요"/>
+				<span>납입 개시일 선택 후 한달 간격으로 회비를 납부할 수 있습니다.</span>
+			</div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn groupFeeBtn" id="groupFeeInsertBtn">회비 설정</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- 모달 끝  -->
+
+
+
 <!-- 푸터 영역 -->
 <div class="footer">
 	<c:import url="MemberFooter.jsp"></c:import>
 </div>
-
 </body>
 </html>

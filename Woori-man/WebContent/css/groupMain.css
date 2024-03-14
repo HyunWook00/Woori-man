@@ -141,3 +141,18 @@ h4
 	text-decoration: none;
 	text-align: right;		
 }
+
+.groupFee
+{
+	width: 100%;
+}
+
+.groupFeeList
+{
+	padding: 10px;
+    height: 160px;
+    font-size: 15pt;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

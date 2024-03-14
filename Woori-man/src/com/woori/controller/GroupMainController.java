@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.woori.dao.GroupDAO;
+import com.woori.dao.GroupFeeDAO;
 import com.woori.dao.ICsDAO;
 import com.woori.dao.IGroupDAO;
 import com.woori.dao.IGroupMyPageDAO;
 import com.woori.dao.MyInfoDAO;
 import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupFeeDTO;
 import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.MeetingDTO;
 import com.woori.dto.UserDTO;
@@ -290,23 +292,47 @@ public class GroupMainController
 	
 	// 회비 페이지 컨트롤러
 	@RequestMapping(value = "/groupfee.woori")
-	public String groupFee(ModelMap model)
+	public String groupFee(ModelMap model, HttpSession session, GroupFeeDTO dto)
 	{	
+		GroupDTO groupDTO = (GroupDTO) session.getAttribute("groupDTO");
+		String cg_code = groupDTO.getCg_code();
 		
+		//System.out.println(us_code);
+		//System.out.println(gm_code1);
+		//System.out.println(cg_code);
 		
+		GroupFeeDAO dao = new GroupFeeDAO();
 		
+		//model.addAttribute("groupFeeInserList", dao.groupFeeInsertList(cg_code));
+		//model.addAttribute("groupFeeInsertCheck",dao.groupFeeInsertCheck(dto, gm_code1));
+		model.addAttribute("groupFeeList", dao.groupFeeList(cg_code));
+		
+		dao.close();
 		
 		return "/WEB-INF/view/GroupFee.jsp";
 	}
 	
-	@RequestMapping(value = "/groupfeeinsertform.woori")
-	public String groupFeeInsert(ModelMap model)
-	{	
+	// 회비 설정 컨트롤러
+	@RequestMapping(value = "/groupfeeinsert.woori")
+	public String groupFeeInsert(HttpSession session, GroupFeeDTO dto)
+	{
+		GroupDTO groupDTO = (GroupDTO) session.getAttribute("groupDTO");
+		String cg_code = groupDTO.getCg_code();
+		dto.setGm_code(groupDTO.getGm_code());
+		try
+		{
+			GroupFeeDAO dao = new GroupFeeDAO();
+			dao.groupFeeInsert(dto, cg_code);
+			
+			dao.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 		
-		return "/WEB-INF/view/GroupFeeInsertForm.jsp";
+		return "redirect:groupfee.woori";
 	}
-	
-	
 	
 	
 }

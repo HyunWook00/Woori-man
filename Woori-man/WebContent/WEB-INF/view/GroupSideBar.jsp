@@ -92,11 +92,11 @@
 <hr>
 <div id="menulist" class="menulist"> 
 	<p><a><i class="bi bi-file-text"></i>전체글 보기</a></p>
-	<p><a><i class="bi bi-calendar-event"></i>모임</a></p>
-	<p><a href="groupfee.woori"><i class="bi bi-file-text"></i>후기</a></p>
-	<p><a><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
+	<p><a href="meetinglist.woori"><i class="bi bi-calendar-event"></i>모임</a></p>
+	<p><a href="historylist.woori"><i class="bi bi-file-text"></i>후기</a></p>
+	<p><a href=""><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
 	<hr>
-	<p><a><i class="bi bi-currency-dollar"></i>회비</a></p>
+	<p><a href="groupfee.woori"><i class="bi bi-currency-dollar"></i>회비</a></p>
 	<p><a><i class="bi bi-people-fill"></i>그룹원</a></p>
 	<hr>
 	<p id="versionUp">

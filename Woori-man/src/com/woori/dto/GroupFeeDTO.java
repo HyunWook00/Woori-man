@@ -5,6 +5,7 @@ public class GroupFeeDTO
 	private String gf_code;			// 월 회비 코드
 	private int gf_amount;			// 회비 금액
 	private String gm_code;			// 그룹원 코드
+	private String gm_nickname;		// 총무 닉네임
 	private String gf_date;			// 회비 설정일 
 	private String gf_start;		// 회비 납부 설정일
 	private String gfi_code;		// 회비 납부 코드
@@ -12,6 +13,15 @@ public class GroupFeeDTO
 	private int gfi_amount;			// 회비 납부 금액
 
 	//getter/setter 구성
+	
+	public String getGm_nickname()
+	{
+		return gm_nickname;
+	}
+	public void setGm_nickname(String gm_nickname)
+	{
+		this.gm_nickname = gm_nickname;
+	}
 	
 	public String getGm_code()
 	{

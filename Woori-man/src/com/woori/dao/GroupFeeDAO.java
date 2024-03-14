@@ -28,15 +28,28 @@ public class GroupFeeDAO
 			System.out.println(e.toString());
 		}
 	}
+
+	public void close() 
+	{
+		try
+		{
+			DBConn.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+	}
 	
 	// 그룹별 설정된 회비 조회
-	public GroupFeeDTO groupfeeList(String cg_code)
+	public GroupFeeDTO groupFeeList(String cg_code)
 	{
 		GroupFeeDTO result = new GroupFeeDTO();
 		
 		try
 		{
-			String sql = "SELECT GF_CODE, GF_AMOUNT, TO_CHAR(GF_DATE,'YYYY-MM-DD'), TO_CHAR(GF_START,'YYYY-MM-DD'), CG_CODE, GM_CODE FROM GROUP_FEE WHERE CG_CODE = ?";
+			String sql = "SELECT GF_CODE, GF_AMOUNT, TO_CHAR(GF_DATE,'YYYY-MM-DD') AS GF_DATE , TO_CHAR(GF_START,'YYYY-MM-DD') AS GF_START"
+					+ ", CG_CODE, GM_NICKNAME FROM GROUP_FEE GF JOIN GROUP_MEMBER GM ON GF.GM_CODE = GM.GM_CODE WHERE CG_CODE = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(cg_code));
 			ResultSet rs = pstmt.executeQuery();
@@ -46,7 +59,7 @@ public class GroupFeeDAO
 				result.setGf_amount(rs.getInt("GF_AMOUNT"));
 				result.setGf_date(rs.getString("GF_DATE"));
 				result.setGf_start(rs.getString("GF_START"));
-				result.setGm_code(rs.getString("GM_CODE"));
+				result.setGm_nickname(rs.getString("GM_NICKNAME"));
 			}
 			
 			rs.close();
@@ -56,18 +69,7 @@ public class GroupFeeDAO
 		{
 			System.out.println(e.toString());
 		}
-		finally 
-		{
-			try
-			{
-				DBConn.close();
-				
-			} catch (Exception e2)
-			{
-				System.out.println(e2.toString());
-		}
-		
-		return result;
+		return result; 
 	}
 		
 	// 그룹 회비 설정 
@@ -91,16 +93,6 @@ public class GroupFeeDAO
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
-		}
-		finally {
-			try
-			{
-				DBConn.close();
-				
-			} catch (Exception e2)
-			{
-				System.out.println(e2.toString());
-			}
 		}
 		return result; 
 	}
@@ -137,19 +129,9 @@ public class GroupFeeDAO
 		{
 			System.out.println(e.toString());
 		}
-		finally {
-			try
-			{
-				
-			} catch (Exception e2)
-			{
-				System.out.println(e2.toString());
-			}
-		}
 		
 		return result;
 	}
-	
 	
 	// 그룹원 회비 납부 체크 (group_fee_insert)
 	public int groupFeeInsertCheck(GroupFeeDTO dto, String gm_code1)
@@ -171,16 +153,6 @@ public class GroupFeeDAO
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
-		}
-		finally {
-			try
-			{
-				DBConn.close();
-				
-			} catch (Exception e2)
-			{
-				System.out.println(e2.toString());
-			}
 		}
 		
 		return result;
