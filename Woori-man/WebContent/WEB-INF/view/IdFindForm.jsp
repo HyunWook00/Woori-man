@@ -35,7 +35,7 @@ $(document).ready(function()
 		
 		$.ajax({
             type: "GET"
-            , url: "idfind.action"
+            , url: "idfind.woori"
             , data: params
             , success: function(args)
 			{
