@@ -35,6 +35,13 @@ $(function()
 	{
 		$("#cancelReasonModal").modal("show");
 	});
+	
+	// 모임 수정
+	$(".article-modify").click(function()
+	{
+		var mt_code = $(this).val();
+		window.location.href="meetingupdateform.woori?mt_code="+mt_code;
+	});
 });
 
 //----- 나의 댓글 & 대댓글 수정하기, 대댓글 달기 폼 오픈 완료 ----------------------------

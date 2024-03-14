@@ -209,13 +209,23 @@
 					</table>
 					<table class="meeting-detail">
 						<tr>
-							<!-- 방문장소들 -->
-							<th rowspan="2" class="visit-place">우리 여기 가자!</th>
-							<td><span class="place-name">스타벅스 부천역점</span></td>
+							<th rowspan="3" class="visit-place">우리 여기 가자!</th>
 						</tr>
+						<!-- 방문장소들 -->
+						<c:choose>
+						<c:when test="${fn:length(places) <= 0 }">
 						<tr>
-							<td><span class="place-name">인생네컷 부천역점</span></td>
+							<td>등록된 방문 장소가 없습니다.</td>
 						</tr>
+						</c:when>
+						<c:otherwise>
+						<c:forEach items="${places }" var="place">
+						<tr>
+							<td><span class="place-name">${place.vp_addr1 }<br>${place.vp_addr2 }</span></td>
+						</tr>
+						</c:forEach>
+						</c:otherwise>
+						</c:choose>
 					</table>
 					<div class="meeting-memo">
 						<span class="memo-title">${meetingArticle.gm_nickname }님의 메모</span><br>

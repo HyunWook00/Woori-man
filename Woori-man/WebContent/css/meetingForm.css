@@ -7,6 +7,7 @@ span.meeting-writer, form>div>span.group-name, form>div>span.meeting-category, f
 }
 form>div>.meeting-title {border: none; font-size: 15pt; text-align: center; width: 500px;}
 div.meeting-region-div {display: flex; justify-content: center;}
+div.meeting-date-div {margin: 10px;}
 div.list-column {width: 200px;}
 div.list-column-name {padding: 8px; border-bottom: 1px solid #d2d2d2; text-align: center; font-size: 10.5pt; font-weight: bold;}
 ul.select-list {max-height: 180px; overflow-y: auto; font-size: 11pt; padding: 0px; margin-top: 4px; margin-right: 5px;}
@@ -15,4 +16,14 @@ li.region-item, li.city-item {padding: 8px 16px; text-align: left; list-style: n
 ul.city-list {display: none;}
 div.meeting-region-info {display: none; align-items: center;}
 div.etc-write {width: inherit; display: flex; flex-direction: column; align-items: flex-end; align-content: space-around; flex-wrap: wrap;}
+div.meeting-etc {margin: 20px;}
 textarea.meeting-etc-input {resize: none; width: 500px;}
+div.content {text-align: center;}
+button.meeting-insert-btn {border: 1px solid #e4e4e4; padding: 6px 14px; background-color: #ff9a34; margin: 10px;}
+button.meeting-insert-btn:hover {background-color: #ff8000;}
+.visited-form-element {height: 32px;}
+.visited-form-zipcode {width: 106px; height: 32px;}
+.visited-form-addr1 {width: 350px;}
+.visited-form-addr2 {width: 200px;}
+.meeting-visited {display: inline-block; text-align: left;}
+

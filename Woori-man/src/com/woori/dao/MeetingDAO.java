@@ -199,7 +199,7 @@ public class MeetingDAO
 		
 		try
 		{
-			String sql = "SELECT MRC_CODE, MRC_DATE, MRC_CONTENT, GM_NICKNAME, MCM_CODE, GM_CODE, GM_PROFILE, MRC_LIKE, (SELECT COUNT(*) FROM MEETING_RECOMMENT_LIKE WHERE GM_CODE = ? AND MRCM_CODE = VMR.MRC_CODE) AS LIKE_CHECK FROM VIEW_MEETING_RECOMMENT VMR WHERE MCM_CODE =?";
+			String sql = "SELECT MRC_CODE, MRC_DATE, MRC_CONTENT, GM_NICKNAME, MCM_CODE, GM_CODE, GM_PROFILE, MRC_LIKE, (SELECT COUNT(*) FROM MEETING_RECOMMENT_LIKE WHERE GM_CODE = ? AND MRC_CODE = VMR.MRC_CODE) AS LIKE_CHECK FROM VIEW_MEETING_RECOMMENT VMR WHERE MCM_CODE =?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(gm_code));
 			pstmt.setInt(2, Integer.parseInt(mcm_code));
@@ -664,6 +664,28 @@ public class MeetingDAO
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next())
 				result = rs.getInt("NOTATTEND");
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 모임 기타 메모사항 변경
+	public int updateMeetingEtc(String mt_code, String mt_etc)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "UPDATE MEETING SET MT_ETC = ? WHERE MT_CODE = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mt_etc);
+			pstmt.setInt(2, Integer.parseInt(mt_code));
+			result = pstmt.executeUpdate();
+			pstmt.close();
 			
 		} catch (Exception e)
 		{

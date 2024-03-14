@@ -123,7 +123,7 @@
 		// 정기모임 발의가 가능한 직위는 정기모임, 번개모임 무엇을 발의할것인지 분기
 		$(".create-article").click(function()
 		{
-			var position = ${groupMemberDTO.pos_code};
+			var position = '${groupMemberDTO.pos_code}';
 			if (position == '1' || position == '2')
 				$("#meetingCategoryModal").modal("show");
 			else

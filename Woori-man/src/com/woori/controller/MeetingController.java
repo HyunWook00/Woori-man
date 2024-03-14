@@ -1,10 +1,8 @@
 package com.woori.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.CityDAO;
-import com.woori.dao.GroupDAO;
 import com.woori.dao.ICommentDAO;
-import com.woori.dao.IGroupDAO;
+import com.woori.dao.IPlaceDAO;
 import com.woori.dao.MeetingDAO;
 import com.woori.dto.CancelReasonDTO;
 import com.woori.dto.CityDTO;
@@ -26,9 +23,9 @@ import com.woori.dto.CommentDTO;
 import com.woori.dto.GroupDTO;
 import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.MeetingDTO;
+import com.woori.dto.PlaceDTO;
 import com.woori.dto.RecommentDTO;
 import com.woori.dto.RegionDTO;
-import com.woori.dto.UserDTO;
 
 // 모임 페이지 관련 컨트롤러 클래스
 
@@ -44,20 +41,13 @@ public class MeetingController
 	public String meetingList(Model model, HttpSession session)
 	{
 		MeetingDAO dao = new MeetingDAO();
-		//GroupDAO groupDAO = new GroupDAO();
 		
 		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
-		//GroupMemberDTO groupMemberDTO = null;
 		ArrayList<MeetingDTO> meetingList = null;	// 등록된 모임 정보 리스트
-		//ArrayList<GroupMemberDTO> groupPostition = null;
 		int articleCount = 0;						// 새글수 정보
 		
 		try
 		{
-			//groupDAO.connection();
-			//groupDTO = groupDAO.groupInfo("1", "1");
-			//groupMemberDTO = groupDAO.groupMyInfo(groupDTO.getGm_code());
-			//groupPostition = groupDAO.groupPosition(groupDTO.getCg_code());
 			meetingList = dao.getMeetingList(groupDTO.getCg_code());
 			articleCount = dao.getArticleCount(groupDTO.getCg_code());
 			
@@ -76,11 +66,6 @@ public class MeetingController
 				System.out.println(e.toString());
 			}
 		}
-		
-		// 테스트용 세션 구성
-		//session.setAttribute("groupDTO", groupDTO);
-		//session.setAttribute("groupMemberDTO", groupMemberDTO);
-		//session.setAttribute("groupPosition", groupPostition);
 		
 		// 모델에 객체 담아 뷰로 보내기
 		model.addAttribute("meetingList", meetingList);
@@ -102,11 +87,9 @@ public class MeetingController
 		
 		MeetingDTO meetingArticle = null;																		// 모임 상세정보
 		ArrayList<CommentDTO> comments = null;																	// 모임에 달린 댓글들
+		ArrayList<PlaceDTO> places = null;
 		HashMap<String, ArrayList<RecommentDTO>> recomments = new HashMap<String, ArrayList<RecommentDTO>>();	// 댓글별 달린 대댓글
 		int totalCommentCount = 0;																				// 댓글과 대댓글 합산
-		
-		//HashMap<String, String> commentLike = new HashMap<String, String>();									// 댓글별 좋아요 눌렀는지 안 눌렀는지
-		//HashMap<String, String> recommentLike = new HashMap<String, String>();								// 대댓글별 좋아요 눌렀는지 안 눌렀는지
 		
 		int totalMemberCount = 0;																				// 그룹원 인원수
 		int attendMemberCount = 0;																				// 참석자 인원수
@@ -120,6 +103,7 @@ public class MeetingController
 		
 		try
 		{
+			IPlaceDAO pDao = sqlSession.getMapper(IPlaceDAO.class);
 			// 철회 사유
 			cancelReason = dao.getCancelReasonList();
 			
@@ -138,6 +122,9 @@ public class MeetingController
 			// 나의 모임 참여 상태
 			attendStatus = dao.getAttend(mt_code, member.getGm_code());
 			
+			// 방문 장소
+			places = pDao.getPlaceList(mt_code);
+			
 			// 모임 게시글
 			meetingArticle = dao.getMeetingArticle(mt_code);
 			
@@ -152,8 +139,6 @@ public class MeetingController
 				// 댓글 하나하나 코드값을 key 로 설정
 				String key = comments.get(i).getCommentCode();
 				
-				// 내가 댓글 좋아요를 눌렀는지 안 눌렀는지 확인
-				//commentLike.put(key, dao.getCommentLike(key, member.getGm_code()));
 				
 				// 해당 댓글의 대댓글 얻어오기
 				recomments.put(key, dao.getRecomments(key, member.getGm_code()));
@@ -195,14 +180,13 @@ public class MeetingController
 		model.addAttribute("comments", comments);
 		model.addAttribute("recomments", recomments);
 		model.addAttribute("totalCommentCount", totalCommentCount);
-		//model.addAttribute("commentLike", commentLike);
-		//model.addAttribute("recommentLike", recommentLike);
 		model.addAttribute("totalMemberCount", totalMemberCount);
 		model.addAttribute("attendMemberCount", attendMemberCount);
 		model.addAttribute("notAttendMemberCount", notAttendMemberCount);
 		//model.addAttribute("attendMemberList", attendMemberList);
 		model.addAttribute("attendStatus", attendStatus);
 		model.addAttribute("cancelReason", cancelReason);
+		model.addAttribute("places", places);
 		
 		// 뷰 호출
 		return "/WEB-INF/view/MeetingArticle.jsp";
@@ -229,7 +213,7 @@ public class MeetingController
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:meetingarticle.woori?meeting=" + articleCode;
+		return "redirect:meetingarticle.woori?mt_code=" + articleCode;
 	}
 	
 	//모임 대댓글 입력 요청
@@ -575,8 +559,8 @@ public class MeetingController
 	public String meetingInsert(Model model, MeetingDTO dto, HttpSession session)
 	{
 		MeetingDAO dao = new MeetingDAO();
-		dto.setGm_code(((GroupMemberDTO)session.getAttribute("member")).getGm_code());
-		dto.setCg_code(((GroupMemberDTO)session.getAttribute("member")).getCg_code());
+		dto.setGm_code(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
+		dto.setCg_code(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getCg_code());
 		try
 		{
 			dao.insertMeeting(dto);
@@ -649,5 +633,81 @@ public class MeetingController
 		return "meetinglist.woori";
 	}
 	
+	// 모임 수정폼 컨트롤러
+	// meetingupdateform.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "meetingupdateform.woori", method = RequestMethod.GET)
+	public String updateMeetingForm(Model model, @RequestParam("mt_code") String mt_code)
+	{
+		MeetingDAO dao = new MeetingDAO();
+		MeetingDTO meeting = new MeetingDTO();
+		ArrayList<PlaceDTO> places = null;
+		try
+		{
+			IPlaceDAO pDao = sqlSession.getMapper(IPlaceDAO.class);
+			meeting = dao.getMeetingArticle(mt_code);
+			places = pDao.getPlaceList(mt_code);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		model.addAttribute("meeting", meeting);
+		model.addAttribute("places", places);
+		
+		return "/WEB-INF/view/MeetingUpdateForm.jsp";
+	}
+	
+	// 모임 수정 컨트롤러
+	// meetingarticleupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "meetingupdate.woori", method = RequestMethod.POST)
+	public String updateMeeting(Model model, @RequestParam("mt_code") String mt_code, @RequestParam("mt_etc") String mt_etc, @RequestParam("vp_zipcode") String vp_zipcode, @RequestParam("vp_addr1") String vp_addr1
+								, @RequestParam("vp_addr2") String vp_addr2)
+	{
+		PlaceDTO place = new PlaceDTO();
+		MeetingDAO mDao = new MeetingDAO();
+		place.setMt_code(mt_code);
+		place.setVp_addr1(vp_addr1);
+		place.setVp_addr2(vp_addr2);
+		place.setVp_zipcode(vp_zipcode);
+		
+		try
+		{
+			IPlaceDAO dao = sqlSession.getMapper(IPlaceDAO.class);
+			if (vp_addr2 == null || vp_addr2.equals(""))
+				dao.insertPlaceAddr1(place);
+			else
+				dao.insertPlaceAddr2(place);
+			mDao.updateMeetingEtc(mt_code, mt_etc);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				mDao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:meetingarticle.woori?mt_code=" + mt_code;
+		
+	}
 	
 }

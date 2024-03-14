@@ -14,77 +14,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css">
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
 <link rel="stylesheet" href="<%=cp %>/css/meetingForm.css" />
-<script type="text/javascript">
-
-	$(function()
-	{
-		$(".meeting-region-div").css("display", "none");
-		$(".meeting-title").change(function()
-		{
-			if($(this).val().trim()=="")
-			{
-				alert("공백은 입력이 불가능합니다.");
-				return;
-			}
-			$(this).val($(this).val().trim());
-			// 날짜 객체
-			var date = new Date();
-			
-			// 최소 날짜 설정 (오늘 + 6일)
-			var minDay = new Date(date.setDate(date.getDate()+6));
-			
-			// 최대 날짜 설정 (minDay + 84일)
-			var maxDay = new Date(date.setDate(date.getDate()+83));
-			
-			$("#mt_meet").attr("min", minDay.toISOString().substring(0,10));
-			$("#mt_meet").attr("max", maxDay.toISOString().substring(0,10));
-			$("#mt_meet").attr("value", minDay.toISOString().substring(0,10));
-			
-			$(".meeting-date-div").fadeIn("slow");
-		});
-		
-		$(".meeting-date").change(function()
-		{
-			$(".meeting-region-div").fadeIn("slow");
-		});
-		
-		$(".region-item").click(function()
-		{
-			$(".region-item").removeClass("selected-item");
-			$(this).addClass("selected-item");
-			var cityId = "#region-" + $(this).val();
-			$(".city-list").css("display", "none");
-			$(cityId).css("display", "block");
-		});
-		
-		$(".city-item").click(function()
-		{
-			$(".city-item").removeClass("selected-item");
-			$(this).addClass("selected-item");
-			$(".meeting-region").text($(".region-item.selected-item").text() + " " + $(this).text());
-			$(".ct_code").val($(this).val());
-			$(".meeting-region-info").css("display", "flex");
-			$(".submit-btn-div").css("display", "block");
-			$(".sub-content-div").css("display", "block");
-		});
-		
-		$(".meeting-etc-input").keyup(function()
-		{
-			$(".now-count").text($(this).val().length);
-		});
-		
-		$(".article-list").click(function()
-		{
-			window.location.href="meetinglist.woori";
-		});
-		
-	});
-
-</script>
+<script type="text/javascript" src="<%=cp %>/js/meetingForm.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 
@@ -96,16 +31,18 @@
 	<c:import url="MemberHeader.jsp"></c:import>
 </div>
 
-<!-- 상단메뉴 -->
+<!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <div class="container">
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴 들어가용
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 -->
@@ -115,12 +52,11 @@
 		<div class="board-info">
 		
 			<!-- 추후 세션에서 그룹명 받아오기 -->
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 모임 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] 모임 게시판</div>
 			
 			<div class="button-zone">
 				<div class="button-div">
 					<button type="button" class="article-button article-list">취소하기</button>
-					<button type="button" class="article-button pre-article">미리보기</button>
 				</div>
 			</div><!-- .button-zone -->
 		</div><!-- .board-info -->
@@ -129,8 +65,8 @@
 			<form action="meetinginsert.woori" class="meeting-insert-form" method="post">
 				<input type="hidden" id="mc_code" name="mc_code" value="${mc_code }" />
 					
-				<div><span class="meeting-writer">${member.gm_nickname }</span>님이 발의중인 모임은</div>
-				<div><span class="group-name">약속해조</span>그룹의<span class="meeting-category">${mc_code==1? '정기모임':'번개모임' }</span> 입니다.</div>
+				<div><span class="meeting-writer">${groupMemberDTO.gm_nickname }</span>님이 발의중인 모임은</div>
+				<div><span class="group-name">${groupDTO.cg_name }</span>그룹의<span class="meeting-category">${mc_code==1? '정기모임':'번개모임' }</span> 입니다.</div>
 				<div>모임 제목은 <input type="text" name="mt_title" id="mt_title" class="meeting-title" placeholder="모임 제목을 입력하세요.(최대 50글자)"/> 입니다.</div>
 				<div class="meeting-date-div">모임 예정일은 <input type="date" id="mt_meet" name="mt_meet" class="meeting-date" /> 입니다.</div>
 				<div class="meeting-region-div">
@@ -167,9 +103,16 @@
 							<span class="count"><span class="now-count">0</span> / 100</span>
 						</div>
 					</div>
+					<!-- 
 					<div class="meeting-visited">
-						여기서 방문장소 입력받기
+						<span>방문장소 등록</span><br>
+						<input type="text" class="visited-form-element visited-form-zipcode" id="zipcode-1" name="zipcode" placeholder="우편번호">
+						<input type="button" onclick="findPostcode(1)" value="우편번호 찾기"><br>
+						<input type="text" class="visited-form-element visited-form-addr1" name="addr1" id="addr1-1" placeholder="도로명주소"><br>
+						<input type="text" class="visited-form-element visited-form-addr1" id="addr3-1" placeholder="지번주소"><br>
+						<input type="text" class="visited-form-element visited-form-addr2" name="addr2" id="addr2-1" placeholder="상세주소">
 					</div>
+					 -->
 				</div>
 				
 			</form>
