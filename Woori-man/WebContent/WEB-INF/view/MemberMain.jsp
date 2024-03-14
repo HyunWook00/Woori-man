@@ -49,6 +49,16 @@ function enterGroup(cg_code)
 //친구 찾기 ajax 처리
 $(document).ready(function()
 {
+
+	var delCount = '${delCount}';
+	var addCount = '${addCount}';
+	
+	if (delCount == 1 || addCount == 1)
+	{
+		$(".modal").modal("show");	
+	}
+	
+
 	$(".findBtn").click(function()
 	{
 		
@@ -74,22 +84,35 @@ $(document).ready(function()
 	
 });
 
+//  즐겨찾기
 function bookmark(gm_code, gb_code)
 {
 	$(location).attr("href", "bookmark.woori?gb_code=" + gb_code + "&gm_code=" + gm_code);
 }
 
 
-
+// 친구 삭제
 function deleteFriends(fr_code, us_id)
 {
-	if (confirm(us_id + "님을 삭제하시겠습니까?"))
+	if (confirm(us_id + "님을 삭제 하시겠습니까?"))
 	{
 		$(location).attr("href", "deletefriend.woori?fr_code="+fr_code);
 	}
-
 }
 
+// 친구 추가
+function addFriends(us_code2)
+{
+	var us_id = $("#id").val();
+	
+	//alert(us_code2);
+	//alert(us_id);
+	
+	if (confirm(us_id + "님을 친구추가 하시겠습니까?"))
+	{
+		$(location).attr("href", "addfriend.woori?us_code2="+us_code2);
+	}
+}
 
 
 
@@ -105,30 +128,22 @@ function deleteFriends(fr_code, us_id)
 <div class="header">
 		<c:import url="MemberHeader.jsp"></c:import>
 </div>
-<br><br>
 <div class="top_bar">
-	<div>
+	<div class="bar-item">
 		<a href="">그룹</a>
 	</div>
-	<div>
-		<a href="">그룹</a>
+	<div class="bar-item">
+		<a href="">히스토리</a>
 	</div>
-	<div>
-		<a href="">그룹</a>
+	<div class="bar-item">
+		<a href="">친구</a>
 	</div>
-	<div>
-		<a href="">그룹</a>
-	</div>
-	<div>+
-		<a href="">그룹</a>
+	<div class="bar-item">
+		<a href="">쪽지</a>
 	</div>
 </div>
-   
-  <br><br><br><br>
-<div class="container" >
-	
+<div class="container top-con" >
 	<div class=" row">
-	
 		<div class="left col-12 col-md-2">	
 			<div class="menus_area sticky">
 				<div class="sub_area">
@@ -185,10 +200,10 @@ function deleteFriends(fr_code, us_id)
 		<div class="mid col-12 col-md-7">
 			<div class="friend">
 				<h2>친구 검색</h2>
-				<hr>
 				<input type="text" id="friend" class="fr_txt txt" data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-whatever="@mdo"  placeholder="아이디 / 닉네임 / 이름 " >
 				<button type="button" class="fr_btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-whatever="@mdo" ><i class="bi bi-search"></i></button>
 			</div>
+			<hr>
 			
 			
 			<!-- 친구 찾기 모달 -->
@@ -203,7 +218,12 @@ function deleteFriends(fr_code, us_id)
 			      </div>
 			      <div class="modal-body">
 			        <form>
-			        	<label for="recipient-name" class="col-form-label">친구 검색:</label>
+			        	<div class="msg_div">
+			        		<span class="friend_msg">※친구 상태인 회원은 검색 결과에 반영되지 않습니다. </span>
+			        	</div>
+			        	<div>
+		        			<label for="recipient-name" class="col-form-label modal-option">친구 검색</label>
+		        		</div>
 			          <div class="mb-3 txt_top">
 			            <input type="text" class="form-control" id="shearchValue" name="shearchValue">
 			            <button type="button" class=" btn btn-primary findBtn"> 검색</button>
@@ -230,7 +250,7 @@ function deleteFriends(fr_code, us_id)
 			        
 			        <div class="mb-3" >
 			            <div class=" result-title ">
-			            	<div class="friend-title"><h3>친구 목록</h3></div>
+			            	<div class="friend-title modal-option">친구 목록</div>
 			            	<table class="table tbl"> 
 			            		<tr>
 			            			<th>회원코드</th>
@@ -271,7 +291,7 @@ function deleteFriends(fr_code, us_id)
 					<div class="group col-6 col-md-6 col-lg-4">
 						<div class="gr_option">
 							<div class="make_gr">
-								<button onclick="location.href='creategroupform.woori'"><i class="bi bi-plus-circle-fill"></i></button>
+								<button class="createBtn" onclick="location.href='creategroupform.woori'"><i class="bi bi-plus-circle-fill"></i></button>
 								<br>
 								만들기
 							</div>
@@ -383,7 +403,7 @@ function deleteFriends(fr_code, us_id)
         </div>
         
         
-        <div class="cal_zone" style="border-radius: 15px; box-shadow: 0px 0px 2px 1px #70767b inset, 3px 3px 3px 3px #dee2e6;">
+        <div class="cal_zone" >
 	    	<div class="wrapper calendar-wrapper col-12" >
 	    		<c:import url="cal.jsp"></c:import>
 		    </div>
