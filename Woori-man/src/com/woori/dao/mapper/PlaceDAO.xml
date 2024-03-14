@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.woori.dao.IPlaceDAO">
+ 
+ 	<insert id="insertPlaceAddr1">
+ 		INSERT INTO VISITED_PLACE(VP_CODE, VP_ZIPCODE, VP_ADDR1, VP_PLAN, MT_CODE)
+ 		VALUES(SEQ_VISITED_PLACE.NEXTVAL, #{vp_zipcode}, #{vp_addr1}, SYSDATE, #{mt_code})
+ 	</insert>
+ 	
+ 	<insert id="insertPlaceAddr2">
+ 		INSERT INTO VISITED_PLACE(VP_CODE, VP_ZIPCODE, VP_ADDR1, VP_ADDR2, VP_PLAN, MT_CODE)
+ 		VALUES(SEQ_VISITED_PLACE.NEXTVAL, #{vp_zipcode}, #{vp_addr1}, #{vp_addr2}, SYSDATE, #{mt_code})
+ 	</insert>
+ 	
+ 	<select id="getPlaceList" resultType="com.woori.dto.PlaceDTO">
+ 		SELECT VP_CODE, VP_ZIPCODE, VP_ADDR1, VP_ADDR2, VP_EXPENSES
+ 		, TO_CHAR(VP_PLAN,'YYYY-MM-DD') AS VP_PLAN
+ 		, TO_CHAR(VP_DATE,'YYYY-MM-DD') AS VP_DATE
+ 		, MT_CODE
+ 		FROM VISITED_PLACE
+ 		WHERE MT_CODE = #{mt_code}
+ 	</select>
+ 
+ </mapper>
+ 
+ 
