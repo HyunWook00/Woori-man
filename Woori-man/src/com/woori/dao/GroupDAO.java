@@ -33,7 +33,7 @@ public class GroupDAO
 	      GroupDTO result = new GroupDTO();
 	      
 	      String sql = " SELECT MGV.CG_CODE, MGV.GI_CODE, MGV.CG_INTRO, MGV.CG_PROFILE, MGV.CG_NAME, TO_CHAR(MGV.CG_DATE,'YYYY-MM-DD') AS CG_DATE , MGV.BRD_NAME," + 
-	      		"(SELECT COUNT(MGV2.CG_CODE) FROM MY_GROUP_VIEW MGV2 WHERE MGV2.CG_CODE = MGV.CG_CODE) AS GM_COUNT, MGV.GM_CODE AS GM_CODE" + 
+	      		"(SELECT COUNT(MGV2.CG_CODE) FROM MY_GROUP_VIEW MGV2 WHERE MGV2.CG_CODE = MGV.CG_CODE AND MGV2.GW_CODE IS NULL) AS GM_COUNT, MGV.GM_CODE AS GM_CODE" + 
 	      		" FROM MY_GROUP_VIEW MGV WHERE US_CODE2 = ? AND CG_CODE = ?";
 	      
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -61,12 +61,12 @@ public class GroupDAO
 	   }
 	   
 	   // 선택한 내 그룹에 진입할 때 해당 그룹의 그룹원들 정보GroupMemberDTO 를 구성하여 세션으로 넘기기
-	   public ArrayList<GroupMemberDTO> groupMemberInfo(String cg_code) throws SQLException
+	   public ArrayList<GroupMemberDTO> groupMemberList(String cg_code) throws SQLException
 	   {
 	      ArrayList<GroupMemberDTO> result = new ArrayList<GroupMemberDTO>();
 	      
-	      String sql = "SELECT CG_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO, GM_REGDATE, POS_CODE, POS_NAME"
-	            + " FROM GROUP_MEMBER_VIEW WHERE CG_CODE = ?";
+	      String sql = "SELECT CG_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO, GM_REGDATE, POS_CODE, NVL(POS_NAME,'그룹원') AS POS_NAME"
+	      		+ " FROM GROUP_MEMBER_VIEW WHERE CG_CODE = ? AND GW_CODE IS NULL";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, cg_code);
 	      
@@ -254,6 +254,8 @@ public class GroupDAO
 			   PreparedStatement pstmt = conn.prepareStatement(sql);
 			   pstmt.setInt(1, Integer.parseInt(gm_code));
 			   
+			   System.out.println(gm_code);
+			   
 			   ResultSet rs = pstmt.executeQuery();
 			   while (rs.next())
 			   {
@@ -274,4 +276,54 @@ public class GroupDAO
 		   return result;
 	   }
 	   
+	   // 직위 여부 확인
+	   public int positionCount(String gm_code)
+	   {
+		   int result = 0;
+		  
+		   try
+		   {
+			   String sql = "SELECT COUNT(*) AS COUNT FROM FRIENDS FR, GROUP_INVITE GI, GROUP_MEMBER GM, POSITION_APPOINT PA"
+			   		+ " WHERE FR.FR_CODE = GI.GI_CODE AND GI.GI_CODE = GM.GI_CODE AND"
+			   		+ " GM.GM_CODE = PA.GM_CODE2 AND GM.GM_CODE = ?";
+			   PreparedStatement pstmt = conn.prepareStatement(sql);
+			   pstmt.setInt(1, Integer.parseInt(gm_code));
+			   
+			   ResultSet rs = pstmt.executeQuery();
+			   if(rs.next())
+				   result = rs.getInt("COUNT");
+			   
+			   rs.close();
+			   pstmt.close();
+			   
+		   } catch (Exception e)
+		   {
+			   System.out.println(e.toString());
+		   }
+		   
+		   return result;
+	   }
+	   
+	   // 그룹 탈퇴 
+	   public int groupWthdr(String gm_code)
+	   {
+		   int result = 0;
+		   
+		   try
+		   {
+			   String sql = "INSERT INTO GROUP_WTHDR (GW_CODE, GM_CODE, GW_DATE) VALUES (SEQ_GROUP_WTHDR.NEXTVAL, ?, SYSDATE)";
+			   PreparedStatement pstmt = conn.prepareStatement(sql);
+			   pstmt.setInt(1, Integer.parseInt(gm_code));
+			   
+			   result = pstmt.executeUpdate();
+			   pstmt.close();
+			   
+		   } catch (Exception e)
+		   {
+			   System.out.println(e.toString());
+		   }
+		   return result;
+	   }
+	   
+	  
 }

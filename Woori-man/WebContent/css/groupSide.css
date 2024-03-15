@@ -205,3 +205,9 @@ hr
 	font-weight: bold;
 }
 
+a
+{
+	text-decoration: none;
+	color: #343434;
+}
+

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-*
+	*
 	{
 		text-align: center; 
 		font-family: 라인Seed;
@@ -31,7 +31,6 @@
    		background: none;
    		border: none;
 	}
-	
 	
 	.bi-search
 	{
@@ -75,32 +74,6 @@
 		font-size: 15pt;
 	}
 
-	.inquiry 
-	{
-		border: solid 1px #F2F2F2;
-		border-radius: 5px;
-		padding: 20px;
-		margin-left: 18%;
-		background-color: #F2F2F2;
-		
-	}
-
-	.inquiry a
-	{
-		font-size: 15pt;
-		text-decoration: none;
-		color: gray;
-		
-	}
-	
-	.inquiry i
-	{
-		font-size: 25pt;
-		padding: 20px;
-		text-align: center;
-		color: gray;
-	}
-	
 	.notices, .qnaList
 	{
 		padding: 15px;
@@ -110,26 +83,12 @@
 		width: 70%;
 	}
 	
-	
 	.more
 	{
 		color: black;
 		text-decoration: none;
 		text-align: right;
 		margin-right: 16%;
-	}
-	
-	
-	.input-group-addon + .input-group-addon{position:relative;}
-	.input-group-addon + .input-group-addon:before{
-	    content: '';
-	    display: block;
-	    width: 1px;
-	    height: 70%;
-	    background: #939393;
-	    position: absolute;
-	    top: 22px;
-	    left: 0;
 	}
 	
 	.faqselect:focus
@@ -159,40 +118,39 @@
 		color: white;
 	}
 		
-	.report
-	{
-	    background-color: #f2f2f2;
-	    padding: 21px;
-	    width: 170px;
-	    margin-left: 72px;
-	    border-radius: 5px
-	}
-	
-	.report a 
-	{
-	    color: gray;
-	    text-decoration: none;
-	    font-size: 20px;
-	}
-	
-	.report i
-	{
-		color: gray;
-		font-size: 25pt;
-	}
-	
 	.text-center
 	{
-		margin: 10px !important;
+	    text-align: center !important;
+	    display: flex;
+	    flex-direction: row;
+	    flex-wrap: wrap;
+	    justify-content: space-evenly;
+	    align-content: center;
+	}
+	
+	.textBody
+	{
+		width: 1350px;
+    	margin-left: 278px;
+		margin-top: 50px;
+	    border-top: 1px solid #ddd;
+	    border-bottom: 1px solid #ddd;
+	    padding: 13px 0;
+	}
+	
+	div#accordionExample 
+	{
+    	margin-top: 20px;
 	}
 	
 	/* 검색어 css */
 	#searchList
 	{	
-		border: 2px solid #ff8000;
-		border-top: none;
+	    border: 2px solid #ff8000;
+	    border-top: none;
 	    width: 50%;
 	    position: absolute;
+	    top: 243px;
 	    font-weight: bold;
 	    color: #343;
 	    display: none;

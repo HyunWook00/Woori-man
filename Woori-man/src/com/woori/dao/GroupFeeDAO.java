@@ -101,12 +101,12 @@ public class GroupFeeDAO
 	// 회비 납부한 그룹원 확인 
 	public ArrayList<GroupFeeDTO> groupFeeInsertList(String cg_code)
 	{
-		ArrayList<GroupFeeDTO> result = null;
+		ArrayList<GroupFeeDTO> result = new ArrayList<GroupFeeDTO>();
 		
 		try
 		{
-			String sql = "SELECT GFI.GFI_CODE, GFI.GFI_DATE, GFI.GM_CODE2, GFI.GFI_AMOUNT"
-					+ " FROM GROUP_FEE_INSERT GFI JOIN GROUP_FEE GF ON GFI.GF_CODE = GF.GF_CODE WHERE CG_CODE = ?";
+			String sql = "SELECT GM_NICKNAME, POS_CODE, GFI_CODE ,GFI_DATE, GFI_AMOUNT, GM_CODE1, CG_CODE"
+					+ " FROM GROUP_MEMBER_FEE_LIST_VIEW WHERE CG_CODE = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(cg_code));
 			ResultSet rs = pstmt.executeQuery();
@@ -116,8 +116,15 @@ public class GroupFeeDAO
 				GroupFeeDTO dto = new GroupFeeDTO();
 				dto.setGfi_code(rs.getString("GFI_CODE"));
 				dto.setGfi_date(rs.getString("GFI_DATE"));
-				dto.setGm_code(rs.getString("GM_CODE"));
+				dto.setGm_nickname(rs.getString("GM_NICKNAME"));
+				dto.setGm_code(rs.getString("GM_CODE1"));
 				dto.setGfi_amount(rs.getInt("GFI_AMOUNT"));
+				
+				System.out.println(dto.getGfi_code());
+				System.out.println(dto.getGf_date());
+				System.out.println(dto.getGm_nickname());
+				System.out.println(dto.getGm_code());
+				System.out.println(dto.getGfi_amount());
 				
 				result.add(dto);
 			}
@@ -129,6 +136,8 @@ public class GroupFeeDAO
 		{
 			System.out.println(e.toString());
 		}
+		
+		System.out.println("DAO나감");
 		
 		return result;
 	}

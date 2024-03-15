@@ -18,7 +18,7 @@
 
 <div class="groupHeader">
 	<div class="groupHeader_title" ><a href="groupmain.woori">${groupDTO.cg_name}</a></div>
-	<div><a href="">그룹원</a></div>
+	<div><a href="groupmemberlist.woori">그룹원</a></div>
 	<div><a href="meetinglist.woori">모임</a></div>
 	<div><a href="historylist.woori">히스토리</a></div>
 </div>

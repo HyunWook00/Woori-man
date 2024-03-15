@@ -49,7 +49,7 @@ String cp = request.getContextPath();
 			<c:import url="GroupSideBar.jsp"></c:import>
 		</div>	
 		<div class="groupMain_main">
-			<div id="slideWrap" class="carousel slide" data-ride="carousel">			
+			<div id="slideWrap" class="carousel slide" data-ride="carousel">
 				<div class="carousel-inner">
 				<h4>정기 모임</h4>
 				<c:choose>

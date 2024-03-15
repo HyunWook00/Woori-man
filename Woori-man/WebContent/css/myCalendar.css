@@ -14,7 +14,6 @@
   font-family:'라인Seed';
 }
 
-/*#5 */
 .myPageCalender 
 {
   background: #fff;
@@ -29,7 +28,6 @@
   background-color: transparent;
 }
 
-/*#7*/
 .myCalendar ul {
   display: flex;
   list-style: none;
@@ -60,8 +58,7 @@
 }
   
 }
- 
-/*#11*/
+
 .date li.inactive {
   color: #aaa;
 }

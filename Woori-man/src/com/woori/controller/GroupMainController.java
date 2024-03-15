@@ -1,5 +1,6 @@
 package com.woori.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -81,20 +82,28 @@ public class GroupMainController
 	         
 	         // 그룹 모임 정보 넣기
 	         groupMeetingDTO = groupDAO.Groupmetting(cg_code);
+	      
+	         // 그룹 탈퇴 가능 여부 확인
+	         int positionCount = groupDAO.positionCount(gm_code);
 	         
 	         // 데이터 베이스 연결 해제
 	         groupDAO.close();
 	         
-	         // 그룹 정보 DTO, 그룹 멤버 DTO, 그룹 직위(그룹장, 부그룹장) 세션 생성 
+	         // 사이드바에서 사용하는 세션 올리기
+	         //그룹 정보 DTO 
 	         session.setAttribute("groupDTO", groupDTO);
+	         //그룹 멤버 DTO 
 	         session.setAttribute("groupMemberDTO", groupMemberDTO);
+	         //그룹 직위(그룹장, 부그룹장)
 	         session.setAttribute("groupPosition", groupPostition);
+	         //그룹 모임 
 	         session.setAttribute("groupMeetingDTO", groupMeetingDTO);
+	         //그룹 탈퇴 가능 여부
+	         session.setAttribute("positionCount", positionCount);
 	         
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
-			
 		}
 		
 		return "groupmain.woori";
@@ -144,6 +153,29 @@ public class GroupMainController
 		return "/WEB-INF/view/GroupMain.jsp";
 	}
 	
+	// 그룹원 목록 페이지 접속 시 실행되는 컨트롤러
+	@RequestMapping(value = "/groupmemberlist.woori")
+	public String groupMemberList(ModelMap model, HttpSession session)
+	{
+		// 세션에서 필요한 값 받아오기
+		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
+		String cg_code = groupDTO.getCg_code();
+
+		try
+		{
+			GroupDAO dao = new GroupDAO();
+			dao.connection();
+			model.addAttribute("groupMemberList", dao.groupMemberList(cg_code));
+			dao.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "WEB-INF/view/GroupMemberList.jsp";
+	}
+	
 	// 그룹 마이페이지 접속 시 실행되는 컨트롤러
 	@RequestMapping(value = "/groupmypage.woori" , method = RequestMethod.GET)
 	public String groupMyPage(ModelMap model, HttpSession session)
@@ -181,8 +213,8 @@ public class GroupMainController
 			model.addAttribute("impromptuBoard", dao.impromptuBoard(gm_code));
 			model.addAttribute("historyBorad", dao.historyBorad(gm_code));
 			model.addAttribute("board", dao.board(gm_code));
-			
-			// 개인 일정 조회 (2024-03-11 추가완료)
+						
+			// 개인 일정 조회(캘린더) (2024-03-11 추가완료)
 			groupDAO.connection();
 			
 			myPageMeeting = groupDAO.myMetting(gm_code);
@@ -199,7 +231,9 @@ public class GroupMainController
 			System.out.println(e.toString());
 		}
 		
+		// 마이페이지 캘린더
 		session.setAttribute("myPageMeeting", myPageMeeting);
+		
 		session.setAttribute("myInfo", dao.myProfileList(us_code));
 		
 		return "/WEB-INF/view/GroupMyPage.jsp";
@@ -292,22 +326,26 @@ public class GroupMainController
 	
 	// 회비 페이지 컨트롤러
 	@RequestMapping(value = "/groupfee.woori")
-	public String groupFee(ModelMap model, HttpSession session, GroupFeeDTO dto)
+	public String groupFee(ModelMap model, HttpSession session, GroupFeeDTO dto) 
 	{	
 		GroupDTO groupDTO = (GroupDTO) session.getAttribute("groupDTO");
 		String cg_code = groupDTO.getCg_code();
 		
-		//System.out.println(us_code);
-		//System.out.println(gm_code1);
-		//System.out.println(cg_code);
+		try
+		{
+			GroupFeeDAO dao = new GroupFeeDAO();
+			
+			model.addAttribute("groupFeeInsertList", dao.groupFeeInsertList(cg_code));
+			model.addAttribute("groupFeeList", dao.groupFeeList(cg_code));
+			
+			dao.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 		
-		GroupFeeDAO dao = new GroupFeeDAO();
-		
-		//model.addAttribute("groupFeeInserList", dao.groupFeeInsertList(cg_code));
-		//model.addAttribute("groupFeeInsertCheck",dao.groupFeeInsertCheck(dto, gm_code1));
-		model.addAttribute("groupFeeList", dao.groupFeeList(cg_code));
-		
-		dao.close();
+		System.out.println("페이지로 이동~~");
 		
 		return "/WEB-INF/view/GroupFee.jsp";
 	}
@@ -319,6 +357,7 @@ public class GroupMainController
 		GroupDTO groupDTO = (GroupDTO) session.getAttribute("groupDTO");
 		String cg_code = groupDTO.getCg_code();
 		dto.setGm_code(groupDTO.getGm_code());
+		
 		try
 		{
 			GroupFeeDAO dao = new GroupFeeDAO();
@@ -332,6 +371,36 @@ public class GroupMainController
 		}
 		
 		return "redirect:groupfee.woori";
+	}
+	
+	// 그룹 탈퇴 컨트롤러
+	@RequestMapping(value = "/groupwthdrinsert.woori", method = RequestMethod.GET)
+	public String groupWthdr(HttpSession session)
+	{
+		// 세션에서 필요한 값 받기
+		GroupMemberDTO groupMemberDTO = (GroupMemberDTO) session.getAttribute("groupMemberDTO");
+		String gm_code = groupMemberDTO.getGm_code();
+		
+		// 그룹 탈퇴 처리
+		try
+		{
+			GroupDAO dao = new GroupDAO();
+			
+			// 데이터 베이스 연결
+			dao.connection();
+			
+			// 그룹 탈퇴 메소드 호출
+			dao.groupWthdr(gm_code);
+			
+			// 데이터 베이스 연결 해제
+			dao.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "membermain.woori";
 	}
 	
 	

@@ -24,7 +24,7 @@ String cp = request.getContextPath();
 -->
  
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/font.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/groupMain.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/groupFee.css">
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
 
 <!-- 1. 부트스트랩 js -->
@@ -92,29 +92,45 @@ String cp = request.getContextPath();
 			</c:when>
 			<c:otherwise>
 			<div class="groupFeelist">
-					<div> 회비 금액 : ${groupFeeList.gf_amount }</div>
-					<div> 회비 납부일 : ${groupFeeList.gf_start }</div>
-					<div> 관련 총무 : ${groupFeeList.gm_nickname } </div>
+				<div> 회비 금액 : ${groupFeeList.gf_amount }</div>
+				<div> 회비 납부일 : ${groupFeeList.gf_start }</div>
+				<div> 관련 총무 : ${groupFeeList.gm_nickname } </div>
 			</div>
 			</c:otherwise>
 			</c:choose>
      	 </div>
-     	 <div class="groupFee">
+     	 <div class="groupFeeMember">
+     	 <form action="">
 	        <ul class="list-group list-group-flush">
 	 		<h4> 💰 회비 납부 내역 </h4>
-			<table class="groupFeetable">
+			<table class="groupFeetable table table-hover">
 				<tr>
-					<th>그룹원 </th>
-					<th>납부 여부</th>
-					<th>처리</th>
+					<th>그룹원</th>
+					<th>납부일</th>
+					<th>납부금액</th>
+					<th>납부처리</th>
 				</tr>
+			<c:forEach var="groupFeeInsertList" items="${groupFeeInsertList}">
 				<tr>
-					<td>밍</td>
-					<td>납부완료</td>
-					<td><button>납부</button></td>
+					<td>${groupFeeInsertList.gm_nickname }</td>
+					<td>${groupFeeInsertList.gfi_date eq null ? ' - ' : groupFeeInsertList.gfi_date}</td>
+					<td>${groupFeeInsertList.gfi_amount eq null ? ' - ' : groupFeeInsertList.gfi_amount}</td>
+					<c:choose>
+					<c:when test="${not empty groupFeeInsertList.gfi_code }">
+						<td><button disabled="disabled">납부 처리</button></td>
+					</c:when>
+					<c:when test="${groupMemberDTO.pos_code != 3 }">
+						<td><button disabled="disabled">납부 처리</button></td>
+					</c:when>
+					<c:otherwise>
+						<td><button onclick="">납부처리</button></td>
+					</c:otherwise>
+					</c:choose>
 				</tr>
+			</c:forEach> 
 			</table> 
 			</ul>
+     	 </form>
      	 </div>
 		</div> <!-- groupMain_main -->
 </div> <!-- groupBody -->

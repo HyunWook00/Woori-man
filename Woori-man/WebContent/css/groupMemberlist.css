@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.groupMain_side
+{
+	width: 280px;
+    margin-inline-start: 140px;
+}
+
+.groupMemberlist
+{
+    width: 1280px;
+    position: absolute;
+    top: 142px;
+    margin-inline-start: 450px;
+}
+
+th
+{
+	font-family: 라인Seed;
+}
+
+h2
+{
+	font-family: 라인Seed;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+}
+
+

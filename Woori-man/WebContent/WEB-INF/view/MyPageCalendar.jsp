@@ -89,10 +89,8 @@
 				i++;
 				//break;
 			}
-		
 			//System.out.println(myMeeting.get(m).getMt_title());
 			//System.out.println(myMeeting.get(m).getCt_name());
-			
 		}	
 		
 		myLi += "<li>"+i+"</li>";			// 기본 날짜 뽑는거 
@@ -102,7 +100,6 @@
 			myLi += "<br>";
 			myWeek = 0;
 		}
-		
 	}
 
 	// 월이 끝나고 빈칸 처리

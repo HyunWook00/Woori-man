@@ -11,8 +11,8 @@ String cp = request.getContextPath();
 <title>자주 묻는 질문(FAQ) - 우리만</title>
 <link rel="stylesheet" href="<%=cp%>/css/font.css">
 <link rel="stylesheet" href="<%=cp%>/css/memberHeader.css">
-<link rel="stylesheet" href="<%=cp%>/css/faq.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/footer.css">
+<link rel="stylesheet" href="<%=cp%>/css/faq.css">
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://getbootstrap.com/docs/5.3/assets/css/docs.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -58,40 +58,40 @@ String cp = request.getContextPath();
 	<div class="search">
 		<input type="search" id="searchFaq" placeholder="궁금하신 내용을 검색해주세요." />
 		<button type="button"><i class="bi bi-search"></i></button>
-		<br><br><br>
 	</div>
 	<div id="searchList">
 	</div>
-	<hr />
-	<div class="grid text-center">
-		<div class="g-col-2 g-start-3 faqselect1" onclick="faqSelect(1)">회원</div>
-		<div class="g-col-2 faqselect2"  onclick="faqSelect(2)">친구</div>
-		<div class="g-col-2 faqselect3"  onclick="faqSelect(3)">그룹</div>
-		<div class="g-col-2 faqselect4"  onclick="faqSelect(4)">모임</div>
-		<div class="g-w-100"></div>
-		<div class="g-col-2 g-start-3 faqselect5" onclick="faqSelect(5)">경고</div>
-		<div class="g-col-2 faqselect6" onclick="faqSelect(6)">신고</div>
-		<div class="g-col-2 faqselect7" onclick="faqSelect(7)">포인트</div>
-		<div class="g-col-2 faqselect8" onclick="faqSelect(8)">기타</div>
+	<div class ="textBody">
+		<div class="grid text-center">
+			<div class="g-col-2 g-start-3 faqselect" onclick="faqSelect(1)">회원</div>
+			<div class="g-col-2 faqselect"  onclick="faqSelect(2)">친구</div>
+			<div class="g-col-2 faqselect"  onclick="faqSelect(3)">그룹</div>
+			<div class="g-col-2 faqselect"  onclick="faqSelect(4)">모임</div>
+		</div>
+		<div class="grid text-center">
+			<div class="g-col-2 g-start-3 faqselect" onclick="faqSelect(5)">경고</div>
+			<div class="g-col-2 faqselect" onclick="faqSelect(6)">신고</div>
+			<div class="g-col-2 faqselect" onclick="faqSelect(7)">포인트</div>
+			<div class="g-col-2 faqselect" onclick="faqSelect(8)">기타</div>
+		</div>
 	</div>
-	<hr />
+		<div class="accordion" id="accordionExample">
+		 <c:forEach var="faqList" items="${faqList }">
+		  <div class="accordion-item">
+		    <h2 class="accordion-header">
+		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_${faqList.faq_code }" aria-expanded="false" aria-controls="${faqList.faq_code }">
+		        ${faqList.faq_title }
+		      </button>
+		    </h2>
+		    <div id="collapse_${faqList.faq_code }" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+		      <div class="accordion-body">
+		        ${faqList.faq_content }
+		      </div>
+		    </div>
+		  </div>
+		</c:forEach>
+		</div>
 
-	<div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-        <c:forEach var="faqList" items="${faqList }">
-       		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${faqList.faq_code }" aria-expanded="false" aria-controls="${faqList.faq_code }">
-         		${faqList.faq_title }
-         	</button>
-	        </h2>
-	        <div id="${faqList.faq_code }" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
-	          <div class="accordion-body answer">
-	            ${faqList.faq_content }
-	          </div>
-	        </div>
-        </c:forEach>
-        </div>
-     </div>
         <!-- 
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
            Q. 회원 탈퇴 후 재가입이 가능한가요?

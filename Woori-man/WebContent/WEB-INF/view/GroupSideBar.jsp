@@ -93,7 +93,7 @@
 	<p><a href="freeboardlist.woori"><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
 	<hr>
 	<p><a href="groupfee.woori"><i class="bi bi-currency-dollar"></i>회비</a></p>
-	<p><a><i class="bi bi-people-fill"></i>그룹원</a></p>
+	<p><a href="groupmemberlist.woori"><i class="bi bi-people-fill"></i>그룹원</a></p>
 	<hr>
 	<p id="versionUp">
 	[ 평균을 이겨라 ] <br>
@@ -102,7 +102,7 @@
 	<br><br>
 	<hr>
 	<!-- 모달을 실행할 버튼 -->
-	<button type="button" class="wthdrBtn" data-bs-toggle="modal" data-bs-target="#groupWthdr">
+	<button type="button" class="wthdrBtn" data-bs-toggle="modal" data-bs-target="#groupWthdr" ${positionCount == 0 ? '' : 'disabled=\"disabled\"' }>
 		그룹 탈퇴
 	</button>
 	
@@ -124,7 +124,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary">그룹 탈퇴</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='groupwthdrinsert.woori'">그룹 탈퇴</button>
 	      </div>
 	    </div>
 	  </div>
