@@ -197,11 +197,11 @@ public class LoginController
 	}
 	
 	// 캘린더 AJAX 
-		@RequestMapping(value = "/maincalendarajax.woori")
-		public String myPageCalendarAjax(ModelMap model)
-		{
-			return "MainCalendarAjax.jsp";
-		}
+	@RequestMapping(value = "/maincalendarajax.woori")
+	public String myPageCalendarAjax(ModelMap model)
+	{
+		return "/WEB-INF/view/MainCalendarAjax.jsp";
+	}
 		
 		
 		// 로그인 

@@ -49,6 +49,17 @@
 	width: unset !important;
 }
 
+.tbl
+{
+    width: 100% !important;
+    text-align: center;
+}
+
+.book-markon
+{
+	color: #ff8000 !important;
+}
+
 .sideCalender
 {
 	width: unset !important;
