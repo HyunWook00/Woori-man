@@ -3,102 +3,71 @@
 
 
 
-@media screen and (min-width: 980px)
+@media screen and (max-width: 1200px)
 {
-	.off
+	
+	.memProfile_zone
 	{
 		display: none;
 	}
 	
-	.left
-	{
-		display: inline-block;
+	.cal_zone {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    margin-top: 90px !important;
 	}
+    
+    .sideCalender  
+    {
+        width: unset !important;
+    }
+    .nav{
+    	width: unset !important;
+    }
+    .wrapper{
+    	width: unset !important;
+    }
+    
 }
 
-@media screen and (max-width: 980px)
+@media (min-width: 1200px)
 {
-	.off
+	.col-xl-7 
 	{
-		display: inline-block;
-		margin-top: 20px;
-	}
-	
-	.off_btn
-	{
-	    background-color: #fff3cd !important;
-   		border: unset !important;
- 			
-	}
-	
-	.bi_btn
-	{
-		font-size: 20px;
-	}
-	
-	.left
-	{
-		display: none;
-	}
+	    flex: 0 0 auto;
+	    width: 64% !important;
+	 };
 }
 
-
- @media screen and (max-width: 995px)
-{
-	 .right
-	{
-		display: none;
-	}  
-	
-	.content
-	{
-    	width: 1100px;
-	}
-
-	.gr_img 
-	{
-    	height: 200px;
-	}
-
-	.gr_option
-	{
-		height: 315px;
-	}
-	
-	
-} 
-
-
- @media screen and (max-width: 755px)
-{
-	
-	 .right
-	{
-		display: inline-block;
-		margin-top: 40px !important;
-	}  
-
-	.content
-	{
-		width: unset !important;
-	}
-}
-
-
- 
-
-
-
-
-.content
-{
-
-}
 
 .cal
 {
 	height: 280px;
 }
+.profile_card
+{
+	width: unset !important;
+}
+
+.sideCalender
+{
+	width: unset !important;
+	margin-top: 60px !important;
+}
+
+
+.off_btn
+{
+    background-color: #FFF !important;
+    border: unset !important;
+}
+
+.btn-close
+{
+	margin-left: 335px !important;
+}
+
+
 
 
 a
@@ -134,19 +103,6 @@ a
 	margin-top: 50px;
 }
 
-.card
-{
-    border-top: 1px solid #adb5bd !important;
-    border-bottom: 1px solid #adb5bd !important;
-    border-left: unset !important;
-    border-right: unset !important;
-    border-radius: unset !important;
-}
-
-.profile_img
-{
-	width: 45px; height: 45px;
-}
 
 .py-3
 {
@@ -156,18 +112,14 @@ a
       
 .left
 {
-	padding: 0 !important;
+	margin-right: 15px;
 }
 
 .right
 {
-	width: 23% !important;
-    margin-left: 25px;
+    margin-left: 11px;
 }
 
-.mid
-{
-}
 
 .fr_txt
 {
@@ -195,10 +147,6 @@ a
     margin-top: 50px;
 }
 
-.gr_option:hover
-{
-
-}
 
 .gr_option
 {
@@ -242,7 +190,8 @@ a
 .findBtn
 {
     background-color: #ff8000 !important;
-    margin-left: 5px;
+    margin-left: 5px !important;
+    width: 50px !important !important;
 }
 
 .friend-title
@@ -279,7 +228,6 @@ hr
 {
 	color: red;
 	font-size: small;
-	margin-left: 410px;
 }
 
 .modal-option
@@ -341,14 +289,13 @@ img
 
 .explain
 {
-    padding: 8px;
+	padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 .book-mark
 {
-    margin-left: 180px;
-    position: absolute;
-    z-index: 1;
 }
 
 #mark
@@ -358,23 +305,20 @@ img
 
 .bookmark_zone
 {
-	display: flex;
+    text-align: right;
+    margin-right: 5px;
 }
 .group_count
 {
 	font-size: small;
-	margin-left: 10px;
 }
 
 .bi-bookmark-heart-fill
 {
-	color: gray !important; 
+	color: gray !important;
+	font-size: 25px !important; 
 }
 
-.prof
-{
-	/* border: 1px solid; */
-}
 
 .img-fluid
 {
@@ -383,20 +327,6 @@ img
 	border: 1px solid #dee2e6;	
 }
 
-
-
-.sticky
-{
-	position: sticky;
-    top: 100px;
-    right: 300px;
-    border: 2px solid #ccc;
-    background-color: #fff;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    width: 190px;
-}
 
 .menu_list
 {
@@ -428,32 +358,29 @@ img
     padding: 20px;
 }
 
-.sub_area
+
+.option_top
 {
-	
+    color: #ff8000;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #dee2e6;
 }
 
 .menu_option
 {
 	height: 105px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;	
 }
 
 .menu_option:hover
 {
-    background-color: #f2f5f7;
-    /* border-radius: 300px; */
+    background-color: #f3f3f3;
     border: !important;
-    padding: 25px;
-	
 }
 
-.m_menu
-{
-	
-}
   
 li
 {
@@ -465,19 +392,6 @@ li
 	color: black !important;
 }
 
-.prof
-{
-    border: 1px solid;
-    text-align: center;
-}
-
-.prof_img
-{
-    width: 67%;
-    height: 66%;
-    border: 1px solid;
-    border-radius: 50%;
-}
 
 .right_content
 {
@@ -502,15 +416,6 @@ li
  	font-size: 15px !important;	
 }
 
-.prItem
-{
-    margin-top: 10px;
-}
-
-.joinDay
-{
-
-}
 
 .infoItem
 {
@@ -530,31 +435,6 @@ li
 	display: block;
 }
 
-.kakao_log
-{
-    width: 25px !important;
-    height: 25px !important;
-}
-
-.p_change
-{
-
-}
-
-.logout
-{
-
-}
-
-.btns
-{
-	width: 100%;
-}
-
-.btn
-{
-
-}
 
 .cal_zone
 {

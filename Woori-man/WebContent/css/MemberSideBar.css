@@ -1,0 +1,180 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+
+@media screen and (min-width: 1200px)
+{
+	.off
+	{
+		display: none;
+	}
+	
+	.sticky
+	{
+		display: inline-block;
+	}
+}
+
+@media screen and (max-width: 1200px)
+{
+	.off
+	{
+		display: inline-block;
+		margin-top: 20px;
+	}
+	
+	.off_btn
+	{
+	    background-color: #fff3cd !important;
+   		border: unset !important;
+	}
+	
+	.bi_btn
+	{
+		font-size: 20px;
+	}
+	
+	.sticky
+	{
+		display: none;
+	}
+	
+ }
+
+@media (min-width: 1200px)
+{
+	.col-xl-7 
+	{
+	    flex: 0 0 auto;
+	    width: 64% !important;
+	 };
+}
+
+
+
+.off_btn
+{
+    background-color: #FFF !important;
+    border: unset !important;
+}
+
+.btn-close
+{
+	margin-left: 335px !important;
+}
+
+.bi-list-ul
+{
+	color: #ff8000;	
+	font-size: 20pt;
+}
+
+a
+{
+	text-decoration: none !important;
+    color: white !important;
+}
+
+
+img
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+ 
+
+
+.sidebar
+{
+    position: sticky;
+    top: 100px;
+    right: 300px;
+    border-right: 1px solid #ccc;
+    background-color: #fbfbfb;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu_list
+{
+    padding-left: 0;
+    text-align: center;	
+}
+
+.li_menu
+{
+	font-size: 30px;
+    list-style: square;
+    margin-bottom : 20px;
+    padding: 5px;
+}
+
+.li_menu:hover
+{
+	background: #ff8b16;
+    border-radius: 15px;
+	
+}
+
+
+
+.menu_img
+{
+    height: 72px;
+    width: 80px !important;
+    padding: 20px;
+}
+
+.sub_area
+{
+	
+}
+
+.option_top
+{
+    color: #ff8000;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.menu_option
+{
+	height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;	
+}
+
+.menu_option:hover
+{
+    background-color: #f3f3f3;
+    border: !important;
+}
+
+  
+li
+{
+	list-style: none;
+} 
+
+.m_menu, .p_menu
+{
+	color: black !important;
+}
+
+
+ 
+.bis
+{
+ 	color: black !important;
+ 	font-size: 15px !important;	
+}
+
+
+
+
+
+

@@ -49,7 +49,7 @@ function enterGroup(cg_code)
 //친구 찾기 ajax 처리
 $(document).ready(function()
 {
-
+	
 	var delCount = '${delCount}';
 	var addCount = '${addCount}';
 	
@@ -58,7 +58,7 @@ $(document).ready(function()
 		$(".modal").modal("show");	
 	}
 	
-
+	
 	$(".findBtn").click(function()
 	{
 		
@@ -136,68 +136,20 @@ function addFriends(us_code2)
 		<a href="">히스토리</a>
 	</div>
 	<div class="bar-item">
-		<a href="friends.woori">친구</a>
+		<a href="">친구</a>
 	</div>
 	<div class="bar-item">
-		<a href="notelist.woori">쪽지</a>
+		<a href="">쪽지</a>
 	</div>
 </div>
 <div class="container top-con" >
 	<div class=" row">
-		<div class="left col-12 col-md-2">	
-			<div class="menus_area sticky">
-				<div class="sub_area">
-					<div class="menu_option"><img src="images/111.png" class="menu_img" />프로필</div>
-					<div class="menu_option"><img src="" class="menu_img" />그룹</div>
-					<div class="menu_option"><img src="images/history.png" class="menu_img" />히스토리</div>
-					<div class="menu_option"><img src="images/meeting.png" class="menu_img" />모임</div>
-					<div class="menu_option"><img src="images/add_user.png" class="menu_img" />친구</div>
-					<div class="menu_option"><img src="images/letter.png" class="menu_img" />쪽지</div>
-					<div class="menu_option"><img src="images/.png" class="menu_img" />일정</div>
-				</div>
-			</div>
+		<div class="left col-12 col-xl-1 col-xxl-1">
+			<!-- 사이드바  -->	
+			<c:import url="MemberMainSidebar.jsp"></c:import>
 		</div>
-		
-		<div class="off">
-				<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">버튼!</button>
-
-				<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-				  <div class="offcanvas-header">
-				    <h5 class="offcanvas-title" id="offcanvasTopLabel"></h5>
-				    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				  </div>
-				  <div class="offcanvas-body">
-				   <p class="menu_list" style="color: #ff8000; font-weight: bold; margin-top: 10px;">우리만</p>
-				<hr>
-				<ul class="" >
-					<li><a href="" class="m_menu">프로필</a></li>
-					<li><a href="" class="m_menu">그룹</a></li>
-					<li><a href="" class="m_menu">히스토리</a></li>
-					<li><a href="" class="m_menu">모임</a></li>
-					<!-- <li><a href="" class="m_menu">친구</a></li> -->
-					<li><a href="" class="m_menu">일정</a></li>
-				</ul>
-				<p style="font-weight: bold;">플랫폼</p>
-				<ul class="" >
-					<li><a href="" class="p_menu">공지사항</a></li>
-					<li><a href="" class="p_menu">이용약관</a></li>
-					<li><a href="" class="p_menu">활동정책</a></li>
-					<li><a href="" class="p_menu">문의</a></li>
-					<li><a href="" class="p_menu">도움말</a></li>
-					<li><a href="" class="p_menu">개발자</a></li>
-				</ul>
-				<p style="font-weight: bold;">부가기능</p>
-				<ul class="" >
-					<li><a href="" class="p_menu">친구</a></li>
-					<li><a href="" class="p_menu">쪽지</a></li>
-					<li><a href="" class="p_menu">1:1 문의</a></li>
-					<li><a href="" class="p_menu">신고</a></li>
-					<li><a href="" class="p_menu">FAQ</a></li>
-				</ul>
-			  </div>
-			</div>
-			</div>
-		<div class="mid col-12 col-md-7">
+			
+		<div class="mid col-12 col-xl-7 col-xxl-7">
 			<div class="friend">
 				<h2>친구 검색</h2>
 				<input type="text" id="friend" class="fr_txt txt" data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-whatever="@mdo"  placeholder="아이디 / 닉네임 / 이름 " >
@@ -207,8 +159,6 @@ function addFriends(us_code2)
 			
 			
 			<!-- 친구 찾기 모달 -->
-			<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">친구</button> -->
-
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-lg">
 			    <div class="modal-content">
@@ -229,57 +179,53 @@ function addFriends(us_code2)
 			            <button type="button" class=" btn btn-primary findBtn"> 검색</button>
 			          </div>
 			        </form>
-			        
-			        <!-- <div>검색 결과</div> -->
-			        <div id="friendResult">
-			        	<table  id="searchTable" class="table tbl"> 
-		            		<tr>
-		            			<th>회원코드</th>
-		            			<th>아이디</th>
-		            			<th>이름</th>
-		            			<th>친구추가</th>
-		            		</tr>
-		            		<tr id="searchFriends">
-		            			<td colspan="4">
-		            				회원코드 또는 아이디 또는 이름으로 검색 해주세요.
-		            			</td>
-		            		</tr>
-		            	</table>
-			        </div>
-			        
-			        
-			        <div class="mb-3" >
-			            <div class=" result-title ">
-			            	<div class="friend-title modal-option">친구 목록</div>
-			            	<table class="table tbl"> 
+		        		<!-- 검색 결과 -->
+				        <div id="friendResult">
+				        	<table  id="searchTable" class="table tbl"> 
 			            		<tr>
 			            			<th>회원코드</th>
 			            			<th>아이디</th>
 			            			<th>이름</th>
-			            			<th>삭제</th>
+			            			<th>친구추가</th>
 			            		</tr>
-			            		<c:forEach var="friends" items="${friendsList }">
-			            		<tr id="result-info">
-			            			<td>${friends.us_code2 }</td>
-			            			<td>${friends.us_id }</td>
-			            			<td>${friends.us_name }</td>
-			            			<td>
-			            				<button type="button" class="deleteBtn" onclick="deleteFriends(${friends.fr_code}, '${friends.us_id }')">
-			            					<i class="bi bi-trash"></i></button>
+			            		<tr id="searchFriends">
+			            			<td colspan="4">
+			            				회원코드 또는 아이디 또는 이름으로 검색 해주세요.
 			            			</td>
 			            		</tr>
-			            		</c:forEach>
 			            	</table>
-			            </div>
-			       </div>
-			      </div>
-			       
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+				        </div>
+				        <div class="mb-3" >
+				            <div class=" result-title ">
+				            	<div class="friend-title modal-option">친구 목록</div>
+				            	<table class="table tbl"> 
+				            		<tr>
+				            			<th>회원코드</th>
+				            			<th>아이디</th>
+				            			<th>이름</th>
+				            			<th>삭제</th>
+				            		</tr>
+				            		<c:forEach var="friends" items="${friendsList }">
+				            		<tr id="result-info">
+				            			<td>${friends.us_code2 }</td>
+				            			<td>${friends.us_id }</td>
+				            			<td>${friends.us_name }</td>
+				            			<td>
+				            				<button type="button" class="deleteBtn" onclick="deleteFriends(${friends.fr_code}, '${friends.us_id }')">
+				            					<i class="bi bi-trash"></i></button>
+				            			</td>
+				            		</tr>
+				            		</c:forEach>
+		            			</table>
+		            		</div>
+		       			</div>
+      				</div>
+		     		<div class="modal-footer">
+		        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		      		</div>
+		   		 </div>
+		  	</div>
+		</div>
 			
 			
 			<div class="my_gr">
@@ -287,8 +233,7 @@ function addFriends(us_code2)
 				<hr>
 				
 				<div class="group_list row">
-				
-					<div class="group col-6 col-md-6 col-lg-4">
+					<div class="group col-6 col-md-4 col-xl-3">
 						<div class="gr_option">
 							<div class="make_gr">
 								<button class="createBtn" onclick="location.href='creategroupform.woori'"><i class="bi bi-plus-circle-fill"></i></button>
@@ -301,115 +246,51 @@ function addFriends(us_code2)
 					
 					
 					<c:forEach var="list" items="${groupList }">
-							<div class="group col-6 col-md-6 col-lg-4">
-								<form action="membermain.woori">  
-									<div  class="gr_option" >
+						<div class="group col-6 col-md-4 col-xl-3">
+							<form action="membermain.woori" method="post">  
+								<div  class="gr_option" >
 									<div class="gr_img">
 										<img onclick="enterGroup(${list.cg_code})" src="https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800">
 									</div>
 									<div class="gr_name">
 										<div class="explain" onclick="enterGroup(${list.cg_code})">							
 											<span>그룹명 : ${list.cg_name }</span>
+											<span class="group_count" >그룹원 : ${list.g_count }명</span>
 										</div>
 										<div class="bookmark_zone">
-											
 											<c:choose>
 												<c:when test="${list.gb_code == 0 }">
-													<span class="group_count" >그룹원: ${list.g_count }명</span>
 													<span class="book-mark" onclick="bookmark(${list.gm_code}, ${list.gb_code})">
 													<i  class="bookmark${list.cg_code} bi bi-bookmark-heart-fill"></i>
 													</span>
 												</c:when>
 												<c:otherwise>
-													<span class="group_count" >그룹원: ${list.g_count }명</span>
 													<span class="book-mark" onclick="bookmark(${list.gm_code}, ${list.gb_code})">
 													<i  style= "color: #ff8000 !important; " class="bookmark${list.cg_code} bi bi-bookmark-heart-fill"></i>
 													</span>
 												</c:otherwise>
-												
 											</c:choose>
-											
 										</div>
 									</div>
-									</div>
-								</form>
-							</div>
-							
-							
+								</div>
+							</form>
+						</div>
 					</c:forEach>
-					
-				
 				</div>
-				
-				
 			</div>
 		
 	      
     </div>
     
-    <div class="right col-12 col-md-3">
-    	<div class="card " >
-          <div class="card-body text-center">
-            <div class="mt-3 mb-4 ">
-              <img src="https://i.namu.wiki/i/7saHRlH_KjVEOEMwky9mR_mTpdz-u1GUy7jRuwDFmS2kEVJTfoMEOy7X-ciLCrzOqGXdu-TlgaJO_TVMOgXHLg.webp"
-                class="rounded-circle img-fluid" style="width: 100px; height: 100px; border: 1px solid #dee2e6;" />
-            </div>
-            
-            <div>
-            <h5 class="mb-2">${userDTO.us_name } <img src="https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff5d7b9d3-6faa-4fbd-92fb-abc13883f4ac%2Fkakao.png&blockId=845a0760-d543-46ae-965d-018c4289eb32&width=256" 
-             class="log_Api kakao_log profile_img"  /></h5>
-            </div>
-        
-            
-            <div class="prof_info">
-            
-            <div class="prItem userId " >
-            <i class="bi bi-person-fill bis"></i>
-            <div class="hover-text">회원 아이디</div>
-            <span class="infoItem">${userDTO.us_id }</span>
-			</div>
-			            
-            <div class="prItem code">
-            <i class="bi bi-upc-scan bis"></i>
-            <div class="hover-text">회원 코드</div>
-            <span class="infoItem">${userDTO.us_code }</span>
-            </div>
-			
-			<div class="prItem joinDay">            
-            <i class="bi bi-clipboard-check bis"></i>
-             <div class="hover-text">가입일</div>
-            <span class="infoItem">${userDTO.us_signup }</span>
-            </div>
-            
-            </div>
-            <br>
-            
-            <div class="prof_btn row">
-            	<div class="p_change col-6"  >
-            		<button type="button" class="btn btn-primary btn-rounded btns ">
-             		  Profile
-           			</button>
-            	</div>
-            	<div class="logout col-6">
-	            <button type="button" class="btn btn-secondary btn-rounded  btns" onclick="location.href='logout.woori'">
-	             Logout
-	            </button>
-            	</div>
-            	
-            </div>
-            
-          </div>
-          
-        </div>
-        
-        
+    <div class="right col-12 col-xl-3 col-xxl-3">
+    	<div class="memProfile_zone">
+          <c:import url="MemberProfile.jsp"></c:import>
+    	</div>
         <div class="cal_zone" >
-	    	<div class="wrapper calendar-wrapper col-12" >
-	    		<c:import url="cal.jsp"></c:import>
+	    	<div class="wrapper calendar-wrapper" >
+	    		<c:import url="MainCalendar.jsp"></c:import>
 		    </div>
 	    </div>
-	    
-	    
     </div>
     
     
