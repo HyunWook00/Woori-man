@@ -1,4 +1,4 @@
-<%@page import="com.test.mvc.MeetingDTO"%>
+<%@page import="com.woori.dto.MeetingDTO"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
