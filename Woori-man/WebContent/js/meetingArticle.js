@@ -69,6 +69,7 @@ function insertRecomment(commentCode)
 	document.getElementsByClassName("comment-cancel-btn")[0].click();
 	var id = "#" + commentCode + "-recomment";
 	$(id).css("display", "block");
+	$(id).find("form").css("display", "block");
 }
 //----------------------------------------------------------------------------------------
 
@@ -143,28 +144,47 @@ function deleteCommentLike(obj)
 }
 
 // 대댓글 좋아요 입력
-function recommentLikeInsert(recommentCode, gm_code)
+function insertRecommentLike(obj)
 {
-	var gmCode = gm_code;
-	var params = "mrcmCode=" + recommentCode + "&gmCode=" + gm_code;
-	var obj = document.getElementById("recomment-like-btn-" + recommentCode);
-	var objId = "#recomment-like-btn-" + recommentCode;
+	var recommentCode = obj.value;
+	var params = "recommentCode=" + recommentCode;
 	 
 	$.ajax(
 	{
 		type: "GET"
-		, url: "recommentlikeajax.woori"
+		, url: "meetingrecommentlike.woori"
 		, data: params
 		, success: function(args)
 		{
-			//obj.innerHTML = "";
-			
-			obj.innerHTML = args;
-			 
-			$(objId).removeClass("recomment-like-btn");
-			$(objId).addClass("recomment-unlike-btn");
-			$(objId).attr("onclick", "recommentLikeDelete(" + recommentCode + "," + gm_code + ")");
-			 
+			$(obj).find("i").removeClass("bi-heart").addClass("bi-heart-fill");
+			$(obj).attr("onclick", "deleteRecommentLike(this)");
+			$(obj).next().remove();
+			$(obj).after(args);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+}
+
+// 대댓글 좋아요 삭제
+function deleteRecommentLike(obj)
+{
+	var recommentCode = obj.value;
+	var params = "recommentCode=" + recommentCode;
+	
+	$.ajax(
+	{
+		type: "GET"
+		, url: "meetingrecommentunlike.woori"
+		, data: params
+		, success: function(args)
+		{
+			$(obj).find("i").removeClass("bi-heart-fill").addClass("bi-heart");
+			$(obj).attr("onclick", "insertRecommentLike(this)");
+			$(obj).next().remove();
+			$(obj).after(args);
 		}
 		, beforeSend: function()
 		{
@@ -175,6 +195,7 @@ function recommentLikeInsert(recommentCode, gm_code)
 			alert(e.responseText);
 		}
 	});
+	
 }
 
 // 모임 철회
@@ -188,4 +209,12 @@ function deleteMeeting(mt_code)
 	}
 	url = "deletemeeting.woori?mt_code=" + mt_code + "&crc_code=" + crc_code;
 	window.location.href=url;
+}
+
+function deleteComment(commentCode, mt_code)
+{
+	if (confirm("해당 댓글을 삭제하시겠습니까?"))
+	{
+		window.location.href="meetingcommentdelete.woori?mcm_code=" + commentCode + "&mt_code=" + mt_code;
+	}
 }

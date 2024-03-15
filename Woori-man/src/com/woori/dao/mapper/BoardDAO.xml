@@ -8,7 +8,7 @@
  
  	<select id="getBoardList" resultType="com.woori.dto.BoardDTO">
  		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
- 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
+ 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_TITLE, BRD_CONTENT, BRD_VIEW, BRD_LIKE
  		FROM VIEW_BOARD_LIST
  		WHERE CG_CODE = #{cg_code}
  	</select>
@@ -28,7 +28,7 @@
  	
  	<select id="getBoardArticle" resultType="com.woori.dto.BoardDTO">
  		SELECT NUM, BRD_CODE, CG_CODE, CG_NAME
- 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE
+ 		, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_TITLE, BRD_CONTENT, BRD_VIEW, BRD_LIKE
  		FROM VIEW_BOARD_LIST
  		WHERE BRD_CODE = #{brd_code}
  	</select>
