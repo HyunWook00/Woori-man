@@ -11,9 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.woori.dto.MeetingDTO;
+import com.woori.dao.MemberMainDAO;
 import com.woori.dao.FriendsDAO;
 import com.woori.dto.FriendsDTO;
 import com.woori.dao.LoginDAO;
@@ -193,67 +196,82 @@ public class LoginController
 		return "/WEB-INF/view/pwdResetForm.jsp";
 	}
 	
-	
-	// 로그인 
-	// 넘겨받은 id와 pwd 의 알맞은 회원에 이름이 존재한다면 
-	// MemberMain 으로 접속 
-	// 존재하지 않는다면 Login 화면을 다시 요청 
-	@RequestMapping("/membermain.woori")
-	public String enterMember(HttpSession session, Model model) throws ClassNotFoundException, SQLException
-	{
-	
-		ArrayList<GroupDTO> groupList = new ArrayList<GroupDTO>();
-		ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();
+	// 캘린더 AJAX 
+		@RequestMapping(value = "/maincalendarajax.woori")
+		public String myPageCalendarAjax(ModelMap model)
+		{
+			return "MainCalendarAjax.jsp";
+		}
 		
-		FriendsDAO friendDao = new FriendsDAO(); // 친구 DAO
-		LoginDAO dao = new LoginDAO();			// 로그인 dao
 		
-		friendDao.connection();
-		dao.connection();
-		
-		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO"); // 세션에 있는 userDTO가져오기
-		String us_code = userDTO.getUs_code();
+		// 로그인 
+		// 넘겨받은 id와 pwd 의 알맞은 회원에 이름이 존재한다면 
+		// MemberMain 으로 접속 
+		// 존재하지 않는다면 Login 화면을 다시 요청 
+		@RequestMapping("/membermain.woori")
+		public String enterMember(HttpSession session, Model model) throws ClassNotFoundException, SQLException
+		{
+			
+			ArrayList<GroupDTO> groupList = new ArrayList<GroupDTO>();
+			ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();
+			ArrayList<MeetingDTO> allMeeting = new ArrayList<MeetingDTO>();
+			MemberMainDAO memberMainDAO = new MemberMainDAO();
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO"); // 세션에 있는 userDTO가져오기
+			String us_code = userDTO.getUs_code();
+
+			
+			FriendsDAO friendDao = new FriendsDAO(); // 친구 DAO
+			LoginDAO dao = new LoginDAO();			// 로그인 dao
+			
+			memberMainDAO.connection();
+			friendDao.connection();
+			dao.connection();
+			
+					
+			
+			if (String.valueOf(us_code)==null || String.valueOf(us_code) =="")			//-- 로그인이 되어있지 않은 상황
+			{
+				return "redirect:loginform.woori";
 				
-		
-		if (String.valueOf(us_code)==null || String.valueOf(us_code) =="")			//-- 로그인이 되어있지 않은 상황
-		{
-			return "redirect:loginform.woori";
-			
-		}
-		else
-		{
-			
-			// 액션이 처리됐다면 값을 membermain에 넘겨줌 
-			// 모달을 자동으로 띄워주는 조건문을 만들기 위함
-			// model 에 값을 담고 session 에서는 삭제
-			if (session.getAttribute("delCount") != null)
-			{
-				model.addAttribute("delCount", session.getAttribute("delCount"));
-				session.removeAttribute("delCount");
 			}
-			else if (session.getAttribute("addCount") != null)
+			else
 			{
-				model.addAttribute("addCount", session.getAttribute("addCount"));
-				session.removeAttribute("addCount");
+				
+				// 액션이 처리됐다면 값을 membermain에 넘겨줌 
+				// 모달을 자동으로 띄워주는 조건문을 만들기 위함
+				// model 에 값을 담고 session 에서는 삭제
+				if (session.getAttribute("delCount") != null)
+				{
+					model.addAttribute("delCount", session.getAttribute("delCount"));
+					session.removeAttribute("delCount");
+				}
+				else if (session.getAttribute("addCount") != null)
+				{
+					model.addAttribute("addCount", session.getAttribute("addCount"));
+					session.removeAttribute("addCount");
+				}
+				
+				// 로그인한 회원의 그룹정보 담기
+				groupList = dao.groupList(us_code);
+				
+				// 친구 목록 뽑기 
+				friendsList = friendDao.list(us_code);
+				
+				// 모임 정보 뽑아오기
+				allMeeting = memberMainDAO.findMeeting(us_code);	// 내 모든 그룹의 의사표현한 모임 담기
+				
+				
+				dao.close();
+				
+				
+				session.setAttribute("allMeeting", allMeeting);
+				model.addAttribute("userDTO", userDTO);
+				model.addAttribute("groupList", groupList);
+				model.addAttribute("friendsList", friendsList);
 			}
 			
-			// 로그인한 회원의 그룹정보 담기
-			groupList = dao.groupList(us_code);
-			
-			// 친구 목록 뽑기 
-			friendsList = friendDao.list(us_code);
-			
-			dao.close();
-			
-			model.addAttribute("userDTO", userDTO);
-			model.addAttribute("groupList", groupList);
-			model.addAttribute("friendsList", friendsList);
+			return "MemberMain.jsp";
 		}
-		
-		
-		return "/WEB-INF/view/MemberMain.jsp";
-	}
-	
 	
 	
 	
