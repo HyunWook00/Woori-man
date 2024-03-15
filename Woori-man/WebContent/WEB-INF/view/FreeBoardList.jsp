@@ -80,7 +80,7 @@
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/articleList.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
@@ -106,15 +106,17 @@
 
 <!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <!-- 주요 콘텐츠 영역 -->
 <div class="mainContent">
 
-	<!-- 좌측 고정메뉴 영역 -->
+	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴가 들어갑ㄴ미다
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 영역 -->
@@ -122,7 +124,7 @@
 	
 		<!-- 게시판 정보 영역 -->
 		<div class="board-info">
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 자유 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] ${groupDTO.brd_name }</div>
 		</div>
 		
 		<!-- 게시글 검색 영역 -->
@@ -155,16 +157,16 @@
 			
 			<!-- 게시글 목록 영역 -->
 			<div class="content-list">
-				<c:forEach items="${boardList }" var="board">
+				<c:forEach var="idx" begin="<%=start-1 %>" end="<%=end-1 %>">
 				<div class="article">
-					<div class="article-number article-element">${board.num }</div>
+					<div class="article-number article-element">${boardList[idx].num }</div>
 					<div class="article-title article-element">
-						<a href="freeboardarticle.woori?article=${board.brd_code }">${board.brd_subject }</a>
+						<a href="freeboardarticle.woori?article=${boardList[idx].brd_code }">${boardList[idx].brd_subject }</a>
 					</div>
-					<div class="write-user article-element">${board.gm_nickname }</div>
-					<div class="write-date article-element">${board.brd_date }</div>
-					<div class="view-count article-element">${board.brd_view }</div>
-					<div class="like-count article-element">${board.brd_like }</div>
+					<div class="write-user article-element">${boardList[idx].gm_nickname }</div>
+					<div class="write-date article-element">${boardList[idx].brd_date }</div>
+					<div class="view-count article-element">${boardList[idx].brd_view }</div>
+					<div class="like-count article-element">${boardList[idx].brd_like }</div>
 				</div>
 				</c:forEach>
 			</div>

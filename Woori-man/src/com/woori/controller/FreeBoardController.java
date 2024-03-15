@@ -21,6 +21,9 @@ import com.woori.dao.IBoardDAO;
 import com.woori.dao.ICommentDAO;
 import com.woori.dto.BoardDTO;
 import com.woori.dto.CommentDTO;
+import com.woori.dto.GroupDTO;
+import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.RecommentDTO;
 
 // 자유게시판 관련 컨트롤러
 @Controller
@@ -32,13 +35,9 @@ public class FreeBoardController
 	// 자유게시판 리스트 페이지 요청
 	// freeboardlist.woori 라는 요청이 들오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardlist.woori")
-	public String freeBoardList(Model model, HttpServletRequest request)
+	public String freeBoardList(Model model, HttpServletRequest request, HttpSession session)
 	{
-		HttpSession session = request.getSession();
-		session.setAttribute("cg_code", "1");
-		session.setAttribute("gm_code", "1");
-		session.setAttribute("pos_code", "1");
-		String cg_code = (String)session.getAttribute("cg_code");
+		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
 		
 		ArrayList<BoardDTO> boardList = null;
 		int newArticle = 0;
@@ -46,8 +45,8 @@ public class FreeBoardController
 		try
 		{
 			IBoardDAO dao = sqlSession.getMapper(IBoardDAO.class);
-			boardList = dao.getBoardList(cg_code);
-			newArticle = dao.getNewArticle(cg_code);
+			boardList = dao.getBoardList(group.getCg_code());
+			newArticle = dao.getNewArticle(group.getCg_code());
 			
 		} catch (Exception e)
 		{
@@ -66,15 +65,18 @@ public class FreeBoardController
 	@RequestMapping(value = "/freeboardinsertform.woori")
 	public String freeBoardInsertForm(Model model)
 	{
-		
 		return "/WEB-INF/view/FreeBoardInsertForm.jsp";
 	}
 	
 	// 자유게시판 작성 요청
 	// freeboardinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardinsert.woori", method = RequestMethod.POST)
-	public String freeBoardInsert(Model model, BoardDTO dto)
+	public String freeBoardInsert(Model model, BoardDTO dto, HttpSession session)
 	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
+		dto.setCg_code(group.getCg_code());
+		dto.setGm_code(member.getGm_code());
 		try
 		{
 			IBoardDAO dao = sqlSession.getMapper(IBoardDAO.class);
@@ -98,7 +100,7 @@ public class FreeBoardController
 		BoardDAO dao = new BoardDAO();
 		IBoardDAO iDao = sqlSession.getMapper(IBoardDAO.class);
 		ArrayList<CommentDTO> comments = null;
-		HashMap<String, Integer> checkCommentLike = new HashMap<String, Integer>();
+		HashMap<String, ArrayList<RecommentDTO>> recomments = new HashMap<String, ArrayList<RecommentDTO>>();
  		int commentCount = 0;
  		int checkArticleLike = 0;
 		
@@ -106,13 +108,12 @@ public class FreeBoardController
 		int articleLike = 0;
 		try
 		{
-			comments = dao.getCommentList(brd_code);
+			comments = dao.getCommentList(brd_code, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			commentCount += comments.size();
 			
 			for(CommentDTO dto : comments)
 			{
-				int check = dao.checkCommentLike(dto.getCommentCode(), (String)session.getAttribute("gm_code"));
-				checkCommentLike.put(dto.getCommentCode(), check);
+				recomments.put(dto.getCommentCode(), dao.getRecommentList(dto.getCommentCode(), ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code()));
 			}
 			
 			
@@ -139,9 +140,9 @@ public class FreeBoardController
 				}
 			}
 			
-			articleLike = dao.getArticleLike(brd_code, (String)session.getAttribute("gm_code"));
+			articleLike = dao.getArticleLike(brd_code,((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			boardArticle = iDao.getBoardArticle(brd_code);
-			checkArticleLike = dao.checkArticleLike(brd_code, (String)session.getAttribute("gm_code"));
+			checkArticleLike = dao.checkArticleLike(brd_code, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			
 		} catch (Exception e)
 		{
@@ -162,9 +163,10 @@ public class FreeBoardController
 		model.addAttribute("boardArticle", boardArticle);
 		model.addAttribute("articleLike", articleLike);
 		model.addAttribute("comments", comments);
+		model.addAttribute("recomments", recomments);
 		model.addAttribute("commentCount", commentCount);
 		model.addAttribute("checkArticleLike", checkArticleLike);
-		model.addAttribute("checkCommentLike", checkCommentLike);
+		
 		
 		return "/WEB-INF/view/FreeBoardArticle.jsp";
 	}
@@ -179,7 +181,7 @@ public class FreeBoardController
 		try
 		{
 			IBoardDAO iDao = sqlSession.getMapper(IBoardDAO.class);
-			dao.insertArticleLike(brd_code, (String)session.getAttribute("gm_code"));
+			dao.insertArticleLike(brd_code, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			BoardDTO dto = iDao.getBoardArticle(brd_code);
 			articleLike = dto.getBrd_like();
 			
@@ -212,7 +214,7 @@ public class FreeBoardController
 		String articleLike = null;
 		try
 		{
-			dao.deleteArticleLike(brd_code, (String)session.getAttribute("gm_code"));
+			dao.deleteArticleLike(brd_code, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			BoardDTO dto = iDao.getBoardArticle(brd_code);
 			articleLike = dto.getBrd_like();
 		} catch (Exception e)
@@ -248,7 +250,7 @@ public class FreeBoardController
 			boardArticle = iDao.getBoardArticle(brd_code);
 			boardArticle.setBrd_content(boardArticle.getBrd_content().replaceAll("<br>", "\n"));
 			
-			if (!boardArticle.getGm_code().equals(session.getAttribute("gm_code")))
+			if (!boardArticle.getGm_code().equals(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code()))
 				return "freeboardlist.woori";
 			
 		} catch (Exception e)
@@ -302,18 +304,30 @@ public class FreeBoardController
 	// 자유게시판 댓글 등록 관련 컨트롤러
 	// freeboardcommentinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardcommentinsert.woori", method = RequestMethod.POST)
-	public String insertArticleComment(Model model, CommentDTO dto)
+	public String insertArticleComment(Model model, CommentDTO dto, HttpSession session)
 	{	
 		String brd_code = dto.getArticleCode();
+		dto.setCommentWriterCode(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
+		BoardDAO dao = new BoardDAO();
 		
 		try
 		{
-			ICommentDAO iDao = sqlSession.getMapper(ICommentDAO.class);
-			iDao.insertBoardComment(dto);
+			dao.insertComment(dto);
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
 		}
 		
 		return "redirect:/freeboardarticle.woori?article=" + brd_code;
@@ -330,7 +344,7 @@ public class FreeBoardController
 		
 		try
 		{
-			dao.insertCommentLike(commentCode, (String)session.getAttribute("gm_code"));
+			dao.insertCommentLike(commentCode, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			commentCount = dao.countCommentLike(commentCode);
 			
 		} catch (Exception e)
@@ -355,6 +369,31 @@ public class FreeBoardController
 		return "/WEB-INF/view/CommentLikeAjax.jsp";
 	}
 	
+	// 자유게시판 대댓글 좋아요
+	// boardrecommentlike.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardrecommentlike.woori", method = RequestMethod.GET)
+	public String insertRecommentLike(Model model, String recommentCode, HttpSession session)
+	{
+		BoardDAO dao = new BoardDAO();
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		int commentCount = 0;
+		
+		try
+		{
+			dao.insertRecommentLike(recommentCode, member.getGm_code());
+			commentCount = dao.countRecommentLike(recommentCode);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		model.addAttribute("type", 1);
+		model.addAttribute("commentCount", commentCount);
+		
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
+	}
+	
 	// 자유게시판 댓글 좋아요 취소 관련 컨트롤러
 	// boardcommentunlike.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/boardcommentunlike.woori", method = RequestMethod.GET)
@@ -365,7 +404,7 @@ public class FreeBoardController
 		
 		try
 		{
-			dao.deleteCommentLike(commentCode, (String)session.getAttribute("gm_code"));
+			dao.deleteCommentLike(commentCode, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			commentCount = dao.countCommentLike(commentCode);
 			
 		} catch (Exception e)
@@ -388,5 +427,165 @@ public class FreeBoardController
 		model.addAttribute("commentCount", commentCount);
 		
 		return "/WEB-INF/view/CommentLikeAjax.jsp";
+	}
+	
+	// 자유게시판 대댓글 좋아요 취소 관련 컨트롤러
+	// boardrecommentunlike.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardrecommentunlike.woori", method = RequestMethod.GET)
+	public String deleteRecommentLike(Model model, String recommentCode, HttpSession session)
+	{
+		BoardDAO dao = new BoardDAO();
+		int commentCount = 0;
+		
+		try
+		{
+			dao.deleteRecommentLike(recommentCode, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
+			commentCount = dao.countRecommentLike(recommentCode);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		model.addAttribute("type", 2);
+		model.addAttribute("commentCount", commentCount);
+		
+		return "/WEB-INF/view/CommentLikeAjax.jsp";
+	}
+	
+	// 자유게시판 댓글 수정
+	// boardcommentupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardcommentupdate.woori", method = RequestMethod.GET)
+	public String updateComment(HttpSession session, CommentDTO dto)
+	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		dto.setCommentWriterCode(member.getGm_code());
+		BoardDAO dao = new BoardDAO();
+		try
+		{
+			dao.updateComment(dto);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardarticle.woori?article=" + dto.getArticleCode();
+	}
+	
+	// 자유게시판 대댓글 수정
+	// boardrecommentupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardrecommentupdate.woori", method = RequestMethod.GET)
+	public String updateRecomment(HttpSession session, RecommentDTO dto, String brd_code)
+	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		dto.setRecommentWriterCode(member.getGm_code());
+		BoardDAO dao = new BoardDAO();
+		try
+		{
+			dao.updateRecomment(dto);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardarticle.woori?article=" + brd_code;
+		
+	}
+	
+	// 자유게시판 댓글 삭제
+	// boardcommentdelete.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardcommentdelete.woori", method = RequestMethod.GET)
+	public String deleteComment(String bc_code, String brd_code)
+	{
+		BoardDAO dao = new BoardDAO();
+		
+		try
+		{
+			dao.deleteComment(bc_code);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardarticle.woori?article=" + brd_code;
+	}
+	
+	// 자유게시판 대댓글 입력
+	// boardrecommentinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardrecommentinsert.woori", method = RequestMethod.POST)
+	public String insertRecomment(RecommentDTO dto, HttpSession session, String articleCode)
+	{
+		BoardDAO dao = new BoardDAO();
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		dto.setRecommentWriterCode(member.getGm_code());
+		
+		try
+		{
+			dao.insertRecomment(dto);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardarticle.woori?article=" + articleCode;
 	}
 }

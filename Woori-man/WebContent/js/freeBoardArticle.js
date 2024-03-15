@@ -110,32 +110,33 @@ function articleUnlike(obj)
 	$(obj).attr("onclick", "articleLike(this)");
 }
 
+// 대댓글 달기
 function insertRecomment(commentCode)
 {
-	/*
-	alert(commentCode);
 	document.getElementsByClassName("comment-cancel-btn")[0].click();
-	//var comment = document.getElementById(commentCode + "-recomment");
-	*/
-	var id = commentCode + "-recomment";
-	alert(id);
-	$("#"+id).css("display", "block");
-	//document.getElementById(id).style.display = "block";
-	//$(id).css("display", "block");
-	
+	var id = "#" + commentCode + "-recomment";
+	$(id).css("display", "block");
+	$(id).find("form").css("display", "block");
 }
 
 // 내 댓글 수정하기
 function modifyComment(commentCode)
 {
-	//document.getElementsByClassName("comment-cancel-btn")[0].click();
-	var modify = document.getElementById(commentCode + "-modify");
-	var content = modify.nextElementSibling;
-	var like = content.nextElementSibling;
-	
-	content.style.display = "none";
-	like.style.display = "none";
-	modify.style.display = "block";
+	document.getElementsByClassName("comment-cancel-btn")[0].click();
+	var id = "#" + commentCode + "-modify";
+	$(id).nextAll().css("display", "none");
+	$(id).css("display", "block");
+	$(id).find("form").css("display", "block");
+}
+
+// 나의 대댓글 수정하기
+function modifyRecomment(recommentCode)
+{
+	document.getElementsByClassName("comment-cancel-btn")[0].click();
+	var id = "#" + recommentCode + "-modify-recomment";
+	$(id).nextAll().css("display", "none");
+	$(id).css("display", "block");
+	$(id).find("form").css("display", "block");
 }
 
 function reportComment(commentCode)
@@ -143,11 +144,15 @@ function reportComment(commentCode)
 	alert(commentCode);
 }
 
-function deleteComment(commentCode)
+function deleteComment(commentCode, brd_code)
 {
-	alert(commentCode);
+	if (confirm("해당 댓글을 삭제하시겠습니까?"))
+	{
+		window.location.href="boardcommentdelete.woori?bc_code=" + commentCode + "&brd_code=" + brd_code;
+	}
 }
 
+// 댓글 좋아요
 function insertCommentLike(obj)
 {
 	var commentCode = obj.value;
@@ -172,6 +177,32 @@ function insertCommentLike(obj)
 	});
 }
 
+// 대댓글 좋아요
+function insertRecommentLike(obj)
+{
+	var recommentCode = obj.value;
+	var params = "recommentCode=" + recommentCode;
+	
+	$.ajax(
+	{
+		type: "GET"
+		, url: "boardrecommentlike.woori"
+		, data: params
+		, success: function(args)
+		{
+			$(obj).find("i").removeClass("bi-heart").addClass("bi-heart-fill");
+			$(obj).attr("onclick", "deleteRecommentLike(this)");
+			$(obj).next().remove();
+			$(obj).after(args);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+}
+
+// 댓글 좋아요 삭제
 function deleteCommentLike(obj)
 {
 	var commentCode = obj.value;
@@ -186,6 +217,31 @@ function deleteCommentLike(obj)
 		{
 			$(obj).find("i").removeClass("bi-heart-fill").addClass("bi-heart");
 			$(obj).attr("onclick", "insertCommentLike(this)");
+			$(obj).next().remove();
+			$(obj).after(args);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+}
+
+// 대댓글 좋아요 삭제
+function deleteRecommentLike(obj)
+{
+	var recommentCode = obj.value;
+	var params = "recommentCode=" + recommentCode;
+	
+	$.ajax(
+	{
+		type: "GET"
+		, url: "boardrecommentunlike.woori"
+		, data: params
+		, success: function(args)
+		{
+			$(obj).find("i").removeClass("bi-heart-fill").addClass("bi-heart");
+			$(obj).attr("onclick", "insertRecommentLike(this)");
 			$(obj).next().remove();
 			$(obj).after(args);
 		}

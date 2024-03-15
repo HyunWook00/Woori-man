@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css" />
 <script type="text/javascript" src="<%=cp %>/js/freeBoardArticle.js"></script>
 <style type="text/css">
@@ -34,7 +34,7 @@
 
 <!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <!-- 주요 콘텐츠 영역 -->
@@ -42,7 +42,9 @@
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴 들어가용
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 영역 -->
@@ -50,7 +52,7 @@
 	
 		<!-- 게시판 정보 영역 -->
 		<div class="board-info">
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 자유 게시판</div>
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] ${groupDTO.brd_name }</div>
 			
 			<div class="button-zone">
 				<!-- 목록으로 / 이전글 / 다음글 버튼 영역 -->
@@ -62,7 +64,7 @@
 				<div class="button-div">
 					<!-- 세션에서 회원코드 받아오고 작성자랑 분기 -->
 					<c:choose>
-					<c:when test="${boardArticle.gm_code ==  gm_code}">
+					<c:when test="${boardArticle.gm_code ==  groupMemberDTO.gm_code}">
 					<button type="button" class="article-button article-modify" value="${boardArticle.brd_code }">수정하기</button>
 					<button type="button" class="article-button article-delete" value="${boardArticle.brd_code }">삭제하기</button>
 					</c:when>
@@ -134,7 +136,7 @@
 			
 			<!-- 개별 댓글 영역 -->
 			<c:forEach items="${comments }" var="comment">
-				<div class="comment ${gm_code == comment.commentWriterCode ? 'my-comment' : '' }">
+				<div class="comment ${groupMemberDTO.gm_code == comment.commentWriterCode ? 'my-comment' : '' }">
 				
 					<div class="commenter-profile">
 						<img src="${comment.commentWriterProfile==null ? 'images/basic-profile.png' : comment.commentWriterProfile }" alt="profile" class="profile-img" />
@@ -144,19 +146,17 @@
 						<div class="commenter-info">
 							<div class="commenter-name">${comment.commentWriterName }</div>
 							<div class="comment-create">${comment.commentDate }</div>
-							
 							<div class="comment-menu">
 								<button type="button" class="dropdown-toggle btn" data-bs-toggle="dropdown" aria-expanded="false">
 									<i class="bi bi-three-dots"></i>
 								</button>
-								
 								<!-- 메뉴 목록 -->
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
 									<li><a class="dropdown-item" onclick="insertRecomment(${comment.commentCode})">댓글달기</a></li>
 									<c:choose>
-									<c:when test="${comment.commentWriterCode == gm_code }">
+									<c:when test="${comment.commentWriterCode == groupMemberDTO.gm_code }">
 										<li><a class="dropdown-item" onclick="modifyComment(${comment.commentCode})">수정하기</a></li>
-										<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode})">삭제하기</a></li>
+										<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode}, ${boardArticle.brd_code })">삭제하기</a></li>
 									</c:when>
 									<c:otherwise>
 										<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode})">신고하기</a></li>
@@ -171,7 +171,7 @@
 						
 							<!-- 수정하기(내 댓글에서만 사용) -->
 							<div class="modify-comment-div" id="${comment.commentCode }-modify">
-								<form action="" class="write-recomment write-area update-comment-form">
+								<form action="boardcommentupdate.woori" class="write-recomment write-area update-comment-form">
 									<div class="write-area">
 										<textarea class="comment-input" name="commentContent" id="commentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${comment.commentContent }</textarea>
 										<input type="hidden" name="commentCode" id="commentCode" value="${comment.commentCode }">
@@ -189,7 +189,7 @@
 							<div class="comment-like">
 								<div class="like-button position-relative">
 									<c:choose>
-									<c:when test="${checkCommentLike[comment.commentCode] <= 0 }">
+									<c:when test="${comment.commentLikeCheck <= 0 }">
 									<button type="button" class="comment-like-btn position-relative" onclick="insertCommentLike(this)" value="${comment.commentCode }">
 										<i class="bi bi-heart"></i>
 									</button>
@@ -212,142 +212,99 @@
 						
 						<!-- 대댓글 달기 -->
 						<div class="write-recomment" id="${comment.commentCode }-recomment">
-							<form action="" method="post" class="write-recomment">
-								<div class="">
-									<textarea name="br_content" id="br_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
-									<input type="hidden" name="bc_code" id="bc_code" value="${comment.commentCode }">
-									<input type="hidden" name="brd_code" id="brd_code" value="${boardArticle.brd_code }">
+							<form action="boardrecommentinsert.woori" method="post" class="write-recomment">
+								<div class="write-area">
+									<textarea class="comment-input" name="recommentContent" id="recommentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
+									<input type="hidden" name="commentCode" id="commentCode" value="${comment.commentCode }">
+									<input type="hidden" name="articleCode" id="articleCode" value="${boardArticle.brd_code }">
 								</div>
 								<button type="submit" class="comment-submit-btn">등록</button>
 								<button type="button" class="comment-cancel-btn">취소</button>
 							</form>
 						</div><!-- .write-recomment -->
+						<!-- 대댓글 뽑아내기 -->
+						<c:forEach var="recomment" items="${recomments[comment.commentCode] }">
 						
+						<div class="recomment">
+							<div class="commenter-profile">
+							<img src="${recomment.recommentWriterProfile == null ? 'images/basic-profile.png' : recomment.recommentWriterProfile }" alt="profile" class="profile-img" />
+						</div><!-- .commenter-profile -->
+							<div class="comment-info">
+								<div class="commenter-info">
+									<div class="commenter-name">${recomment.recommentWriterName }</div>
+									<div class="comment-create">${recomment.recommentDate }</div>
+									<div class="comment-menu">
+										<button type="button" class="dropdown-toggle btn" data-bs-toggle="dropdown" aria-expanded="false">
+											<i class="bi bi-three-dots"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
+											<c:choose>
+												<c:when test="${groupMemberDTO.gm_code == recomment.recommentWriterCode }">
+													<li><a class="dropdown-item" onclick="modifyRecomment(${recomment.recommentCode})">수정하기</a></li>
+													<li><a href="/boardrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${boardArticle.brd_code}" class="dropdown-item">삭제하기</a></li>
+												</c:when>
+												<c:when test="${groupMemberDTO.gm_code != recomment.recommentWriterCode }">
+													<li><a href="" class="dropdown-item">신고하기</a></li>
+												</c:when>
+											</c:choose>
+										</ul>
+									</div><!-- .comment-menu -->
+								</div><!-- .commenter-info -->
+							
+								<!-- 나의 대댓글 수정하기 메뉴창이다. -->
+								<div class="modify-comment-div" id="${recomment.recommentCode }-modify-recomment">
+									<form action="boardrecommentupdate.woori" method="get" class="write-recomment write-area update-comment-form" >
+										<div class="write-area">
+										<textarea class="comment-input" name="recommentContent" id="recommentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${recomment.recommentContent }</textarea>
+										<div class="submit-and-count">
+											<span class="count"><span class="now-count">0</span> / 200</span>
+										</div>
+											<button type="submit" class="comment-submit-btn">수정</button>
+											<button type="button" class="comment-cancel-btn">취소</button>
+											<input type="hidden" name="recommentCode" id="recommentCode" value="${recomment.recommentCode }">
+											<input type="hidden" name="commentCode" id="commentCode" value="${recomment.commentCode }">
+											<input type="hidden" name="brd_code" id="brd_code" value="${boardArticle.brd_code }">
+										</div>
+									</form>
+								</div><!-- .modify-comment -->
+								
+								<div class="comment-detail recomment-detail">${recomment.recommentContent }</div>
+							
+								<!-- 대댓글 좋아요 -->
+								<div class="comment-like">
+									<div class="like-button position-relative">
+									
+										<c:choose>
+											<c:when test="${recomment.recommentLikeCheck != '0'}">
+												<button class="recomment-unlike-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="deleteRecommentLike(this)" value="${recomment.recommentCode }">
+													<i class="bi bi-heart-fill"></i>
+													<c:if test="${recomment.recommentLikeCount != 0 }">
+														<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
+															${recomment.recommentLikeCount }
+														</span>						
+													</c:if>
+												</button>
+											</c:when>
+											
+											<c:otherwise>
+												<button class="recomment-like-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="insertRecommentLike(this)" value="${recomment.recommentCode }">
+													<i class="bi bi-heart"></i>
+													<c:if test="${recomment.recommentLikeCount != 0 }">
+														<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
+															${recomment.recommentLikeCount }
+														</span>
+													</c:if>
+												</button>	
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div><!-- .comment-like -->
+							</div><!-- .comment-info -->
+						</div><!-- .recomment -->
+						</c:forEach>
 					</div><!-- .comment-info -->
 				</div><!-- .comment -->
 			</c:forEach>
-			
-			
-			
-			
-			<div class="comment">
-				<div class="commenter-profile">
-					<img src="<%=cp %>/images/basic-profile.png" alt="profile" class="profile-img" />
-				</div>
-				
-				<div class="comment-info">
-					<div class="commenter-info">
-						<div class="commenter-name">금하</div>
-						<div class="comment-create">2024-02-17</div>
-						<div class="comment-menu">
-							<button type="button" class="dropdown-toggle btn" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-three-dots"></i>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
-								<li><a href="" class="dropdown-item">댓글달기</a></li>
-								<li><a href="" class="dropdown-item">신고하기</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="comment-detail">
-						투썸가서 스초생 한판먹장
-					</div>
-					<div class="comment-like">
-						<div class="like-button position-relative">
-							<i class="bi bi-heart"></i>
-							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
-								99
-							</span>						
-						</div>
-					</div>
-					
-					<!-- 댓글별 대댓글 영역 -->
-					<div class="recomment">
-						<div class="commenter-profile">
-							<img src="<%=cp %>/images/basic-profile.png" alt="profile" class="profile-img"/>
-						</div>
-						
-						<div class="comment-info">
-							<div class="commenter-info">
-								<div class="commenter-name">부적응자</div>
-								<div class="comment-create">2024-02-17</div>
-								<div class="comment-menu">
-									<i class="bi bi-three-dots"></i>
-								</div>
-							</div>
-							<div class="comment-detail recomment-detail">
-								아이스박스 아니면 안 감
-							</div>
-							<div class="comment-like">
-								<div class="like-button position-relative">
-									<i class="bi bi-heart"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="recomment">
-						<div class="commenter-profile">
-							<img src="<%=cp %>/images/basic-profile.png" alt="profile" class="profile-img"/>
-						</div>
-						
-						<div class="comment-info">
-							<div class="commenter-info">
-								<div class="commenter-name">금하</div>
-								<div class="comment-create">2024-02-17</div>
-								<div class="comment-menu">
-									<i class="bi bi-three-dots"></i>
-								</div>
-							</div>
-							<div class="comment-detail recomment-detail">
-								걍 오지마
-							</div>
-							<div class="comment-like">
-								<div class="like-button position-relative">
-									<i class="bi bi-heart-fill"></i>
-									<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
-										5
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-			
-			</div>
-			
-			<div class="comment my-comment">
-				<div class="comment-info">
-					<div class="commenter-info mycomment-info">
-						<div class="commenter-name">노은하(나)</div>
-						<div class="comment-create">2024-02-17</div>
-						<div class="comment-menu">
-							<i class="bi bi-three-dots"></i>
-						</div>
-					</div>
-					
-					<div class="comment-like">
-						<div class="like-button position-relative">
-							<i class="bi bi-heart"></i>
-							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
-								4
-							</span>						
-						</div>
-					</div>
-					
-					<div class="comment-detail mycomment-detail">
-						여기서 싸우지말고 나가<br>
-						줄바꿈
-					</div>
-				</div>
-					
-				<div class="commenter-profile">
-					<img src="<%=cp %>/images/basic-profile.png" alt="profile" class="profile-img" />
-				</div>
-			
-			</div>
-			
 			
 		</div><!-- div.comment-list -->
 		
@@ -356,7 +313,6 @@
 			<form action="freeboardcommentinsert.woori" class="board-comment-form write-area" method="post"  id="boardCommentForm">
 				<textarea class="comment-input" id="commentContent" name="commentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다."></textarea>
 				<input type="hidden" name="articleCode" id="articleCode" value="${boardArticle.brd_code }">
-				<input type="hidden" name="commentWriterCode" id="commentWriterCode" value="${gm_code }">
 				<div class="submit-and-count">
 					<button type="button" class="comment-submit-btn">등록</button>
 					<span class="count"><span class="now-count">0</span> / 200</span>

@@ -13,10 +13,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/groupContentCommon.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css">
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
-<link rel="stylesheet" href="<%=cp %>/css/freeBoardForm.css" />
+<link rel="stylesheet" href="<%=cp %>/css/boardForm.css" />
 <script type="text/javascript" src="<%=cp%>/js/freeBoardForm.js"></script>
 </head>
 <body>
@@ -29,16 +29,18 @@
 	<c:import url="MemberHeader.jsp"></c:import>
 </div>
 
-<!-- 상단메뉴 -->
+<!-- 상단메뉴 영역 -->
 <div class="menuList">
-	이런메뉴... 저런메뉴... 조런메뉴...
+ 	<c:import url="GroupHeader.jsp"></c:import>
 </div>
 
 <div class="container">
 
 	<!-- 좌측 고정메뉴 -->
 	<div class="leftMenu">
-		여기 좌측 메뉴 들어가용
+		<div class="groupMain_side">
+		<c:import url="GroupSideBar.jsp"></c:import>
+		</div>
 	</div>
 	
 	<!-- 중앙 주요 컨텐츠 -->
@@ -48,18 +50,11 @@
 		<div class="board-info">
 		
 			<!-- 추후 세션에서 그룹명 받아오기 -->
-			<div class="board-title">[ <span class="group-name">약속해조</span> ] 자유 게시판</div>
-			<div class="button-zone">
-				<div class="button-div">
-					<button type="button" class="article-button article-list" onclick="location.href='freeboardlist.woori'">취소하기</button>
-				</div>
-			</div><!-- .button-zone -->
+			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] ${groupDTO.brd_name }</div>
 		</div><!-- .board-info -->
 		
 		<div class="content">
 			<form action="freeboardupdate.woori" class="board-insert-form" id="board-update-form" method="get">
-				<input type="hidden" id="gm_code" name="gm_code" value="${gm_code }">
-				<input type="hidden" id="cg_code" name="cg_code" value="${cg_code }">
 				<input type="hidden" id="brd_code" name="brd_code" value="${boardArticle.brd_code }">
 				<div class="board-title-div"><input type="text" id="brd_subject" name="brd_subject" placeholder="제목을 입력하세요." class="board-title" value="${boardArticle.brd_subject }"></div>
 				<div class="board-content-div"><textarea placeholder="내용을 입력하세요." name="brd_content" id="brd_content" class="board-content">${boardArticle.brd_content }</textarea></div>
