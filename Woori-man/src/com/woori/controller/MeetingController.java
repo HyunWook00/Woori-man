@@ -220,13 +220,17 @@ public class MeetingController
 	//모임 대댓글 입력 요청
 	//meetingrecommentinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingrecommentinsert.woori", method = RequestMethod.POST)
-	public String meetingRecommentInsert(Model model, RecommentDTO dto, HttpSession session, String articleCode)
+	public String meetingRecommentInsert(Model model, @RequestParam("mcm_code") String commentCode, @RequestParam("mrc_content") String recommentContent, @RequestParam("mt_code") String articleCode, HttpSession session)
 	{
-		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
-		dto.setRecommentWriterCode(member.getGm_code());
 		try
 		{
 			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
+			RecommentDTO dto = new RecommentDTO();
+			GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+			
+			dto.setCommentCode(commentCode);
+			dto.setRecommentWriterCode(member.getGm_code());
+			dto.setRecommentContent(recommentContent);
 			
 			dao.insertRecomment(dto);
 			
@@ -235,19 +239,25 @@ public class MeetingController
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:meetingarticle.woori?mt_code=" + articleCode;
+		return "redirect:meetingarticle.woori?meeting=" + articleCode;
 	}
 	
 	//모임 댓글 수정 요청
 	//meetingcommentupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingcommentupdate.woori", method = RequestMethod.POST)
-	public String meetingCommentUpdate(Model model, CommentDTO dto, HttpSession session)
+	public String meetingCommentUpdate(Model model, @RequestParam("mcm_code") String commentCode, @RequestParam("mt_code") String articleCode, @RequestParam("mcm_content") String commentContent, HttpSession session)
 	{
-		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
-		dto.setCommentWriterCode(member.getGm_code());
 		try
 		{
 			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
+			CommentDTO dto = new CommentDTO();
+			GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+			
+			dto.setCommentCode(commentCode);
+			dto.setCommentWriterCode(member.getGm_code());
+			dto.setArticleCode(articleCode);
+			dto.setCommentContent(commentContent);
+			
 			dao.updateComment(dto);
 			
 		} catch (Exception e)
@@ -255,20 +265,24 @@ public class MeetingController
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:meetingarticle.woori?mt_code=" + dto.getArticleCode();
+		return "redirect:meetingarticle.woori?meeting=" + articleCode;
 	}
 	
-	//모임 대댓글 수정 요청
+	//모임대 대댓글 수정 요청
 	//meetingrecommentupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingrecommentupdate.woori", method = RequestMethod.POST)
-	public String meetingRecommentUpdate(Model model, RecommentDTO dto, String articleCode,  HttpSession session)
+	public String meetingRecommentUpdate(Model model, @RequestParam("mrc_code") String recommentCode, @RequestParam("mcm_code") String commentCode, @RequestParam("mt_code") String articleCode, @RequestParam("mrc_content") String recommentContent, HttpSession session)
 	{
-		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
-		dto.setRecommentWriterCode(member.getGm_code());
-		
 		try
 		{
 			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
+			RecommentDTO dto = new RecommentDTO();
+			GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+			
+			dto.setRecommentCode(recommentCode);
+			dto.setRecommentWriterCode(member.getGm_code());
+			dto.setCommentCode(commentCode);
+			dto.setRecommentContent(recommentContent);
 			
 			dao.updateRecomment(dto);
 			
@@ -277,25 +291,25 @@ public class MeetingController
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:meetingarticle.woori?mt_code=" + articleCode;
+		return "redirect:meetingarticle.woori?meeting=" + articleCode;
 	}
 	
 	//모임 댓글 삭제 요청
 	//meetingcommentdelete.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingcommentdelete.woori", method = RequestMethod.GET)
-	public String meetingCommentDelete(Model model, String mt_code, String mcm_code)
+	public String meetingCommentDelete(Model model, @RequestParam("articleCode") String articleCode, @RequestParam("commentCode") String commentCode)
 	{
 		try
 		{
 			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
-			dao.deleteComment(mcm_code);
+			dao.deleteComment(commentCode);
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:meetingarticle.woori?mt_code=" + mt_code;
+		return "redirect:meetingarticle.woori?meeting=" + articleCode;
 	}
 	
 	//모임 대댓글 삭제 요청
