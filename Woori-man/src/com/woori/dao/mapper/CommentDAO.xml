@@ -50,10 +50,10 @@
 		WHERE MCM_CODE = #{commentCode}
 	</select>
 	
-	<select id="countRecommentLike" resultType="java.lang.Integer">
+	<select id="countRecommentLik" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS RECOMMENT_LIKE
 		FROM MEETING_RECOMMENT_LIKE
-		WHERE MRCM_CODE = #{recommentCode}
+		WHERE MRC_CODE = #{recommentCode}
 	</select>
 	
 	<select id="searchComment" resultType="com.woori.dto.CommentDTO">

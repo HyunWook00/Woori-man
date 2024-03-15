@@ -217,6 +217,7 @@ public class MeetingDAO
 				dto.setRecommentWriterCode(rs.getString("GM_CODE"));
 				dto.setRecommentWriterProfile(rs.getString("GM_PROFILE"));
 				dto.setRecommentLikeCount(rs.getString("MRC_LIKE"));
+				dto.setRecommentLikeCheck(rs.getString("LIKE_CHECK"));
 				
 				
 				result.add(dto);
@@ -232,6 +233,7 @@ public class MeetingDAO
 		
 		return result;
 	}
+	
 	
 	// 댓글을 회원이 좋아요를 눌렀는지 안 눌렀는지 확인 -> 댓글 리스트 출력에서 함
 	/*
@@ -362,6 +364,30 @@ public class MeetingDAO
 		return result;
 	}
 	
+	// 대댓글 좋아요 갯수
+	public int countRecommentLike(String mrc_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "SELECT COUNT(*) AS COUNT FROM MEETING_RECOMMENT_LIKE WHERE MRC_CODE = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(mrc_code));
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				result = rs.getInt("COUNT");
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 	// 대댓글 좋아요 입력
 	public int insertRecommentLike(String recommentCode, String gm_code)
 	{
@@ -369,7 +395,7 @@ public class MeetingDAO
 		
 		try
 		{
-			String sql = "INSERT INTO MEETING_RECOMMENT_LIKE(MRL_CODE, MRCM_CODE, GM_CODE, MRL_DATE) VALUES(SEQ_MEETING_RECOMMENT_LIKE.NEXTVAL, ?, ?, SYSDATE)";
+			String sql = "INSERT INTO MEETING_RECOMMENT_LIKE(MRL_CODE, MRC_CODE, GM_CODE, MRL_DATE) VALUES(SEQ_MEETING_RECOMMENT_LIKE.NEXTVAL, ?, ?, SYSDATE)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(recommentCode));
 			pstmt.setInt(2, Integer.parseInt(gm_code));
@@ -386,15 +412,16 @@ public class MeetingDAO
 	}
 	
 	// 대댓글 좋아요 삭제
-	public int deleteRecommentLike(String mrl_code)
+	public int deleteRecommentLike(String mrc_code, String gm_code)
 	{
 		int result = 0;
 		
 		try
 		{
-			String sql = "DELETE FROM MEETING_RECOMMENT_LIKE WHERE MRL_CODE = ?";
+			String sql = "DELETE FROM MEETING_RECOMMENT_LIKE WHERE MRC_CODE = ? AND GM_CODE = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(mrl_code));
+			pstmt.setInt(1, Integer.parseInt(mrc_code));
+			pstmt.setInt(2, Integer.parseInt(gm_code));
 			result = pstmt.executeUpdate();
 			
 			pstmt.close();

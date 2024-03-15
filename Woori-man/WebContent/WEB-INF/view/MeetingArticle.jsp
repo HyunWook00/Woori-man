@@ -31,36 +31,6 @@
 <link rel="stylesheet" href="<%=cp %>/css/meetingArticle.css" />
 <script type="text/javascript" src="<%=cp %>/js/meetingArticle.js"></script>
 <script type="text/javascript">
-
-	function recommentLikeDelete( recommentCode, gm_code)
-	{
-		var gmCode = gm_code;
-		var params = "mrcmCode=" + recommentCode + "&gmCode=" + gm_code;
-		var obj = document.getElementById("recomment-like-btn-" + recommentCode);
-		var objId = "#recomment-like-btn-" + recommentCode;
-		$.ajax(
-		{
-			type: "GET"
-			, url: "recommentunlikeajax.woori"
-			, data: params
-			, success: function(args)
-			{
-				obj.innerHTML = args;
-				 
-				$(objId).removeClass("recomment-unlike-btn");
-				$(objId).addClass("recomment-like-btn");
-				$(objId).attr("onclick", "recommentLikeInsert(" + recommentCode + "," + gm_code + ")");
-			}
-			, beforeSend: function()
-			{
-				return true;
-			}
-			, error: function(e)
-			{
-				alert(e.responseText);
-			}
-		});
-	}
 	
 	// 2024-02-29 노은하
 	// 댓글 신고하기 버튼 클릭
@@ -307,7 +277,7 @@
 								<c:choose>
 								<c:when test="${comment.commentWriterCode == groupMemberDTO.gm_code }">
 									<li><a class="dropdown-item" onclick="modifyComment(${comment.commentCode})">수정하기</a></li>
-									<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode})">삭제하기</a></li>
+									<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode}, ${meetingArticle.mt_code })">삭제하기</a></li>
 								</c:when>
 								<c:otherwise>
 									<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode})">신고하기</a></li>
@@ -379,7 +349,7 @@
 					<div class="recomment">
 						<!-- 대댓글 프사 -->
 						<div class="commenter-profile">
-							<img src="${comment.commentWriterProfile == null ? 'images/basic-profile.png' : comment.commentWriterProfile }" alt="profile" class="profile-img" />
+							<img src="${recomment.recommentWriterProfile == null ? 'images/basic-profile.png' : recomment.recommentWriterProfile }" alt="profile" class="profile-img" />
 						</div><!-- .commenter-profile -->
 						
 						<div class="comment-info">
@@ -391,10 +361,11 @@
 										<i class="bi bi-three-dots"></i>
 									</button>
 									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
+										
 										<c:choose>
 											<c:when test="${groupMemberDTO.gm_code == recomment.recommentWriterCode }">
 												<li><a class="dropdown-item" onclick="modifyRecomment(${recomment.recommentCode})">수정하기</a></li>
-												<li><a href="/meetingrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${meetingArticle.mt_code}" class="dropdown-item">삭제하기</a></li>
+												<li><a href="meetingrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${meetingArticle.mt_code}" class="dropdown-item">삭제하기</a></li>
 											</c:when>
 											<c:when test="${groupMemberDTO.gm_code != recomment.recommentWriterCode }">
 												<li><a href="" class="dropdown-item">신고하기</a></li>
@@ -406,18 +377,17 @@
 							
 							<!-- 나의 대댓글 수정하기 메뉴창이다. -->
 							<div class="modify-comment-div" id="${recomment.recommentCode }-modify-recomment">
-								<form action="meetingrecommentupdate.woori" method="get" class="write-recomment write-area update-comment-form" >
+								<form action="meetingrecommentupdate.woori" method="post" class="write-recomment write-area update-comment-form" >
 									<div class="write-area">
-									<textarea class="comment-input" name="mrc_content" id="mrc_content" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${recomment.recommentContent }</textarea>
+									<textarea class="comment-input" name="recommentContent" id="recommentContent" placeholder="타인을 비방하는 내용의 댓글은 블라인드 처리됩니다." >${recomment.recommentContent }</textarea>
 									<div class="submit-and-count">
 										<span class="count"><span class="now-count">0</span> / 200</span>
 									</div>
 										<button type="submit" class="comment-submit-btn">수정</button>
 										<button type="button" class="comment-cancel-btn">취소</button>
-										<input type="hidden" name="mrc_code" id="mrc_code" value="${recomment.recommentCode }">
-										<input type="hidden" name="gm_code" id="gm_code" value="${recomment.recommentWriterCode }">
-										<input type="hidden" name="mcm_code" id="mcm_code" value="${recomment.commentCode }">
-										<input type="hidden" name="mt_code" id="mt_code" value="${meetingArticle.mt_code }">
+										<input type="hidden" name="recommentCode" id="recommentCode" value="${recomment.recommentCode }">
+										<input type="hidden" name="commentCode" id="commentCode" value="${comment.commentCode }">
+										<input type="hidden" name="articleCode" id="articleCode" value="${meetingArticle.mt_code }">
 									</div>
 								</form>
 							</div><!-- .modify-comment -->
@@ -429,8 +399,8 @@
 								<div class="like-button position-relative">
 								
 									<c:choose>
-										<c:when test="${recomment.recommentLikeCheck == '0'}">
-											<button class="recomment-unlike-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="recommentLikeDelete(${recomment.recommentCode },${groupMemberDTO.gm_code})">
+										<c:when test="${recomment.recommentLikeCheck != '0'}">
+											<button class="recomment-unlike-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="deleteRecommentLike(this)" value="${recomment.recommentCode }">
 												<i class="bi bi-heart-fill"></i>
 												<c:if test="${recomment.recommentLikeCount != 0 }">
 													<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">
@@ -441,7 +411,7 @@
 										</c:when>
 										
 										<c:otherwise>
-											<button class="recomment-like-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="recommentLikeInsert(${recomment.recommentCode },${groupMemberDTO.gm_code})">
+											<button class="recomment-like-btn position-relative" id="recomment-like-btn-${recomment.recommentCode }" onclick="insertRecommentLike(this)" value="${recomment.recommentCode }">
 												<i class="bi bi-heart"></i>
 												<c:if test="${recomment.recommentLikeCount != 0 }">
 													<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-like">

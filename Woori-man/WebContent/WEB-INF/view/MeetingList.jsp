@@ -211,6 +211,10 @@
 			<!-- 게시글 목록 영역 -->
 			<div class="content-list">
 			
+				<c:forEach var="idx" begin="<%=start-1 %>" end="<%=end-1 %>">
+				${meetingList[idx].mt_title }
+				</c:forEach>
+			
 				<!-- 컨트롤러에서 받아온 게시글 정보 배열 lists에서 하나씩 꺼내오기 -->
 				<c:forEach var='meeting' items="${meetingList }">
 				
