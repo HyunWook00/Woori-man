@@ -255,38 +255,40 @@ public class MemberMainDAO
 	
 	
 	// 자신이 참여의사를 밝힌 모임 찾기
-	public ArrayList<MeetingDTO> findMeeting(String us_code) throws SQLException
-	{
-		ArrayList<MeetingDTO> result =  new ArrayList<MeetingDTO>();
-		
-		String sql = "SELECT AO_CODE, MT_CODE, GM_CODE, AO_DATE, AOC_CODE,MT_TITLE, CT_CODE, CG_CODE, MT_MEET"
-				+ " FROM MEETING_CHECK_VIEW WHERE US_CODE = ? AND AOC_CODE = 1";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, us_code);
-		
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next())
+		public ArrayList<MeetingDTO> findMeeting(String us_code) throws SQLException
 		{
-			MeetingDTO dto = new MeetingDTO();
+			ArrayList<MeetingDTO> result =  new ArrayList<MeetingDTO>();
 			
-			dto.setAo_code(rs.getString(1));
-			dto.setMt_code(rs.getString(2));
-			dto.setGm_code(rs.getString(3));
-			dto.setAo_date(rs.getString(4));
-			dto.setAoc_code(rs.getString(5));
-			dto.setMt_title(rs.getString(6));
-			dto.setCt_code(rs.getString(7));
-			dto.setCg_code(rs.getString(8));
-			dto.setMt_meet(rs.getString(9));
+			String sql = "SELECT AO_CODE, MT_CODE, GM_CODE, TO_CHAR(AO_DATE, 'YYYY-MM-DD'), AOC_CODE,MT_TITLE, CT_CODE, CG_CODE, TO_CHAR(MT_MEET, 'YYYY-MM-DD')"
+					+ ", MT_ETC, MC_NAME, CG_NAME FROM MEETING_CHECK_VIEW WHERE US_CODE = ? AND AOC_CODE = 1";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, us_code);
 			
-			result.add(dto);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				MeetingDTO dto = new MeetingDTO();
+				
+				dto.setAo_code(rs.getString(1));
+				dto.setMt_code(rs.getString(2));
+				dto.setGm_code(rs.getString(3));
+				dto.setAo_date(rs.getString(4));
+				dto.setAoc_code(rs.getString(5));
+				dto.setMt_title(rs.getString(6));
+				dto.setCt_code(rs.getString(7));
+				dto.setCg_code(rs.getString(8));
+				dto.setMt_meet(rs.getString(9));
+				dto.setMt_etc(rs.getString(10));
+				dto.setMc_name(rs.getString(11));
+				dto.setCg_name(rs.getString(12));
+				result.add(dto);
+			}
+				
+			rs.close();
+			pstmt.close();
+			
+			return result;
 		}
-			
-		rs.close();
-		pstmt.close();
-		
-		return result;
-	}
 	
 	
 	// 즐겨찾기 insert 메소드
