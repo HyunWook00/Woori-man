@@ -270,7 +270,7 @@ public class LoginController
 				model.addAttribute("friendsList", friendsList);
 			}
 			
-			return "MemberMain.jsp";
+			return "WEB-INF/view/MemberMain.jsp";
 		}
 	
 	
