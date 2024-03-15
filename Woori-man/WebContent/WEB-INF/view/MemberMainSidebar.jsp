@@ -37,7 +37,7 @@
 					<div class="menu_option" onclick="location.href='user.woori'"><img src="images/profile.png" class="menu_img" /></div>
 					<div class="menu_option" onclick="location.href='notelist.woori'"><img src="images/letter.png" class="menu_img" /></div>
 					<div class="menu_option" onclick="location.href='friends.woori'"><img src="images/friend.png" class="menu_img" /></div>
-					<div class="menu_option" onclick="location.href='notcielist.woori'"><img src="images/notice.png" class="menu_img" /></div>
+					<div class="menu_option" onclick="location.href='noticeslist.woori'"><img src="images/notice.png" class="menu_img" /></div>
 					<div class="menu_option" onclick="location.href='inquirylist.woori'"><img src="images/QnA.png" class="menu_img" /></div>
 					<div class="menu_option" onclick="location.href='faq.woori'"><img src="images/faq.png" class="menu_img" /></div>
 				</div>
@@ -56,9 +56,9 @@
 				<div class="menu_option" onclick="location.href='user.woori'"><img src="images/profile.png" class="menu_img" />프로필</div>
 				<div class="menu_option" onclick="location.href='notelist.woori'"><img src="images/letter.png" class="menu_img" />쪽지</div>
 				<div class="menu_option" onclick="location.href='friends.woori'"><img src="images/friend.png" class="menu_img" />친구</div>
-				<div class="menu_option" onclick="location.href='noticelist.woori'"><img src="images/notice.png" class="menu_img" />공지사항</div>
-				<div class="menu_option" onclick="location.href='inquiry.woori'"><img src="images/QnA.png" class="menu_img" />문의사항</div>
-				<div class="menu_option" onclick="location.href='faq.woori'"><img src="images/history.png" class="menu_img" />자주묻는 질문</div>
+				<div class="menu_option" onclick="location.href='noticeslist.woori'"><img src="images/notice.png" class="menu_img" />공지사항</div>
+				<div class="menu_option" onclick="location.href='inquirylist.woori'"><img src="images/QnA.png" class="menu_img" />문의사항</div>
+				<div class="menu_option" onclick="location.href='faq.woori'"><img src="images/faq.png" class="menu_img" />자주묻는 질문</div>
 			  </div>
 			</div>
 		</div>
