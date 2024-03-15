@@ -21,13 +21,9 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
  -->
 <!-- 1. 부트스트랩 js -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 2. 부트스트랩 css -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <!-- 3. jquery -->
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <!-- 4. 부트스트랩 아이콘 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
 <style type="text/css">
@@ -94,7 +90,7 @@
 	<p><a><i class="bi bi-file-text"></i>전체글 보기</a></p>
 	<p><a href="meetinglist.woori"><i class="bi bi-calendar-event"></i>모임</a></p>
 	<p><a href="historylist.woori"><i class="bi bi-file-text"></i>후기</a></p>
-	<p><a href=""><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
+	<p><a href="freeboardlist.woori"><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
 	<hr>
 	<p><a href="groupfee.woori"><i class="bi bi-currency-dollar"></i>회비</a></p>
 	<p><a><i class="bi bi-people-fill"></i>그룹원</a></p>
