@@ -235,6 +235,7 @@ public class LoginDAO
 
 
 	
+	// 그룹 리스트 뿌려주기
 	public ArrayList<GroupDTO> groupList(String us_code) throws SQLException
 	{
 		ArrayList<GroupDTO> result = new ArrayList<GroupDTO>();
@@ -244,7 +245,7 @@ public class LoginDAO
 				+ ", NVL(MGV.GB_CODE, 0) AS GB_CODE, MGV.GM_CODE"
 				+ ", (SELECT COUNT(MGV2.CG_CODE) FROM MY_GROUP_VIEW MGV2 WHERE MGV2.CG_CODE = MGV.CG_CODE) AS COUNT"
 				+ " FROM MY_GROUP_VIEW MGV"
-				+ " WHERE US_CODE2 = ? AND CGL_CODE IS NULL"
+				+ " WHERE US_CODE2 = ? AND CGL_CODE IS NULL AND GW_CODE IS NULL"
 				+ " ORDER BY GB_CODE DESC";
 
 		
@@ -274,6 +275,5 @@ public class LoginDAO
 		
 		return result;
 	}
-
 
 }

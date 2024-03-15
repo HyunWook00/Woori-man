@@ -204,52 +204,54 @@ public class MemberMainDAO
 	
 
 	// 친구 찾기 
-		public ArrayList<FriendsDTO> findFriends(String us_code, String shearchValue) throws SQLException
+	public ArrayList<FriendsDTO> findFriends(String us_code, String shearchValue) throws SQLException
+	{
+		ArrayList<FriendsDTO> result = new ArrayList<FriendsDTO>();
+		
+		String sql = "SELECT US_CODE, US_ID, US_NAME "
+				+ " FROM USER_VIEW WHERE US_CODE = ? OR US_ID = ? OR US_NAME = ?"
+				+ " AND US_CODE NOT IN (SELECT US_CODE2 FROM FRIENDS_LIST_VIEW WHERE US_CODE1 = ? AND US_CODE2 != ?)"
+				+ " AND US_CODE != ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		if (!shearchValue.matches("[+-]?\\d*(\\.\\d+)?"))
 		{
-			ArrayList<FriendsDTO> result = new ArrayList<FriendsDTO>();
-			
-			String sql = "SELECT US_CODE, US_ID, US_NAME "
-					+ " FROM USER_VIEW WHERE US_CODE = ? OR US_ID = ? OR US_NAME = ?"
-					+ " AND US_CODE NOT IN (SELECT US_CODE2 FROM FRIENDS_LIST_VIEW WHERE US_CODE1 = ? AND US_CODE2 != ?)";
-			
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			
-			if (!shearchValue.matches("[+-]?\\d*(\\.\\d+)?"))
-			{
-				String val = "0";
-				pstmt.setString(1, val);
-				pstmt.setString(2, shearchValue);
-				pstmt.setString(3, shearchValue);
-				pstmt.setString(4, us_code);
-				pstmt.setString(5, us_code);
-			}
-			else
-			{
-				pstmt.setString(1, shearchValue);
-				pstmt.setString(2, shearchValue);
-				pstmt.setString(3, shearchValue);
-				pstmt.setString(4, us_code);
-				pstmt.setString(5, us_code);
-			}
-			
-			
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next())
-			{
-				FriendsDTO dto = new FriendsDTO();
-				dto.setUs_code(rs.getString("US_CODE"));
-				dto.setUs_id(rs.getString("US_ID"));
-				dto.setUs_name(rs.getString("US_NAME"));
-				
-				result.add(dto);
-			}
-			
-			rs.close();
-			pstmt.close();
-			
-			return result;
+			String val = "0";
+			pstmt.setString(1, val);
+			pstmt.setString(2, shearchValue);
+			pstmt.setString(3, shearchValue);
+			pstmt.setString(4, us_code);
+			pstmt.setString(5, us_code);
+			pstmt.setString(6, us_code);
 		}
-
+		else
+		{
+			pstmt.setString(1, shearchValue);
+			pstmt.setString(2, shearchValue);
+			pstmt.setString(3, shearchValue);
+			pstmt.setString(4, us_code);
+			pstmt.setString(5, us_code);
+			pstmt.setString(6, us_code);
+		}
+		
+		
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next())
+		{
+			FriendsDTO dto = new FriendsDTO();
+			dto.setUs_code(rs.getString("US_CODE"));
+			dto.setUs_id(rs.getString("US_ID"));
+			dto.setUs_name(rs.getString("US_NAME"));
+			
+			result.add(dto);
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return result;
+	}
 	
 	
 	// 자신이 참여의사를 밝힌 모임 찾기
