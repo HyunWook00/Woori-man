@@ -197,4 +197,14 @@ public class HistoryController
 		return "";
 	}
 	
+	// 히스토리 게시글 입력폼 요청
+	// historyinsertform.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "historyinsertform.woori", method = RequestMethod.GET)
+	public String insertForm(@RequestParam("ao_code") String ao_code, Model model)
+	{
+		model.addAttribute("ao_code", ao_code);
+		
+		return "/WEB-INF/view/HistoryInsertForm.jsp";
+	}
+	
 }
