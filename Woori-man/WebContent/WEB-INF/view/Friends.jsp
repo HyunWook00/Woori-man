@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 	
 <link rel="stylesheet" href="css/memberHeader.css">
+<link rel="stylesheet" href="css/footer.css">
     
     <style>
 	    body 
@@ -96,8 +97,8 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            width: 70%;
-            margin-left: 100px;
+            width: 90%;
+    		margin-left: 40px;
             overflow-y: auto; /* 수직 스크롤바 설정 */
         	max-height: 400px; /* 최대 높이 설정 */
         }
@@ -167,6 +168,32 @@
             border-radius: 50%;
             border: 1px solid #ff8000;
 		}
+		
+		#type {
+    padding: 10px; /* 내부 여백 설정 */
+    border: 2px solid #ff8000; /* 테두리 설정 */
+    border-radius: 30px; /* 테두리의 둥근 모서리 설정 */
+    outline: none; /* 포커스시 테두리 제거 */
+    margin-bottom: 30px;
+    height: 56px;
+}
+
+/* #type과 .search-input 연결 스타일 */
+#type, .search-input {
+    display: inline-block; /* 인라인 블록 요소로 표시하여 같은 줄에 위치하도록 설정 */
+    vertical-align: middle; /* 수직 정렬을 중앙으로 설정 */
+}
+
+
+.bi-search {margin-bottom: 30px;
+    
+}
+
+.search-container .search-input,
+.search-container .bi-search {
+    vertical-align: middle;
+}
+
 		
     </style>
     
@@ -284,6 +311,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="footer">
+	<c:import url="MemberFooter.jsp"></c:import>
 </div>
 
 

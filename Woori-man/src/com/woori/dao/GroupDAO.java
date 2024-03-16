@@ -65,7 +65,7 @@ public class GroupDAO
 	   {
 	      ArrayList<GroupMemberDTO> result = new ArrayList<GroupMemberDTO>();
 	      
-	      String sql = "SELECT CG_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO, GM_REGDATE, POS_CODE, NVL(POS_NAME,'그룹원') AS POS_NAME"
+	      String sql = "SELECT CG_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO, TO_CHAR(GM_REGDATE, 'YYYY-MM-DD'), POS_CODE, NVL(POS_NAME,'그룹원') AS POS_NAME"
 	      		+ " FROM GROUP_MEMBER_VIEW WHERE CG_CODE = ? AND GW_CODE IS NULL";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, cg_code);
