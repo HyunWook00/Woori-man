@@ -121,8 +121,8 @@ function addFriends(us_code2)
    
 
 
-   
-<div class="header">
+  
+<div class="header container">
 	<c:import url="MemberHeader.jsp"></c:import>
 </div>
 <div class="top_bar">

@@ -53,8 +53,8 @@ public class MemberMainController
 			MemberMainDAO dao = new MemberMainDAO();
 			GroupDTO dto = new GroupDTO();
 			
-			String us_code = (String) session.getAttribute("us_code");
-			
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+			String us_code = userDTO.getUs_code();
 			System.out.println(us_code);
 			
 			dao.connection();		
