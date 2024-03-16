@@ -261,7 +261,7 @@
 		
 		<div class="G0_Create">
 			<button type="button" class="create in" id="submitBtn">그룹개설</button>
-			<button type="button" class="create out">돌아가기</button>
+			<button type="button" class="create out" >돌아가기</button>
 		</div>
 		
 		

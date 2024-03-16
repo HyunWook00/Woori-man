@@ -84,10 +84,10 @@ public class MemberMainController
 	
 	// 그룹 수정 메소드 
 	@RequestMapping(value = "/groupupdate.woori")
-	public String groupUpdate(@RequestParam("cg_code") String cg_code
-						    , @RequestParam("brd_name") String brd_name
-						    , @RequestParam("cg_intro") String cg_intro
-						    , @RequestParam("cg_profile") String cg_profile) throws ClassNotFoundException, SQLException
+	public String groupUpdate(Model model, @RequestParam("cg_code") String cg_code
+						    		     , @RequestParam("brd_name") String brd_name
+						    		     , @RequestParam("cg_intro") String cg_intro
+						    		     , @RequestParam("cg_profile") String cg_profile) throws ClassNotFoundException, SQLException
 	{
 		MemberMainDAO dao = new MemberMainDAO();
 		GroupDTO dto = new GroupDTO();
@@ -107,11 +107,14 @@ public class MemberMainController
 		
 		dao.close();
 		
-		return "redirect:changeGroupTest.jsp";
+		model.addAttribute("cg_code", cg_code);
+		
+		return "entergroup.woori";
 	}
 	
 	
 	// 수정할 그룹 이전 정보 조회 찾아오기 메소드
+	// 그룹 수정 폼으로 이동
 	@RequestMapping(value = "/groupupdateform.woori")
 	public String groupUpdateForm(Model model, @RequestParam("cg_code") String cg_code) throws ClassNotFoundException, SQLException
 	{

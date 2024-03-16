@@ -110,7 +110,7 @@ public class GroupMainController
 	}
 	
 	// 그룹 메인 페이지 접속시 실행되는 컨트롤러
-	@RequestMapping(value = "/groupmain.woori", method = RequestMethod.GET)
+	@RequestMapping(value = "/groupmain.woori")
 	public String groupMain(ModelMap model, HttpSession session)
 	{
 		// 세션에서 필요한 값 받아오기
