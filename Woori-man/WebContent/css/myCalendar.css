@@ -51,7 +51,7 @@
 .myCalendar .date li {
   z-index: 1;
   padding-top:10px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   cursor: pointer;
   border: 1px solid #ddd;
   height: 110px;
@@ -94,12 +94,11 @@
  
 }
 .myPointmeet
-{
-    position: absolute;
+{    position: absolute;
     font-size: 13px;
     width: 137px;
-    padding-top: 5px;
-    margin-top: 33px;
+    padding-top: 0px;
+    margin-top: 6px;
 }
 
 #myPrevBtn, #myNextBtn, #myCurrentMonth

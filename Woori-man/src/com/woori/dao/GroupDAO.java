@@ -204,7 +204,7 @@ public class GroupDAO
 		   
 		   try
 		   {	
-			   String sql = "SELECT MT_MEET, MT_TITLE, MT_ETC, CT_NAME FROM GROUP_MEETINGLIST_VIEW WHERE CG_CODE = ?";
+			   String sql = "SELECT MT_MEET, MT_TITLE, MT_ETC, CT_NAME, RG_NAME, MC_NAME FROM GROUP_MEETINGLIST_VIEW WHERE CG_CODE = ?";
 			   PreparedStatement pstmt = conn.prepareStatement(sql);
 			   pstmt.setInt(1, Integer.parseInt(cg_code));
 			   
@@ -221,7 +221,8 @@ public class GroupDAO
 				   dto.setMt_title(rs.getString("MT_TITLE"));
 				   dto.setMt_etc(rs.getString("MT_ETC"));
 				   dto.setCt_name(rs.getString("CT_NAME"));
-				   
+				   dto.setMc_name(rs.getString("MC_NAME"));
+				   dto.setRg_name(rs.getString("RG_NAME"));
 				  // System.out.println(dto.getMt_meet());
 				  // System.out.println(dto.getMt_title());
 				  // System.out.println(dto.getMt_etc());
@@ -250,7 +251,7 @@ public class GroupDAO
 		   
 		   try
 		   {
-			   String sql = "SELECT MT_MEET, MT_TITLE, MT_ETC, CT_NAME FROM GROUP_MYMEETING_VIEW WHERE GM_CODE = ?";
+			   String sql = "SELECT MT_MEET, MT_TITLE, MT_ETC, CT_NAME, RG_NAME, MC_NAME FROM GROUP_MYMEETING_VIEW WHERE GM_CODE = ?";
 			   PreparedStatement pstmt = conn.prepareStatement(sql);
 			   pstmt.setInt(1, Integer.parseInt(gm_code));
 			   
@@ -264,6 +265,8 @@ public class GroupDAO
 				   dto.setMt_title(rs.getString("MT_TITLE"));
 				   dto.setMt_etc(rs.getString("MT_ETC"));
 				   dto.setCt_name(rs.getString("CT_NAME"));
+				   dto.setMc_name(rs.getString("MC_NAME"));
+				   dto.setRg_name(rs.getString("RG_NAME"));
 				   
 				   result.add(dto);
 			   }

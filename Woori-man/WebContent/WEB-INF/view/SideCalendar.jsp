@@ -86,7 +86,7 @@
 				//System.out.println(m + " : 뒤");
 				li += "<li class='point'><div class='pointMt'> 모임 구분 :" + meetingDTO.get(m).getMc_name() 
 					   + "<br>모임 제목 : " + meetingDTO.get(m).getMt_title() 
-					   + "<br>모임 지역 : " + meetingDTO.get(m).getRg_name() +meetingDTO.get(m).getMt_etc()+"<br></div>"+i+"</li>";
+					   + "<br>모임 지역 : " + meetingDTO.get(m).getRg_name() + meetingDTO.get(m).getCt_name()+"<br></div>"+i+"</li>";
 				i++;
 				//break;
 			}
