@@ -234,12 +234,17 @@ strong {
 		<div id="content">
 			<div class="c_header">
 				<h2>탈퇴 안내</h2>
-				<p class="contxt">회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.</p>
+				<p class="contxt" style="font-weight: bold;">회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.</p>
+				
+				<p style="font-weight: bold; font-size: 14px;"> 
+				직위(그룹장 / 부그룹장 / 매니저 / 총무)를 가진 회원의 경우 탈퇴 버튼이 비활성화 되어 있습니다.<br>
+				회원님이 가입한 그룹 중 <span style="color: #FF8000;">직위</span>를 가진 그룹은 <span style="color: #FF8000;">${userPos }개<span> 입니다.<br>
+				</p>
 			</div>
 
 			<div class="section_delete">
 				<h3 class="h_dropout">
-					사용하고 계신 아이디(<em>${userId.us_Id }</em>)는 탈퇴할 경우 재사용 및 복구가 불가능합니다.
+					사용하고 계신 아이디(<em>${userId.us_id }</em>)는 탈퇴할 경우 재사용 및 복구가 불가능합니다.
 				</h3>
 				<p class="dropout_dsc">
 					<em>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가</em>하오니 신중하게 선택하시기 바랍니다.
@@ -304,7 +309,7 @@ strong {
 					<input type="hidden" name="lang" value="ko_KR">
 					<div class="dropout_agree_area">
 						<p class="contxt">
-							<strong> 탈퇴 후에는 아이디 <em>${userId.us_Id }</em> 로 다시 가입할 수 없으며
+							<strong> 탈퇴 후에는 아이디 <em>${userId.us_id }</em> 로 다시 가입할 수 없으며
 								아이디와 데이터는 복구할 수 없습니다. <br> 게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수
 								없습니다.<br>
 							</strong>

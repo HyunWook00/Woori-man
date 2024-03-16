@@ -362,19 +362,78 @@ a:visited  {
 			</div>
 
 
+			<div class="blockedGroup" style="display: right;">
+				
+				<div class="accordion" id="accordionExample">
+				  <div class="accordion-item">
+				    <h2 class="accordion-header">
+				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				        차단한 그룹 조회
+				      </button>
+				    </h2>
+				    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				      <div class="accordion-body">
+				        
+				        <ul class="InvitationList_ul">
+
+							<c:forEach var="blockedGroupList" items="${blockedGroupList }">
+							<!-- 그룹명, 그룹프사, 그룹멤버등록일, 그룹카테고리, 그룹 한줄소개 -->
+
+								<li class="InvitationList_li">
+									<div class="Invitation" style="margin: 0 auto; display: flex;" >
+
+										<div class="GroupProfileImage"
+											style="float: left; padding-right: 20px;">
+											<img alt="대체이미지" src="image/img_account.png"
+												style="width: 50px; height: 50px;">
+										</div>
+										<div class="GroupProfile_txt"
+											style="width: 450px; height: 200px;">
+											<div class="GourpProfileName">
+												<span class="GroupName" style="font-weight: bold;">${blockedGroupList.cg_name}</span>
+												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${blockedGroupList.gc_name }</span>
+												<br> 
+												<%-- <span class="GroupName_Category" style="color: #767678; font-size: 13px;">나의 그룹원 등록일 : ${myGroupList.gm_regDate}</span>
+												<br> --%>
+												<div class="GroupIntroduce">
+													<p>${blockedGroupList.cg_intro }</p>
+												</div>
+											</div>
+										</div>
+									
+									<div class="btnDiv" style="float: left;">
+									 	<button type="button" class="btn_edit" onclick="invitationunblock()">
+									  		<span class="subIndexEdit">차단 해제</span>
+										</button>
+									</div>
+									</div>
+								</li>
+								
+							</c:forEach>
+						</ul>
+				        
+				      </div>
+				    </div>
+				  </div>
+  
+			</div>
+			</div>
+			
+
+			<!-- 초대 그룹 리스트 -->
 			<div class="carousel"
 				style="display: flex; width: 1000px; padding: 24px 28px 28px; background-color: white; margin: 30px 106.5px 0px; border-radius: 20px; height: 300px; margin-left: 450px;">
 				<!-- 추가 -->
 
 
 				<div id="carouselExampleInterval" class="carousel slide"
-					data-bs-ride="carousel" style="float: left; width: 50%;">
+					data-bs-ride="carousel" style="float: left; width: 70%;">
 					
 					<div class="carousel-inner" style="height: 250px; display: flex; border-radius: 20px;">
 					
 					<c:forEach var="inviteGroupList" items="${inviteGroupList }">
-						<div class="carousel-item active" data-bs-interval="10000" 
-						style="width: 100%; height: 300px; float: left; background-color: #f4f6f8; background-size: 100px; ">
+						<div class="carousel-item active" data-bs-interval="2000" 
+						style="width: 100%; height: 300px; float: center; background-color: #f4f6f8; background-size: 100px; ">
 						
 						<!-- 그룹명, 그룹프사, 그룹장닉네임, 그룹한줄소개, 그룹초대발신일 -->
 						<div class="testTitle" >
@@ -391,24 +450,109 @@ a:visited  {
 									<ul class="testUl" style="list-style: none;">
 										<li class="testLi" style="font-size: 13px;">${inviteGroupList.cg_name }</li>
 										<li class="testLi" style="font-size: 13px;">그룹장이름</li>
-										<li class="testLi" style="font-size: 13px;">${inviteGroupList.gi_request }</li>
+										<%-- <li class="testLi" style="font-size: 13px;">초대일:${inviteGroupList.gi_request }</li> --%>
+										<li class="testLi" style="font-size: 13px;">응답유효기간:</li>
 									</ul>
 								</div>
 		    				</div>
 							<div class="GroupIntro" style="width: 85%; height: 30px; background-color: #fafafa; ">
 									<span>${inviteGroupList.cg_intro }</span>
+									<span>각그룹의최근활동일</span>
 							</div>
 							
-							
+<!-- 							
 							<div class="GroupProfileBtn">
-								<a href="" class="add">
+								<a href="invitationacccept.woori" class="add">
 									<span style="font-weight: 700;">수락</span>
 								</a>
-								<a href="" class="refuse">
+								<a href="invitationrefuse.woori" class="refuse">
 									<span style="font-weight: 700;">거절</span>
 								</a>
 							</div>
-								
+							
+ -->							
+ 
+ 						<!-- Button trigger modal -->
+ 						<div class="btnArea_new">
+							<button type="button" class="accept" data-bs-toggle="modal" data-bs-target="#exampleModalAccept">
+							  <span class="btn_text">수락</span>
+							</button>
+							<button type="button" class="refuse" data-bs-toggle="modal" data-bs-target="#exampleModalRefuse">
+							  <span class="btn_text">거절</span>
+							</button>
+						</div>	
+						
+							<!--수락 Modal -->
+							<div class="modal fade" id="exampleModalAccept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        해당 그룹의 초대를 수락하시겠습니까?
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="accept" data-bs-dismiss="modal" onclick="invitaionAccept()">
+							        	<span class="btn_text">수락</span>
+							        </button>
+							        <button type="reset" class="refuse">
+							        	<span class="btn_text">취소</span>
+							        </button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
+							<!--거절 Modal -->
+							<div class="modal fade" id="exampleModalRefuse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        초대를 거절한 그룹의 초대를 더이상 받지 않을 수 있습니다.
+							        해당 그룹의 초대를 더이상 받지 않으시겠습니까?
+							      </div>
+							      <div class="modal-footer">
+							      <!-- 
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">이번만 거절만 할게요</button>
+							        <button type="button" class="btn btn-primary">더이상 받지 않을래용</button>
+									 -->
+									
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="invitaionRefuse()">
+							        	<span class="btn_text">이번만 거절만 할게요</span>
+							        </button>
+							        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal"  onclick="invitationBlock()">
+							        	<span class="btn_text">더이상 받지 않을래용</span>
+							        </button>
+									
+																	      
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							 
+ 
+ 
+ 						<!-- 
+						<div class="btnArea_new">
+							<a href="" class="btn_item1">
+								<span class="btn_text">취소</span>
+							</a>						
+							<button class="accept" onclick="invitaionAccept()">
+								<span class="btn_text">수락</span>
+							</button>
+												
+							<button class="refuse" onclick="invitationRefuse()">
+								<span class="btn_text">거절</span>
+							</button>
+							
+						</div> -->
+											
 						</div>
 						
 						
@@ -508,10 +652,11 @@ a:visited  {
 				</div>
 
 				<!-- 두 번째 캐러셀 -->
-				<div id="carouselExampleInterval" class="carousel slide"
+				
+				<%-- <div id="carouselExampleInterval" class="carousel slide"
 					data-bs-ride="carousel" style="float: right; width: 50%;">
 					<div class="carousel-inner">
-						<div class="carousel-item active" data-bs-interval="10000">
+						<div class="carousel-item active" data-bs-interval="2000">
 								
 							<c:forEach var="inviteGroupList" items="${inviteGroupList }">
 								<div class="carousel-item active" data-bs-interval="10000" 
@@ -575,7 +720,7 @@ a:visited  {
 						<span class="carousel-control-next-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Next</span>
 					</button>
-				</div>
+				</div>  --%>
 
 
 			</div>
@@ -599,10 +744,10 @@ a:visited  {
 							<!-- 그룹명, 그룹프사, 그룹멤버등록일, 그룹카테고리, 그룹 한줄소개 -->
 
 								<li class="InvitationList_li">
-									<div class="Invitation" style="margin: 0 auto;">
+									<div class="Invitation">
 
 										<div class="GroupProfileImage"
-											style="float: left; padding-right: 20px;">
+											>
 											<img alt="대체이미지" src="image/img_account.png"
 												style="width: 50px; height: 50px;">
 										</div>
@@ -610,10 +755,10 @@ a:visited  {
 											style="width: 450px; height: 200px;">
 											<div class="GourpProfileName">
 												<span class="GroupName" style="font-weight: bold;">${myGroupList.cg_name}</span>
-												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${myGroupList.gm_regDate}</span>
-												<br> 
 												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${myGroupList.gc_name }</span>
-												<br>
+												<br> 
+												<%-- <span class="GroupName_Category" style="color: #767678; font-size: 13px;">나의 그룹원 등록일 : ${myGroupList.gm_regdate}</span>
+												<br> --%>
 												<div class="GroupIntroduce">
 													<p>${myGroupList.cg_intro }</p>
 												</div>
@@ -645,12 +790,13 @@ a:visited  {
 
 					<div class="groupList">
 						<ul class="InvitationList_ul">
+						
 							
 							<!-- 그룹명, 그룹프사, 그룹카테고리, 그룹장닉네임, 그룹한줄소개, 그룹초대응답일 -->
 							<c:forEach var="waitingGroupList" items="${waitingGroupList }">
 
 								<li class="InvitationList_li">
-									<div class="Invitation" style="margin: 0 auto;">
+									<div class="Invitation">
 
 										<div class="GroupProfileImage"
 											style="float: left; padding-right: 20px;">
@@ -661,21 +807,22 @@ a:visited  {
 											style="width: 450px; height: 200px;">
 											<div class="GourpProfileName">
 												<span class="GroupName" style="font-weight: bold;">${waitingGroupList.cg_name}</span>
-												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${waitingGroupList.gi_response}</span>
-												<br> 
 												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${waitingGroupList.gc_name }</span>
-												<br>
+												<br> 
+												<%-- <span class="GroupName_Category" style="color: #767678; font-size: 13px;">나의 초대 응답일 : ${waitingGroupList.gi_response}</span>
+												<br> --%>
 												<div class="GroupIntroduce">
 													<p>${waitingGroupList.cg_intro }</p>
 												</div>
 											</div>
-
 										</div>
+									
 									</div>
 									
 									<button type="button" class="btn_edit">
 									  <span class="subIndexEdit">그룹원 정보 등록하기</span>
 									</button>
+									
 									
 								</li>
 								
@@ -703,7 +850,6 @@ a:visited  {
 					</ul>
 				</div>
 			</footer>
-
 
 
 		</div>
