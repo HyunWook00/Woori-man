@@ -93,8 +93,9 @@
 				//System.out.print(Integer.parseInt(groupMonth[3].toString())+" - ");
 				//System.out.print(Integer.parseInt(groupDay[3].toString())+"\n");
 				//System.out.println(m + " : 뒤");
-				li += "<li class='point'><div class='pointMt'>"+meetingDTO.get(m).getMt_title()+"<br>"
-					   + meetingDTO.get(m).getMt_etc()+"<br></div>"+i+"</li>";
+				li += "<li class='point'><div class='pointMt'> 모임 구분 :" + meetingDTO.get(m).getMc_name() 
+					   + "<br>모임 제목 : " + meetingDTO.get(m).getMt_title() 
+					   + "<br>모임 지역 : " + meetingDTO.get(m).getRg_name() +meetingDTO.get(m).getMt_etc()+"<br></div>"+i+"</li>";
 				i++;
 				//break;
 			}

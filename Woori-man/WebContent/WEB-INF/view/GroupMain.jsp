@@ -128,7 +128,7 @@ String cp = request.getContextPath();
 		</div> <!-- end carousel slide -->
 		<div class="newArticle" >
 	        <ul class="list-group list-group-flush">
-			<h4>왁자지껄 최신글</h4>
+			<h4>${groupDTO.brd_name } 최신글</h4>
 			<c:forEach var="newborad" items="${newBorad }">
 				<li class="list-group-item list" 
 				onclick="loaction.href='freeboardarticle.woori?article=${newborad.brd_code }'">${newborad.brd_subject }</li>

@@ -61,6 +61,9 @@
 		 	<div class="profile2">
 		 		${groupDTO.cg_intro }<br>
 		 		포인트 : ${groupDTO.group_point }pt<br>	
+		 		<c:if test="${groupMemberDTO.pos_code== 1 || groupMemberDTO.pos_code== 2 }">
+		 			<button type="button" class="mySideBtn" > 그룹 수정 </button>
+		 		</c:if>
 		 		<hr>
 		 	</div>
 		  </div>
