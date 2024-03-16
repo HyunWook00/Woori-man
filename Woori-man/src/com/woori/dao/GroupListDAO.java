@@ -186,7 +186,7 @@ public class GroupListDAO
 			
 			//○ 그룹명, 그룹프사, 그룹장닉네임, 그룹한줄소개, 그룹초대발신일
 			//→ 그룹장닉네임, 그룹초대발신일 추가
-			String sql = "SELECT CG_NAME, CG_PROFILE, CG_INTRO FROM VIEW_INVITEGROUP WHERE US_CODE = ?";
+			String sql = "SELECT CG_NAME, CG_PROFILE, CG_INTRO FROM INVITEGROUP_VIEW WHERE US_CODE = ?";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
@@ -312,7 +312,7 @@ public class GroupListDAO
 			return result;
 		}
 		
-		// 그룹 차단 해제 버튼 클릭시 → 차단테이블에서 해당 그룹 삭제
+		// 그룹 차단 해제 버튼 클릭시 → 차단테이블에서 해당 그룹 삭제, 초대 테이블 
 		public int unblock(String us_code, String cg_code) throws ClassNotFoundException, SQLException
 		{
 			int result = 0;

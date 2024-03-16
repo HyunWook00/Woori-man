@@ -48,6 +48,7 @@ public class GroupController01
 			//GroupDTO recentDate = new GroupDTO();
 			
 			String us_code = dto.getUs_code();
+			//System.out.println(us_code);
 			//int us_code = 3859105;
 			//int cg_code = 5;
 			

@@ -18,6 +18,7 @@ String cp = request.getContextPath();
 
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
 
 <style type="text/css">
@@ -333,7 +334,97 @@ a:visited  {
 	color: #7b8994;
 }
 
+
+.accept{
+   width: 60px;
+   height: 30px;
+   /* float: right; */
+   text-align: center;
+   /* border-radius: 20px; */
+   /* vertical-align: middle; */
+   padding: 19px 0 18px;
+   border-radius: 5px;
+   background-color: #ff8a3d;
+   border: none;
+}
+.btnArea_new {
+	display: block;
+	text-align: center;
+	height: 61px;
+	width: 100%;
+	height: 143px;
+	margin-top: 30px;
+}
+
+.refuse{
+	width: 60px;
+   height: 30px;
+   /* float: right; */
+   text-align: center;
+   /* border-radius: 20px; */
+   /* vertical-align: middle; */
+   padding: 19px 0 18px;
+   border-radius: 5px;
+   background-color: #959eae;
+   border: none;
+}
+
+
+.btn_text {
+	font-size: 17px;
+	font-weight: 600;
+	letter-spacing: -.5px;
+	color: #fff;
+	width: 60px;
+    height: 4px;
+    
+    justify-content: center;
+    align-items: center;
+    display: flex;
+} 
+
+.blockedGroup{
+   width: 500px; 
+   margin-left: 950px;
+   border-radius: 20px;
+}
+
+.accordion-body{
+	height: 200px;
+	overflow: scroll;
+}
+
+.accordion-body::-webkit-scrollbar {
+	display: none;
+}
+
+
+/* 필수 */
+.InvitationList_ul .InvitationList_li:nth-child(2n-1) {
+    padding-right: 33px;
+}
+
+.GroupProfileImage{
+	padding-right: 20px;
+}
+
+.GroupPrifile_txt{
+	width: 450px;
+}
+
+
+
 </style>
+<script type="text/javascript">
+
+ 	$(function()
+	{
+		var obj = document.getElementsByClassName("carousel-item")[0];
+		$(obj).addClass("active");
+		
+	})
+ 
+</script>
 
 </head>
 <body>
@@ -418,18 +509,228 @@ a:visited  {
   
 			</div>
 			</div>
-			
 
-			<!-- 초대 그룹 리스트 -->
+<!-- 
+			<div id="carouselExample" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+					</div>
+					<div class="carousel-item">
+					</div>
+					<div class="carousel-item">
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+
+ -->	
+ 		<!-- 초대 그룹 리스트 -->
 			<div class="carousel"
 				style="display: flex; width: 1000px; padding: 24px 28px 28px; background-color: white; margin: 30px 106.5px 0px; border-radius: 20px; height: 300px; margin-left: 450px;">
 				<!-- 추가 -->
 
 
-				<div id="carouselExampleInterval" class="carousel slide"
-					data-bs-ride="carousel" style="float: left; width: 70%;">
+				<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+				  <div class="carousel-inner">
+						
+					 <c:forEach var="inviteGroupList" items="${inviteGroupList }">
+						
+						<div class="carousel-item" data-bs-interval="3000"
+						style="width:500px; height: 300px; float: center; background-color: #f4f6f8; background-size: 100px; ">
 					
-					<div class="carousel-inner" style="height: 250px; display: flex; border-radius: 20px;">
+						
+						<!-- 그룹명, 그룹프사, 그룹장닉네임, 그룹한줄소개, 그룹초대발신일 -->
+						<div class="testTitle" >
+	
+							<div class="testGroupProfile" style="width: 100%; height: 70px; background-color: #fafafa; display: flex;">
+								<div class="testProfileImage" style="flex-direction: left; width:20%; height:60px; margin-top: 3px;">
+										<img alt="그룹프사" src="image/profile.jpg" style="width: 90%; height: 60px; border-radius: 100%;">
+								</div>
+									
+								<div class="testGroupInfo" style="flex-direction: right; width:80%; height:60px; margin-top: 3px;">
+									<ul class="testUl" style="list-style: none;">
+										<li class="testLi" style="font-size: 13px;">${inviteGroupList.cg_name }</li>
+										<li class="testLi" style="font-size: 13px;">그룹장이름</li>
+										<%-- 
+										<li class="testLi" style="font-size: 13px;">초대일:${inviteGroupList.gi_request }</li>
+										 --%>
+										<li class="testLi" style="font-size: 13px;">응답유효기간:</li>
+									</ul>
+								</div>
+		    				 </div>
+							 <div class="GroupIntro" style="width: 85%; height: 30px; background-color: #fafafa; ">
+									<span>${inviteGroupList.cg_intro }</span>
+									<span>각그룹의최근활동일</span>
+							 </div>
+							
+	 						<!-- Button trigger modal -->
+	 						<div class="btnArea_new">
+								<button type="button" class="accept" data-bs-toggle="modal" data-bs-target="#exampleModalAccept">
+								  <span class="btn_text">수락</span>
+								</button>
+								<button type="button" class="refuse" data-bs-toggle="modal" data-bs-target="#exampleModalRefuse">
+								  <span class="btn_text">거절</span>
+								</button>
+							</div>	
+
+					
+					</div> <!-- testTitle div 끝 -->
+						
+				</div><!-- carousel-item active div 끝 -->
+	 		 </c:forEach>
+						
+							<!--수락 Modal -->
+							<div class="modal fade" id="exampleModalAccept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        해당 그룹의 초대를 수락하시겠습니까?
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="accept" data-bs-dismiss="modal" onclick="invitaionAccept()">
+							        	<span class="btn_text">수락</span>
+							        </button>
+							        <button type="reset" class="refuse">
+							        	<span class="btn_text">취소</span>
+							        </button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							<!-- 수락 modal div 끝 -->
+							
+							<!--거절 Modal -->
+							<div class="modal fade" id="exampleModalRefuse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        초대를 거절한 그룹의 초대를 더이상 받지 않을 수 있습니다.
+							        해당 그룹의 초대를 더이상 받지 않으시겠습니까?
+							      </div>
+							      <div class="modal-footer">
+							      <!-- 
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">이번만 거절만 할게요</button>
+							        <button type="button" class="btn btn-primary">더이상 받지 않을래용</button>
+									 -->
+									
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="invitaionRefuse()">
+							        	<span class="btn_text">이번만 거절만 할게요</span>
+							        </button>
+							        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal"  onclick="invitationBlock()">
+							        	<span class="btn_text">더이상 받지 않을래용</span>
+							        </button>
+																	      
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							<!-- 거절 모달 div 끝 -->
+											
+						
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+		
+		
+		 </div><!-- carousel-inner div 끝 -->  
+		
+		</div> <!--  carouselExample div 끝 -->
+		
+	</div> <!-- carousel div 끝 -->
+				
+				<!-- 두 번째 캐러셀 -->
+				
+				<%-- <div id="carouselExampleInterval" class="carousel slide"
+					data-bs-ride="carousel" style="float: right; width: 50%;">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="2000">
+								
+							<c:forEach var="inviteGroupList" items="${inviteGroupList }">
+								<div class="carousel-item active" data-bs-interval="10000" 
+								style="width: 100%; height: 300px; float: left; background-color: #f4f6f8; background-size: 100px; ">
+								
+								<!-- 그룹명, 그룹프사, 그룹장닉네임, 그룹한줄소개, 그룹초대발신일 -->
+								<div class="testTitle"" >
+			
+									<div class="testGroupProfile" style="width: 85%; height: 70px; background-color: #fafafa;
+										display: flex;">
+										<div class="testProfileImage" style="flex-direction: left; 
+											width:20%; height:60px; margin-top: 3px;">
+												<img alt="그룹프사" src="image/profile.jpg" style="width: 90%; height: 60px; border-radius: 100%;">
+										</div>
+											
+										<div class="testGroupInfo" style="flex-direction: right; 
+										width:80%; height:60px; margin-top: 3px;">
+											<ul class="testUl" style="list-style: none;">
+												<li class="testLi" style="font-size: 13px;">${inviteGroupList.cg_name }</li>
+												<li class="testLi" style="font-size: 13px;">그룹장이름</li>
+												<li class="testLi" style="font-size: 13px;">${inviteGroupList.gi_request }</li>
+											</ul>
+										</div>
+				    				</div>
+									<div class="GroupIntro" style="width: 85%; height: 30px; background-color: #fafafa; ">
+											<span>${inviteGroupList.cg_intro }</span>
+									</div>
+									
+									
+									<div class="GroupProfileBtn">
+										<a href="" class="add">
+											<span style="font-weight: 700;">수락</span>
+										</a>
+										<a href="" class="refuse">
+											<span style="font-weight: 700;">거절</span>
+										</a>
+									</div>
+								</div>
+								
+								</div>
+						
+					</c:forEach>
+						
+					
+					
+					
+					</div>
+					<button class="carousel-control-prev" type="button"
+						data-bs-target="#carouselExample" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-bs-target="#carouselExample" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+
+
+				<%-- <div id="carouselExampleInterval" class="carousel slide"
+					data-bs-ride="carousel" style="float: left; width: 70%;">
+				  <div class="carousel-inner" style="height: 250px; display: flex; border-radius: 20px;">
 					
 					<c:forEach var="inviteGroupList" items="${inviteGroupList }">
 						<div class="carousel-item active" data-bs-interval="2000" 
@@ -450,7 +751,7 @@ a:visited  {
 									<ul class="testUl" style="list-style: none;">
 										<li class="testLi" style="font-size: 13px;">${inviteGroupList.cg_name }</li>
 										<li class="testLi" style="font-size: 13px;">그룹장이름</li>
-										<%-- <li class="testLi" style="font-size: 13px;">초대일:${inviteGroupList.gi_request }</li> --%>
+										<li class="testLi" style="font-size: 13px;">초대일:${inviteGroupList.gi_request }</li>
 										<li class="testLi" style="font-size: 13px;">응답유효기간:</li>
 									</ul>
 								</div>
@@ -560,84 +861,6 @@ a:visited  {
 						
 					</c:forEach>
 						
-						<!-- 
-						<div class="carousel-item" data-bs-interval="2000"
-						style="width: 100%; height: 300px; float: right; background-color: green;">
-
-
-						<div class="testTitle">
-							<div class="testGroupProfile" style="width: 85%; height: 70px; background-color: #fafafa;
-							display: flex;">
-								<div class="testProfileImage" style="flex-direction: left; 
-								width:20%; height:60px; margin-top: 3px;">
-									<img alt="그룹프사" src="image/profile.jpg" style="width: 90%; height: 60px; border-radius: 100%;">
-								</div>
-								<div class="testGroupInfo" style="flex-direction: right; 
-								width:80%; height:60px; margin-top: 3px;">
-									<ul class="testUl" style="list-style: none;">
-										<li class="testLi" style="font-size: 13px;">젤리를 먹는 그룹</li>
-										<li class="testLi" style="font-size: 13px;">그룹장젤리</li>
-										<li class="testLi" style="font-size: 13px;">그룹초대발신일</li>
-									</ul>
-								</div>
-							</div>
-							<div class="GroupIntro" style="width: 85%; height: 30px; background-color: #fafafa; ">
-								<span>젤리를 먹는 그룹입니다</span>
-							</div>
-							
-							<div class="GroupProfileBtn">
-							<a href="" class="add">
-								<span style="font-weight: 700;">수락</span>
-							</a>
-							<a href="" class="refuse">
-								<span style="font-weight: 700;">거절</span>
-							</a>
-						</div>
-							
-						
-						</div>
-
-
-						</div>
-						
-						
-						<div class="carousel-item" style="width: 100%; height: 300px; background-color: #f4f6f8;">
-						
-						<div class="testTitle">
-							<div class="testGroupProfile" style="width: 85%; height: 70px; background-color: #fafafa;
-							display: flex;">
-								<div class="testProfileImage" style="flex-direction: left; 
-								width:20%; height:60px; margin-top: 3px;">
-									<img alt="그룹프사" src="image/profile.jpg" style="width: 90%; height: 60px; border-radius: 100%;">
-								</div>
-								<div class="testGroupInfo" style="flex-direction: right; 
-								width:80%; height:60px; margin-top: 3px;">
-									<ul class="testUl" style="list-style: none;">
-										<li class="testLi" style="font-size: 13px;">정수기를 가는 그룹</li>
-										<li class="testLi" style="font-size: 13px;">그룹장물</li>
-										<li class="testLi" style="font-size: 13px;">그룹초대발신일</li>
-									</ul>
-								</div>
-							</div>
-							
-							<div class="GroupIntro" style="width: 85%; height: 30px; background-color: #fafafa; ">
-								<span>물을 뜨는 그룹입니다</span>
-							</div>
-							
-							<div class="GroupProfileBtn">
-							<a href="" class="add">
-								<span style="font-weight: 700;">수락</span>
-							</a>
-							<a href="" class="refuse">
-								<span style="font-weight: 700;">거절</span>
-							</a>
-							</div>
-						
-						</div>
-						
-						</div>
-						 -->
-						
 					</div>
 					<button class="carousel-control-prev" type="button"
 						data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -649,8 +872,8 @@ a:visited  {
 						<span class="carousel-control-next-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Next</span>
 					</button>
-				</div>
-
+				</div> --%>
+				
 				<!-- 두 번째 캐러셀 -->
 				
 				<%-- <div id="carouselExampleInterval" class="carousel slide"
@@ -703,12 +926,6 @@ a:visited  {
 						</div>
 
 
-						<div class="carousel-item" data-bs-interval="2000">
-							<img src="..." class="d-block w-100" alt="...">
-						</div>
-						<div class="carousel-item">
-							<img src="..." class="d-block w-100" alt="...">
-						</div>
 					</div>
 					<button class="carousel-control-prev" type="button"
 						data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -720,10 +937,13 @@ a:visited  {
 						<span class="carousel-control-next-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Next</span>
 					</button>
-				</div>  --%>
+				</div> 
 
 
-			</div>
+			</div> 
+ --%>			
+			
+			
 			<!-- 캐러셀 끝 -->
 
 			<section class="GroupListSection">
@@ -852,7 +1072,7 @@ a:visited  {
 			</footer>
 
 
-		</div>
+
 	</div>
 </body>
 </html>
