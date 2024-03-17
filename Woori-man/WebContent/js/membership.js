@@ -37,7 +37,6 @@ $(document).ready(function()
 	            			});
 	            	}
 				}
-		 		, beforeSend: checkId
 		 		, error: function(e)
 				{
 					alert(e.responseText);
