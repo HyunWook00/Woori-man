@@ -28,7 +28,7 @@
 
 
 <div class="header">
-	<c:import url="/AdminHeader.jsp"></c:import>
+	<c:import url="AdminHeader.jsp"></c:import>
 </div>
 
 <div class="main">
@@ -36,7 +36,7 @@
 
 <div class="container content">
     <h2>공지사항 입력</h2>
-    <form action="noticeinsert.woori" method="post"  >
+    <form action="notificationinsert.woori" method="post"  >
         <div class="form-group">
             <label for="title">제목:</label>
             <input type="text" id="title" name="title" class="txt" required>

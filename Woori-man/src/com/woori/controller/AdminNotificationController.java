@@ -24,7 +24,7 @@ import sun.nio.fs.DefaultFileTypeDetector;
 public class AdminNotificationController
 {
 	// 공지사항 리스트 
-		@RequestMapping(value = "/notice.woori")
+		@RequestMapping(value = "/notification.woori")
 		public String noticeList(Model model) throws SQLException, ClassNotFoundException
 		{
 			ArrayList<AdminNotificationDTO> noticeList = new ArrayList<AdminNotificationDTO>();
@@ -35,21 +35,21 @@ public class AdminNotificationController
 			
 			model.addAttribute("noticeList", noticeList);
 			
-			return "Notification.jsp";
+			return "WEB-INF/view/Notification.jsp";
 		}
 		
 		
 		// 공지사항 작성폼 이동 메소드
-		@RequestMapping(value = "/noticeinsertform.woori")
+		@RequestMapping(value = "/notificationinsertform.woori")
 		public String noticeInsertForm()
 		{
-			return "NotificationInsertForm.jsp";
+			return "WEB-INF/view/NotificationInsertForm.jsp";
 		}
 		
 		
 		
 		// 공지사항 작성 액션 처리 
-		@RequestMapping(value = "/noticeinsert.woori")
+		@RequestMapping(value = "/notificationinsert.woori")
 		public String noticeInsert(@RequestParam("nf_title") String nf_title
 								 , @RequestParam("nf_content") String nf_content
 								 , @RequestParam("ad_code") String ad_code
@@ -59,11 +59,6 @@ public class AdminNotificationController
 			dao.connection();
 			AdminNotificationDTO ad = new AdminNotificationDTO();
 
-			
-			
-			
-		
-			
 			System.out.println(nf_title);
 			System.out.println(nf_content);
 			System.out.println(ad_code);
@@ -77,14 +72,14 @@ public class AdminNotificationController
 				
 			dao.addNotice(ad);
 				
-			return "redirect:notice.woori";
+			return "redirect:notification.woori";
 		}
 		
 		
 
 
 		// 특정 공지사항 내용 조회
-		@RequestMapping(value = "/noticeread.woori")
+		@RequestMapping(value = "/notificationread.woori")
 		public String noticeRead(Model model, @RequestParam("nf_code") String nf_code) throws SQLException, ClassNotFoundException
 		{
 			AdminNotificationDAO dao = new AdminNotificationDAO();
@@ -95,7 +90,7 @@ public class AdminNotificationController
 			
 			model.addAttribute("notice", notice);
 			
-			return "NotificationRead.jsp";
+			return "WEB-INF/view/NotificationRead.jsp";
 		}
 
 }

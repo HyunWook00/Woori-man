@@ -30,7 +30,7 @@
 
 
 <div class="header">
-	<c:import url="/AdminHeader.jsp"></c:import>
+	<c:import url="AdminHeader.jsp"></c:import>
 </div>
 
 <div class="main ma">
@@ -48,7 +48,7 @@
 		    	</div>
 		    	<div class="go-list">
 		    		<label>
-		    			<a href="notice.woori" style="display: flex; align-items: center;">
+		    			<a href="notification.woori" style="display: flex; align-items: center;">
 		    				<i class="bi bi-list-task" style="color: unset; font-size: 23px; padding: 3px; "></i>
 		    			목록</a>
 		    		</label>

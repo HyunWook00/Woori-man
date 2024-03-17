@@ -61,7 +61,7 @@
 			
 			<!-- 공지사항 관리 메뉴 -->
 			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-card-text"></i><span class="menu-title">공지사항 관리</span></a></div>
+				<div class="icon"><a href="notification.woori"><i class="bi bi-card-text"></i><span class="menu-title">공지사항 관리</span></a></div>
 				<div class="hover-text">공지사항 관리</div>
 			</li>
 			

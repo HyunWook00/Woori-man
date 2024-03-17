@@ -42,7 +42,7 @@
 		<ul class="tbl_list">
 			<c:forEach var="list" items="${noticeList }">
 				<li class="tbl">
-					<a href="noticeread.woori?nf_code=${list.nf_code}">
+					<a href="notificationread.woori?nf_code=${list.nf_code}">
 					<strong>${list.nf_title }</strong>
 					<br>
 					<span>${list.nf_date }</span>
