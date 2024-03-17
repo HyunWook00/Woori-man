@@ -4,6 +4,9 @@ package com.woori.controller;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
@@ -52,13 +55,13 @@ public class AdminNotificationController
 		@RequestMapping(value = "/notificationinsert.woori")
 		public String noticeInsert(@RequestParam("nf_title") String nf_title
 								 , @RequestParam("nf_content") String nf_content
-								 , @RequestParam("ad_code") String ad_code
-								 , @RequestParam("na_name") String na_name) throws ClassNotFoundException, SQLException
+								 , @RequestParam("na_name") String na_name, HttpSession session) throws ClassNotFoundException, SQLException
 		{
 			AdminNotificationDAO dao = new AdminNotificationDAO();
 			dao.connection();
 			AdminNotificationDTO ad = new AdminNotificationDTO();
-
+			String ad_code = (String)session.getAttribute("ad_code");
+			
 			System.out.println(nf_title);
 			System.out.println(nf_content);
 			System.out.println(ad_code);

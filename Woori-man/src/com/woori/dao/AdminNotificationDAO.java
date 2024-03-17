@@ -39,7 +39,7 @@ public class AdminNotificationDAO
 		{
 			ArrayList<AdminNotificationDTO> result = new ArrayList<AdminNotificationDTO>();		
 			
-			String sql = "SELECT NF_CODE, NF_TITLE, NF_DATE FROM NOTIFICATION";
+			String sql = "SELECT NF_CODE, NF_TITLE, NF_DATE FROM NOTIFICATION ORDER BY 1 DESC";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

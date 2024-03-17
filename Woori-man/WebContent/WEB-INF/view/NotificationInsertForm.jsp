@@ -39,16 +39,15 @@
     <form action="notificationinsert.woori" method="post"  >
         <div class="form-group">
             <label for="title">제목:</label>
-            <input type="text" id="title" name="title" class="txt" required>
+            <input type="text" id="nf_title" name="nf_title" class="txt" required>
         </div>
         <div class="form-group">
             <label for="content">내용:</label>
-            <textarea id="content" name="content" class="txt" required></textarea>
+            <textarea id="nf_content" name="nf_content" class="txt" required></textarea>
         </div>
         <div class="form-group">
             <label for="image">이미지 첨부:</label>
-            <input type="file" id="name" name="name">
-            관리자 코드<input type="text" class="ad"  id="code" name="code"/>	
+            <input type="file" id="na_name" name="na_name">
         </div>
         <div class="form-group">
             <button type="submit" class="f_btn">등록</button>
