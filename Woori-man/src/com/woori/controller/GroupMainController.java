@@ -10,10 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.woori.dto.FriendsDTO;
+import com.woori.dao.GroupInviteDAO;
+import com.woori.dto.GroupInviteDTO;
 import com.woori.dao.GroupDAO;
 import com.woori.dao.GroupFeeDAO;
 import com.woori.dao.ICsDAO;
@@ -155,25 +159,117 @@ public class GroupMainController
 	
 	// 그룹원 목록 페이지 접속 시 실행되는 컨트롤러
 	@RequestMapping(value = "/groupmemberlist.woori")
-	public String groupMemberList(ModelMap model, HttpSession session)
+	public String groupMemberList(ModelMap model, HttpSession session) throws SQLException
 	{
 		// 세션에서 필요한 값 받아오기
 		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
+		UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
 		String cg_code = groupDTO.getCg_code();
-
+		String us_code = userDTO.getUs_code();
+		//String us_code = groupDTO.getUs_code();
+		
+		//GroupInviteDAO dao = new GroupInviteDAO();
+		
+		//System.out.println("ㅇㅇㅇㅇㅇ");
+		GroupDAO dao = new GroupDAO();
+		GroupInviteDAO dao2 = new GroupInviteDAO();
+		
+		ArrayList<GroupMemberDTO> groupMemberList = null;
+		int count = 0;
+		
 		try
 		{
-			GroupDAO dao = new GroupDAO();
 			dao.connection();
-			model.addAttribute("groupMemberList", dao.groupMemberList(cg_code));
+			//System.out.println("여기");
+			//System.out.println(us_code + cg_code);
+			groupMemberList = dao.groupMemberList(cg_code);
 			dao.close();
+			dao2.connection();
+			count = dao2.count(us_code, cg_code);
+			dao2.close();
+			
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
-		return "WEB-INF/view/GroupMemberList.jsp";
+		model.addAttribute("groupMemberList", groupMemberList);
+		model.addAttribute("count", count);
+		//System.out.println(cg_code);
+		//model.addAttribute("us_code", us_code);
+		//model.addAttribute("cg_code", cg_code);
+		
+		return "/WEB-INF/view/GroupMemberList.jsp";
+	}
+	
+	// 친구 목록 
+	@RequestMapping("/groupinvitelist.woori")
+	public String friends(Model model, HttpSession session) throws SQLException, ClassNotFoundException
+	{
+		String result = "";
+		
+		ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();		
+		
+		GroupInviteDAO dao = new GroupInviteDAO();
+		
+		
+		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
+		UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
+		String cg_code = groupDTO.getCg_code();
+		String us_code = userDTO.getUs_code();
+		
+		try
+		{
+			dao.connection();
+			
+			friendsList = dao.list(us_code, cg_code);
+			
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		
+		model.addAttribute("friendsList", friendsList);
+		
+		model.addAttribute("us_code", us_code);
+		model.addAttribute("cg_code", cg_code);
+		
+		result = "/WEB-INF/view/GroupInviteModal.jsp";
+		
+		return result;
+	}	
+	
+	// 그룹원 초대하기
+	@RequestMapping("/groupinvite.woori")
+	public String GroupInvite(Model model, GroupInviteDTO dto) throws SQLException, ClassNotFoundException
+	{
+		String result = "";
+		
+		GroupInviteDAO dao = new GroupInviteDAO();
+		
+		dao.connection();
+		
+		dao.GroupInvite(dto);
+		
+		dao.close();
+		
+		result = "redirect:groupmemberlist.woori";
+		
+		return result;
 	}
 	
 	// 그룹 마이페이지 접속 시 실행되는 컨트롤러

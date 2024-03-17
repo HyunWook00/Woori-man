@@ -235,28 +235,25 @@ public class NoteController
 	}
 
 	// 쪽지 작성(입력) 폼 불러오는 액션 처리
-	@RequestMapping("/notewriteform.woori")
-	public String noteWriteForm(Model model) throws SQLException, ClassNotFoundException
-	{
-		String result = "";
-		
-		result = "/WEB-INF/view/NoteWrite.jsp";
-		
-		return result;
-	}
-
-	// 쪽지 작성(입력) 액션
-	@RequestMapping("/notewrite.woori")
-	public String noteWrite(Model model) throws SQLException, ClassNotFoundException
-	{
-		String result = "";
-		
-		
-		
-		result = "redirect:sendnote.woori";
-		
-		return result;
-	}
+	/*
+	 * @RequestMapping("/notewriteform.woori") public String noteWriteForm(Model
+	 * model) throws SQLException, ClassNotFoundException { String result = "";
+	 * 
+	 * result = "/WEB-INF/view/NoteWrite.jsp";
+	 * 
+	 * return result; }
+	 * 
+	 * // 쪽지 작성(입력) 액션
+	 * 
+	 * @RequestMapping("/notewrite.woori") public String noteWrite(Model model)
+	 * throws SQLException, ClassNotFoundException { String result = "";
+	 * 
+	 * 
+	 * 
+	 * result = "redirect:sendnote.woori";
+	 * 
+	 * return result; }
+	 */
 	
 	
 	

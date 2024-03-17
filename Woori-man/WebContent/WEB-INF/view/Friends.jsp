@@ -170,30 +170,47 @@
 		}
 		
 		#type {
-    padding: 10px; /* 내부 여백 설정 */
-    border: 2px solid #ff8000; /* 테두리 설정 */
-    border-radius: 30px; /* 테두리의 둥근 모서리 설정 */
-    outline: none; /* 포커스시 테두리 제거 */
-    margin-bottom: 30px;
-    height: 56px;
-}
+		    padding: 10px; 
+		    border: 2px solid #ff8000; 
+		    border-radius: 30px; 
+		    outline: none; 
+		    margin-bottom: 30px;
+		    height: 56px;
+		}
 
-/* #type과 .search-input 연결 스타일 */
-#type, .search-input {
-    display: inline-block; /* 인라인 블록 요소로 표시하여 같은 줄에 위치하도록 설정 */
-    vertical-align: middle; /* 수직 정렬을 중앙으로 설정 */
-}
+		
+		#type, .search-input {
+		    display: inline-block; 
+		    vertical-align: middle; 
+		}
 
 
-.bi-search {margin-bottom: 30px;
-    
-}
+		.bi-search {margin-bottom: 30px;
+		    
+		}
+		
+		.search-container .search-input,
+		.search-container .bi-search {
+		    vertical-align: middle;
+		}
 
-.search-container .search-input,
-.search-container .bi-search {
-    vertical-align: middle;
-}
 
+		.friend-profile
+		{
+			display: flex; 
+			justify-content: space-between;
+		}
+		
+		.invite-btn
+		{
+			border: 1px solid #ff8000;
+		    background-color: white;
+		}
+		
+		.modal-content
+		{
+			width: 100%;	
+		}
 		
     </style>
     
@@ -300,8 +317,7 @@
 	                    # ${friend.us_code2 } ${friend.us_name } (${friend.us_id })</div>
 	                    <div class="btns">
 	                    <button type="button" class="message_btn" 
-	                    onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }
-	                    &us_id=${friend.us_id }&us_name=${friend.us_name }'"><i class="bi bi-envelope"></i></button>
+	                    onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }&us_id=${friend.us_id }&us_name=${friend.us_name }'"><i class="bi bi-envelope"></i></button>
 	                    <button type="button" class="delete_btn" value="${friend.fr_code }"><i class="bi bi-x-circle"></i></button>
                     </div>
                 	</li>

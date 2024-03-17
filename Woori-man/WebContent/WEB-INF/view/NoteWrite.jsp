@@ -131,6 +131,8 @@
 					$("#note_content").focus();
 					return;
 				}
+				
+				$("#noteForm").submit();
 			});
 			
 			
@@ -192,7 +194,7 @@
         <div class="card-header">
             <h1 class="card-title text-center">쪽지 작성</h1>
         </div>
-        <form action="friendnotewrite.action" method="get">
+        <form action="friendnotewrite.woori" method="get" id="noteForm">
         <div class="card-body">
                 <div class="mb-3">
                     <label for="searchRecipient" class="form-label">받는 사람</label>
@@ -215,7 +217,7 @@
 				<input type="hidden" id="fr_code" name="fr_code" value="${fr_code }"> 
 				
                 <div class="btns">
-					<button type="button" class="list-btn" onclick="location.href='/notelist.woori'">목록으로</button>
+					<button type="button" class="list-btn" onclick="location.href='/friends.woori'">목록으로</button>
 					<button type="button" class="submit-btn">전송하기</button>
 				</div>
 				

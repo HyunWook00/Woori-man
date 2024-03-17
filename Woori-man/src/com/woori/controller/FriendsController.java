@@ -198,16 +198,16 @@ public class FriendsController
 	// 친구 쪽지 폼
 	@RequestMapping("/friendnotewriteform.woori")
 	public String friendNoteWriteForm(Model model, @RequestParam("us_code2") String us_code2
-	/*
-	 * ,@RequestParam("us_id") String us_id, @RequestParam("us_name") String us_name
-	 */
+
+	  ,@RequestParam("us_id") String us_id, @RequestParam("us_name") String us_name
+
 			, @RequestParam("fr_code") String fr_code ) throws SQLException, ClassNotFoundException
 	{
 		String result = "";
 		
 		FriendsDAO dao = new FriendsDAO();
-		String code = "#" + us_code2;
-		//String receiver = "#" + us_code2 + us_id + "(" + us_name + ")" ;
+		//String code = "#" + us_code2 + us_name + ;
+		String code = "#" + us_code2 + " " + us_name + "(" + us_id + ")" ;
 		String friend_code = fr_code;
 		
 		/*
@@ -279,7 +279,7 @@ public class FriendsController
 			}
 		}
 		
-		result = "redirect:sendnote.woori";
+		result = "redirect:notelist.woori";
 		
 		return result;
 	}
