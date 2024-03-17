@@ -15,111 +15,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/adminHeader.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/notificationRead.css">
+<!-- 부트스트랩 css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
- 
-<style type="text/css">
-body {
-	font-family: Arial, sans-serif;
-}
-
-.main
-{
-    display: flex;
-    justify-content: center;	
-    background-color: #f9f9f9;
-}
-
-
-
-
-.content 
-{
-    max-width: 800px !important;
-    /* padding: 50px; */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white; 
-    height: 820px;
-    margin-top: 20px;
-    margin-left: unset !important;
-    margin-right: unset !important;
-    padding: 0;
-}
-
-.section
-{
-    max-width: 798px;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-top: 50px;	
- 	
-}
-
-
-
-.holding-notice
-{
-    margin-left: 20px;
-}
-h1
-{
-    font-size: 20px;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.ct-title
-{
-}
-
-.top
-{
-	display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 798px;
-    
-    padding-left: 50px;
-    padding-right: 50px;
-    
-}
-
-.go-list
-{
-    display: flex;
-    align-items: center;
-}
-
-a
-{
-	text-decoration: none;
-	color: unset;
-}
-
-.ct-read
-{
-	max-width: 798px;
-}
-
-
-</style>
 <!-- 부트스트랩 js -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
 
-	$(document).ready(function()
-	{
-		$("span:('일정관리')").css({color:"#ff8000"});
-		
-		
-	});
-	
-
-
-</script>
 </head>
 <body>
 

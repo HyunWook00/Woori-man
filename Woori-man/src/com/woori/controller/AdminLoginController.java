@@ -68,8 +68,10 @@ public class AdminLoginController
 		{
 			return "adminloginform.woori";
 		}
-	
-		session.setAttribute("ad_code", ad_code);
+		else
+		{
+			session.setAttribute("ad_code", ad_code);
+		}
 		
 		return "adminmain.woori";
 	}

@@ -12,50 +12,9 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/login.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<style type="text/css">
-
-
-
-</style>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-
-$(document).ready(function()
-{
-	$("#loginBtn").click(function()
-	{
-		//alert("확인");
-		var id = $("#id").val();
-		var pwd = $("#pwd").val();
-		
-		if (id == "" || id == null || id == " ")
-		{
-			alert("아이디를 입력해주세요.");
-			$("#id").focus();
-			return;
-			
-			
-		}
-		else if (pwd == "" || pwd == null || pwd == " ")
-		{
-			alert("비밀번호를 입력해주세요.");
-			$("#pwd").focus();
-			return;
-		}
-		
-		
-		$("#loginForm").submit();
-		
-	});
-	
-});
-
-
-
-</script>
-
-
+<script type="text/javascript" src="js/login.js"></script>
 </head>
 
 <body>

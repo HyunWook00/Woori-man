@@ -10,51 +10,15 @@
 <meta charset="UTF-8">
 <title>AdminLogin.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/login.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.min.css">
+<!-- 1. 부트스트랩 js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 2. 부트스트랩 css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<style type="text/css">
-
-
-
-</style>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-
-$(document).ready(function()
-{
-	$("#loginBtn").click(function()
-	{
-		//alert("확인");
-		var ad_code = $("#ad_code").val();
-		var ad_pwd = $("#ad_pwd").val();
-		
-		if (ad_code == "" || ad_code == null || ad_code == " ")
-		{
-			alert("아이디를 입력해주세요.");
-			$("#ad_code").focus();
-			return;
-			
-			
-		}
-		else if (ad_pwd == "" ||ad_pwd == null || ad_pwd == " ")
-		{
-			alert("비밀번호를 입력해주세요.");
-			$("#ad_pwd").focus();
-			return;
-		}
-		
-		
-		$("#loginForm").submit();
-		
-	});
-	
-});
-
-
-
-</script>
-
+<script type="text/javascript" src="js/adminLogin.js"></script>
 
 </head>
 

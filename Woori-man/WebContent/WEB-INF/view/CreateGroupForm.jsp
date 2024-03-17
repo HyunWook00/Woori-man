@@ -20,55 +20,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
- 
-<script type="text/javascript">
-
-	$(document).ready(function()
-	{
-		
-		form = $("#createForm");
-		
-		
-		$('input[name="gc_code"]').change(function()
-		{
-			var val = $(this).val();
-			var checked = $(this).prop('checked');
-			
-			$(".caseItem").css("background-color", "#F7F7F8");			
-			
-			var item = "case" + val;
-			
-			
-			if (checked)
-			{
-				$("."+ item).css('background-color', '#495057ba');
-			}
-			
-		});
-		
-		
-		$("#submitBtn").click(function()
-		{
-			
-			var brd_name = $("#brd_name").val(); 
-			
-			if ($("input[name='gc_code']:checked").val() == null)
-			{
-				alert("그룹 카테고리를 선택 해주세요.");
-				return;
-			}
-			
-			
-			form.submit();
-			
-		});
-		
-		
-	}); 
-	
-	
-
-</script>
+<script type="text/javascript" src="js/createGroupForm.js"></script>
 
 
 </head>

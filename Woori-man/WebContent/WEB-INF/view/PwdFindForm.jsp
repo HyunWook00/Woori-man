@@ -10,20 +10,14 @@
 <meta charset="UTF-8">
 <title>PwdFindForm.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/pwdFind.css">
+<!-- 부트스트랩 css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<style type="text/css">
-
-
-
-</style>
+<!-- 부트스트랩 js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-
-
-
-</script>
-
 
 </head>
 <body>
