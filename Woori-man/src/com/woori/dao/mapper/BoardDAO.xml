@@ -33,6 +33,12 @@
  		WHERE BRD_CODE = #{brd_code}
  	</select>
  	
+ 	<select id="countArticle" resultType="java.lang.Integer">
+ 		SELECT COUNT(*)
+ 		FROM VIEW_BOARD_LIST
+ 		WHERE CG_CODE = #{cg_code}
+ 	</select>
+ 	
  	<update id="updateArticleView">
  		UPDATE BOARD
  		SET BRD_VIEW = BRD_VIEW + 1

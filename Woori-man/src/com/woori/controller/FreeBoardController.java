@@ -34,19 +34,21 @@ public class FreeBoardController
 	
 	// 자유게시판 리스트 페이지 요청
 	// freeboardlist.woori 라는 요청이 들오면 연결되는 컨트롤러
-	@RequestMapping(value = "/freeboardlist.woori")
-	public String freeBoardList(Model model, HttpServletRequest request, HttpSession session)
+	@RequestMapping(value = "/freeboardlist.woori", method = RequestMethod.GET)
+	public String freeBoardList(Model model, HttpServletRequest request, HttpSession session, String num, String pageNum, String key, String value)
 	{
 		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
 		
-		ArrayList<BoardDTO> boardList = null;
+		//ArrayList<BoardDTO> boardList = null;
 		int newArticle = 0;
+		int allArticle = 0;
 		
 		try
 		{
 			IBoardDAO dao = sqlSession.getMapper(IBoardDAO.class);
-			boardList = dao.getBoardList(group.getCg_code());
+			//boardList = dao.getBoardList(group.getCg_code());
 			newArticle = dao.getNewArticle(group.getCg_code());
+			allArticle = dao.countArticle(group.getCg_code());
 			
 		} catch (Exception e)
 		{
@@ -54,8 +56,13 @@ public class FreeBoardController
 		}
 		
 		// 모델에 객체 담아 뷰로 보내기
-		model.addAttribute("boardList", boardList);
+		//model.addAttribute("boardList", boardList);
 		model.addAttribute("newArticle", newArticle);
+		model.addAttribute("allArticle", allArticle);
+		model.addAttribute("num", num);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("key", key);
+		model.addAttribute("value", value);
 		
 		return "/WEB-INF/view/FreeBoardList.jsp";
 	}
@@ -94,7 +101,7 @@ public class FreeBoardController
 	// 자유게시판 상세정보 페이지
 	// freeboardarticle.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardarticle.woori", method = RequestMethod.GET)
-	public String freeBoardArticle(Model model, @RequestParam("article") String brd_code, HttpServletResponse response, HttpServletRequest request, HttpSession session)
+	public String freeBoardArticle(Model model, @RequestParam("article") String brd_code, HttpServletResponse response, HttpServletRequest request, HttpSession session, String pageNum)
 	{
 		BoardDTO boardArticle = new BoardDTO();
 		BoardDAO dao = new BoardDAO();
@@ -144,6 +151,7 @@ public class FreeBoardController
 			boardArticle = iDao.getBoardArticle(brd_code);
 			checkArticleLike = dao.checkArticleLike(brd_code, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			
+			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
@@ -166,6 +174,7 @@ public class FreeBoardController
 		model.addAttribute("recomments", recomments);
 		model.addAttribute("commentCount", commentCount);
 		model.addAttribute("checkArticleLike", checkArticleLike);
+		model.addAttribute("pageNum", pageNum);
 		
 		
 		return "/WEB-INF/view/FreeBoardArticle.jsp";

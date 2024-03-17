@@ -41,33 +41,28 @@ public class PagingUtil
 		if(currentPage % numPerBlock == 0)
 			currentPageSetup = currentPageSetup - numPerBlock;
 		
+		if ((totalPage>numPerBlock) && (currentPageSetup>0))
+			strList.append("<li><a href='" + listUrl + "pageNum=1' class='page-control first-page-control'>1</a></li>");
+		
 		n = currentPage - numPerBlock;
 		
 		if ((totalPage > numPerBlock) && (currentPageSetup > 0))
 			strList.append("<a href='" + listUrl + "pageNum=" + n + "' class='page-control pre-page'>이전 페이지</a>");
 		strList.append("<ul class='page-list'>");
 		
-		if ((totalPage>numPerBlock) && (currentPageSetup>0))
-			strList.append("<li><a href='" + listUrl + "pageNum=1' class='page-control first-page-control'>1</a></li>");
-		
-		if ((totalPage > numPerBlock) && (currentPageSetup > 0))
-			strList.append("<li><a href='" + listUrl + "pageNum=" + n + "' class='page-control pre-page'>...</a></li>");
 		
 		page = currentPageSetup + 1;
-		
 		while ((page <= totalPage) && (page <= currentPageSetup + numPerBlock))
 		{
 			if(page==currentPage)
 				strList.append("<li><a class='page-control now-page'>" + page + "</a></li>");
 			else
-				strList.append("<li><a href='" + listUrl + "' class='page-control'>" + page + "</a></li>");
+				strList.append("<li><a href='" + listUrl + "pageNum=" + page + "' class='page-control'>" + page + "</a></li>");
 			page++;
 		}
 			
 		n = currentPage + numPerBlock;
 		
-		if((totalPage - currentPageSetup) > numPerBlock)
-			strList.append("<li><a href='" + listUrl + "pageNum=" + n + "' class='page-control next-page'>...</a></li>");
 			
 		if((totalPage>numPerBlock)&&(currentPageSetup + numPerBlock)<totalPage)
 			strList.append("<li><a href='" + listUrl + "pageNum=1' class='page-control list-page-control'>" + totalPage + "</a></li>");

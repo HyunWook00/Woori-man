@@ -14,4 +14,5 @@ public interface IBoardDAO
 	public int updateArticleView(String brd_code);
 	public int updateArticle(BoardDTO dto);
 	public int deleteArticle(String brd_code);
+	public int countArticle(String cg_code);
 }

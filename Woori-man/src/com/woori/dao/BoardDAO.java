@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.woori.dto.BoardDTO;
 import com.woori.dto.CommentDTO;
 import com.woori.dto.RecommentDTO;
 import com.woori.util.DBConn;
@@ -475,6 +476,51 @@ public class BoardDAO
 			pstmt.setInt(2, Integer.parseInt(dto.getCommentCode()));
 			pstmt.setInt(3, Integer.parseInt(dto.getRecommentWriterCode()));
 			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 페이징 처리 적용 자유게시판 게시글 목록 출력 메소드
+	public ArrayList<BoardDTO> getBoardList(String cg_code, int start, int end, String key, String value)
+	{
+		ArrayList<BoardDTO> result = new ArrayList<BoardDTO>();
+		
+		try
+		{
+			value = "%" + value + "%";
+			String sql = "SELECT RNUM, BRD_CODE, CG_CODE, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE" + 
+					" FROM (SELECT ROWNUM AS RNUM, DATA.* FROM(SELECT BRD_CODE, CG_CODE, GM_CODE, GM_NICKNAME, BRD_DATE, BRD_SUBJECT, BRD_CONTENT, BRD_VIEW, BRD_LIKE" + 
+					" FROM VIEW_BOARD_LIST WHERE CG_CODE = ? AND " + key + " LIKE ? ORDER BY BRD_CODE DESC)DATA) WHERE RNUM >= ? AND RNUM <= ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(cg_code));
+			pstmt.setString(2, value);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next())
+			{
+				BoardDTO dto = new BoardDTO();
+				dto.setNum(rs.getInt("RNUM"));
+				dto.setBrd_code(rs.getString("BRD_CODE"));
+				dto.setCg_code(rs.getString("CG_CODE"));
+				dto.setGm_code(rs.getString("GM_CODE"));
+				dto.setGm_nickname(rs.getString("GM_NICKNAME"));
+				dto.setBrd_date(rs.getString("BRD_DATE"));
+				dto.setBrd_subject(rs.getString("BRD_SUBJECT"));
+				dto.setBrd_content(rs.getString("BRD_CONTENT"));
+				dto.setBrd_view(rs.getString("BRD_VIEW"));
+				dto.setBrd_like(rs.getString("BRD_LIKE"));
+				result.add(dto);
+			}
+			rs.close();
 			pstmt.close();
 			
 		} catch (Exception e)

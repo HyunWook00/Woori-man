@@ -1,3 +1,5 @@
+<%@page import="com.woori.dto.GroupDTO"%>
+<%@page import="com.woori.dao.BoardDAO"%>
 <%@page import="com.woori.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.woori.util.PagingUtil"%>
@@ -12,7 +14,7 @@
 <%
 	//2024-03-04 노은하
 	// 페이징
-	String strNum = request.getParameter("num");
+	String strNum = (String)request.getAttribute("num");
 	int num=0;
 	if(strNum!=null)
 		num = Integer.parseInt(strNum);
@@ -22,26 +24,24 @@
 	if(pageNum != null)
 		currentPage = Integer.parseInt(pageNum);
 	
-	String searchKey = request.getParameter("searchKey");
-	String searchValue = request.getParameter("searchValue");
+	String key = (String)request.getAttribute("key");
+	String value = (String)request.getAttribute("value");
 	
-	if(searchKey != null)
+	if(key != null)
 	{
 		if(request.getMethod().equalsIgnoreCase("GET"))
 			// 디코딩 처리
-			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			value = URLDecoder.decode(value, "UTF-8");
 	}
 	else
 	{
-		searchKey = "title";
-		searchValue = "";
+		key = "BRD_SUBJECT";
+		value = "";
 	}
 	
 	PagingUtil myUtil = new PagingUtil();
 	
-	ArrayList<BoardDTO> lists = (ArrayList<BoardDTO>)request.getAttribute("boardList");
-	int dataCount = lists.size();
-	
+	int dataCount = (Integer)request.getAttribute("allArticle");
 	int numPerPage = 10;
 	int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 	
@@ -52,20 +52,26 @@
 	int end = currentPage * numPerPage;
 	
 	
+	BoardDAO dao = new BoardDAO();
+	ArrayList<BoardDTO> boardList = null;
+	String cg_code = ((GroupDTO)session.getAttribute("groupDTO")).getCg_code();
+	boardList = dao.getBoardList(cg_code, start, end, key, value);
+	dao.close();
+	
 	String param = "";
 	
-	if(!searchValue.equals(""))
+	if(!value.equals(""))
 	{
-		param += "?searchKey=" + searchKey;
-		param += "&searchValue=" + searchValue;
+		param += "?key=" + key;
+		param += "&value=" + value;
 	}
 	
-	String listUrl = "/freeboardlist.woori" + param;
+	String listUrl = "freeboardlist.woori" + param;
 	
 	String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 	
 	// 글 내용 보기 주소
-	String articleUrl = cp + "/Article.jsp";
+	String articleUrl = "freeboardarticle.woori";
 	
 	if(param.equals(""))
 		articleUrl = articleUrl + "?pageNum=" + currentPage;
@@ -130,7 +136,7 @@
 		<!-- 게시글 검색 영역 -->
 		<div class="content-search">
 			<div class="count-article">
-				새글 <span id="new-article">${newArticle }</span> / <span id="total-article">${fn:length(boardList) }</span>
+				새글 <span id="new-article">${newArticle }</span> / <span id="total-article">${allArticle }</span>
 			</div>
 			<form action="" class="search-form">
 				<select name="searchCategory" id="" class="search-category">
@@ -157,16 +163,16 @@
 			
 			<!-- 게시글 목록 영역 -->
 			<div class="content-list">
-				<c:forEach var="idx" begin="<%=start-1 %>" end="<%=end-1 %>">
+				<c:forEach items="<%=boardList %>" var="board">
 				<div class="article">
-					<div class="article-number article-element">${boardList[idx].num }</div>
+					<div class="article-number article-element">${board.num }</div>
 					<div class="article-title article-element">
-						<a href="freeboardarticle.woori?article=${boardList[idx].brd_code }">${boardList[idx].brd_subject }</a>
+						<a href="<%=articleUrl %>&article=${board.brd_code }">${board.brd_subject }</a>
 					</div>
-					<div class="write-user article-element">${boardList[idx].gm_nickname }</div>
-					<div class="write-date article-element">${boardList[idx].brd_date }</div>
-					<div class="view-count article-element">${boardList[idx].brd_view }</div>
-					<div class="like-count article-element">${boardList[idx].brd_like }</div>
+					<div class="write-user article-element">${board.gm_nickname }</div>
+					<div class="write-date article-element">${board.brd_date }</div>
+					<div class="view-count article-element">${board.brd_view }</div>
+					<div class="like-count article-element">${board.brd_like }</div>
 				</div>
 				</c:forEach>
 			</div>
