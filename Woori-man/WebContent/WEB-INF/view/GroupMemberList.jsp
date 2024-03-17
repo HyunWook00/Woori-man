@@ -95,7 +95,7 @@
 		    background: #555;
 		}
 		
-		.friend-profile img, img
+		img.friend-profile
 		{
 			width: 40px;
             height: 40px;
