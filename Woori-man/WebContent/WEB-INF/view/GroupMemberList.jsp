@@ -25,6 +25,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
+<style type="text/css">
+
+	.invite-btn
+	{
+		font-size: 15px;
+		font-weight: bold;
+	    border: solid 2px #ffffff;
+	    border-radius: 5px;
+	    color: #ffffff;
+	    background-color: #ff8000;	
+	}
+
+</style>
+
 </head>
 <body>
 
@@ -54,6 +68,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<button type="button" class="invite-btn">그룹원 초대하기</button>
 </div>
 
 <div class="footer">

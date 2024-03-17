@@ -21,13 +21,13 @@
 	{
 		if(count >= 1)
 		{
-			sb.append(String.format("<img src='images/%s'> %s %s (%s)", user.getUs_profile(), user.getUs_code2(), user.getUs_id(), user.getUs_name()));
+			sb.append(String.format("<div class='friend-info'><img src='images/%s'> %s %s (%s)</div>", user.getUs_profile(), user.getUs_code2(), user.getUs_id(), user.getUs_name()));
 			sb.append("<p>해당 회원은 이미 친구로 등록하였습니다.</p>");
 		}
 		else
 		{
-		 	sb.append(String.format("<img src='images/%s'> %s %s (%s)", user.getUs_profile(), user.getUs_code2(), user.getUs_id(), user.getUs_name()));			
-			sb.append(String.format("<button type='button' class='btn plus_btn' onclick=\"location.href='%s'\">친구추가</button>", action));
+		 	sb.append(String.format("<div class='friend-info'><img src='images/%s'> %s %s (%s)</div>", user.getUs_profile(), user.getUs_code2(), user.getUs_id(), user.getUs_name()));			
+			sb.append(String.format("<div class='btns'><button type='button' class='btn plus_btn' onclick=\"location.href='%s'\">친구추가</button></div>", action));
 		}
 	}
 %>

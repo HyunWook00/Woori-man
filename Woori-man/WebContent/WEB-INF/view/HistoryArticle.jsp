@@ -253,5 +253,10 @@
 	
 </div>
 
+<!-- 푸터 영역 -->
+<div class="footer">
+<c:import url="MemberFooter.jsp"></c:import>
+</div>
+
 </body>
 </html>
