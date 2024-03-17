@@ -127,16 +127,16 @@ function addFriends(us_code2)
 </div>
 <div class="top_bar">
 	<div class="bar-item">
-		<a href="">그룹</a>
+		<a href="user.woori">프로필</a>
 	</div>
 	<div class="bar-item">
-		<a href="">히스토리</a>
+		<a href="friends.woori">친구</a>
 	</div>
 	<div class="bar-item">
-		<a href="">친구</a>
+		<a href="notelist.woori">쪽지</a>
 	</div>
 	<div class="bar-item">
-		<a href="">쪽지</a>
+		<a href="cs.woori">고객센터</a>
 	</div>
 </div>
 <div class="container top-con" >
