@@ -530,5 +530,26 @@ public class BoardDAO
 		
 		return result;
 	}
+	
+	public int insertBoardReport(String brd_code, String gm_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "INSERT INTO BOARD_REPORT(BRDR_CODE, BRD_CODE, GM_CODE) VALUES(SEQ_BOARD_REPORT.NEXTVAL, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(brd_code));
+			pstmt.setInt(2, Integer.parseInt(gm_code));
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
 
 }

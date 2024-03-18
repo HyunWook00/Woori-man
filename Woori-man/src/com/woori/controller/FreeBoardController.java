@@ -597,4 +597,37 @@ public class FreeBoardController
 		
 		return "redirect:freeboardarticle.woori?article=" + articleCode;
 	}
+	
+	// 자유게시판 게시글 신고
+	// reportboardarticle.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "reportboardarticle.woori", method = RequestMethod.GET)
+	public String reportArticle(String brd_code, HttpSession session)
+	{
+		BoardDAO dao = new BoardDAO();
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		
+		try
+		{
+			dao.insertBoardReport(brd_code, member.getGm_code());
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardlist.woori";
+		
+	}
+	
 }

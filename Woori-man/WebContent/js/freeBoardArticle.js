@@ -2,7 +2,7 @@ $(function()
 {
 	$(".article-list").click(function()
 	{
-		window.location.href="freeboardlist.woori";
+		window.location.href="freeboardlist.woori?pageNum=" + $(this).val();
 	});
 	
 	$("textarea").keyup(function()
@@ -250,4 +250,13 @@ function deleteRecommentLike(obj)
 			alert(e.responseText);
 		}
 	});
+}
+
+// 게시글 신고
+function reportArticle(brd_code)
+{
+	if (confirm("해당 게시글을 정말 신고하시겠습니까?"))
+	{
+		window.location.href="reportboardarticle.woori?brd_code=" + brd_code;
+	}
 }

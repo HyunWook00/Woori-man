@@ -69,7 +69,7 @@
 			<div class="button-zone">
 				<!-- 목록으로 / 이전글 / 다음글 버튼 영역 -->
 				<div class="button-div">
-					<button type="button" class="article-button article-list">목록으로</button>
+					<button type="button" class="article-button article-list" value="${pageNum }">목록으로</button>
 					<button type="button" class="article-button pre-article">이전글</button>
 					<button type="button" class="article-button next-article">다음글</button>
 				</div>
