@@ -441,7 +441,7 @@ public class GroupMainController
 			System.out.println(e.toString());
 		}
 		
-		System.out.println("페이지로 이동~~");
+		//System.out.println("페이지로 이동~~");
 		
 		return "/WEB-INF/view/GroupFee.jsp";
 	}
@@ -468,6 +468,34 @@ public class GroupMainController
 		
 		return "redirect:groupfee.woori";
 	}
+	
+	// 회비 수정 컨트롤러
+	@RequestMapping(value = "/groupfeeupdate.woori")
+	public String groupFeeUpdate(HttpSession session, GroupFeeDTO dto)
+	{
+		GroupDTO groupDTO = (GroupDTO) session.getAttribute("groupDTO");
+		dto.setGm_code(groupDTO.getGm_code());
+		
+		//System.out.println("컨트롤러 진입");
+		//System.out.println(dto.getGf_amount());
+		//System.out.println(dto.getGf_code());
+		//System.out.println(dto.getGf_start());
+		//System.out.println(dto.getGm_code());
+		
+		try
+		{
+			GroupFeeDAO dao = new GroupFeeDAO();
+			dao.groupFeeModify(dto);
+			dao.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:groupfee.woori";
+	}
+	
 	
 	// 그룹 탈퇴 컨트롤러
 	@RequestMapping(value = "/groupwthdrinsert.woori", method = RequestMethod.GET)

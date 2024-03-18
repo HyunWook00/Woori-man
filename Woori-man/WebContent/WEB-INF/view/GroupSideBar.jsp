@@ -25,14 +25,26 @@
 <!-- 3. jquery -->
 <!-- 4. 부트스트랩 아이콘 -->
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<script type="text/javascript">
 
-<style type="text/css">
+	$(function()
+	{
+		// 2024-03-03 노은하
+		// 정기모임 발의가 가능한 직위는 정기모임, 번개모임 무엇을 발의할것인지 분기
+		$(".create-article").click(function()
+		{
+			var position = '${groupMemberDTO.pos_code}';
+			if (position == '1' || position == '2')
+				$("#meetingCategoryModal").modal("show");
+			else
+				window.location.href="meetinginsertform.woori?mc_code=2";
+		});
+	});
 
-
- 
-</style>
+</script>
 </head>
 <body>
+
 <div class="SideBarBody">
 <div class="groupProfile">
   	<nav class="nav nav-tabs profile" role="tablist">
@@ -80,7 +92,7 @@
 		 		${groupMemberDTO.gm_intro } <br>
 		 	</div>
 			 <div class="profileButton">
-				<button class="mySideBtn">모임 발의</button>
+				<button class="mySideBtn create-article">모임 발의</button>
 				<button class="mySideBtn" onclick="location.href='groupmypage.woori'">마이페이지</button>
 		 	</div>
 				<hr>
@@ -92,7 +104,7 @@
 <div id="menulist" class="menulist"> 
 	<p><a><i class="bi bi-file-text"></i>전체글 보기</a></p>
 	<p><a href="meetinglist.woori"><i class="bi bi-calendar-event"></i>모임</a></p>
-	<p><a href="historylist.woori"><i class="bi bi-file-text"></i>후기</a></p>
+	<p><a href="historylist.woori"><i class="bi bi-file-text"></i>히스토리</a></p>
 	<p><a href="freeboardlist.woori"><i class="bi bi-file-text"></i>${groupDTO.brd_name }</a></p>
 	<hr>
 	<p><a href="groupfee.woori"><i class="bi bi-currency-dollar"></i>회비</a></p>
@@ -135,6 +147,10 @@
 	<hr>
 </div>
 </div> <!-- Mycontent -->
+
+<div>
+	<c:import url="MeetingCategoryModal.jsp"></c:import>
+</div>
 
 <%-- <div class="groupSideBar">
 		<!-- 그룹 프로필 + 그룹원 목록 -->

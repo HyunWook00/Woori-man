@@ -73,7 +73,7 @@ String cp = request.getContextPath();
 			       				 <p>모임 날짜 : ${regular.mt_meet }</p>
 			       				 <p>모임 지역 : ${regular.rg_name } ${regular.ct_name }</p>
 			       				 <p>참석 여부 확인기간 : ${regular.mt_date } ~ ${regular.mt_vote }</p>
-			       				 <button class="button">참석 여부 선택하러 가기</button>
+			       				 <button class="button" onclick="location.href='meetingarticle.woori?mt_code=${regular.mt_code}'">참석 여부 선택하러 가기</button>
 			          		 </div>
 						</div>
 						</c:forEach> 
@@ -112,7 +112,8 @@ String cp = request.getContextPath();
 			         				 <p>모임 날짜 : ${impromptu.mt_meet }</p>
 			         				 <p>모임 지역 : ${impromptu.rg_name} ${impromptu.ct_name}</p>
 			         				 <p>참석 여부 확인기간 :${impromptu.mt_date} ~ ${impromptu.mt_vote }</p>
-			         				 <button class="button">참석 여부 선택하러 가기</button>
+			         				 <button class="button" 
+			         				 onclick="location.href='meetingarticle.woori?mt_code=${impromptu.mt_code}'">참석 여부 선택하러 가기</button>
 			           		   </div>
 						</div> 
 						</c:forEach>
@@ -129,6 +130,7 @@ String cp = request.getContextPath();
 		<div class="newArticle" >
 	        <ul class="list-group list-group-flush">
 			<h4>${groupDTO.brd_name } 최신글</h4>
+			<div class = "more" onclick="location.href='freeboardlist.woori'">더보기 ▶</div>
 			<c:forEach var="newborad" items="${newBorad }">
 				<li class="list-group-item list" 
 				onclick="loaction.href='freeboardarticle.woori?article=${newborad.brd_code }'">${newborad.brd_subject }</li>
@@ -138,6 +140,7 @@ String cp = request.getContextPath();
      	 <div class="newArticle">
 	        <ul class="list-group list-group-flush">
 	 		<h4>히스토리 최신글</h4>
+	 		<div class = "more" onclick="location.href='historylist.woori'">더보기 ▶</div>
  				<c:forEach var="newHistory" items="${newHistory }">
  						<li class="list-group-item list" 
  						onclick="loaction.href='historyarticle.woori?his_code='${newHistory.his_code}">
