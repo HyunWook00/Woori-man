@@ -3,7 +3,7 @@ $(function()
 	// 목록으로 돌아가기
 	$(".article-list").click(function()
 	{
-		$(location).attr("href", "meetinglist.woori?pageNum=" + $(this).val());
+		$(location).attr("href", "meetinglist.woori");
 	});
 	
 	// 대댓글 달기, 내 댓글 수정하기 취소 버튼
