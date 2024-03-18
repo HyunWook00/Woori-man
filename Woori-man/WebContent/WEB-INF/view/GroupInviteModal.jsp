@@ -25,7 +25,7 @@
 		
 		sb.append("<li><div class='friend-profile'>");
 		sb.append("<div class='friend-info'>");
-		sb.append("<img alt='profile' src='images/basic-profile.png'>#" + friendsList.get(i).getUs_code2() + 
+		sb.append("<img alt='profile' src='images/basic-profile.png' class='friend'>#" + friendsList.get(i).getUs_code2() + 
 				friendsList.get(i).getUs_name() + '(' + friendsList.get(i).getUs_id() + ")</div>");
 		
 		sb.append("<div class='btns'>");	

@@ -95,7 +95,7 @@
 		    background: #555;
 		}
 		
-		img.friend-profile
+		img.friend, img.groupMember
 		{
 			width: 40px;
             height: 40px;
@@ -181,7 +181,7 @@
 		</tr>
 		<c:forEach var="groupMemberList" items="${groupMemberList }">
 			<tr>
-				<td>${groupMemberList.gm_profile }</td>
+				<td><img src="${groupMemberList.gm_profile }" class="groupMember"></td>
 				<td>${groupMemberList.gm_nickname }</td>
 				<td>${groupMemberList.gm_intro }</td>
 				<td>${groupMemberList.pos_name }</td>
