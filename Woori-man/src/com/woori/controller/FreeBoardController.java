@@ -95,7 +95,7 @@ public class FreeBoardController
 			System.out.println(e.toString());
 		}
 		
-		return "freeboardlist.woori";
+		return "redirect:freeboardlist.woori";
 	}
 	
 	// 자유게시판 상세정보 페이지

@@ -45,11 +45,13 @@ public class MeetingController
 		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
 		ArrayList<MeetingDTO> meetingList = null;	// 등록된 모임 정보 리스트
 		int articleCount = 0;						// 새글수 정보
+		int allArticle = 0;
 		
 		try
 		{
 			meetingList = dao.getMeetingList(groupDTO.getCg_code());
 			articleCount = dao.getArticleCount(groupDTO.getCg_code());
+			allArticle = dao.countArticle(groupDTO.getCg_code());
 			
 		} catch (Exception e)
 		{
@@ -70,6 +72,7 @@ public class MeetingController
 		// 모델에 객체 담아 뷰로 보내기
 		model.addAttribute("meetingList", meetingList);
 		model.addAttribute("articleCount", articleCount);
+		model.addAttribute("allArticle", allArticle);
 		
 		// 연결시켜줄 뷰 호출
 		return "/WEB-INF/view/MeetingList.jsp";

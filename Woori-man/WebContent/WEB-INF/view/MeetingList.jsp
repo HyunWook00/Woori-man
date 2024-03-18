@@ -1,3 +1,5 @@
+<%@page import="com.woori.dto.GroupDTO"%>
+<%@page import="com.woori.dao.MeetingDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.woori.dto.MeetingDTO"%>
 <%@page import="com.woori.util.PagingUtil"%>
@@ -22,26 +24,24 @@
 	if(pageNum != null)
 		currentPage = Integer.parseInt(pageNum);
 	
-	String searchKey = request.getParameter("searchKey");
-	String searchValue = request.getParameter("searchValue");
+	String key = (String)request.getAttribute("key");
+	String value = (String)request.getAttribute("value");
 	
-	if(searchKey != null)
+	if(key != null)
 	{
 		if(request.getMethod().equalsIgnoreCase("GET"))
 			// 디코딩 처리
-			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+			value = URLDecoder.decode(value, "UTF-8");
 	}
 	else
 	{
-		searchKey = "title";
-		searchValue = "";
+		key = "MT_TITLE";
+		value = "";
 	}
 	
 	PagingUtil myUtil = new PagingUtil();
 	
-	ArrayList<MeetingDTO> lists = (ArrayList<MeetingDTO>)request.getAttribute("meetingList");
-	int dataCount = lists.size();
-	
+	int dataCount = (Integer)request.getAttribute("allArticle");
 	int numPerPage = 10;
 	int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 	
@@ -50,22 +50,27 @@
 	
 	int start = (currentPage-1) * numPerPage + 1;
 	int end = currentPage * numPerPage;
-	
+
+	MeetingDAO dao = new MeetingDAO();
+	ArrayList<MeetingDTO> meetingList = null;
+	String cg_code = ((GroupDTO)session.getAttribute("groupDTO")).getCg_code();
+	meetingList = dao.getMeetingLists(cg_code, start, end, key, value);
+	dao.close();
 	
 	String param = "";
 	
-	if(!searchValue.equals(""))
+	if(!value.equals(""))
 	{
-		param += "?searchKey=" + searchKey;
-		param += "&searchValue=" + searchValue;
+		param += "?key=" + key;
+		param += "&value=" + value;
 	}
 	
-	String listUrl = "/groupmeetinglist.woori" + param;
+	String listUrl = "meetinglist.woori" + param;
 	
 	String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 	
 	// 글 내용 보기 주소
-	String articleUrl = cp + "/Article.jsp";
+	String articleUrl = "meetingarticle.woori";
 	
 	if(param.equals(""))
 		articleUrl = articleUrl + "?pageNum=" + currentPage;
@@ -144,7 +149,7 @@
 		<div class="content-search">
 		
 				<div class="count-article">
-					새글 <span id="new-article">${articleCount }</span> / <span id="total-article">${fn:length(meetingList) }</span>
+					새글 <span id="new-article">${articleCount }</span> / <span id="total-article">${allArticle }</span>
 				</div>
 				
 			<form action="" class="search-form">
@@ -211,12 +216,8 @@
 			<!-- 게시글 목록 영역 -->
 			<div class="content-list">
 			
-				<c:forEach var="idx" begin="<%=start-1 %>" end="<%=end-1 %>">
-				${meetingList[idx].mt_title }
-				</c:forEach>
-			
 				<!-- 컨트롤러에서 받아온 게시글 정보 배열 lists에서 하나씩 꺼내오기 -->
-				<c:forEach var='meeting' items="${meetingList }">
+				<c:forEach var='meeting' items="<%=meetingList %>">
 				
 				<div class="article">
 				
