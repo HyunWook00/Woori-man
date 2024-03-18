@@ -108,8 +108,7 @@ public class LoginController
 		dto.setUs_name(us_name);
 		dto.setUs_birthday(us_birthday);
 		dto.setUs_lunar(us_lunar);
-		dto.setUs_tel(us_tel1);
-		dto.setUs_tel(us_tel2);
+		dto.setUs_tel(us_tel);
 		dto.setUs_zipcode(us_zipcode);
 		dto.setUs_addr1(us_addr1);
 		dto.setUs_addr2(us_addr2);

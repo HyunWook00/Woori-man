@@ -3,8 +3,12 @@ membership.js
 */
 
 // 아이디 중복확인 ajax 처리 부분
+var idSameCheck = false;
+var telSameCheck = false;
+
 $(document).ready(function()
 {
+	
 	
 	$(".checkBtn").click(function()
 	{
@@ -20,6 +24,7 @@ $(document).ready(function()
 	            , data: params
 	            , success: function(args)
 				{
+	            	
 	            	if (args == 0)
 					{
 	            		Swal.fire({
@@ -27,6 +32,9 @@ $(document).ready(function()
 		            		  text: "사용 가능한 아이디입니다. ",
 		            		  icon: "success"
 		            		});
+	            		idSameCheck = true;
+	            		return idSameCheck;
+	            		
 					}
 	            	else if (args == 1)
 	            	{
@@ -37,6 +45,7 @@ $(document).ready(function()
 	            			});
 	            	}
 				}
+		 		, beforeSend: checkId
 		 		, error: function(e)
 				{
 					alert(e.responseText);
@@ -66,6 +75,9 @@ $(document).ready(function()
 		            		  text: "본인인증이 완료되었습니다. ",
 		            		  icon: "success"
 		            		});
+	            		
+	            		telSameCheck = true;
+	            		return telSameCheck;
 					}
 	            	else if (args == 1)
 	            	{
@@ -74,6 +86,7 @@ $(document).ready(function()
 	            			  title: "Oops...",
 	            			  text: "이미 가입된 전화번호 입니다.",
 	            			});
+	            		
 	            	}
 				}
 		 		, beforeSend: checkTel
@@ -84,11 +97,23 @@ $(document).ready(function()
 	           
 	        });		
 	});
-
-	
-	
 	
 });
+
+
+
+function checkId()
+{
+	var flag = true;
+	
+	if ($.trim($("#us_id").val()).length < 6 || $.trim($("#us_id").val()).length > 20)
+	{
+		alert("6 ~ 20 자리 아이디를 입력 해주세요.");
+		flag = false;
+		$("#us_id").focus();
+		return flag;
+	}
+}
 
 
 // 전화번호 확인 ajax 처리 이전 체크사항
@@ -163,6 +188,91 @@ function sample6_execDaumPostcode()
 function checkInfo()
 {
 	
+	
+	if ($.trim($("#us_id").val()).length < 6 || $.trim($("#us_id").val()).length > 20)
+	{
+		alert("6 ~ 20 자리 아이디를 입력 해주세요.");
+		$("#us_id").focus();
+		return;
+	}
+	else if($.trim($("#us_pwd").val()).length < 8 || $.trim($("#us_pwd").val()).length >= 20)
+	{
+		alert("8 ~ 20 자리 비밀번호를 입력 해주세요.");
+		$("#us_pwd").focus();
+		return;
+	}
+	else if($.trim($("#us_pwd").val()) != $.trim($("#pwd2").val())) 
+	{
+		alert("비밀번호가 서로 일치하지 않습니다.");
+		$("#pwd2").focus();
+		return;
+	}
+	else if(!$.trim($("#us_name").val()))
+	{
+		alert("이름을 입력 해주세요.");
+		$("#us_name").focus();
+		return;
+	}
+	else if($.trim($("#us_birthday").val()).length != 6 )
+	{
+		alert("주민번호 앞 6자리 형식으로 입력 해주세요.");
+		$("#us_birthday").focus();
+		return;
+	}
+	else if($.trim($("#us_birthday2").val()).length != 1 )
+	{
+		alert("주민번호 뒷 1자리를 입력해주세요.");
+		$("#us_birthday2").focus();
+		return;
+	}
+	else if(!$('#us_lunar1').is(':checked') && !$('#us_lunar2').is(':checked')) 
+	{
+		alert("양/음력을 선택해주세요.");
+		$("#us_lunar1").focus();
+		return;
+	}
+	else if ($.trim($("#us_tel1").val()).length != 4 || $.trim($("#us_tel2").val()).length != 4)
+	{
+		alert("올바른 전화번호를 입력해주세요.");
+		$("#us_tel1").focus();
+		return;
+	}
+	else if(!$.trim($("#us_email").val()))
+	{
+		alert("이메일을 선택해주세요.");
+		$("#us_email").focus();
+		return;
+	}
+	else if(!$.trim($("#us_zipcode").val()))
+	{
+		alert("주소를 입력해주세요.");
+		$(".addrBtn").focus();
+		return;
+	}
+	else if(!$.trim($("#us_addr2").val()))
+	{
+		alert("상세주소를 입력해주세요.");
+		$("#us_addr2").focus();
+		return;
+	}
+	else if(!$('#agree').is(':checked'))
+	{
+		alert("이용약관 동의를 해주세요.");
+		$("#agree").focus();
+		return;
+	}
+	else if (idSameCheck != true)
+	{
+		alert("아이디 중복 확인을 해주세요.");
+		return;
+	}
+	else if (telSameCheck != true)
+	{
+		alert("전화번호 중복 확인을 해주세요.");
+		return;
+	}
+	
 	$("#userForm").submit();
+	alert("회원가입이 완료되었습니다.");
 }
 	

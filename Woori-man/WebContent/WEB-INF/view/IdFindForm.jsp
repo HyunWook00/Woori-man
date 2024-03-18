@@ -16,6 +16,12 @@
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/idFindForm.js"></script>
+<script type="text/javascript">
+
+
+
+</script>
+
 
 </head>
 <body>

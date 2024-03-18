@@ -92,7 +92,7 @@
         
         
         <div class="agree-check">
-          <input type="checkbox" name="checkbox" value="1" /> 이용약관 개인정보 수집 및 이용, 마케팅 활용
+          <input type="checkbox" id="agree" name="checkbox" value="1" /> 이용약관 개인정보 수집 및 이용, 마케팅 활용
           선택에 모두 동의합니다.
         </div>
         <div class="btn">

@@ -4,4 +4,4 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-${us_id }
+회원님의 아이디는 ${us_id } 입니다.

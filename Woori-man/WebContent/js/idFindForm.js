@@ -18,7 +18,7 @@ $(document).ready(function()
             , data: params
             , success: function(args)
 			{
-            	alert(args);
+            	alert($.trim(args));
 			}
 			,beforeSend: checkInfo
 	 		, error: function(e)
