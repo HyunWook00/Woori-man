@@ -615,7 +615,28 @@ public class MeetingDAO
 		return result;
 	}
 	
-	// 2024-03-11 노은하
+	// 게시글 신고
+	public int insertArticleReport(String mt_code, String gm_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "INSERT INTO MEETING_REPORT(MR_CODE, MT_CODE, GM_CODE) VALUES(SEQ_MEETING_REPORT.NEXTVAL, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(mt_code));
+			pstmt.setInt(2, Integer.parseInt(gm_code));
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 	
 	// 특정 모임에 참석 의사 확인값 출력
 	public String getAttend(String mt_code, String gm_code)
@@ -840,7 +861,7 @@ public class MeetingDAO
 		
 		try
 		{
-			String sql = "SELECT COUNT(*) AS COUNT FROM MEETING WHERE CG_CODE = ?";
+			String sql = "SELECT COUNT(*) AS COUNT FROM MEETING WHERE CG_CODE = ? AND MT_CODE NOT IN (SELECT MT_CODE FROM MEETING_REPORT)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(cg_code));
 			ResultSet rs = pstmt.executeQuery();

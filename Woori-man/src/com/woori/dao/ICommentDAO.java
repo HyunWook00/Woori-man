@@ -25,6 +25,7 @@ public interface ICommentDAO
 	
 	// 댓글, 대댓글 찾기
 	public CommentDTO searchComment(String commentCode);
+	public CommentDTO searchRecomment(String recommentCode);
 	
 	
 }

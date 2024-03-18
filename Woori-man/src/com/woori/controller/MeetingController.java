@@ -460,12 +460,11 @@ public class MeetingController
 	
 	
 	// 신고용 모임 댓글 정보 불러오기 ajax
-	// reportcommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
-	@RequestMapping(value = "/reportcommentajax.woori", method = RequestMethod.GET)
-	public String commentReportAjax(Model model, @RequestParam("commentCode") String commentCode, HttpSession session)
+	// reportmeetingcommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "/reportmeetingcommentajax.woori", method = RequestMethod.GET)
+	public String commentReportAjax(Model model, String commentCode, HttpSession session)
 	{
 		CommentDTO comment = new CommentDTO();
-		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		
 		try
 		{
@@ -478,7 +477,27 @@ public class MeetingController
 		}
 		
 		model.addAttribute("comment", comment);
-		model.addAttribute("repoter", member.getGm_code());
+		
+		return "/WEB-INF/view/CommentReportAjax.jsp";
+	}
+	
+	// 신고용 모임 대댓글 정보 불러오기 ajax
+	// reportmeetingrecommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "reportmeetingrecommentajax.woori", method = RequestMethod.GET)
+	public String recommentReportAjax(Model model, String recommentCode)
+	{
+		CommentDTO comment = new CommentDTO();
+		try
+		{
+			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
+			comment = dao.searchRecomment(recommentCode);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		model.addAttribute("comment", comment);
 		
 		return "/WEB-INF/view/CommentReportAjax.jsp";
 	}
@@ -486,7 +505,7 @@ public class MeetingController
 	// 댓글 신고 처리
 	// meetingcommentreport.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/meetingcommentreport.woori", method = RequestMethod.GET)
-	public String commentReport(Model model, @RequestParam("commentCode") String commentCode, @RequestParam("mt_code") String articleCode, HttpSession session)
+	public String commentReport(Model model, String commentCode, String mt_code, HttpSession session)
 	{
 		MeetingDAO dao = new MeetingDAO();
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
@@ -510,7 +529,29 @@ public class MeetingController
 			}
 		}
 		
-		return "redirect:meetingarticle.woori?meeting=" + articleCode;
+		return "redirect:meetingarticle.woori?mt_code=" + mt_code;
+	}
+	
+	// 대댓글 신고 처리
+	
+	// 모임 게시글 신고 처리
+	@RequestMapping(value = "reportmeetingarticle.woori", method = RequestMethod.GET)
+	public String articleReport(String mt_code, HttpSession session)
+	{
+		MeetingDAO dao = new MeetingDAO();
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		
+		try
+		{
+			dao.insertArticleReport(mt_code, member.getGm_code());
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:meetinglist.woori";
+		
 	}
 	
 	// 모임 발의 폼
@@ -558,7 +599,6 @@ public class MeetingController
 	@RequestMapping(value = "/meetinginsert.woori", method = RequestMethod.POST)
 	public String meetingInsert(Model model, MeetingDTO dto, HttpSession session)
 	{
-		System.out.println("컨트롤러 호출~");
 		MeetingDAO dao = new MeetingDAO();
 		dto.setGm_code(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 		dto.setCg_code(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getCg_code());

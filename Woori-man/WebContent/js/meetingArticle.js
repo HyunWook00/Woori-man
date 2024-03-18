@@ -211,6 +211,7 @@ function deleteMeeting(mt_code)
 	window.location.href=url;
 }
 
+// 댓글 삭제
 function deleteComment(commentCode, mt_code)
 {
 	if (confirm("해당 댓글을 삭제하시겠습니까?"))
@@ -218,3 +219,61 @@ function deleteComment(commentCode, mt_code)
 		window.location.href="meetingcommentdelete.woori?mcm_code=" + commentCode + "&mt_code=" + mt_code;
 	}
 }
+
+// 댓글 신고
+function reportComment(commentCode, mt_code)
+{
+	var params = "commentCode=" + commentCode;
+	$.ajax(
+	{
+		type: "GET"
+		, url: "reportmeetingcommentajax.woori"
+		, data: params
+		, success: function(args)
+		{
+			document.getElementById("report-modal-body").innerHTML = args;
+			$("#reportModal").modal("show");
+			var onclickEvent = "location.href='meetingcommentreport.woori?commentCode=" + commentCode + "&mt_code=" + mt_code + "'";
+			$("#report-submit-btn").attr("onclick", onclickEvent);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+}
+
+// 대댓글 신고
+function reportRecomment(recommentCode, mt_code)
+{
+	var params = "recommentCode=" + recommentCode;
+	$.ajax(
+	{
+		type: "GET"
+		, url: "reportmeetingrecommentajax.woori"
+		, data: params
+		, success: function(args)
+		{
+			document.getElementById("report-modal-body").innerHTML = args;
+			$("#reportModal").modal("show");
+			var onclickEvent = "location.href='meetingrecommentreport.woori?recommentCode=" + recommentCode + "&mt_code=" + mt_code + "'";
+			$("#report-submit-btn").attr("onclick", onclickEvent);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+}
+
+// 게시글 신고
+function reportArticle(mt_code)
+{
+	if (confirm("해당 모임을 정말 신고하시겠습니까?"))
+	{
+		window.location.href="reportmeetingarticle.woori?mt_code=" + mt_code;
+	}
+}
+
+	
+

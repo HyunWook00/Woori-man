@@ -67,4 +67,15 @@
 		AND MC.MCM_CODE = #{commentCode}
 	</select>
 	
+	<select id="searchRecomment" resultType="com.woori.dto.CommentDTO">
+		SELECT MR.MRC_CODE AS COMMENTCODE
+		, MR.MRC_DATE AS MRC_DATE
+		, MR.MRC_CONTENT AS COMMENTCONTENT
+		, GM.GM_CODE AS COMMENTWRITERCODE
+		, GM.GM_NICKNAME AS COMMENTWRITERNAME
+		FROM MEETING_RECOMMENT MR, GROUP_MEMBER GM
+		WHERE MR.GM_CODE = GM.GM_CODE
+		AND MR.MRC_CODE = #{recommentCode}
+	</select>
+	
 </mapper>

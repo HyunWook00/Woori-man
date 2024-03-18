@@ -30,38 +30,6 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css">
 <link rel="stylesheet" href="<%=cp %>/css/meetingArticle.css" />
 <script type="text/javascript" src="<%=cp %>/js/meetingArticle.js"></script>
-<script type="text/javascript">
-	
-	// 2024-02-29 노은하
-	// 댓글 신고하기 버튼 클릭
-	function reportComment(commentCode, gm_code, mt_code)
-	{
-		var params = "commentCode=" + commentCode + "&gm_code=" + gm_code;
-		$.ajax(
-		{
-			type: "GET"
-			, url: "reportcommentajax.woori"
-			, data: params
-			, success: function(args)
-			{
-				document.getElementById("report-modal-body").innerHTML = args;
-				$("#modal-btn").click();
-				var onclickEvent = "location.href='meetingcommentreport.woori?commentCode=" + commentCode + "&gm_code=" + gm_code + "&mt_code=" + mt_code + "'";
-				$("#report-submit-btn").attr("onclick", onclickEvent);
-			}
-			, error: function(e)
-			{
-				alert(e.responseText);
-			}
-		});
-	}
-	
-	function reportArticle(articleCode, gm_code)
-	{
-		//var params = "articleCode=" + 
-	}
-	
-</script>
 </head>
 <body>
 
@@ -115,7 +83,7 @@
 					</c:when>
 					
 					<c:when test="${meetingArticle.gm_code !=  groupMemberDTO.gm_code}">
-					<button type="button" class="article-button" value="${meetingArticle.mt_code }">신고하기</button>
+					<button type="button" class="article-button" value="${meetingArticle.mt_code }" onclick="reportArticle(${meetingArticle.mt_code })">신고하기</button>
 					</c:when>
 					</c:choose>
 				</div>
@@ -280,7 +248,7 @@
 									<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode}, ${meetingArticle.mt_code })">삭제하기</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode})">신고하기</a></li>
+									<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode}, ${meetingArticle.mt_code })">신고하기</a></li>
 								</c:otherwise>
 								</c:choose>
 							</ul><!-- .dropdown-menu -->
@@ -368,7 +336,7 @@
 												<li><a href="meetingrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${meetingArticle.mt_code}" class="dropdown-item">삭제하기</a></li>
 											</c:when>
 											<c:when test="${groupMemberDTO.gm_code != recomment.recommentWriterCode }">
-												<li><a href="" class="dropdown-item">신고하기</a></li>
+												<li><a href="" class="dropdown-item" onclick="reportRecomment(${recomment.recommentCode}, ${meetingArticle.mt_code })">신고하기</a></li>
 											</c:when>
 										</c:choose>
 									</ul>
@@ -476,9 +444,6 @@
 <!-- 모임 철회 모달 -->
 <c:import url="MeetingCanceledModal.jsp"></c:import>
 
-<button type="button" class="btn btn-primary" id="modal-btn" data-bs-toggle="modal" data-bs-target="#reportModal"></button>
-
-	
 <!-- 푸터 영역 -->
 <div class="footer">
 <c:import url="MemberFooter.jsp"></c:import>
