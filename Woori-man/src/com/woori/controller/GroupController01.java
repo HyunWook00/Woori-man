@@ -181,7 +181,7 @@ public class GroupController01
 			
 			try
 			{
-				//accept = dao.accept(gi_code);
+				accept = dao.accept(gi_code);
 				
 			} catch (Exception e)
 			{
