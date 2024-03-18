@@ -258,12 +258,19 @@ public class GroupController01
 		}
 		
 		// 차단그룹 목록에서 차단해제 버튼 클릭시 (그룹차단 테이블 삭제)
-		@RequestMapping(value = "invitaionUnblock.woori")
-		public String invitationUnBlock(Model model, HttpSession session)
+		@RequestMapping(value = "invitaionUnblock.woori", method = RequestMethod.GET)
+		public String invitationUnBlock(Model model, HttpSession session, String cg_code)
 		{
-			GroupDTO dto = (GroupDTO) session.getAttribute("GroupDTO");
-			String cg_code = dto.getCg_code();
-			String us_code = dto.getUs_code();
+			/*
+			 * GroupDTO dto = (GroupDTO) session.getAttribute("GroupDTO"); String cg_code =
+			 * dto.getCg_code(); String us_code = dto.getUs_code();
+			 */
+			
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+			String us_code = userDTO.getUs_code();
+			
+			//System.out.println("차단해제 버튼 클릭시 세션에서 받아온 cg_code : " + cg_code);
+			//System.out.println("차단해제 버튼 클릭시 세션에서 받아온 us_code : " + us_code);
 			
 			GroupListDAO dao = new GroupListDAO();
 			

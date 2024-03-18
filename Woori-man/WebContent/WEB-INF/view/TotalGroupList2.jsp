@@ -332,6 +332,8 @@ a:visited  {
 
 }
 
+
+
 .subIndexEdit {
 	font-size: 14px;
 	font-weight: 500;
@@ -444,6 +446,26 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 	margin-left: -250px;
 }
 
+.btn_unBlock{
+	display: inline-block;
+    height: 30px;
+    width: 80px;
+    padding: 2px 9px 3px;
+    border-radius: 4px;
+    border: solid 1px rgba(212, 216, 229, .5);
+    background-color: rgba(212, 216, 229, .25);
+    box-sizing: border-box;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.btn_unBlock:hover{
+	background-color: #fff2ea;
+}
+
+.btn_edit:hover{
+	background-color: #fff2ea;
+}
 
 
 </style>
@@ -489,9 +511,10 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 		window.location.href="invitationblock.woori?gi_code=" + gi_code + "&cg_code=" + cg_code;
 	}
 	
-	function invitationUnblock()
+	function invitationUnblock(gi_code, cg_code)
 	{
-		window.location.href="invitationUnblock.woori";
+		//alert("그룹차단도 할래용" + gi_code + ", " + cg_code);
+		window.location.href="invitaionUnblock.woori?gi_code=" + gi_code + "&cg_code=" + cg_code;
 	}
 
 
@@ -843,7 +866,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
  									-->
  									
  									<div class="btnDiv" style="float: left;">
-									 	<button type="button" class="btn_edit" onclick="invitationUnblock()">
+									 	<button type="button" class="btn_unBlock" onclick="invitationUnblock(${blockedGroupList.gi_code }, ${blockedGroupList.cg_code })">
 									  		<span class="subIndexEdit">차단 해제</span>
 										</button>
 									</div>
