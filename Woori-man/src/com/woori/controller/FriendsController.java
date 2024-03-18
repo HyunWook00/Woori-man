@@ -257,6 +257,8 @@ public class FriendsController
 		// 이거는 지금 새로운 dto 객체를 생성한거잖아?
 		// 새로운 dto 객체를 생성하면 그 안에 ㅇㅇ
 		
+		dto.setNote_content(dto.getNote_content().replaceAll("\n", "<br>"));
+		
 		try
 		{
 			dao.connection();					

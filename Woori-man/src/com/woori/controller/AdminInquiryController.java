@@ -268,13 +268,15 @@ public class AdminInquiryController
 	// 문의사항 답변 입력
 	@RequestMapping(value = "/admininquiryanswer.woori", method = RequestMethod.GET)
 	public String inquiryAnswer(Model model, @RequestParam("iq_code") String iq_code, HttpSession session 
-			, @RequestParam("as_content") String as_content) throws SQLException, ClassNotFoundException 
+			, @RequestParam("as_content") String as_content, InquiryDTO dto) throws SQLException, ClassNotFoundException 
 	{
 	    String result = "";		
 	    
 	    AdminInquiryDAO dao = new AdminInquiryDAO();	    	    	    	    
 	    
 	    String ad_code = (String)session.getAttribute("ad_code");
+	    
+	    dto.setAs_content(dto.getAs_content().replaceAll("\n", "<br>"));
 	    
 	    try
 		{

@@ -97,6 +97,7 @@ public class AdminNoteController
 		
 		dto.setAd_code(ad_code);
 		
+			
 		try
 		{
 			dao.connection();
