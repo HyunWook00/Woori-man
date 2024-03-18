@@ -117,7 +117,7 @@ public class LoginController
 		
 		dao.membership(dto);
 		
-		return "loginform.action";
+		return "loginform.woori";
 	}
 	
 	

@@ -25,97 +25,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
-<style type="text/css">
-
-	#modal-btn, .invite-btn
-	{
-		font-size: 15px;
-		font-weight: bold;
-	    border: solid 2px #ffffff;
-	    border-radius: 5px;
-	    color: #ffffff;
-	    background-color: #ff8000;	
-	}
-	
-	.friends {
-            /* background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 80%;
-            margin-left: 100px; */
-            overflow-y: auto; /* 수직 스크롤바 설정 */
-        	max-height: 500px; /* 최대 높이 설정 */
-        }
-
-        .friends h2 {
-            font-size: 24px;
-            color: black;
-            border: 2px solid #ff8000;
-            padding: 10px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .friends .lists li {
-            padding: 15px 0;            
-            border-bottom: 1px solid #ff8000;
-            color: #343a40;
-            font-size: 18px;
-            list-style: none;
-        }
-        
-        .container 
-        {
-        	padding-top: 50px;
-        	
-       	}
-		
-        /* .lists li {
-            display: flex;
-            justify-content: space-between;
-            margin-right: 30px;
-        } */
-        
-        ::-webkit-scrollbar {
-	    width: 10px;
-	    height: 10px;
-		}
-	
-		::-webkit-scrollbar-track {
-		    background: #f1f1f1;
-		}
-		
-		::-webkit-scrollbar-thumb {
-		    background: #888;
-		    border-radius: 5px;
-		}
-		
-		::-webkit-scrollbar-thumb:hover {
-		    background: #555;
-		}
-		
-		img.friend, img.groupMember
-		{
-			width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid #ff8000;
-		}
-		
-		.friend-profile
-		{
-			display: flex; 
-			justify-content: space-between;
-		}
-		
-		.modal-content
-		{
-			width: 150%;	
-		}
-
-</style>
-
 <script type="text/javascript">
 
 	$(function()
@@ -181,7 +90,7 @@
 		</tr>
 		<c:forEach var="groupMemberList" items="${groupMemberList }">
 			<tr>
-				<td><img src="${groupMemberList.gm_profile }" class="groupMember"></td>
+				<td>${groupMemberList.gm_profile }</td>
 				<td>${groupMemberList.gm_nickname }</td>
 				<td>${groupMemberList.gm_intro }</td>
 				<td>${groupMemberList.pos_name }</td>
@@ -189,8 +98,9 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
-	<button type="button" id="modal-btn" data-toggle="modal" data-target="#messageModal1">그룹원 초대하기</button>
+	<c:if test="${groupMemberDTO.pos_code == 1 || groupMemberDTO.pos_code == 2 }">
+		<button type="button" id="modal-btn" data-toggle="modal" data-target="#messageModal1">그룹원 초대하기</button>
+	</c:if>
 </div>
 
 <div class="footer">
