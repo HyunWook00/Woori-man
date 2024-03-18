@@ -20,6 +20,7 @@ $(document).ready(function()
 			{
             	alert(args);
 			}
+			,beforeSend: checkInfo
 	 		, error: function(e)
 			{
 				alert(e.responseText);
@@ -29,3 +30,45 @@ $(document).ready(function()
 		
 	});
 });
+
+
+function checkInfo()
+{
+	var flag = true;
+	
+	if (!$.trim($("#us_name").val()) )
+	{
+		alert("이름을 입력해주세요.");
+		$("#us_name").focus();
+		flag = false;
+		return flag;
+	}
+	if (!$.trim($("#us_birthday").val()) )
+	{
+		alert("생년월일을 입력해주세요.");
+		$("#us_birthday").focus();
+		flag = false;
+		return flag;
+	}
+	if (!$.trim($("#us_tel").val()) )
+	{
+		alert("전화번호를 입력해주세요.");
+		$("#us_tel").focus();
+		flag = false;
+		return flag;
+	}
+	
+	
+	return flag;
+}
+
+
+
+
+
+
+
+
+
+
+

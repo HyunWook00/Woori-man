@@ -10,15 +10,13 @@
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/pwdReset.css">
-<!-- 부트스트랩 css -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <!-- 부트스트랩 js -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" slot="js/pwdResetForm.js"></script>
+<script type="text/javascript" src="js/pwdResetForm.js"></script>
 </head>
 <body>
 
@@ -26,11 +24,11 @@
 <div class="tabs">
     <div class="tab" id="idTab">
         <i class="bi bi-person"></i>
-        <a href="IdFindForm.jsp" class="activeTab">아이디 찾기</a>
+        <a href="idfindform.woori" class="activeTab">아이디 찾기</a>
     </div>
     <div class="tab" id="passwordTab">
         <i class="bi bi-file-lock"></i>
-        <a href="pwdFindForm.jsp">비밀번호 찾기</a>
+        <a href="pwdfindform.woori">비밀번호 찾기</a>
     </div>
 </div>
 

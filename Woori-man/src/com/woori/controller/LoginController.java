@@ -131,7 +131,7 @@ public class LoginController
 		UserDTO userDTO = new UserDTO();
 		LoginDTO user = new LoginDTO();
 		LoginDAO dao = new LoginDAO();
-
+		String loginMsg = ""; 
 		
 		dao.connection();
 		
@@ -146,9 +146,9 @@ public class LoginController
 		if (us_code == null || uw_code != null)
 		{
 			// 로그인 실패 → 로그인 폼을 다시 요청할 수 있도록 안내
+			loginMsg = "아이디 또는 비밀번호를 잘못 입력했습니다.";
+			session.setAttribute("loginMsg", loginMsg);
 			return "loginform.woori";
-			
-			
 		} 
 		
 		// 로그인 성공 → 세션 구성 → MemberMain 페이지를  요청할 수 있도록 안내
@@ -167,8 +167,12 @@ public class LoginController
 
 	// 로그인 폼 연결 메소드
 	@RequestMapping(value = "/loginform.woori")
-	public String loginform(HttpSession session)
+	public String loginform(HttpSession session, Model model)
 	{
+		String loginMsg = (String) session.getAttribute("loginMsg");
+		System.out.println(loginMsg);
+		model.addAttribute("loginMsg", loginMsg);
+		session.removeAttribute("loginMsg");
 		return "/WEB-INF/view/Login.jsp";
 	}
 	

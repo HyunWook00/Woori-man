@@ -39,9 +39,8 @@
 	</div>
 		
 	<div id="tblDiv">
-		<p>회원정보에 등록한 휴대전화로 인증</p>
-		<span>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야
-		, 인증번호를 받을 수 있습니다.</span><br><br>
+		<p>회원정보를 통한 아이디 찾기</p>
+		<span>회원정보에 등록한 이름, 생년월일, 전화번호를 통해 아이디를 찾을 수 있습니다.</span><br><br>
 		<form action="idfind.woori" method="post" >
 			<table class="table">
 				<tr>

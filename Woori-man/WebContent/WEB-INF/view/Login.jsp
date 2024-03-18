@@ -15,6 +15,22 @@
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function()
+{
+	var loginMsg = "${loginMsg}";
+	
+	if (loginMsg != "")
+	{
+		alert(loginMsg);
+	}
+	
+});
+
+</script>
+
+
 </head>
 
 <body>
