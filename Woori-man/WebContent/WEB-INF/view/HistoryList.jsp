@@ -1,9 +1,84 @@
+<%@page import="com.woori.dto.MeetingDTO"%>
+<%@page import="com.woori.dto.GroupDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.woori.dao.MeetingDAO"%>
+<%@page import="com.woori.util.PagingUtil"%>
+<%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+%>
+<%
+//페이징
+	String strNum = request.getParameter("num");
+	int num=0;
+	if(strNum!=null)
+		num = Integer.parseInt(strNum);
+	
+	String pageNum = request.getParameter("pageNum");
+	int currentPage = 1;
+	if(pageNum != null)
+		currentPage = Integer.parseInt(pageNum);
+	
+	String key = (String)request.getAttribute("key");
+	String value = (String)request.getAttribute("value");
+	
+	if(key != null)
+	{
+		if(request.getMethod().equalsIgnoreCase("GET"))
+			// 디코딩 처리
+			value = URLDecoder.decode(value, "UTF-8");
+	}
+	else
+	{
+		key = "MT_TITLE";
+		value = "";
+	}
+	
+	PagingUtil myUtil = new PagingUtil();
+	
+	int dataCount = (Integer)request.getAttribute("allArticle");
+	int numPerPage = 10;
+	int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+	
+	if(currentPage > totalPage)
+		currentPage = totalPage;
+	
+	int start = (currentPage-1) * numPerPage + 1;
+	int end = currentPage * numPerPage;
+
+	MeetingDAO dao = new MeetingDAO();
+	ArrayList<MeetingDTO> meetingList = null;
+	String cg_code = ((GroupDTO)session.getAttribute("groupDTO")).getCg_code();
+	meetingList = dao.getCompleteMeetingLists(cg_code, start, end, key, value);
+	dao.close();
+	
+	String param = "";
+	
+	if(!value.equals(""))
+	{
+		param += "?key=" + key;
+		param += "&value=" + value;
+	}
+	
+	String listUrl = "historylist.woori" + param;
+	
+	String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+	
+	// 글 내용 보기 주소
+	String articleUrl = "meetingarticle.woori";
+	
+	if(param.equals(""))
+		articleUrl = articleUrl + "?pageNum=" + currentPage;
+	else
+		articleUrl = articleUrl + param + "&pageNum=" + currentPage;
+
+
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -88,7 +163,7 @@
 			
 			<!-- 게시글 목록 영역 -->
 			<div class="content-list">
-				<c:forEach items="${meetingList }" var="meeting">
+				<c:forEach items="<%=meetingList %>" var="meeting">
 				<c:if test="${meeting.mt_status == 2 }">
 				<div class="meeting">
 					<div class="meeting-category">${fn:substring(meeting.mc_name, 0, 2)}</div>
@@ -128,12 +203,27 @@
 			</div>
 		</div><!-- .content-list-div -->
 		
-		<!-- 페이징 처리 영억 -->
+		<!-- 페이징 처리 영역 -->
 		<div class="paging" align="center">
-			1 2 3 ... 9
-		</div>
+			<nav class="page-nav">
+				<%
+				if (dataCount != 0)
+				{
+				%>
+					<%=pageIndexList %>
+				<%
+				}
+				else
+				{
+				%>
+					등록된 게시물이 존재하지 않습니다.
+				<%
+				}
+				%>
+			</nav>
+		</div><!-- .paging -->
 		
-	</div>
+	</div><!-- .centerContent -->
 	
 	<!-- 우측 고정메뉴 영역 -->
 	<div class="rightMenu"></div>

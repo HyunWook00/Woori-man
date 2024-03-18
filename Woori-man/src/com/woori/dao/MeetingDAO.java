@@ -159,6 +159,60 @@ public class MeetingDAO
 		return result;
 	}
 	
+	// 페이징 처리용 확정된 모임 게시글 리스트 출력 메소드
+	public ArrayList<MeetingDTO> getCompleteMeetingLists(String cg_code, int start, int end, String key, String value)
+	{
+		ArrayList<MeetingDTO> result = new ArrayList<MeetingDTO>();
+		
+		try
+		{
+			value = "%" + value + "%";
+			String sql = "SELECT RNUM, MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME" + 
+					" FROM (SELECT ROWNUM AS RNUM, DATA.* FROM (SELECT MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME" + 
+					" FROM VIEW_MEETING_LIST WHERE CG_CODE = ? AND " + key + " LIKE ? AND MT_STATUS = 2 ORDER BY MT_CODE DESC)DATA) WHERE RNUM >= ? AND RNUM <= ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(cg_code));
+			pstmt.setString(2, value);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				MeetingDTO dto = new MeetingDTO();
+				dto.setNum(rs.getInt("RNUM"));
+				dto.setMt_code(rs.getString("MT_CODE"));
+				dto.setCg_code(rs.getString("CG_CODE"));
+				dto.setCg_name(rs.getString("CG_NAME"));
+				dto.setGm_code(rs.getString("GM_CODE"));
+				dto.setGm_nickname(rs.getString("GM_NICKNAME"));
+				dto.setMt_date(rs.getString("MT_DATE"));
+				dto.setMt_update(rs.getString("MT_UPDATE"));
+				dto.setMt_meet(rs.getString("MT_MEET"));
+				dto.setMt_vote(rs.getString("MT_VOTE"));
+				dto.setMt_title(rs.getString("MT_TITLE"));
+				dto.setCt_code(rs.getString("CT_CODE"));
+				dto.setCt_name(rs.getString("CT_NAME"));
+				dto.setRg_code(rs.getString("RG_CODE"));
+				dto.setRg_name(rs.getString("RG_NAME"));
+				dto.setMt_status(rs.getString("MT_STATUS"));
+				dto.setMt_etc(rs.getString("MT_ETC"));
+				dto.setMc_code(rs.getString("MC_CODE"));
+				dto.setMc_name(rs.getString("MC_NAME"));
+				
+				result.add(dto);
+			}
+			
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 	// 모임 게시글 상세조회 데이터 출력 메소드 ok
 	public MeetingDTO getMeetingArticle(String mt_code)
 	{

@@ -42,6 +42,7 @@ public class HistoryController
 		HashMap<String, ArrayList<HistoryDTO>> historyList = new HashMap<String, ArrayList<HistoryDTO>>();
 		HashMap<String, String> attendStatus = new HashMap<String, String>();
 		MeetingDAO mDao = new MeetingDAO();
+		int allArticle = 0;
 		try
 		{
 			IHistoryDAO dao = sqlSession.getMapper(IHistoryDAO.class);
@@ -51,6 +52,7 @@ public class HistoryController
 				historyList.put(dto.getMt_code(), dao.getHistoryList(dto.getMt_code()));
 				attendStatus.put(dto.getMt_code(), dao.checkHistory(member.getGm_code(), dto.getMt_code()));
 			}
+			allArticle = mDao.countArticle(group.getCg_code());
 			
 		} catch (Exception e)
 		{
@@ -71,6 +73,7 @@ public class HistoryController
 		model.addAttribute("meetingList", meetingList);
 		model.addAttribute("historyList", historyList);
 		model.addAttribute("attendStatus", attendStatus);
+		model.addAttribute("allArticle", allArticle);
 		
 		return "/WEB-INF/view/HistoryList.jsp";
 	}
