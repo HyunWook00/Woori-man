@@ -96,9 +96,9 @@ String cp = request.getContextPath();
 		<div class="groupMain_main">
 		<div class="groupFee" >
 			<div> <h4>💰 회비 정보 </h4>
-			<%-- <c:if test="${groupMemberDTO.pos_code == 3 && not empty groupFeeList.gf_start}"> --%>
+			 <c:if test="${groupMemberDTO.pos_code == 3 || groupMemberDTO.pos_code == 1 && not empty groupFeeList.gf_start}">
 				<button class="groupFeebtn" data-bs-toggle="modal" data-bs-target="#groupFeeUpdate">회비 수정</button>
-			<%-- </c:if> --%>
+			</c:if> 
 			</div> 
 			<c:choose>
 			<c:when test="${empty groupFeeList.gf_start }">

@@ -558,6 +558,7 @@ public class MeetingController
 	@RequestMapping(value = "/meetinginsert.woori", method = RequestMethod.POST)
 	public String meetingInsert(Model model, MeetingDTO dto, HttpSession session)
 	{
+		System.out.println("컨트롤러 호출~");
 		MeetingDAO dao = new MeetingDAO();
 		dto.setGm_code(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 		dto.setCg_code(((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getCg_code());
