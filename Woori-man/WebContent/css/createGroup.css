@@ -18,8 +18,22 @@ input[type=radio]
 	display: none;
 }
 
+.drop-explain
+{
+    display: flex;
+    flex-direction: column;
+}
 
+.reExplain
+{
+	color: red;
+}
 
+.dtopBtn
+{
+	background-color: #ff8000 !important;
+	border: 0 !important;
+}
 
 .txt
 {

@@ -116,21 +116,40 @@ public class MemberMainController
 	// 수정할 그룹 이전 정보 조회 찾아오기 메소드
 	// 그룹 수정 폼으로 이동
 	@RequestMapping(value = "/groupupdateform.woori")
-	public String groupUpdateForm(Model model, @RequestParam("cg_code") String cg_code) throws ClassNotFoundException, SQLException
+	public String groupUpdateForm(HttpSession session, Model model, @RequestParam("cg_code") String cg_code) throws ClassNotFoundException, SQLException
 	{
 		MemberMainDAO dao = new MemberMainDAO();
 		GroupDTO group = new GroupDTO();
 		dao.connection();
+		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+		String us_code = userDTO.getUs_code();
 		
-		group = dao.searchGroup(cg_code);
+		group = dao.searchGroup(cg_code, us_code);
 		
 		model.addAttribute("cg_code", cg_code);
+		model.addAttribute("us_code", us_code);
 		model.addAttribute("group", group);
+		
 		
 		dao.close();
 		
 		return "/WEB-INF/view/ChangeGroupInfo.jsp";
 	}
+	
+	
+	// 그룹 폐쇄 메소드 
+	@RequestMapping(value = "/dropgroup.woori")
+	public String droupGroup(Model model, @RequestParam("cg_code") String cg_code
+								 , @RequestParam("gm_code") String gm_code ) throws ClassNotFoundException, SQLException
+	{
+		MemberMainDAO dao = new MemberMainDAO();
+		dao.connection();
+		
+		dao.dropGroup(gm_code, cg_code);
+		
+		return "redirect:membermain.woori";
+	}
+	
 	
 	// 설정한 DTO session 테스트
 	@RequestMapping(value = "/newfile.woori")

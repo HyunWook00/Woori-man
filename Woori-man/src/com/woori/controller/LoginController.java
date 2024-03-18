@@ -170,7 +170,6 @@ public class LoginController
 	public String loginform(HttpSession session, Model model)
 	{
 		String loginMsg = (String) session.getAttribute("loginMsg");
-		System.out.println(loginMsg);
 		model.addAttribute("loginMsg", loginMsg);
 		session.removeAttribute("loginMsg");
 		return "/WEB-INF/view/Login.jsp";

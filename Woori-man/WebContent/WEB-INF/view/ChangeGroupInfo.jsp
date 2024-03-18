@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CreateGroupForm.jsp</title>
+<title>ChangeGroupForm.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/createGroup.css">
 <!-- 1. 부트스트랩 js -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -21,6 +21,17 @@
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="changeGroupInfo.js"></script>
+<script type="text/javascript">
+
+ $(document).ready(function()
+{
+	 
+	
+});
+
+</script>
+
+
 
 </head>
 <body>
@@ -28,7 +39,6 @@
 
 <div class="header">
 	<c:import url="MemberHeader.jsp"></c:import>
-	
 </div>
 	<hr>
 
@@ -210,13 +220,47 @@
 		</div>
 		
 		<div class="G0_Create">
+			<c:choose>
+				<c:when test="${group.us_code == us_code}">
+					<button type="button" class="create dropBtn" id="dropBtn"   data-bs-toggle="modal" data-bs-target="#staticBackdrop">그룹 폐쇄</button>
+				</c:when>
+			</c:choose>
 			<button type="button" class="create in" id="submitBtn" onclick="updateGroup()">변경하기</button>
 			<button type="button" class="create out" onclick="location.href='entergroup.woori?cg_code=${cg_code}'">돌아가기</button>
 		</div>
 		
 		<input type="hidden" id="cg_code" name="cg_code" value="${cg_code }">
+		<input type="hidden" id="gm_code" name="gm_code" value="${group.gm_code }">
+		</form>
 		
-	</form>
+		<!-- 그룹 폐쇄 Modal -->
+		<form action="dropgroup.woori" method="post">
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Caution</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body drop-explain">
+		        <div>※ 해당 그룹 폐쇄 시 모든 활동내역이 삭제되고,</div>
+		        <div>그룹원 전체가 자동으로 그룹 탈퇴 됩니다.</div> 
+		        <div class="reExplain">정말 폐쇄 하시겠습니까?</div> 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="submit" class="btn btn-primary dtopBtn">그룹 폐쇄</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<input type="hidden" id="cg_code" name="cg_code" value="${cg_code }">
+		<input type="hidden" id="gm_code" name="gm_code" value="${group.gm_code }">
+		</form>
+		
+		
+		
+	
 </div>
 
 

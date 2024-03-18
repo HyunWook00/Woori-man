@@ -12,16 +12,19 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/MemberProfile.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<style type="text/css">
-
-
-
-</style>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 
-
+$(document).ready(function()
+{
+	$(".logoutBtn").click(function()
+	{
+		alert("정상적으로 로그아웃 되었습니다.");
+		
+	});
+	
+});
 
 </script>
 
@@ -65,12 +68,12 @@
             
             <div class="prof_btn row">
             	<div class="p_change col-6"  >
-            		<button type="button" class="btn btn-primary btn-rounded btns ">
+            		<button type="button" class="btn btn-primary btn-rounded btns profBtn" onclick="location.href='user.woori'">
              		  Profile
            			</button>
             	</div>
             	<div class="logout col-6">
-	            	<button type="button" class="btn btn-secondary btn-rounded  btns" onclick="location.href='logout.woori'">
+	            	<button type="button" class="btn btn-secondary btn-rounded  btns logoutBtn" onclick="location.href='logout.woori'">
 	             	Logout
 	            	</button>
             	</div>

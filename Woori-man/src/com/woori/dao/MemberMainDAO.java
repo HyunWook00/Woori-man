@@ -98,14 +98,15 @@ public class MemberMainDAO
 	
 	
 	// 그룹 수정을 위해 이전 정보 불러오는 메소드
-	public GroupDTO searchGroup(String cg_code) throws SQLException
+	public GroupDTO searchGroup(String cg_code, String us_code) throws SQLException
 	{
 		GroupDTO result = new GroupDTO();
 		
-		String sql = "SELECT CG_NAME, GC_CODE, CG_INTRO, BRD_NAME, 	NVL(CG_PROFILE, '기본프로필') AS CG_PROFILE"
-				+ " FROM CREATE_GROUP WHERE CG_CODE = ?";
+		String sql = "SELECT CG_NAME, GC_CODE, CG_INTRO, BRD_NAME, 	NVL(CG_PROFILE, '기본프로필') AS CG_PROFILE, US_CODE, GM_CODE"
+				+ " FROM MY_GROUP_VIEW WHERE CG_CODE = ? AND US_CODE = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, cg_code);
+		pstmt.setString(2, us_code);
 		
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next())
@@ -115,12 +116,34 @@ public class MemberMainDAO
 			result.setCg_intro(rs.getString("CG_INTRO"));
 			result.setBrd_name(rs.getString("BRD_NAME"));
 			result.setCg_profile(rs.getString("CG_PROFILE"));
+			result.setUs_code(rs.getString("US_CODE"));
+			result.setGm_code(rs.getString("GM_CODE"));
+		
 		}
 		
 		rs.close();
 		pstmt.close();
 		
 		return result;	
+	}
+	
+	
+	// 그룹 폐쇄 메소드 
+	public int dropGroup(String gm_code, String cg_code) throws SQLException
+	{
+		int result = 0;
+		
+		String sql = "INSERT INTO CLOSED_GROUP_LIST(CGL_CODE, CGL_DATE, GM_CODE, CR_CODE, CG_CODE)"
+				+ " VALUES(SEQ_CLOSED_GROUP_LIST.NEXTVAL, SYSDATE, ?, 1, ?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, gm_code);
+		pstmt.setString(2, cg_code);
+		
+		result = pstmt.executeUpdate();
+		
+		pstmt.close();
+		
+		return result;
 	}
 	
 	
