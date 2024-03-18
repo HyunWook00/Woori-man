@@ -178,7 +178,8 @@ hr
     color: dimgray;
 }
 
-.wthdrBtn
+/* 그룹 탈퇴 */
+.wthdrBtnActive
 {
 	font-size: 12px;
     border: solid 1px #ff8000;
@@ -189,7 +190,7 @@ hr
 	
 }
 
-.wthdrBtn:hover
+.wthdrBtnActive:hover
 {
 	font-size: 12px;
     border: solid 1px #ff8000;
@@ -197,6 +198,28 @@ hr
     background-color: #ff8000;
     padding: 7px;
     margin-inline-start: 100px;
+}
+
+.wthdrBtn:hover
+{
+	border: solid 2px #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: '라인Seed';
+    background-color:#ddd;
+    color: #757575;
+    padding: 8px;
+}
+
+.wthdrBtn
+{
+	border: solid 2px #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: '라인Seed';
+    background-color:#ddd;
+    color: #757575;
+    padding: 8px;
 }
 
 .groupWthdr

@@ -117,7 +117,8 @@
 	<br><br>
 	<hr>
 	<!-- 모달을 실행할 버튼 -->
-	<button type="button" class="wthdrBtn" data-bs-toggle="modal" data-bs-target="#groupWthdr" ${positionCount == 0 ? '' : 'disabled=\"disabled\"' }>
+	<button type="button" ${positionCount == 0 ? 'class=\"wthdrBtnActive\"' : 'class=\"wthdrBtn\"' }
+	 data-bs-toggle="modal" data-bs-target="#groupWthdr" ${positionCount == 0 ? '' : 'disabled=\"disabled\"' }>
 		그룹 탈퇴
 	</button>
 	

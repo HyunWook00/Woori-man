@@ -39,7 +39,7 @@ h4
 	font-family: 라인Seed !important;
 }
 
-.button:hover
+.button:hover 
 {
 	font-size: 14px;
     font-family: '라인Seed';
@@ -140,3 +140,4 @@ h4
 	text-decoration: none;
 	text-align: right;		
 }
+
