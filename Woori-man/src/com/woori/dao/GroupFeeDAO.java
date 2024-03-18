@@ -28,7 +28,8 @@ public class GroupFeeDAO
 			System.out.println(e.toString());
 		}
 	}
-
+	
+	// 데이터베이스 연결 해제 
 	public void close() 
 	{
 		try
@@ -60,6 +61,7 @@ public class GroupFeeDAO
 				result.setGf_date(rs.getString("GF_DATE"));
 				result.setGf_start(rs.getString("GF_START"));
 				result.setGm_nickname(rs.getString("GM_NICKNAME"));
+				result.setGf_code(rs.getString("GF_CODE"));
 			}
 			
 			rs.close();
@@ -98,6 +100,41 @@ public class GroupFeeDAO
 	}
 	
 	
+	// 그룹 회비 업데이트 
+	public int groupFeeModify(GroupFeeDTO dto)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "UPDATE GROUP_FEE SET GF_AMOUNT = ?, GF_DATE = SYSDATE"
+					+ " , GF_START = ?, GM_CODE = ? WHERE GF_CODE = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getGf_amount());
+			pstmt.setString(2, dto.getGf_start());
+			pstmt.setInt(3, Integer.parseInt(dto.getGm_code()));
+			pstmt.setInt(4, Integer.parseInt(dto.getGf_code()));
+			
+			//System.out.println("DAO 진입");
+			//System.out.println(dto.getGf_amount());
+			//System.out.println(dto.getGf_code());
+			//System.out.println(dto.getGf_start());
+			//System.out.println(dto.getGm_code());
+			
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	
 	// 회비 납부한 그룹원 확인 
 	public ArrayList<GroupFeeDTO> groupFeeInsertList(String cg_code)
 	{
@@ -120,11 +157,11 @@ public class GroupFeeDAO
 				dto.setGm_code(rs.getString("GM_CODE1"));
 				dto.setGfi_amount(rs.getInt("GFI_AMOUNT"));
 				
-				System.out.println(dto.getGfi_code());
-				System.out.println(dto.getGf_date());
-				System.out.println(dto.getGm_nickname());
-				System.out.println(dto.getGm_code());
-				System.out.println(dto.getGfi_amount());
+				//System.out.println(dto.getGfi_code());
+				//System.out.println(dto.getGf_date());
+				//System.out.println(dto.getGm_nickname());
+				//System.out.println(dto.getGm_code());
+				//System.out.println(dto.getGfi_amount());
 				
 				result.add(dto);
 			}
@@ -137,7 +174,7 @@ public class GroupFeeDAO
 			System.out.println(e.toString());
 		}
 		
-		System.out.println("DAO나감");
+		//System.out.println("DAO나감");
 		
 		return result;
 	}

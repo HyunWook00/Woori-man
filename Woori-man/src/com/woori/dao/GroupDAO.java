@@ -248,7 +248,7 @@ public class GroupDAO
 		   
 		   try
 		   {
-			   String sql = "SELECT MT_MEET, MT_TITLE, MT_ETC, MT_CODE,RG_NAME,MC_NAME,CT_NAME FROM GROUP_MYMEETING_VIEW WHERE GM_CODE = ?";
+			   String sql = "SELECT MT_MEET, MT_TITLE, MT_ETC, MT_CODE , RG_NAME,MC_NAME,CT_NAME FROM GROUP_MYMEETING_VIEW WHERE GM_CODE = ?";
 			   PreparedStatement pstmt = conn.prepareStatement(sql);
 			   pstmt.setInt(1, Integer.parseInt(gm_code));
 			   

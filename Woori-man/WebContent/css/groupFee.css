@@ -14,9 +14,36 @@
     margin-inline-start: 475px;
 }   
 
-.groupMain_main h4, th 
+.groupMain_main h4
 {
 	font-family: 라인Seed;
+	display: inline-block;
+}
+
+th
+{
+	font-family: 라인Seed;
+} 
+
+ .groupFeebtn:hover
+{
+	font-size: 13px;
+	border: solid 2px #ff8000;
+	border-radius: 5px;
+	color: #ff8000;
+	background-color: white;
+	padding: 8px;
+}
+
+.groupFeebtn
+{
+	font-size: 13px;
+	border: solid 2px #ffffff;
+	border-radius: 5px;
+	color: #ffffff;
+	background-color: #ff8000;
+	padding: 8px;
+	
 }
 
 .groupFee

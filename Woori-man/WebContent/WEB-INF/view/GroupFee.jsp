@@ -42,13 +42,12 @@ String cp = request.getContextPath();
 	{
 		$("#groupFeeInsertBtn").click(function()
 		{
-			
 			//alert($("#gf_start").val());
 			
 			if($.trim($("#gf_amount").val())=="")
 			{
 				alert("회비를 입력해주세요!");
-				$("#gf_amount").focus();
+				$(".gf_amount").focus();
 				return 
 			}
 			else if($.trim($("#gf_start").val())=="")
@@ -58,7 +57,26 @@ String cp = request.getContextPath();
 				return 
 			}
 			
-			$("#groupFeeForm").submit();
+			$("#groupFeeInsertForm").submit();
+			
+		});
+		
+		$("#groupFeeUpdateBtn").click(function()
+		{
+			if($.trim($("#gf_amount2").val())=="")
+			{
+				alert("회비를 입력해주세요!");
+				$("#gf_amount2").focus();
+				return 
+			}
+			else if($.trim($("#gf_start2").val())=="")
+			{
+				alert("납부 개시일을 선택해주세요!");
+				$("#gf_start2").focus();
+				return 
+			}
+			
+			$("#groupFeeUpdateForm").submit();
 			
 		});
 		
@@ -77,7 +95,11 @@ String cp = request.getContextPath();
 		</div>	
 		<div class="groupMain_main">
 		<div class="groupFee" >
-			<h4> 💰 회비 정보 </h4>
+			<div> <h4>💰 회비 정보 </h4>
+			<%-- <c:if test="${groupMemberDTO.pos_code == 3 && not empty groupFeeList.gf_start}"> --%>
+				<button class="groupFeebtn" data-bs-toggle="modal" data-bs-target="#groupFeeUpdate">회비 수정</button>
+			<%-- </c:if> --%>
+			</div> 
 			<c:choose>
 			<c:when test="${empty groupFeeList.gf_start }">
 			<div class="groupFeelist">
@@ -135,7 +157,7 @@ String cp = request.getContextPath();
 		</div> <!-- groupMain_main -->
 </div> <!-- groupBody -->
 
-<!-- 모달 내용 및 처리 -->
+<!-- 회비 설정 모달 내용 및 처리 -->
 <div class="modal fade" id="groupFeeInsert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog .modal-dialog-scrollable">
     <div class="modal-content">
@@ -145,7 +167,7 @@ String cp = request.getContextPath();
       </div>
       <div class="modal-body">
       <div class="groupFee">회비를 설정하세요</div><br>
-      <form action="groupfeeinsert.woori" method="get" id="groupFeeForm">
+      <form action="groupfeeinsert.woori" method="get" id="groupFeeInsertForm">
 			<div>회비 금액 : 
 				<input class="form-control" name="gf_amount" id="gf_amount" type="text" placeholder="회비 금액을 정해주세요"/>
 			</div>
@@ -158,6 +180,34 @@ String cp = request.getContextPath();
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <button type="button" class="btn groupFeeBtn" id="groupFeeInsertBtn">회비 설정</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- 모달 끝  -->
+<!-- 회비 수정 모달 내용 및 처리 -->
+<div class="modal fade" id="groupFeeUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog .modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">회비 설정</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="groupFee">회비를 수정하세요</div><br>
+      <form action="groupfeeupdate.woori" method="get" id="groupFeeUpdateForm">
+			<div>회비 금액 : 
+				<input class="form-control" name="gf_amount" id="gf_amount2" type="text" value="${groupFeeList.gf_amount }"/>
+			</div>
+			<div> 납부 개시일 : 
+				<input class="form-control" name="gf_start" id="gf_start2" type="date" value="${groupFeeList.gf_start }"/>
+				<span>납입 개시일 선택 후 한달 간격으로 회비를 납부할 수 있습니다.</span>
+				<input type="hidden" id="gf_code" name="gf_code" value="${groupFeeList.gf_code }">
+			</div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn groupFeeBtn" id="groupFeeUpdateBtn">회비 수정</button>
       </div>
     </div>
   </div>
