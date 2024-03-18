@@ -8,9 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PlatformMypageMain.jsp</title>
+<title>플랫폼 마이페이지</title>
 
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<!-- <link rel="stylesheet" type="text/css" href="/Woori-man/css/MemberMain.css"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/Woori-man/css/memberHeader.css">
+<link rel="stylesheet" type="text/css" href="/Woori-man/css/footer.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --> 
@@ -29,7 +32,7 @@
 .leftArea {
 	/* background-color: yellow; */
 	float: left;
-	height: 870px;
+	height: 800px;
 	width: 395px;
 	margin-left: 20%;
 	box-shadow: 5px 1px 8px 0 rgba(0, 0, 0, .06);
@@ -40,7 +43,7 @@
 .rightArea {
 	float: right;
 	background-color: #F9FBFC;
-	height: 870px;
+	height: 800px;
 	width: 920px;
 	margin-left: 0;
 	margin-right: 10%;
@@ -115,6 +118,7 @@
 	margin-top: 20px;
 	font-weight: 700;
 	color: #1e1e23;
+	
 }
 
 .profileList_ul2 {
@@ -151,7 +155,7 @@
 	background-color: #fff;
 	box-sizing: border-box;
 	width: 650px;
-	height: 240px;
+	height: 275px;
 	margin-bottom: 30px;
 	margin-top: 5px;
 }
@@ -456,10 +460,7 @@ a:hover {
 </head>
 <body>
 
-	<div>
-		<h1>플랫폼 마이페이지 메인 헤더</h1>
-		<hr>
-	</div>
+<jsp:include page="MemberHeader.jsp" />
 
 	<div class="myPageMain">
 
@@ -469,7 +470,7 @@ a:hover {
 			<div class="profileImg_div">
 				<div class="profile_img">
 					<a href="#" onclick="changeImage()" class="photo"> <img
-						alt="대체이미지" src="image/img_user.jpg" class="photo_img"> <span
+						alt="대체이미지" src="images/profile.png" class="photo_img"> <span
 						class="photo_edit"></span>
 					</a>
 				</div>
@@ -483,12 +484,12 @@ a:hover {
 
 			<div class="profileList_div">
 				<ul class="profileList_ul">
-					<li class="profileList_li">
+					<!-- <li class="profileList_li">
 						<a href="">나의 모임일정</a>
-					</li>
+					</li> -->
 
 					<li class="profileList_li">
-						<a href="group.woori">나의 그룹 관리</a> 
+						<a href="group.woori" style="color: black !important;">나의 그룹 관리</a> 
 					</li>
 				</ul>
 
@@ -501,16 +502,17 @@ a:hover {
 					</li>
 				    -->
 					<li class="profileList_li2"
-					style="border-top: 1px solid rgba(146, 146, 148, .3); padding-top: 20px; border-length: 100px;"
+					style="padding-top: 5px; border-length: 100px;"
 					>나의 문의내역<a href=""></a></li>
 					<li class="profileList_li2">나의 신고내역<a href=""></a></li>
 				</ul>
 			</div>
 
+<!-- 
 			<footer class="footer" style="text-align: center;">
 				<div class="footer_home"
 					style="padding: 30px 0 40px; box-sizing: border-box;">
-					<ul class="guide_link" style="list-style: none; display: block;">
+					<ul class="guide_link" style="list-style: none; display: block; position:absolute; bottom:30px; margin-left: 50px;">
 						<li><a href=""> <span class="footer_text">로그아웃 ㅣ</span>
 						</a></li>
 
@@ -524,7 +526,8 @@ a:hover {
 				</div>
 			</footer>
 
-		</div>
+ -->
+ 		</div>
 
 
 		<div class="rightArea">
@@ -547,7 +550,7 @@ a:hover {
 
 							<li class="myProfile_li">
 								<div class="myProfile_photo">
-									<img alt="대체이미지" src="image/img_user.jpg" class="photo_img"
+									<img alt="대체이미지" src="images/profile.png" class="photo_img"
 										style="width: 56px; height: 56px; margin-top: 0;">
 								</div>
 							</li>
@@ -920,7 +923,11 @@ a:hover {
 				
 			</div>
 		</div>
+		
+		
+		
 	</div>
+	<jsp:include page="MemberFooter.jsp" />
 
 </body>
 </html>
