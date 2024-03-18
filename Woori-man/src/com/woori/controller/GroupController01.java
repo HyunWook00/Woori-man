@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.woori.dao.GroupListDAO;
 import com.woori.dto.GroupDTO;
@@ -165,13 +166,14 @@ public class GroupController01
 	*/
 	
 	
-	
-		// 수락 버튼 클릭 시 (테스트 완료, 보드게임모임 대기그룹리스트로 이동)
-		@RequestMapping("/invitationacccept.woori")
-		public String invitationAccept(Model model, HttpSession session)
+		// 수락 버튼 클릭 시 (테스트 완료)
+		@RequestMapping(value = "/invitationacccept.woori", method = RequestMethod.GET)
+		public String invitationAccept(Model model, HttpSession session, String gi_code)
 		{
 			GroupDTO dto = (GroupDTO) session.getAttribute("GroupDTO");
-			String gi_code = dto.getGi_code(); 
+			//String gi_code = dto.getGi_code(); 
+			
+			//System.out.println("수락 버튼 클릭시 세션에서 받아온 gi_code : " + gi_code);
 			
 			GroupListDAO dao = new GroupListDAO();
 			
@@ -179,14 +181,14 @@ public class GroupController01
 			
 			try
 			{
-				accept = dao.accept(gi_code);
+				//accept = dao.accept(gi_code);
 				
 			} catch (Exception e)
 			{
 				System.out.println(e.toString());
 			}
 			
-			model.addAttribute("accept", accept);
+			//model.addAttribute("accept", accept);
 			
 			return "group.woori";
 		}
@@ -194,11 +196,13 @@ public class GroupController01
 		
 		// 거절 버튼 클릭 시 (테스트 완료)
 		// 초대 거절 → 거절만 할게요 버튼 클릭 시 (그룹 초대 테이블) 업데이트
-		@RequestMapping(value = "/invitationrefuse.woori")
-		public String invitationRefuse(Model model, HttpSession session)
+		@RequestMapping(value = "/invitationrefuse.woori", method = RequestMethod.GET)
+		public String invitationRefuse(Model model, HttpSession session, String gi_code)
 		{
 			GroupDTO dto = (GroupDTO) session.getAttribute("GroupDTO");
-			String gi_code = dto.getGi_code(); 
+			//String gi_code = dto.getGi_code(); 
+			
+			//System.out.println("거절 버튼 클릭시 세션에서 받아온 gi_code : " + gi_code);
 			
 			GroupListDAO dao = new GroupListDAO();
 			
@@ -221,13 +225,16 @@ public class GroupController01
 		
 		// 차단하시겠습니까? 클릭시
 		// 초대 거절 → 차단도 할래요 버튼 클릭시 (그룹 초대 테이블 + 그룹 차단 테이블) 업데이트
-		@RequestMapping(value = "/invitationblock.woori")
-		public String invitationBlock(Model model, HttpSession session)
+		@RequestMapping(value = "/invitationblock.woori", method = RequestMethod.GET)
+		public String invitationBlock(Model model, HttpSession session, String gi_code, String cg_code)
 		{
-			GroupDTO dto = (GroupDTO) session.getAttribute("GroupDTO");
-			String gi_code = dto.getGi_code(); 
-			String cg_code = dto.getCg_code();
-			String us_code = dto.getUs_code();
+			
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+			String us_code = userDTO.getUs_code();
+			
+			//System.out.println("차단 버튼 클릭시 세션에서 받아온 gi_code : " + gi_code);
+			//System.out.println("차단 버튼 클릭시 세션에서 받아온 cg_code : " + cg_code);
+			//System.out.println("차단 버튼 클릭시 세션에서 받아온 us_code : " + us_code);
 			
 			GroupListDAO dao = new GroupListDAO();
 			
@@ -272,6 +279,16 @@ public class GroupController01
 			
 			return "group.woori";
 			
+		}
+		
+		// 그룹원 정보 등록
+		@RequestMapping(value = "groupaccept.woori", method = RequestMethod.POST)
+		public String groupAccept(String gm_nickname, String gm_intro, String gi_code, String gm_profile) throws ClassNotFoundException, SQLException
+		{
+			GroupListDAO dao = new GroupListDAO();
+			dao.groupMemberInsert(gi_code, gm_nickname, gm_profile, gm_intro);
+			
+			return "redirect:group.woori";
 		}
 
 }

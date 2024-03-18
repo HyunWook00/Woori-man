@@ -451,25 +451,45 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 <script type="text/javascript">
 	
-	function invitaionAccept()
+	function invitaionAccept(gi_code)
 	{
 		//alert("수락메소드 호출되겠지?");
-		window.location.href="invitationacccept.woori";
+		var params = "gi_code=" + gi_code;
+		$.ajax(
+		{
+			type: "GET"
+			, url: "invitationacccept.woori"
+			, data: params
+			, success: function(args)
+			{
+				$("#member-info-gi_code").val(gi_code);
+				$("#memberInfoModal").modal("show");
+				
+			}
+			, error: function(e)
+			{
+				alert(e.responseText);
+			}
+		});
+		
+		//window.location.href="invitationacccept.woori?gi_code=" + gi_code;
 	}
 	
-	function invitaionRefuse()
+	function invitaionRefuse(gi_code)
 	{
+		//alert(gi_code);
 		//alert("초대거절만 할게용");
-		window.location.href="invitationrefuse.woori";
+		window.location.href="invitationrefuse.woori?gi_code=" + gi_code;
 	}
 	
-	function invitationBlock()
+	function invitationBlock(gi_code, cg_code, us_code)
 	{
-		//alert("그룹차단도 할래용");
-		window.location.href="invitationblock.woori";
+		//alert("그룹차단도 할래용" + gi_code + ", " + cg_code+ ", " + us_code);
+		//window.location.href="invitationblock.woori?gi_code=" + gi_code;
+		window.location.href="invitationblock.woori?gi_code=" + gi_code + "&cg_code=" + cg_code;
 	}
 	
-	function invitationunblock()
+	function invitationUnblock()
 	{
 		window.location.href="invitationUnblock.woori";
 	}
@@ -621,7 +641,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 									
 									</div>
 									
-									<button type="button" class="btn_edit">
+									<button type="button" class="btn_edit" onclick="memberInfoInsert()">
 									  <span class="subIndexEdit">그룹원 정보 등록하기</span>
 									</button>
 									
@@ -686,13 +706,71 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 										</div>
 										
 									<div class="btnArea_new" style="display: flex;">
-										<button type="button" class="accept" data-bs-toggle="modal" data-bs-target="#exampleModalAccept">
+										<button type="button" class="accept" data-bs-toggle="modal" data-bs-target="#exampleModalAccept" >
 										  <span class="btn_text">수락</span>
 										</button>
-										<button type="button" class="refuse" data-bs-toggle="modal" data-bs-target="#exampleModalRefuse">
+										<button type="button" class="refuse" data-bs-toggle="modal" data-bs-target="#exampleModalRefuse" value="${inviteGroupList.gi_code }">
 										  <span class="btn_text">거절</span>
 										</button>
 									</div>	
+									
+									
+							
+							<!--수락 Modal -->
+							<div class="modal fade" id="exampleModalAccept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        해당 그룹의 초대를 수락하시겠습니까?
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="accept" data-bs-dismiss="modal" onclick="invitaionAccept(${inviteGroupList.gi_code })" value="${inviteGroupList.gi_code }">
+							        	<span class="btn_text">수락</span>
+							        </button>
+							        <button type="reset" class="refuse">
+							        	<span class="btn_text">취소</span>
+							        </button>
+							      </div>
+							    </div>
+							  </div>
+							</div> <!-- 수락 modal 끝 -->
+							
+							<!--거절 Modal -->
+							<div class="modal fade" id="exampleModalRefuse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        초대를 거절한 그룹의 초대를 더이상 받지 않을 수 있습니다.
+							        해당 그룹의 초대를 더이상 받지 않으시겠습니까?
+							      </div>
+							      <div class="modal-footer">
+							      <!-- 
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">이번만 거절만 할게요</button>
+							        <button type="button" class="btn btn-primary">더이상 받지 않을래용</button>
+									 -->
+									
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="invitaionRefuse(${inviteGroupList.gi_code })" value="${inviteGroupList.gi_code }">
+							        	<span class="btn_text">이번만 거절만 할게요</span>
+							        </button>
+							        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal"  onclick="invitationBlock(${inviteGroupList.gi_code }, ${inviteGroupList.cg_code })" value="${inviteGroupList.gi_code }">
+							        	<span class="btn_text">더이상 받지 않을래용</span>
+							        </button>
+									
+																	      
+							      </div>
+							    </div>
+							  </div>
+							</div> <!-- 거절 modal 끝 -->
+							
+						
 									
 									<!-- <div class="btnDiv" style="float: left;">
 									 	<button type="button" class="btn_edit" onclick="invitationunblock()">
@@ -714,7 +792,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 		</div> <!-- 초대 togglediv끝 -->
 		
-			
+		<!-- 차단 그룹 toggle -->	
 		<div class="toggleDiv" style="float: right;">	
 		 <div class="blockedGroup">
 				
@@ -730,7 +808,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 				        
 				         <ul class="InvitationList_ul">
 
-							<c:forEach var="inviteGroupList" items="${inviteGroupList }">
+							<c:forEach var="blockedGroupList" items="${blockedGroupList }">
 							<!-- 그룹명, 그룹프사, 그룹멤버등록일, 그룹카테고리, 그룹 한줄소개 -->
 
 								<li class="InvitationList_li">
@@ -743,17 +821,17 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 										<div class="GroupProfile_txt"
 											style="width: 450px; height: 100px;">
 											<div class="GourpProfileName">
-												<span class="GroupName" style="font-weight: bold;">${inviteGroupList.cg_name}</span>
-												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${inviteGroupList.gc_name }</span>
+												<span class="GroupName" style="font-weight: bold;">${blockedGroupList.cg_name}</span>
+												<span class="GroupName_Category" style="color: #767678; font-size: 13px;">${blockedGroupList.gc_name }</span>
 												<br> 
 												<%-- <span class="GroupName_Category" style="color: #767678; font-size: 13px;">나의 그룹원 등록일 : ${myGroupList.gm_regDate}</span>
 												<br> --%>
 												<div class="GroupIntroduce" style="width: 200px;">
-													<p>${inviteGroupList.cg_intro }</p>
+													<p>${blockedGroupList.cg_intro }</p>
 												</div>
 											</div>
 										</div>
-										
+									<!-- 	
 									<div class="btnArea_new" style="display: flex;">
 										<button type="button" class="accept" data-bs-toggle="modal" data-bs-target="#exampleModalAccept">
 										  <span class="btn_text">수락</span>
@@ -762,12 +840,13 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 										  <span class="btn_text">거절</span>
 										</button>
 									</div>	
-									
-									<!-- <div class="btnDiv" style="float: left;">
-									 	<button type="button" class="btn_edit" onclick="invitationunblock()">
+ 									-->
+ 									
+ 									<div class="btnDiv" style="float: left;">
+									 	<button type="button" class="btn_edit" onclick="invitationUnblock()">
 									  		<span class="subIndexEdit">차단 해제</span>
 										</button>
-									</div> -->
+									</div>
 									</div>
 								</li>
 								
@@ -786,6 +865,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 
 			<jsp:include page="MemberFooter.jsp" />
+			<c:import url="GroupMemberInfoFormModal.jsp"></c:import>
 
 
 

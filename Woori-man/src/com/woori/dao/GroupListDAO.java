@@ -186,7 +186,7 @@ public class GroupListDAO
 			
 			//○ 그룹명, 그룹프사, 그룹장닉네임, 그룹한줄소개, 그룹초대발신일
 			//→ 그룹장닉네임, 그룹초대발신일 추가
-			String sql = "SELECT CG_NAME, CG_PROFILE, CG_INTRO FROM INVITEGROUP_VIEW WHERE US_CODE = ?";
+			String sql = "SELECT CG_NAME, CG_PROFILE, CG_INTRO, GI_CODE, CG_CODE FROM INVITEGROUP_VIEW WHERE US_CODE = ?";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
@@ -200,6 +200,8 @@ public class GroupListDAO
 				dto.setCg_name(rs.getString("CG_NAME"));
 				dto.setCg_profile(rs.getString("CG_PROFILE"));
 				dto.setCg_intro(rs.getString("CG_INTRO"));
+				dto.setGi_code(rs.getString("GI_CODE"));
+				dto.setCg_code(rs.getString("CG_CODE"));
 				//dto.setGi_request(rs.getString("GI_REQUEST"));
 				
 				result.add(dto);
@@ -245,7 +247,7 @@ public class GroupListDAO
 		
 	
 	
-		// 초대 수락 버튼 클릭 시 그룹 초대 테이블 업데이트  (테스트 ○)
+		// 초대 수락 버튼 클릭 시 그룹 초대 테이블 업데이트  (수락시 대기그룹으로 이동)
 		public int accept(String gi_code) throws ClassNotFoundException, SQLException
 		{
 			int result = 0;
@@ -268,14 +270,13 @@ public class GroupListDAO
 
 
 		// 초대 거절 버튼 클릭 시 그룹 초대 테이블 업데이트 (테스트 X)
-		// + 그룹 → 그룹을 차단하시겠습니까? 추가 → 확인 시 그룹차단 테이블에 추가
+		// + 그룹 → 그룹을 차단하시겠습니까?  → 거절만 할게요
 		public int refuse(String gi_code) throws ClassNotFoundException, SQLException
 		{
 			int result = 0;
 			
 			Connection conn = null;
 			conn = DBConn.getConnection();
-			
 			
 			String sql = "UPDATE GROUP_INVITE SET GI_RESPONSE = SYSDATE, RS_CODE = 2 WHERE GI_CODE = ?";
 			
@@ -301,8 +302,8 @@ public class GroupListDAO
 			String sql = "INSERT INTO BLOCKED_GROUP(BG_CODE, CG_CODE, US_CODE, BG_DATE) VALUES(SEQ_BLOCKED_GROUP.NEXTVAL, ?, ?, SYSDATE)";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(us_code));
-			pstmt.setString(2, cg_code);
+			pstmt.setInt(1, Integer.parseInt(cg_code));
+			pstmt.setInt(2, Integer.parseInt(us_code));
 			
 			result = pstmt.executeUpdate();
 			
@@ -333,6 +334,48 @@ public class GroupListDAO
 			
 			return result; 
 			
+		}
+		
+		// 그룹원 정보 입력 메소드
+		public int groupMemberInsert(String gi_code, String gm_nickname, String gm_profile, String gm_intro) throws SQLException, ClassNotFoundException
+		{
+			int result = 0;
+			
+			Connection conn = null;
+			conn = DBConn.getConnection();
+			
+			String sql = "INSERT INTO GROUP_MEMBER(GM_CODE, GI_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO) VALUES(SEQ_GROUP_MEMBER.NEXTVAL, ?, ?, ?, ?)";
+			PreparedStatement pstmt = null;
+			if (gm_profile.equals("") || gm_profile == null)
+			{
+				sql = "INSERT INTO GROUP_MEMBER(GM_CODE, GI_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO) VALUES(SEQ_GROUP_MEMBER.NEXTVAL, ?, ?, NULL, ?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(gi_code));
+				pstmt.setString(2, gm_nickname);
+				pstmt.setString(3, gm_intro);
+			}
+			else if (gm_intro.equals("") || gm_intro == null)
+			{
+				sql = "INSERT INTO GROUP_MEMBER(GM_CODE, GI_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO) VALUES(SEQ_GROUP_MEMBER.NEXTVAL, ?, ?, ?, NULL)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(gi_code));
+				pstmt.setString(2, gm_nickname);
+				pstmt.setString(3, gm_profile);
+			}
+			else if (gm_profile.equals("") || gm_profile == null && gm_intro.equals("") || gm_intro == null)
+			{
+				sql = "INSERT INTO GROUP_MEMBER(GM_CODE, GI_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO) VALUES(SEQ_GROUP_MEMBER.NEXTVAL, ?, ?, NULL, NULL)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(gi_code));
+				pstmt.setString(2, gm_nickname);
+			}
+			
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+			DBConn.close();
+			
+			return result;
 		}
 		
 	
