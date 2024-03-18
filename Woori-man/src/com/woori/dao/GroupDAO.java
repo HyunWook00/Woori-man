@@ -78,8 +78,8 @@ public class GroupDAO
 	         dto.setCg_code(rs.getString(1));
 	         dto.setGm_code(rs.getString(2));
 	         dto.setGm_nickname(rs.getString(3));
-	         dto.setGm_intro(rs.getString(4));
-	         dto.setGm_profile(rs.getString(5));
+	         dto.setGm_profile(rs.getString(4));
+	         dto.setGm_intro(rs.getString(5));
 	         dto.setGm_regdate(rs.getString(6));
 	         dto.setPos_code(rs.getString(7));
 	         dto.setPos_name(rs.getString(8));
@@ -96,12 +96,12 @@ public class GroupDAO
 	   }
 	   
 	   
-	// 선택한 내 그룹에 진입할 때 해당 그룹의 그룹원들 정보GroupMemberDTO 를 구성하여 세션으로 넘기기
+	// 선택한 내 그룹에 진입할 때 해당 그룹원 정보GroupMemberDTO 를 구성하여 세션으로 넘기기
 	   public GroupMemberDTO groupMyInfo(String gm_code) throws SQLException
 	   {
 	      GroupMemberDTO result = new GroupMemberDTO();
 	      
-	      String sql = "SELECT CG_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO, TO_CHAR(GM_REGDATE,'YYYY-MM-DD'), POS_CODE, POS_NAME FROM GROUP_MEMBER_VIEW WHERE GM_CODE = ?";
+	      String sql = "SELECT CG_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, GM_INTRO, TO_CHAR(GM_REGDATE,'YYYY-MM-DD') AS GM_REGDATE, POS_CODE, POS_NAME FROM GROUP_MEMBER_VIEW WHERE GM_CODE = ? ORDER BY POS_CODE DESC";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, gm_code);
 	      

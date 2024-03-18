@@ -34,7 +34,8 @@ public class NoteController
 		ArrayList<NoteDTO> receiveNote = new ArrayList<NoteDTO>();		
 		ArrayList<NoteDTO> receiveAdminNote = new ArrayList<NoteDTO>();		
 		ArrayList<NoteDTO> receiveFriendNote = new ArrayList<NoteDTO>();		
-		ArrayList<NoteDTO> sendNote = new ArrayList<NoteDTO>();		
+		//ArrayList<NoteDTO> sendNote = new ArrayList<NoteDTO>();
+		int allSendNote = 0;
 		
 		NoteDAO dao = new NoteDAO();
 		
@@ -49,7 +50,8 @@ public class NoteController
 			receiveNote = dao.receiveNote(receiver);
 			receiveAdminNote = dao.receiveAdminNote(receiver);
 			receiveFriendNote = dao.receiveFriendNote(receiver);
-			sendNote = dao.sendNote(sender);
+			//sendNote = dao.sendNote(sender);
+			allSendNote = dao.sendNoteCount(sender);
 			
 		} catch (Exception e)
 		{
@@ -70,7 +72,8 @@ public class NoteController
 		model.addAttribute("receiveNote", receiveNote);
 		model.addAttribute("receiveAdminNote", receiveAdminNote);
 		model.addAttribute("receiveFriendNote", receiveFriendNote);
-		model.addAttribute("sendNote", sendNote);
+		//model.addAttribute("sendNote", sendNote);
+		model.addAttribute("allSendNote", allSendNote);
 		
 		result = "/WEB-INF/view/NoteList.jsp";
 		

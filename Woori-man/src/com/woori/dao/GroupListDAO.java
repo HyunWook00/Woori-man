@@ -222,7 +222,7 @@ public class GroupListDAO
 			
 			ArrayList<GroupDTO> result = new ArrayList<GroupDTO>();
 			
-			String sql = "SELECT CG_NAME, CG_INTRO, GC_NAME FROM BLOCKEDGROUP_VIEW WHERE US_CODE = ?";
+			String sql = "SELECT CG_NAME, CG_INTRO, GC_NAME, CG_CODE, GI_CODE FROM BLOCKEDGROUP_VIEW WHERE US_CODE = ?";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, us_code);
@@ -234,6 +234,8 @@ public class GroupListDAO
 				dto.setCg_name(rs.getString("CG_NAME"));
 				dto.setCg_intro(rs.getString("CG_INTRO"));
 				dto.setGc_name(rs.getString("GC_NAME"));
+				dto.setCg_code(rs.getString("CG_CODE"));
+				dto.setGi_code(rs.getString("GI_CODE"));
 				
 				result.add(dto);
 			}

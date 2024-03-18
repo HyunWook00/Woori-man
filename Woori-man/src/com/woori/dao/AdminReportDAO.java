@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.woori.dto.InquiryDTO;
 import com.woori.dto.ReportDTO;
 import com.woori.util.DBConn;
 
@@ -61,6 +62,88 @@ public class AdminReportDAO
 		
 		return result;
 	}		
+	
+	// 신고 내역 갯수
+	public int count() throws SQLException 
+	{
+		int result = 0;
+		
+		String sql = "SELECT COUNT(*) AS COUNT FROM ALL_REPORT_VIEW";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next())
+		{
+			result = rs.getInt("COUNT");
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return result;
+	}
+	
+	// 신고 내역 상태별 분기
+	public ArrayList<ReportDTO> reportStatusList(String report_status) throws SQLException
+	{
+		ArrayList<ReportDTO> result = new ArrayList<ReportDTO>();
+		
+		String sql = "SELECT REPORT_TYPE, REPORT_CODE, REPORT_TITLE, REPORT_DATE, US_CODE1, AD_CODE"
+				+ ", REPORT_STATUS FROM ALL_REPORT_VIEW WHERE REPORT_STATUS = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, report_status);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		ReportDTO dto = null;
+		
+		while(rs.next())
+		{
+			dto = new ReportDTO();
+						
+			dto.setReport_type(rs.getString("REPORT_TYPE"));
+			dto.setReport_code(rs.getString("REPORT_CODE"));
+			dto.setReport_title(rs.getString("REPORT_TITLE"));
+			dto.setReport_date(rs.getString("REPORT_DATE"));
+			dto.setUs_code1(rs.getString("US_CODE1"));
+			dto.setAd_code(rs.getString("AD_CODE"));
+			dto.setReport_status(rs.getString("REPORT_STATUS"));
+			
+			result.add(dto);
+		}
+		
+		rs.close();
+		pstmt.close();				
+		
+		return result;
+	}
+	
+	// 신고 처리상태별 갯수
+	public int count(String report_status) throws SQLException 
+	{
+		int result = 0;
+		
+		String sql = "SELECT COUNT(*) AS COUNT FROM ALL_REPORT_VIEW WHERE REPORT_STATUS = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, report_status);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next())
+		{
+			result = rs.getInt("COUNT");
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return result;
+	}
+	
 	
 	// 신고 처리 결과 
 	public ArrayList<ReportDTO> ReportResult() throws SQLException

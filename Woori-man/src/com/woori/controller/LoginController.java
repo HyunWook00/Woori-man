@@ -229,7 +229,6 @@ public class LoginController
 			friendDao.connection();
 			dao.connection();
 			
-					
 			
 			if (String.valueOf(us_code)==null || String.valueOf(us_code) =="")			//-- 로그인이 되어있지 않은 상황
 			{

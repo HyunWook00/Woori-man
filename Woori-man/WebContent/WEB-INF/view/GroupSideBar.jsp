@@ -73,7 +73,7 @@
 		 	<div class="profile2">
 		 		${groupDTO.cg_intro }<br>
 		 		포인트 : ${groupDTO.group_point }pt<br>	
-		 		<c:if test="${groupMemberDTO.pos_code== 1 }">
+		 		<c:if test="${groupMemberDTO.pos_code== 1}">
 		 			<button type="button" class="mySideBtn" onclick="location.href='groupupdateform.woori?cg_code=${groupDTO.cg_code}'"> 그룹 수정 </button>
 		 		</c:if>
 		 		<hr>

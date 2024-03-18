@@ -501,10 +501,8 @@ a:hover {
 						href="platformaccountupdateform.do">계정관리/비밀번호변경</a>
 					</li>
 				    -->
-					<li class="profileList_li2"
-					style="padding-top: 5px; border-length: 100px;"
-					>나의 문의내역<a href=""></a></li>
-					<li class="profileList_li2">나의 신고내역<a href=""></a></li>
+					<li class="profileList_li2" style="padding-top: 5px; border-length: 100px;"><a href="inquirylist.woori">나의 문의내역</a></li>
+					<li class="profileList_li2"><a href="reportlist.woori">나의 신고내역</a></li>
 				</ul>
 			</div>
 

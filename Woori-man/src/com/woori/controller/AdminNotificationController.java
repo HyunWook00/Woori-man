@@ -62,11 +62,10 @@ public class AdminNotificationController
 			AdminNotificationDTO ad = new AdminNotificationDTO();
 			String ad_code = (String)session.getAttribute("ad_code");
 			
-			System.out.println(nf_title);
-			System.out.println(nf_content);
-			System.out.println(ad_code);
-			System.out.println(na_name);
-			
+			//System.out.println(nf_title);
+			//System.out.println(nf_content);
+			//System.out.println(ad_code);
+			//System.out.println(na_name);
 			
 			ad.setNf_title(nf_title);
 			ad.setNf_content(nf_content);

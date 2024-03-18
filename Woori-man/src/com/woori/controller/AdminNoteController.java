@@ -40,6 +40,7 @@ public class AdminNoteController
 		String result = "";
 		
 		ArrayList<AdminNoteDTO> adminNote = null;
+		int count = 0;
 		
 		AdminNoteDAO dao = new AdminNoteDAO();
 		
@@ -47,6 +48,7 @@ public class AdminNoteController
 		{
 			dao.connection();
 			adminNote = dao.adminNote();
+			count = dao.count();
 			
 		} catch (Exception e)
 		{
@@ -65,6 +67,7 @@ public class AdminNoteController
 		}
 		
 		model.addAttribute("adminNote", adminNote);
+		model.addAttribute("count", count);
 		
 		result = "/WEB-INF/view/AdminNoteList.jsp";
 		

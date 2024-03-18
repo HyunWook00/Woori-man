@@ -49,6 +49,8 @@ public class AdminReportController
 		String result = "";
 		
 		ArrayList<ReportDTO> Report = new ArrayList<ReportDTO>();
+		int count = 0;
+		
 		
 		AdminReportDAO dao = new AdminReportDAO();
 		
@@ -56,6 +58,7 @@ public class AdminReportController
 		{
 			dao.connection();
 			Report = dao.adminReportList();
+			count  = dao.count();
 			
 			
 		} catch (Exception e)
@@ -76,6 +79,62 @@ public class AdminReportController
 		// 왜 안 나오냐면? hashmap 메소드를 실행하지 않았어요~ 그래서 hashmap에 들어있는게 하나도 없기 떄문에
 		// 안 나오는 것입니다~.
 		model.addAttribute("Report", Report);
+		model.addAttribute("count", count);
+		model.addAttribute("reportType", hashmap());
+		
+		result = "/WEB-INF/view/AdminReportList.jsp";
+		
+		return result;
+	}
+	
+	// 신고 내역 상태별 분기
+	@RequestMapping(value = "/adminreportstatuslist.woori", method = RequestMethod.GET)
+	public String AdminReportStatusList(Model model, @RequestParam("report_status") String report_status) throws SQLException, ClassNotFoundException
+	{
+		String result = "";
+		
+		ArrayList<ReportDTO> Report = new ArrayList<ReportDTO>();
+		int count = 0;
+		
+		
+		AdminReportDAO dao = new AdminReportDAO();
+		
+		try
+		{
+			dao.connection();
+			Report = dao.reportStatusList(report_status);
+			
+			if (!report_status.equals("")) 
+		    { 
+		    	Report = dao.reportStatusList(report_status); 
+		    	count = dao.count(report_status);  
+	    	} 
+		    else if (report_status=="")  
+		    { 
+		    	Report = dao.adminReportList(); 
+		    	count = dao.count(); 
+	    	}
+			
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		// 왜 안 나오냐면? hashmap 메소드를 실행하지 않았어요~ 그래서 hashmap에 들어있는게 하나도 없기 떄문에
+		// 안 나오는 것입니다~.
+		model.addAttribute("Report", Report);
+		model.addAttribute("count", count);
 		model.addAttribute("reportType", hashmap());
 		
 		result = "/WEB-INF/view/AdminReportList.jsp";
