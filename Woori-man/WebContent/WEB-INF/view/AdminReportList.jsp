@@ -95,7 +95,7 @@
 	
 	.search_btn {background-color: #4367ad; color: white; border-radius: 20px; border: none;}
 	
-	.category {background-color: #4367ad; color: white; border-radius: 20px; border: none; text-align: center; font-weight: bold;}
+	.category,#report_status  {background-color: #4367ad; color: white; border-radius: 20px; border: none; text-align: center; font-weight: bold;}
 	
 	a {color: black; text-decoration: none; }
 	
@@ -172,6 +172,37 @@
 			$(location).attr("href", "adminreportarticle.woori?report_code=" + report_code + "&ad_code=" + ad_code);
 		});
 	}); */
+	
+	// 리스트 처리상태(접수완료/관리자검토중/처리완료)별 분기
+    function statusFilter() 
+    {
+    	
+        var report_status = $("#report_status").val();        
+        //var count = $("#count").val();
+        //$(location).attr("href", "inquirystatuslist.action?status=" + status + "&count=" + count);
+        $(location).attr("href", "adminreportstatuslist.woori?report_status=" + report_status);
+        
+    }
+    
+    $(document).ready(function() 
+	{	
+     	// 이전에 저장된 IQ 상태 값을 가져옴
+        var savedStatus = localStorage.getItem("savedStatus");
+        if (savedStatus) 
+        {
+        	// 이전에 저장된 IQ 상태가 있으면 해당 값을 #iq_status 요소의 값으로 설정
+            $("#report_status").val(savedStatus);
+        }
+        
+     	// #iq_status 요소의 값이 변경될 때마다 실행될 함수
+        $("#report_status").change(function() 
+   		{
+        	// 변경된 IQ 상태 값을 로컬 스토리지에 저장
+            localStorage.setItem("savedStatus", $(this).val());
+        });
+     	
+     	
+    });
 
 </script>
 
@@ -187,7 +218,7 @@
 <h1>신고내역</h1><hr>
 <div class="list_result">
     <p class="result_count">
-   	    <span id="count">10</span>건
+   	    <span id="count">${count }</span>건
     </p>
     <div class="right_area">
        <div class="inquiry_category">
@@ -232,12 +263,13 @@
 	            <th scope="col">신고일</th>
 	            <th scope="col">담당자</th>
 	            <th scope="col">
-					<select class="category">
-		               <option selected="selected">처리상태</option>
-		               <option>접수완료</option>
-		               <option>검토중</option>
-		               <option>처리완료</option>
-		            </select>
+					<select class="report_status" id="report_status" onchange="statusFilter()">
+					    <option>처리상태</option>
+					    <option value="" >전체</option>
+					    <option value="1">접수완료</option>
+					    <option value="2">관리자 검토중</option>
+					    <option value="3">처리완료</option>	
+					</select>
 				</th>
 	        </tr>
 		</thead>

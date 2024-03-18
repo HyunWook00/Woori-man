@@ -65,6 +65,28 @@ public class AdminNoteDAO
 		return result;
 	}
 	
+	// 관리자 쪽지 갯수
+	public int count() throws SQLException 
+	{
+		int result = 0;
+		
+		String sql = "SELECT COUNT(*) AS COUNT FROM ADMIN_NOTE";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next())
+		{
+			result = rs.getInt("COUNT");
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return result;
+	}
+	
 	// 관리자 쪽지 작성
 	public int adminNoteWrite(AdminNoteDTO dto) throws SQLException
 	{

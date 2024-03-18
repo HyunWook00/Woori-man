@@ -133,7 +133,7 @@
 <h1>쪽지</h1><hr>
 <div class="list_result">
     <p class="result_count">
-   	    <span id="count">5</span>건
+   	    <span id="count">${count }</span>건
     </p>
     <div class="right_area">
        <div class="inquiry_category">
