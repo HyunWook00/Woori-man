@@ -78,8 +78,8 @@ public class GroupDAO
 	         dto.setCg_code(rs.getString(1));
 	         dto.setGm_code(rs.getString(2));
 	         dto.setGm_nickname(rs.getString(3));
-	         dto.setGm_intro(rs.getString(4));
-	         dto.setGm_profile(rs.getString(5));
+	         dto.setGm_profile(rs.getString(4));
+	         dto.setGm_intro(rs.getString(5));
 	         dto.setGm_regdate(rs.getString(6));
 	         dto.setPos_code(rs.getString(7));
 	         dto.setPos_name(rs.getString(8));

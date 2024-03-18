@@ -217,7 +217,7 @@
 				<input type="hidden" id="fr_code" name="fr_code" value="${fr_code }"> 
 				
                 <div class="btns">
-					<button type="button" class="list-btn" onclick="location.href='/friends.woori'">목록으로</button>
+					<button type="button" class="list-btn" onclick="location.href='friends.woori'">목록으로</button>
 					<button type="button" class="submit-btn">전송하기</button>
 				</div>
 				

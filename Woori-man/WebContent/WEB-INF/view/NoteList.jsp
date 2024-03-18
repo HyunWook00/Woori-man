@@ -1,8 +1,64 @@
+<%@page import="com.woori.dto.UserDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.woori.dto.NoteDTO"%>
+<%@page import="com.woori.dao.NoteDAO"%>
+<%@page import="com.woori.util.PagingUtil"%>
+<%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
+%>
+<%
+	//페이징
+	String strNum = request.getParameter("num");
+	int num=0;
+	if(strNum!=null)
+		num = Integer.parseInt(strNum);
+	
+	String pageNum = request.getParameter("pageNum");
+	int currentPage = 1;
+	if(pageNum != null)
+		currentPage = Integer.parseInt(pageNum);
+	
+	PagingUtil myUtil = new PagingUtil();
+	
+	int dataCount = (Integer)request.getAttribute("allSendNote");
+	int numPerPage = 10;
+	int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+	
+	if(currentPage > totalPage)
+		currentPage = totalPage;
+	
+	int start = (currentPage-1) * numPerPage + 1;
+	int end = currentPage * numPerPage;
+
+	NoteDAO dao = new NoteDAO();
+	dao.connection();
+	ArrayList<NoteDTO> sendNote = null;
+	String sender = ((UserDTO)session.getAttribute("userDTO")).getUs_code();
+	sendNote = dao.sendNoteList(sender, start, end);
+	dao.close();
+	
+	String param = "";
+	
+	String listUrl = "notelist.woori" + param;
+	
+	String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+	
+	// 글 내용 보기 주소
+	/*
+	String articleUrl = "meetingarticle.woori";
+	
+	if(param.equals(""))
+		articleUrl = articleUrl + "?pageNum=" + currentPage;
+	else
+		articleUrl = articleUrl + param + "&pageNum=" + currentPage;
+	*/
+
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +80,7 @@ String cp = request.getContextPath();
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
 <link rel="stylesheet" href="css/memberHeader.css">
+<link rel="stylesheet" href="css/footer.css">
 
 <style>
 	@font-face {
@@ -125,6 +182,7 @@ String cp = request.getContextPath();
 	
 	.bi-envelope {
 		font-size: 25pt;
+		color: #ff8000;
 	}
 	
 	select {
@@ -197,7 +255,53 @@ String cp = request.getContextPath();
 		{
 			width: 100px;
 		}
-		
+	
+	div.paging
+{ margin-top: 50px;}
+
+nav.page-nav
+{
+	display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+ul.page-list
+{
+	display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+a.page-control
+{
+	padding: 3.5px 6px;
+	border: 1px solid #b5b5b5;
+	margin: 4px;
+	text-decoration: none;
+	color: #363636;
+	font-size: 10pt;
+	border-radius: 4px;
+	display: inline-flex;
+}
+
+a.page-control:hover
+{
+	background-color: #ff8a3d;
+	border: 1px solid #ff8a3d;
+	color: white;
+}
+
+a.page-control.now-page
+{
+	background-color: #ff8000;
+	border: 1px solid #ff8000;
+	color: white;
+	font-weight: bold;
+}
+
+a.first-page-control, a.last-page-control
+{ margin: 4px 20px;}
      
 </style>
 
@@ -461,7 +565,7 @@ String cp = request.getContextPath();
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="send" items="${sendNote }">
+					<c:forEach var="send" items="<%= sendNote %>">
 						<tr class="message-item">
 							<td>
 								<div class="form-check">
@@ -476,8 +580,30 @@ String cp = request.getContextPath();
 							<td>${send.note_date }</td>
 						</tr>
 					</c:forEach>
+					<tr>
+					
+					</tr>
 				</tbody>
 			</table>
+			<!-- 페이징 처리 영역 -->
+			<div class="paging" align="center">
+				<nav class="page-nav">
+					<%
+					if (dataCount != 0)
+					{
+					%>
+						<%=pageIndexList %>
+					<%
+					}
+					else
+					{
+					%>
+						등록된 게시물이 존재하지 않습니다.
+					<%
+					}
+					%>
+				</nav>
+			</div><!-- .paging -->
 			<table class="table message-table tab-pane fade" id="admin" role="tabpanel" aria-labelledby="nav-admin-tab">
 				<thead>
 					<tr>
@@ -574,61 +700,17 @@ String cp = request.getContextPath();
 					</c:forEach>
 				</tbody>
 			</table>
-			<!-- <tr class="message-item">
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="select1">
-                                <label class="form-check-label" for="select1"></label>
-                            </div>
-                        </td>
-                        <td>홍길동</td>
-                        <td>ㅎㅇㅎㅇ</td>
-                        <td>2024-02-05 10:30</td>
-                        <td><span class="badge bg-secondary">읽음</span></td>
-                    </tr>
-                    <tr class="message-item" >
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="select2">
-                                <label class="form-check-label" for="select2"></label>
-                            </div>
-                        </td>
-                        <td>정현욱</td>
-                        <td onclick="window.location.href='MessageContent.jsp'">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</td>
-                        <td>2024-02-07 14:45</td>
-                        <td><span class="badge bg-danger">읽지않음</span></td>
-                    </tr>
-                    <tr class="message-item" >
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="select3">
-                                <label class="form-check-label" for="select3"></label>
-                            </div>
-                        </td>
-                        <td>아이유</td>
-                        <td onclick="openPopup('MessageContent.jsp')">블루밍</td>
-                        <td>2024-02-12 22:45</td>
-                        <td><span class="badge bg-secondary">읽음</span></td>
-                    </tr>
-                    <tr class="message-item" >
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="select4">
-                                <label class="form-check-label" for="select4"></label>
-                            </div>
-                        </td>
-                        <td>관리자</td>
-                        <td data-toggle="modal" data-target="#messageModal1">안녕하세요</td>
-                        <td>2024-02-12 22:45</td>
-                        <td><span class="badge bg-secondary">읽음</span></td>
-                    </tr> -->
+		
 
 		</div>
 		<div class="compose-btn">
 			<button type="button" class="btn btn-delete" onclick="deleteReceiveNote()">쪽지 삭제</button>
-			<button type="button" class="btn btn-write"
-				onclick="location.href='notewriteform.woori'">쪽지 작성</button>
+			<button type="button" class="btn btn-write"	onclick="location.href='notewriteform.woori'">쪽지 작성</button>
 		</div>
+	</div>
+	
+	<div class="footer">
+		<c:import url="MemberFooter.jsp"></c:import>
 	</div>
 
 	<div class="modal fade" id="messageModal1" tabindex="-1" aria-labelledby="messageModalLabel1" aria-hidden="true">

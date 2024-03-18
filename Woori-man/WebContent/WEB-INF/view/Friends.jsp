@@ -161,7 +161,7 @@
 		    background: #555;
 		}
 		
-		.friend-profile img, img
+		img.friend, .friend-profile>img
 		{
 			width: 40px;
             height: 40px;
@@ -210,6 +210,12 @@
 		.modal-content
 		{
 			width: 100%;	
+		}
+		
+		.bi-x-circle, .bi-envelope
+		{
+			color: #ff8000;
+			font-size: 20pt;
 		}
 		
     </style>
@@ -314,7 +320,7 @@
                 	<c:forEach var="friend" items="${friendsList }">
                 	<li>
                 		<div class="friend-profile"><img src="${friend.us_profile }" alt="profile picture">
-	                    # ${friend.us_code2 } ${friend.us_name } (${friend.us_id })</div>
+	                     # ${friend.us_code2 } ${friend.us_name } (${friend.us_id })</div>
 	                    <div class="btns">
 	                    <button type="button" class="message_btn" 
 	                    onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }&us_id=${friend.us_id }&us_name=${friend.us_name }'"><i class="bi bi-envelope"></i></button>
