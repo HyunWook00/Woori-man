@@ -208,7 +208,7 @@ function addFriends(us_code2)
 					            				<td>${friends.us_id }</td>
 					            				<td>${friends.us_name }</td>
 					            				<td>
-					            				<button type="button" class="deleteBtn" onclick="deleteFriends(${friends.fr_code}, '${friends.us_id }')"><i class="bi bi-trash"></i></button>
+					            				<button type="button" class="deleteBtn bi-btn" onclick="deleteFriends(${friends.fr_code}, '${friends.us_id }')"><i class="bi bi-trash"></i></button>
 					          	 			</td>
 						          		</tr>
 					            		</c:forEach>

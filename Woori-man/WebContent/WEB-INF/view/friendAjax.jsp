@@ -33,7 +33,7 @@
 			sb.append("<td>"+ friends.get(i).getUs_code() + "</td>");
 			sb.append("<td>"+ friends.get(i).getUs_id() + "</td>");
 			sb.append("<td>"+ friends.get(i).getUs_name() + "</td>");
-			sb.append("<td><button onclick=addFriends(" + friends.get(i).getUs_code() + ")><i class='bi bi-person-plus'></i></button></td>");
+			sb.append("<td><button onclick=addFriends(" + friends.get(i).getUs_code() + ")><i class='bi bi-person-plus bi-btn'></i></button></td>");
 			sb.append("</tr>");
 			sb.append("<input type='hidden'" + "id='id'" + "value='" + friends.get(i).getUs_id() +"'>");
 		}

@@ -281,6 +281,13 @@ button
 	color: #ccc !important;
 }
 
+
+.bi-btn
+{
+	color: #ff8000 !important;
+	font-size: 25px !important;
+}
+
 .gr_img {
     height: 140px;
     overflow: hidden;
