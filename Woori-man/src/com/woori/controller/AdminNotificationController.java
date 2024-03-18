@@ -67,6 +67,8 @@ public class AdminNotificationController
 			//System.out.println(ad_code);
 			//System.out.println(na_name);
 			
+			nf_content = nf_content.replaceAll("\r\n", "<br>");
+			
 			ad.setNf_title(nf_title);
 			ad.setNf_content(nf_content);
 			ad.setAd_code(ad_code);
