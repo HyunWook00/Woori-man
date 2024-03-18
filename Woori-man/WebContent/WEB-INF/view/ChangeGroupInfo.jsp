@@ -208,7 +208,7 @@
 					<li class="caseItem case6">
 						<label for="gc_name6">
 						<span class="iconUscase">
-						<img src="images/partnership.png" class="category_img friend">
+						<img src="https://coresos-phinf.pstatic.net/a/34g74c/6_i33Ud018admmxp6bu88rerd_5ksoqj.png" class="category_img friend">
 						</span>
 						<input type="radio" id="gc_name6" name="gc_code" value="6" class="rdo">
 						<em class="uscaseName">취미, 동호회</em>
