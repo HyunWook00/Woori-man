@@ -132,7 +132,7 @@ public class LoginDAO
 		UserDTO dto = new  UserDTO();
 		
 		String sql = "SELECT US_CODE, US_ID, US_NAME, US_BIRTHDAY, US_LUNAR, US_TEL, US_EMAIL, US_PROFILE"
-				+ ", US_SIGNUP, US_ZIPCODE, US_ADDR1, US_ADDR2 FROM USER_VIEW WHERE US_CODE = ?";
+				+ ", TO_CHAR(US_SIGNUP, 'YYYY-MM-DD') AS US_SIGNUP, US_ZIPCODE, US_ADDR1, US_ADDR2 FROM USER_VIEW WHERE US_CODE = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, us_code);
 		
