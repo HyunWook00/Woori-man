@@ -38,7 +38,7 @@ String cp = request.getContextPath();
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 <script type="text/javascript">
 
-	/* 	
+		
 	$(function()
 	{
 		$("#groupFeeInsertBtn").click(function()
@@ -61,6 +61,8 @@ String cp = request.getContextPath();
 			$("#groupFeeInsertForm").submit();
 			
 		});
+		
+		/*
 		$("#groupFeeUpdateBtn").click(function()
 		{
 			if($.trim($("#gf_amount2").val())=="")
@@ -79,8 +81,9 @@ String cp = request.getContextPath();
 			$("#groupFeeUpdateForm").submit();
 			
 		});
+		*/
 		
-	}); */
+	}); 
 
 </script>
 
