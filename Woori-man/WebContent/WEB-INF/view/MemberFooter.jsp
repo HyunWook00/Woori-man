@@ -9,6 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>MemberFooter</title>
+<style type="text/css">
+.footer-atag {color: #767676 !important; text-decoration: none;}
+.footer-atag:visited {color: #767676; text-decoration: none;}
+</style>
 </head>
 <body>
 
@@ -16,7 +20,9 @@
 <!-- 플랫폼 푸터 jsp 파일 작업 -->
 
 <div class="footer-body">
-	© 약속해조<span>고객센터</span><span>1:1문의사항</span><span>FAQ</span> 
+	© 약속해조<span><a class="footer-atag" href="cs.woori">고객센터</a></span>
+	<span><a class="footer-atag" href="inquirylist.woori">문의사항</a></span>
+	<span><a class="footer-atag" href="reportlist.woori">신고내역</a></span> 
 </div>
 
 </body>
