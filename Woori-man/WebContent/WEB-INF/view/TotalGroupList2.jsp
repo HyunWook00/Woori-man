@@ -415,6 +415,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 .GroupProfileImage{
 	padding-right: 20px;
+	float: left;
 }
 
 .GroupPrifile_txt{
@@ -508,8 +509,10 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 </head>
 <body>
-<jsp:include page="MemberHeader.jsp" />
 
+<div class="container">
+	<jsp:include page="MemberHeader.jsp" />
+</div>
 
 	<div class="content">
 

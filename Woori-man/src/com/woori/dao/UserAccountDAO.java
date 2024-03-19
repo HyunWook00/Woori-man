@@ -215,6 +215,7 @@ public class UserAccountDAO
 		}
 	
 		// 플랫폼 탈퇴 (완료)
+		
 		public int accountWthdr(String us_code)
 		{
 			int result = 0;

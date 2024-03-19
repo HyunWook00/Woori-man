@@ -290,6 +290,18 @@ a:hover {
 	color: #ff8a3d;
 }
 
+
+.aInquiry: visited{
+	text-decoration-line: none;
+	color: black;
+}
+
+aInquiry:hover {
+	text-decoration: none;
+	color: #ff8a3d;
+}
+
+
 .guide_link li {
 	display: inline-block;
 	margin: 0;
@@ -460,8 +472,9 @@ a:hover {
 </head>
 <body>
 
+<div class="container" style="width: 120%;">
 <jsp:include page="MemberHeader.jsp" />
-
+</div>
 	<div class="myPageMain">
 
 
@@ -501,8 +514,8 @@ a:hover {
 						href="platformaccountupdateform.do">계정관리/비밀번호변경</a>
 					</li>
 				    -->
-					<li class="profileList_li2" style="padding-top: 5px; border-length: 100px;"><a href="inquirylist.woori">나의 문의내역</a></li>
-					<li class="profileList_li2"><a href="reportlist.woori">나의 신고내역</a></li>
+					<li class="profileList_li2" style="padding-top: 5px; border-length: 100px;"><a href="inquirylist.woori" style="color: black !important;">나의 문의내역</a></li>
+					<li class="profileList_li2"><a href="reportlist.woori" style="color: black !important;">나의 신고내역</a></li>
 				</ul>
 			</div>
 
