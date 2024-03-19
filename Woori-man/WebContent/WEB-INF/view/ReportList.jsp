@@ -73,7 +73,7 @@
 				    type="button" role="tab" aria-controls="boardReport" aria-selected="false">자유게시판</button>
 				</div>
 			</nav>	
-			  <div class="tab-content csList" id="nav-tabContent">
+			  <div class="tab-content csRList" id="nav-tabContent">
 				  <div class="tab-pane fade show active" id="allReport" role="tabpanel" aria-labelledby="nav-all-tab">
 					<table class="table table-hover">
 	  					<tr>
