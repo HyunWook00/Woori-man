@@ -13,7 +13,7 @@
 		         ON B.CG_CODE = G.CG_CODE
 		         LEFT JOIN BOARD_REPORT BR
 		         ON BR.BRD_CODE = B.BRD_CODE
-		    WHERE G.CG_CODE = 2 AND BRDR_CODE IS NULL
+		    WHERE G.CG_CODE = #{cg_code} AND BRDR_CODE IS NULL
 		)
 		WHERE RANK <![CDATA[<=]]> 5  
 		ORDER BY RANK
@@ -36,7 +36,7 @@
 		         ON M.GI_CODE = I.GI_CODE
 		         LEFT JOIN HISTORY_REPORT HR
 		         ON HR.HIS_CODE = H.HIS_CODE  
-		    WHERE I.CG_CODE = 2 AND HR_CODE IS NULL    
+		    WHERE I.CG_CODE = #{cg_code} AND HR_CODE IS NULL    
 		)
 		WHERE RANK <![CDATA[<=]]> 5  
 		ORDER BY RANK
