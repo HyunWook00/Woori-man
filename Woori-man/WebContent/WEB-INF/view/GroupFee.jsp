@@ -62,7 +62,7 @@ String cp = request.getContextPath();
 			
 		});
 		
-		/*
+		
 		$("#groupFeeUpdateBtn").click(function()
 		{
 			if($.trim($("#gf_amount2").val())=="")
@@ -81,7 +81,7 @@ String cp = request.getContextPath();
 			$("#groupFeeUpdateForm").submit();
 			
 		});
-		*/
+		
 		
 	}); 
 
