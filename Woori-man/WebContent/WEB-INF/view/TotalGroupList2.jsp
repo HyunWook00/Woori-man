@@ -573,7 +573,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 										<div class="GroupProfileImage"
 											>
-											<img alt="대체이미지" src="image/img_account.png"
+											<img alt="대체이미지" src="images/profile.png"
 												style="width: 50px; height: 50px;">
 										</div>
 										<div class="GroupProfile_txt"
@@ -625,7 +625,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 										<div class="GroupProfileImage"
 											style="float: left; padding-right: 20px;">
-											<img alt="대체이미지" src="image/img_account.png"
+											<img alt="대체이미지" src="images/profile.png"
 												style="width: 50px; height: 50px;">
 										</div>
 										<div class="GroupProfile_txt"
