@@ -89,18 +89,17 @@
 						<span>방문장소 등록</span><br>
 						<c:choose>
 						<c:when test="${fn:length(places) <= 0 }">
-						<input type="text" class="visited-form-element visited-form-zipcode" id="zipcode-1" name="vp_zipcode" placeholder="우편번호">
+						<input type="text" class="visited-form-element visited-form-zipcode" id="zipcode-1" name="vp_zipcode" placeholder="우편번호" readonly="readonly">
 						<input type="button" onclick="findPostcode(1)" value="우편번호 찾기"><br>
-						<input type="text" class="visited-form-element visited-form-addr1" name="vp_addr1" id="addr1-1" placeholder="도로명주소"><br>
-						<input type="text" class="visited-form-element visited-form-addr1" id="addr3-1" placeholder="지번주소"><br>
+						<input type="text" class="visited-form-element visited-form-addr1" name="vp_addr1" id="addr1-1" placeholder="도로명주소" readonly="readonly"><br>
 						<input type="text" class="visited-form-element visited-form-addr2" name="vp_addr2" id="addr2-1" placeholder="상세주소">
 						</c:when>
 						
 						<c:otherwise>
 						<c:forEach items="${places }" var="place" varStatus="num">
-						<input type="text" class="visited-form-element visited-form-zipcode" id="zipcode-${num.count }" name="vp_zipcode" placeholder="우편번호" value="${place.vp_zipcode }">
+						<input type="text" class="visited-form-element visited-form-zipcode" id="zipcode-${num.count }" name="vp_zipcode" placeholder="우편번호" value="${place.vp_zipcode }" readonly="readonly">
 						<input type="button" onclick="findPostcode(${num.count })" value="우편번호 찾기"><br>
-						<input type="text" class="visited-form-element visited-form-addr1" name="vp_addr1" id="addr1-${num.count }" placeholder="도로명주소" value="${place.vp_addr1 }"><br>
+						<input type="text" class="visited-form-element visited-form-addr1" name="vp_addr1" id="addr1-${num.count }" placeholder="도로명주소" value="${place.vp_addr1 }" readonly="readonly"><br>
 						<input type="text" class="visited-form-element visited-form-addr2" name="vp_addr2" id="addr2-${num.count }" placeholder="상세주소" value="${place.vp_addr2 }">
 						</c:forEach>
 						</c:otherwise>

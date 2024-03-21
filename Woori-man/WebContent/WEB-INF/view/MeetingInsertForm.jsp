@@ -103,16 +103,6 @@
 							<span class="count"><span class="now-count">0</span> / 100</span>
 						</div>
 					</div>
-					<!-- 
-					<div class="meeting-visited">
-						<span>방문장소 등록</span><br>
-						<input type="text" class="visited-form-element visited-form-zipcode" id="zipcode-1" name="zipcode" placeholder="우편번호">
-						<input type="button" onclick="findPostcode(1)" value="우편번호 찾기"><br>
-						<input type="text" class="visited-form-element visited-form-addr1" name="addr1" id="addr1-1" placeholder="도로명주소"><br>
-						<input type="text" class="visited-form-element visited-form-addr1" id="addr3-1" placeholder="지번주소"><br>
-						<input type="text" class="visited-form-element visited-form-addr2" name="addr2" id="addr2-1" placeholder="상세주소">
-					</div>
-					 -->
 				</div>
 				
 			</form>

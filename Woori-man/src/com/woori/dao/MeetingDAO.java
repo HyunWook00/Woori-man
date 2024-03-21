@@ -695,8 +695,6 @@ public class MeetingDAO
 	{
 		int result = 0;
 		
-		System.out.println("dao 입장~");
-		
 		try
 		{
 			// 모임일, 제목, 기타, 카테고리, 그룹원코드, 도시코드, 그룹코드

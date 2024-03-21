@@ -13,6 +13,7 @@ $(function()
 		$("#meeting-update-form").submit();
 		
 	});
+	
 });
 
 function findPostcode(num)
@@ -34,6 +35,7 @@ function findPostcode(num)
 	
 	     document.getElementById("zipcode-"+num).value = data.zonecode;
 	     document.getElementById("addr1-"+num).value = roadAddr;
+	     $(".visited-form-addr2").val("");
 	     
 	     }
 	 }).open();

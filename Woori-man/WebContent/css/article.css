@@ -24,7 +24,7 @@ div.wirte-date,div.wirte-user, div.article-number, div.article-view {display: in
 div.article-content {text-align: center; margin: 20px 0px;}
 div.article-detail {display: inline-block; vertical-align: top;}
 div.article-like {display: flex; justify-content: center;}
-.article-like-btn, .article-unlike-btn {border: 1px solid #ff86c3; background-color: white; border-radius: 5px; padding: 1px 8px 0px 8px; display: flex; align-items: center}
+.article-like-btn, .article-unlike-btn {border: 1px solid #ff86c3; background-color: white; border-radius: 5px; padding: 1px 8px 5px 8px; display: flex;}
 span.article-like-count {font-size: 10.5pt; margin: 0px 5px; display: inline-block;}
 
 /* ------------------------------------------------------------------------------------------------------------------------------ */

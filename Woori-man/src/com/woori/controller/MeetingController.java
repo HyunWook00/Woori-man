@@ -725,11 +725,11 @@ public class MeetingController
 		try
 		{
 			IPlaceDAO dao = sqlSession.getMapper(IPlaceDAO.class);
+			mDao.updateMeetingEtc(mt_code, mt_etc);
 			if (vp_addr2 == null || vp_addr2.equals(""))
 				dao.insertPlaceAddr1(place);
 			else
 				dao.insertPlaceAddr2(place);
-			mDao.updateMeetingEtc(mt_code, mt_etc);
 			
 		} catch (Exception e)
 		{
