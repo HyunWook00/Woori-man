@@ -56,6 +56,7 @@
 		WHERE MRC_CODE = #{recommentCode}
 	</select>
 	
+	<!-- 모임 댓글 찾기 -->
 	<select id="searchComment" resultType="com.woori.dto.CommentDTO">
 		SELECT MC.MCM_CODE AS COMMENTCODE
 		, MC.MCM_DATE AS MCM_DATE
@@ -67,6 +68,20 @@
 		AND MC.MCM_CODE = #{commentCode}
 	</select>
 	
+	<!-- 자유게시판 댓글 찾기 -->
+	<select id="searchBoardComment" resultType="com.woori.dto.CommentDTO">
+		SELECT BC.BC_CODE AS COMMENTCODE
+		, BC.BC_DATE AS COMMENTDATE
+		, BC.BC_CONTENT AS COMMENTCONTENT
+		, BC.BRD_CODE AS ARTICLECODE
+		, GM.GM_CODE AS COMMENTWRITERCODE
+		, GM.GM_NICKNAME AS COMMENTWRITERNAME
+		FROM BOARD_COMMENT BC LEFT JOIN GROUP_MEMBER GM
+		ON BC.GM_CODE = GM.GM_CODE
+		WHERE BC.BC_CODE = #{commentCode}
+	</select>
+	
+	<!-- 모임 대댓글 찾기 -->
 	<select id="searchRecomment" resultType="com.woori.dto.CommentDTO">
 		SELECT MR.MRC_CODE AS COMMENTCODE
 		, MR.MRC_DATE AS MRC_DATE
@@ -76,6 +91,19 @@
 		FROM MEETING_RECOMMENT MR, GROUP_MEMBER GM
 		WHERE MR.GM_CODE = GM.GM_CODE
 		AND MR.MRC_CODE = #{recommentCode}
+	</select>
+	
+	<!-- 자유게시판 대댓글 찾기 -->
+	<select id="searchBoardRecomment" resultType="com.woori.dto.CommentDTO">
+		SELECT BR.BR_CODE AS COMMENTCODE
+		, BR.BR_DATE AS COMMENTDATE
+		, BR.BR_CONTENT AS COMMENTCONTENT
+		, BR.BC_CODE AS BC_CODE
+		, GM.GM_CODE AS COMMENTWRITERCODE
+		, GM.GM_NICKNAME AS COMMENTWRITERNAME
+		FROM BOARD_RECOMMENT BR LEFT JOIN GROUP_MEMBER GM
+		ON BR.GM_CODE = GM.GM_CODE
+		WHERE BR.BR_CODE = #{recommentCode}
 	</select>
 	
 </mapper>

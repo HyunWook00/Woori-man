@@ -24,8 +24,10 @@ public interface ICommentDAO
 	public int countRecommentLike(String recommentCode);
 	
 	// 댓글, 대댓글 찾기
-	public CommentDTO searchComment(String commentCode);
-	public CommentDTO searchRecomment(String recommentCode);
+	public CommentDTO searchComment(String commentCode);			// 모임
+	public CommentDTO searchRecomment(String recommentCode);		// 모임
+	public CommentDTO searchBoardComment(String commentCode);		// 자유게시판
+	public CommentDTO searchBoardRecomment(String recommentCode);	// 자유게시판
 	
 	
 }

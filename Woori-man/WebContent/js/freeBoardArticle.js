@@ -139,10 +139,6 @@ function modifyRecomment(recommentCode)
 	$(id).find("form").css("display", "block");
 }
 
-function reportComment(commentCode)
-{
-	alert(commentCode);
-}
 
 function deleteComment(commentCode, brd_code)
 {
@@ -259,4 +255,50 @@ function reportArticle(brd_code)
 	{
 		window.location.href="reportboardarticle.woori?brd_code=" + brd_code;
 	}
+}
+
+// 댓글 신고
+function reportComment(commentCode, brd_code)
+{
+	var params = "commentCode=" + commentCode;
+	$.ajax(
+	{
+		type: "GET"
+		, url: "reportboardcommentajax.woori"
+		, data: params
+		, success: function(args)
+		{
+			document.getElementById("report-modal-body").innerHTML = args;
+			$("#reportModal").modal("show");
+			var onclickEvent = "location.href='boardcommentreport.woori?commentCode=" + commentCode + "&brd_code=" + brd_code + "'";
+			$("#report-submit-btn").attr("onclick", onclickEvent);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
+}
+
+//대댓글 신고
+function reportRecomment(recommentCode, brd_code)
+{
+	var params = "recommentCode=" + recommentCode;
+	$.ajax(
+	{
+		type: "GET"
+		, url: "reportboardrecommentajax.woori"
+		, data: params
+		, success: function(args)
+		{
+			document.getElementById("report-modal-body").innerHTML = args;
+			$("#reportModal").modal("show");
+			var onclickEvent = "location.href='boardrecommentreport.woori?recommentCode=" + recommentCode + "&brd_code=" + brd_code + "'";
+			$("#report-submit-btn").attr("onclick", onclickEvent);
+		}
+		, error: function(e)
+		{
+			alert(e.responseText);
+		}
+	});
 }

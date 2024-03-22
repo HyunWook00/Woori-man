@@ -531,6 +531,7 @@ public class BoardDAO
 		return result;
 	}
 	
+	// 게시글 신고
 	public int insertBoardReport(String brd_code, String gm_code)
 	{
 		int result = 0;
@@ -540,6 +541,50 @@ public class BoardDAO
 			String sql = "INSERT INTO BOARD_REPORT(BRDR_CODE, BRD_CODE, GM_CODE) VALUES(SEQ_BOARD_REPORT.NEXTVAL, ?, ?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(brd_code));
+			pstmt.setInt(2, Integer.parseInt(gm_code));
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 댓글 신고
+	public int insertCommentReport(String bc_code, String gm_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "INSERT INTO BOARD_COMMENT_REPORT(BRDCR_CODE, BC_CODE, GM_CODE) VALUES(SEQ_BRDCR.NEXTVAL, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(bc_code));
+			pstmt.setInt(2, Integer.parseInt(gm_code));
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 대댓글 신고
+	public int insertRecommentReport(String br_code, String gm_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "INSERT INTO BOARD_RECOMMENT_REPORT(BRDRCR_CODE, BR_CODE, GM_CODE) VALUES(SEQ_BRDRCR.NEXTVAL, ? , ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(br_code));
 			pstmt.setInt(2, Integer.parseInt(gm_code));
 			result = pstmt.executeUpdate();
 			pstmt.close();

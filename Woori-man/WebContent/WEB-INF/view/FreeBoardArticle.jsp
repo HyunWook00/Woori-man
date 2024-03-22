@@ -159,7 +159,7 @@
 										<li><a class="dropdown-item" onclick="deleteComment(${comment.commentCode}, ${boardArticle.brd_code })">삭제하기</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode})">신고하기</a></li>
+										<li><a class="dropdown-item" onclick="reportComment(${comment.commentCode}, ${boardArticle.brd_code })">신고하기</a></li>
 									</c:otherwise>
 									</c:choose>
 								</ul>							
@@ -244,7 +244,7 @@
 													<li><a href="/boardrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${boardArticle.brd_code}" class="dropdown-item">삭제하기</a></li>
 												</c:when>
 												<c:when test="${groupMemberDTO.gm_code != recomment.recommentWriterCode }">
-													<li><a href="" class="dropdown-item">신고하기</a></li>
+													<li><a class="dropdown-item" onclick="reportRecomment(${recomment.recommentCode}, ${boardArticle.brd_code })">신고하기</a></li>
 												</c:when>
 											</c:choose>
 										</ul>
@@ -320,6 +320,24 @@
 			</form>
 		</div>
 		
+	</div>
+</div>
+
+<!-- 모달창 -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h6 class="modal-title fs-5" id="reportModalLabel">신고접수</h6>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="report-modal-body">
+			</div>
+			<div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+		        <button type="button" class="btn btn-primary" id="report-submit-btn">신고하기</button>
+		   </div>
+		</div>
 	</div>
 </div>
 

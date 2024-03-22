@@ -630,4 +630,110 @@ public class FreeBoardController
 		
 	}
 	
+	// 신고용 댓글 정보 불러오기 ajax
+	// reportboardcommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "reportboardcommentajax.woori", method = RequestMethod.GET)
+	public String commentReportAjax(Model model, String commentCode)
+	{
+		CommentDTO comment = new CommentDTO();
+		
+		try
+		{
+			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
+			comment = dao.searchBoardComment(commentCode);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		model.addAttribute("comment", comment);
+		
+		return "/WEB-INF/view/CommentReportAjax.jsp";
+	}
+	
+	// 신고용 대댓글 정보 불러오기 ajax
+	// reportboardrecommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "reportboardrecommentajax.woori", method = RequestMethod.GET)
+	public String recommentReportAjax(Model model, String recommentCode)
+	{
+		CommentDTO comment = new CommentDTO();
+		
+		try
+		{
+			ICommentDAO dao = sqlSession.getMapper(ICommentDAO.class);
+			comment = dao.searchBoardRecomment(recommentCode);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		model.addAttribute("comment", comment);
+		
+		return "/WEB-INF/view/CommentReportAjax.jsp";
+	}
+	
+	// 댓글 신고 처리
+	// boardcommentreport.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardcommentreport.woori", method = RequestMethod.GET)
+	public String commentReport(String commentCode, String brd_code, HttpSession session)
+	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		BoardDAO dao = new BoardDAO();
+		
+		try
+		{
+			dao.insertCommentReport(commentCode, member.getGm_code());
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardarticle.woori?article=" + brd_code;
+	}
+	
+	// 대댓글 신고 처리
+	// boardrecommentreport.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "boardrecommentreport.woori", method = RequestMethod.GET)
+	public String recommentReport(String recommentCode, String brd_code, HttpSession session)
+	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		BoardDAO dao = new BoardDAO();
+		
+		try
+		{
+			dao.insertRecommentReport(recommentCode, member.getGm_code());
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				dao.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:freeboardarticle.woori?article=" + brd_code;
+	}
+	
 }
