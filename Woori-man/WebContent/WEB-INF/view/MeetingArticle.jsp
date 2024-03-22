@@ -336,7 +336,7 @@
 												<li><a href="meetingrecommentdelete.woori?recommentCode=${recomment.recommentCode }&articleCode=${meetingArticle.mt_code}" class="dropdown-item">삭제하기</a></li>
 											</c:when>
 											<c:when test="${groupMemberDTO.gm_code != recomment.recommentWriterCode }">
-												<li><a href="" class="dropdown-item" onclick="reportRecomment(${recomment.recommentCode}, ${meetingArticle.mt_code })">신고하기</a></li>
+												<li><a class="dropdown-item" onclick="reportRecomment(${recomment.recommentCode}, ${meetingArticle.mt_code })">신고하기</a></li>
 											</c:when>
 										</c:choose>
 									</ul>

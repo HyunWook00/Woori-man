@@ -615,6 +615,28 @@ public class MeetingDAO
 		return result;
 	}
 	
+	// 대댓글 신고
+	public int insertRecommentReport(String mrc_code, String gm_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "INSERT INTO MEETING_RECOMMENT_REPORT(MRCR_CODE, MRC_CODE, GM_CODE) VALUES(SEQ_MRCR.NEXTVAL, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(mrc_code));
+			pstmt.setInt(2, Integer.parseInt(gm_code));
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 	// 게시글 신고
 	public int insertArticleReport(String mt_code, String gm_code)
 	{

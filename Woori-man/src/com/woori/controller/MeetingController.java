@@ -462,7 +462,7 @@ public class MeetingController
 	// 신고용 모임 댓글 정보 불러오기 ajax
 	// reportmeetingcommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/reportmeetingcommentajax.woori", method = RequestMethod.GET)
-	public String commentReportAjax(Model model, String commentCode, HttpSession session)
+	public String commentReportAjax(Model model, String commentCode)
 	{
 		CommentDTO comment = new CommentDTO();
 		
@@ -483,7 +483,7 @@ public class MeetingController
 	
 	// 신고용 모임 대댓글 정보 불러오기 ajax
 	// reportmeetingrecommentajax.woori 라는 요청이 들어오면 연결되는 컨트롤러
-	@RequestMapping(value = "reportmeetingrecommentajax.woori", method = RequestMethod.GET)
+	@RequestMapping(value = "/reportmeetingrecommentajax.woori", method = RequestMethod.GET)
 	public String recommentReportAjax(Model model, String recommentCode)
 	{
 		CommentDTO comment = new CommentDTO();
@@ -533,6 +533,33 @@ public class MeetingController
 	}
 	
 	// 대댓글 신고 처리
+	@RequestMapping(value = "meetingrecommentreport.woori", method = RequestMethod.GET)
+	public String recommentReport(String recommentCode, String mt_code, HttpSession session)
+	{
+		MeetingDAO dao = new MeetingDAO();
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		
+		try
+		{
+			dao.insertRecommentReport(recommentCode, member.getGm_code());
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		return "redirect:meetingarticle.woori?mt_code=" + mt_code;
+	}
 	
 	// 모임 게시글 신고 처리
 	@RequestMapping(value = "reportmeetingarticle.woori", method = RequestMethod.GET)
