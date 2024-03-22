@@ -81,6 +81,18 @@
 		WHERE BC.BC_CODE = #{commentCode}
 	</select>
 	
+	<!-- 히스토리 댓글 찾기 -->
+	<select id="searchHistoryComment" resultType="com.woori.dto.CommentDTO">
+		SELECT HC_CODE AS COMMENTCODE
+		, HC_DATE AS COMMENTDATE
+		, HC_CONTENT AS COMMENTCONTENT
+		, GM_NICKNAME AS COMMENTWRITERNAME
+		, HIS_CODE AS ARTICLECODE
+		, GM_CODE AS COMMENTWRITERCODE
+		FROM HISTORY_COMMENT_VIEW
+		WHERE HC_CODE = #{commentCode}
+	</select>
+	
 	<!-- 모임 대댓글 찾기 -->
 	<select id="searchRecomment" resultType="com.woori.dto.CommentDTO">
 		SELECT MR.MRC_CODE AS COMMENTCODE
@@ -104,6 +116,19 @@
 		FROM BOARD_RECOMMENT BR LEFT JOIN GROUP_MEMBER GM
 		ON BR.GM_CODE = GM.GM_CODE
 		WHERE BR.BR_CODE = #{recommentCode}
+	</select>
+	
+	<!-- 히스토리 대댓글 찾기 -->
+	<select id="searchHistoryRecomment" resultType="com.woori.dto.CommentDTO">
+		SELECT HRC_CODE AS COMMENTCODE
+		, HRC_DATE AS COMMENTDATE
+		, HRC_CONTENT AS COMMENTCONTENT
+		, GM_NICKNAME AS COMMENTWRITERNAME
+		, HC_CODE AS HC_CODE
+		, GM_CODE AS COMMENTWRITERCODE
+		, GM_PROFILE AS COMMENTWRITERPROFILE
+		FROM HISTORY_RECOMMENT_VIEW
+		WHERE HRC_CODE = #{recommentCode}
 	</select>
 	
 </mapper>

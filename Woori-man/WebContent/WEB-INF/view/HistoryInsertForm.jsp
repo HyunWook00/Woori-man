@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/article.css">
 <link rel="stylesheet" href="<%=cp %>/css/footer.css" />
 <link rel="stylesheet" href="<%=cp %>/css/boardForm.css" />
-<script type="text/javascript" src="<%=cp%>/js/freeBoardForm.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/historyForm.js"></script>
 </head>
 <body>
 
@@ -56,8 +56,11 @@
 		</div><!-- .board-info -->
 		
 		<div class="content">
-			<form action="historylist.woori" class="board-insert-form" id="board-insert-form" method="post">
-				<div class="board-content-div"><textarea placeholder="내용을 입력하세요." name="brd_content" id="brd_content" class="board-content"></textarea></div>
+			<form action="historyinsert.woori" class="board-insert-form" id="history-insert-form" method="post">
+				<div class="board-content-div">
+					<textarea placeholder="내용을 입력하세요." name="his_content" id="his_content" class="board-content"></textarea>
+					<input type="hidden" name="ao_code" value="${ao_code }">
+				</div>
 				<div class="board-attach-div">
 					<input type="file" class="form-control-sm board-attach" name="bf_name1" id="bf_name1">
 					<i class="bi bi-plus-square add-attach" role="button"></i>

@@ -6,6 +6,7 @@
  <!-- 2024-03-08 노은하 -->
  <mapper namespace="com.woori.dao.IHistoryDAO">
  
+ 	<!-- 히스토리 리스트 출력 -->
  	<select id="getHistoryList" resultType="com.woori.dto.HistoryDTO">
  		SELECT HIS_CODE, HIS_DATE, HIS_VIEW, HIS_CONTENT, AO_CODE, GM_CODE, GM_NICKNAME, GM_PROFILE, MT_CODE, MT_TITLE, CG_CODE, HIS_LIKE
  		FROM HISTORY_LIST_VIEW
@@ -58,6 +59,93 @@
  		AND MT_CODE = #{param2}
  		AND AO_CODE NOT IN (SELECT AO_CODE FROM HISTORY)
  	</select>
- 
+ 	
+ 	<!-- 히스토리 게시글 입력 -->
+ 	<insert id="insertArticle">
+ 		INSERT INTO HISTORY(HIS_CODE, HIS_CONTENT, AO_CODE, CG_CODE)
+ 		VALUES(SEQ_HISTORY.NEXTVAL, #{his_content}, #{ao_code}, #{cg_code})
+ 	</insert>
+ 	
+ 	<!-- 히스토리 댓글 입력 -->
+ 	<insert id="insertHistoryComment">
+ 		INSERT INTO HISTORY_COMMENT(HC_CODE, HC_CONTENT, HIS_CODE, GM_CODE)
+ 		VALUES(SEQ_HISTORY_COMMENT.NEXTVAL, #{commentContent}, #{articleCode}, #{commentWriterCode})
+ 	</insert>
+ 	
+ 	<!-- 히드스토리 대댓글 입력 -->
+ 	<insert id="insertHistoryRecomment">
+ 		INSERT INTO HISTORY_RECOMMENT(HRC_CODE, HRC_CONTENT, HC_CODE, GM_CODE)
+ 		VALUES(SEQ_HISTORY_RECOMMENT.NEXTVAL, #{recommentContent}, #{commentCode}, #{recommentWriterCode})
+ 	</insert>
+ 	
+ 	<!-- 히스토리 댓글 출력 -->
+ 	<select id="getHistoryComment" resultType="com.woori.dto.CommentDTO">
+ 		SELECT RNUM AS NUM, HC_CODE AS COMMENTCODE, HC_DATE AS COMMENTDATE
+ 		, HC_CONTENT AS COMMENTCONTENT, GM_NICKNAME AS COMMENTWRITERNAME, HIS_CODE AS ARTICLECODE, GM_CODE AS COMMENTWRITERCODE
+ 		, GM_PROFILE AS COMMENTWRITERPROFILE
+ 		FROM(SELECT ROWNUM RNUM, DATA.*
+ 		FROM(SELECT HC_CODE, HC_DATE, HC_CONTENT, GM_NICKNAME, HIS_CODE, GM_CODE, GM_PROFILE
+ 		FROM HISTORY_COMMENT_VIEW WHERE HIS_CODE = #{his_code}) DATA ORDER BY HC_DATE)
+ 	</select>
+ 	
+ 	<!-- 히스토리 대댓글 출력 -->
+ 	<select id="getHistoryRecomment" resultType="com.woori.dto.RecommentDTO">
+ 		SELECT HRC_CODE AS RECOMMENTCODE
+ 		, HRC_DATE AS RECOMMENTDATE
+ 		, HRC_CONTENT AS RECOMMENTCONTENT
+ 		, GM_NICKNAME AS RECOMMENTWRITERNAME
+ 		, HC_CODE AS COMMENTCODE
+ 		, GM_CODE AS RECOMMENTWRITERCODE
+ 		, GM_PROFILE AS RECOMMENTWRITERPROFILE
+ 		FROM HISTORY_RECOMMENT_VIEW
+ 		WHERE HC_CODE = #{hc_code}
+ 		ORDER BY HRC_DATE
+ 	</select>
+ 	
+ 	<!-- 히스토리 댓글 수정 -->
+ 	<update id="updateComment">
+ 		UPDATE HISTORY_COMMENT
+ 		SET HC_CONTENT = #{commentContent}
+ 		WHERE HC_CODE = #{commentCode}
+ 	</update>
+ 	
+ 	<!-- 히스토리 대댓글 수정 -->
+ 	<update id="updateRecomment">
+ 		UPDATE HISTORY_RECOMMENT
+ 		SET HRC_CONTENT = #{recommentContent}
+ 		WHERE HRC_CODE = #{recommentCode}
+ 	</update>
+ 	
+ 	<!-- 히스토리 댓글 삭제 -->
+ 	<delete id="deleteComment">
+ 		DELETE
+ 		FROM HISTORY_COMMENT
+ 		WHERE HC_CODE = #{hc_code}
+ 	</delete>
+ 	
+ 	<!-- 히스토리 대댓글 삭제 -->
+ 	<delete id="deleteRecomment">
+ 		DELETE
+ 		FROM HISTORY_RECOMMENT
+ 		WHERE HRC_CODE = #{hrc_code}
+ 	</delete>
+ 	
+ 	<!-- 히스토리 댓글 신고 -->
+ 	<insert id="insertCommentReport">
+ 		INSERT INTO HISTORY_COMMENT_REPORT(HCR_CODE, HC_CODE, GM_CODE)
+ 		VALUES(SEQ_HCR.NEXTVAL, #{param1}, #{param2})
+ 	</insert> 
+ 	
+ 	<!-- 히스토리 대댓글 신고 -->
+ 	<insert id="insertRecommentReport">
+ 		INSERT INTO HISTORY_RECOMMENT_REPORT(HRCR_CODE, HRC_CODE, GM_CODE)
+ 		VALUES(SEQ_HRCR.NEXTVAL, #{param1}, #{param2})
+ 	</insert>
+ 	
+ 	<!-- 히스토리 게시글 신고 -->
+ 	<insert id="insertArticleReport">
+ 		INSERT INTO HISTORY_REPORT(HR_CODE, HIS_CODE, GM_CODE)
+ 		VALUES(SEQ_HISTORY_REPORT.nextval, #{param1}, #{param2})
+ 	</insert>
  </mapper>
  

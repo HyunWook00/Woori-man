@@ -28,6 +28,8 @@ public interface ICommentDAO
 	public CommentDTO searchRecomment(String recommentCode);		// 모임
 	public CommentDTO searchBoardComment(String commentCode);		// 자유게시판
 	public CommentDTO searchBoardRecomment(String recommentCode);	// 자유게시판
+	public CommentDTO searchHistoryComment(String commentCode);		// 히스토리
+	public CommentDTO searchHistoryRecomment(String recommentCode);	// 히스토리
 	
 	
 }

@@ -115,7 +115,7 @@ public class MeetingDAO
 			value = "%" + value + "%";
 			String sql = "SELECT RNUM, MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME" + 
 					" FROM (SELECT ROWNUM AS RNUM, DATA.* FROM (SELECT MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME" + 
-					" FROM VIEW_MEETING_LIST WHERE CG_CODE = ? AND " + key + " LIKE ? ORDER BY MT_CODE DESC)DATA) WHERE RNUM >= ? AND RNUM <= ?";
+					" FROM VIEW_MEETING_LIST WHERE CG_CODE = ? AND " + key + " LIKE ? ORDER BY MT_DATE DESC)DATA) WHERE RNUM >= ? AND RNUM <= ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(cg_code));
 			pstmt.setString(2, value);
@@ -169,7 +169,7 @@ public class MeetingDAO
 			value = "%" + value + "%";
 			String sql = "SELECT RNUM, MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME" + 
 					" FROM (SELECT ROWNUM AS RNUM, DATA.* FROM (SELECT MT_CODE, CG_CODE, CG_NAME, GM_CODE, GM_NICKNAME, MT_DATE, MT_UPDATE, MT_MEET, MT_VOTE, MT_TITLE, CT_CODE, CT_NAME, RG_CODE, RG_NAME, MT_STATUS, MT_ETC, MC_CODE, MC_NAME" + 
-					" FROM VIEW_MEETING_LIST WHERE CG_CODE = ? AND " + key + " LIKE ? AND MT_STATUS = 2 ORDER BY MT_CODE DESC)DATA) WHERE RNUM >= ? AND RNUM <= ?";
+					" FROM VIEW_MEETING_LIST WHERE CG_CODE = ? AND " + key + " LIKE ? AND MT_STATUS = 2 ORDER BY MT_DATE DESC)DATA) WHERE RNUM >= ? AND RNUM <= ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(cg_code));
 			pstmt.setString(2, value);
