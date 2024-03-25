@@ -84,7 +84,28 @@ $(document).ready(function()
 //  즐겨찾기
 function bookmark(gm_code, gb_code)
 {
-	$(location).attr("href", "bookmark.woori?gb_code=" + gb_code + "&gm_code=" + gm_code);
+	//$(location).attr("href", "bookmark.woori?gb_code=" + gb_code + "&gm_code=" + gm_code);
+	
+	var params = "gm_code="+gm_code+"&gb_code="+gb_code;
+	//alert(params);
+	
+	 $.ajax({
+         type: "GET"
+         , url: "bookmark.woori"
+         , data: params
+         , success: function(args)
+			{
+         		document.getElementById("my_gr").innerHTML = args;
+			}
+	 		, error: function(e)
+			{
+				alert(e.responseText);
+			}
+        
+     });	
+	
+	
+	
 }
 
 
@@ -222,10 +243,10 @@ function addFriends(us_code2)
 		   		 	</div>
 		  		</div>
 			</div>
-			<div class="my_gr">
+			<div id="my_gr" class="my_gr">
 				<h2>내 그룹</h2>
 				<hr>
-				<div class="group_list row">
+				<div id="groups" class="group_list row">
 					<div class="group col-6 col-md-4 col-xl-3">
 						<div class="gr_option">
 							<div class="make_gr">
@@ -235,9 +256,10 @@ function addFriends(us_code2)
 							</div>
 						</div>
 					</div>
+						
 						<c:forEach var="list" items="${groupList }">
 							<div class="group col-6 col-md-4 col-xl-3">
-								<form action="membermain.woori" method="post">  
+								<form action="" method="post">  
 									<div  class="gr_option" >
 										<div class="gr_img">
 											<img onclick="enterGroup(${list.cg_code})" src="https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800">
@@ -247,10 +269,10 @@ function addFriends(us_code2)
 												<span>그룹명 : ${list.cg_name }</span>
 												<span class="group_count" >그룹원 : ${list.g_count }명</span>
 											</div>
-											<div class="bookmark_zone">
+											<div id="bookmark-zone" class="bookmark_zone">
 												<c:choose>
 													<c:when test="${list.gb_code == 0 }">
-														<span class="book-mark" onclick="bookmark(${list.gm_code}, ${list.gb_code})">
+														<span  class="book-mark" onclick="bookmark(${list.gm_code}, ${list.gb_code})">
 															<i  class="bookmark${list.cg_code} bi bi-bookmark-heart-fill"></i>
 														</span>
 													</c:when>

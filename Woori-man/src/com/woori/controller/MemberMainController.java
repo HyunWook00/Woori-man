@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.FriendsDAO;
+import com.woori.dao.LoginDAO;
 import com.woori.dao.MemberMainDAO;
 import com.woori.dto.FriendsDTO;
 import com.woori.dto.GroupDTO;
@@ -267,10 +268,17 @@ public class MemberMainController
 	// 즐겨찾기 액션처리 메소드
 	@RequestMapping(value = "/bookmark.woori")
 	public String bookmark(HttpSession session, @RequestParam("gb_code") String gb_code
-						 , @RequestParam("gm_code") String gm_code) throws ClassNotFoundException, SQLException
+						 , Model model, @RequestParam("gm_code") String gm_code) throws ClassNotFoundException, SQLException
 	{
+		ArrayList<GroupDTO> groupList = new ArrayList<GroupDTO>();
 		MemberMainDAO dao = new MemberMainDAO();
+		LoginDAO loginDAO = new LoginDAO();
+		
+		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+		String us_code = userDTO.getUs_code();
+		
 		dao.connection();
+		loginDAO.connection();
 		
 		if (gb_code.equals("0"))
 		{
@@ -281,8 +289,11 @@ public class MemberMainController
 			dao.deleteBookMark(gb_code);
 		}
 		
+		groupList = loginDAO.groupList(us_code);
+		model.addAttribute("groupList", groupList);
 		
-		return "redirect:membermain.woori";
+		
+		return "WEB-INF/view/bookmarkAjax.jsp";
 	}
 	
 	

@@ -3,7 +3,7 @@
 
 body 
 {
-    
+   font-family: 'Arial', sans-serif; 
 }
 
 
@@ -30,7 +30,7 @@ body
     font-weight: bold;
 }
 
-.table-main
+.table
 {
     width: 100%;
 }
@@ -127,7 +127,7 @@ span
 
 #findId
 {
-    width: 51%;
+    width: 38%;
 }
 
 #hr2
