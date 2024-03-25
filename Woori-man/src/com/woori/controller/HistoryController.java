@@ -478,4 +478,26 @@ public class HistoryController
 		}
 		return "redirect:historylist.woori";
 	}
+	
+	// 수정폼 요청
+	// updatehistoryform.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "updatehistoryform.woori", method = RequestMethod.GET)
+	public String updateForm(String his_code, Model model)
+	{
+		HistoryDTO history = new HistoryDTO();
+		
+		try
+		{
+			IHistoryDAO dao = sqlSession.getMapper(IHistoryDAO.class);
+			history = dao.getHistoryArticle(his_code);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		model.addAttribute("history", history);
+		
+		return "/WEB-INF/view/HistoryUpdateForm.jsp";
+	}
 }

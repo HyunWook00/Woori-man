@@ -31,7 +31,8 @@ $(function()
 		}
 		nowCount.text($(this).val().length);
 	});
-
+	
+	// 댓글달기
 	$(".comment-submit-btn").click(function()
 	{
 		var comment = document.getElementById("commentContent");
@@ -47,6 +48,7 @@ $(function()
 		document.getElementById("historyCommentForm").submit();
 	});
 	
+	// 게시글 삭제
 	$(".article-delete").click(function()
 	{
 		if (confirm("히스토리를 정말 삭제하시겠습니까?"))
@@ -55,6 +57,12 @@ $(function()
 		}
 		
 	});
+	
+	// 게시글 수정
+	$(".article-modify").click(function()
+	{
+		window.location.href="updatehistoryform.woori?his_code=" + $(this).val();
+	})
 });
 
 //내 댓글 수정하기
@@ -195,6 +203,5 @@ function reportArticle(his_code)
 		window.location.href="reporthistoryarticle.woori?his_code=" + his_code;
 	}
 }
-
 
 
