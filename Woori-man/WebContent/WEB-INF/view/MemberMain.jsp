@@ -291,7 +291,7 @@ function addFriends(us_code2)
 					</div>
 				</div>
     		</div>
-    		
+    		 
     	<div class="right col-12 col-xl-3 col-xxl-3">
     		<div class="memProfile_zone">
         		<c:import url="MemberProfile.jsp"></c:import>
