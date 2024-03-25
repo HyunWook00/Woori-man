@@ -147,5 +147,12 @@
  		INSERT INTO HISTORY_REPORT(HR_CODE, HIS_CODE, GM_CODE)
  		VALUES(SEQ_HISTORY_REPORT.nextval, #{param1}, #{param2})
  	</insert>
+ 	
+ 	<!-- 히스토리 게시글 삭제 -->
+ 	<delete id="deleteArticle">
+ 		DELETE
+ 		FROM HISTORY
+ 		WHERE HIS_CODE = #{his_code}
+ 	</delete>
  </mapper>
  

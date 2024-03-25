@@ -461,4 +461,21 @@ public class HistoryController
 		
 		return "redirect:historylist.woori";
 	}
+	
+	// 게시글 삭제
+	// deletehistory.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "deletehistory.woori", method = RequestMethod.GET)
+	public String deleteArticle(String his_code)
+	{
+		try
+		{
+			IHistoryDAO dao = sqlSession.getMapper(IHistoryDAO.class);
+			dao.deleteArticle(his_code);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		return "redirect:historylist.woori";
+	}
 }
