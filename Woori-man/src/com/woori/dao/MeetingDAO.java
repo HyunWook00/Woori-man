@@ -267,7 +267,12 @@ public class MeetingDAO
 		
 		try
 		{
-			String sql = "SELECT MT_CODE, MCM_CODE, MCM_DATE, MCM_CONTENT, GM_NICKNAME, GM_CODE, GM_PROFILE, MCM_LIKE, (SELECT COUNT(*) FROM MEETING_COMMENT_LIKE WHERE GM_CODE = ? AND MCM_CODE = VMC.MCM_CODE) AS LIKE_CHECK FROM VIEW_MEETING_COMMENT VMC WHERE MT_CODE = ? ORDER BY MCM_CODE ASC";
+			String sql = "SELECT MT_CODE, MCM_CODE, MCM_DATE, MCM_CONTENT, GM_NICKNAME, GM_CODE, GM_PROFILE, MCM_LIKE"
+					+ ", (SELECT COUNT(*) FROM MEETING_COMMENT_LIKE WHERE GM_CODE = ? AND MCM_CODE = VMC.MCM_CODE) AS LIKE_CHECK"
+					+ ", MCM_BLIND"
+					+ " FROM VIEW_MEETING_COMMENT VMC"
+					+ " WHERE MT_CODE = ?"
+					+ " ORDER BY MCM_CODE ASC";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(gm_code));
 			pstmt.setInt(2, Integer.parseInt(mt_code));
@@ -285,6 +290,7 @@ public class MeetingDAO
 				dto.setCommentWriterProfile(rs.getString("GM_PROFILE"));
 				dto.setCommentLikeCount(rs.getString("MCM_LIKE"));
 				dto.setCommentLikeCheck(rs.getString("LIKE_CHECK"));
+				dto.setCommentBlind(rs.getString("MCM_BLIND"));
 				
 				result.add(dto);
 			}
@@ -307,7 +313,12 @@ public class MeetingDAO
 		
 		try
 		{
-			String sql = "SELECT MRC_CODE, MRC_DATE, MRC_CONTENT, GM_NICKNAME, MCM_CODE, GM_CODE, GM_PROFILE, MRC_LIKE, (SELECT COUNT(*) FROM MEETING_RECOMMENT_LIKE WHERE GM_CODE = ? AND MRC_CODE = VMR.MRC_CODE) AS LIKE_CHECK FROM VIEW_MEETING_RECOMMENT VMR WHERE MCM_CODE =?";
+			String sql = "SELECT MRC_CODE, MRC_DATE, MRC_CONTENT, GM_NICKNAME, MCM_CODE, GM_CODE, GM_PROFILE, MRC_LIKE"
+					+ ", (SELECT COUNT(*) FROM MEETING_RECOMMENT_LIKE"
+					+ " WHERE GM_CODE = ? AND MRC_CODE = VMR.MRC_CODE) AS LIKE_CHECK"
+					+ ", MRC_BLIND"
+					+ " FROM VIEW_MEETING_RECOMMENT VMR"
+					+ " WHERE MCM_CODE =?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(gm_code));
 			pstmt.setInt(2, Integer.parseInt(mcm_code));
@@ -326,7 +337,7 @@ public class MeetingDAO
 				dto.setRecommentWriterProfile(rs.getString("GM_PROFILE"));
 				dto.setRecommentLikeCount(rs.getString("MRC_LIKE"));
 				dto.setRecommentLikeCheck(rs.getString("LIKE_CHECK"));
-				
+				dto.setRecommentBlind(rs.getString("MRC_BLIND"));
 				
 				result.add(dto);
 			}

@@ -234,6 +234,7 @@
 						<div class="comment-create">${comment.commentDate }</div>
 						
 						<!-- 댓글 메뉴(대댓글달기, 수정하기, 삭제하기, 신고하기) -->
+						<c:if test="${comment.commentBlind != 1 }">
 						<div class="comment-menu">
 							<button type="button" class="dropdown-toggle btn" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-three-dots"></i>
@@ -253,12 +254,15 @@
 								</c:choose>
 							</ul><!-- .dropdown-menu -->
 						</div><!-- .comment-menu -->
+						</c:if>
+						
 					</div><!-- .commenter-info -->
 						
-						 
+					
 					<!-- 댓글 내용 & 수정하기 공간 -->
 					<div class="temp">
 					
+						<c:if test="${comment.commentBlind != 1 }">
 						<!-- 수정하기(내 댓글에만 보임) -->
 						<div class="modify-comment-div" id="${comment.commentCode }-modify">
 							<form action="meetingcommentupdate.woori" method="post" class="write-recomment write-area update-comment-form" >
@@ -271,10 +275,12 @@
 								<button type="button" class="comment-cancel-btn">취소</button>
 							</form>
 						</div><!-- .modify-comment -->
+						</c:if>
 						 
 						<!-- 댓글 내용 -->
-						<div class="comment-detail" >${comment.commentContent }</div>
+						<div class="comment-detail" >${comment.commentBlind != 1 ? comment.commentContent : '블라인드 처리된 댓글입니다.' }</div>
 						
+						<c:if test="${comment.commentBlind != 1 }">
 						<!-- 댓글 좋아요 정보 -->
 						<div class="comment-like">
 							<div class="like-button position-relative">
@@ -297,9 +303,11 @@
 								</c:if>
 							</div><!-- .like-button -->
 						</div><!-- .comment-like -->
+						</c:if>
 					</div><!-- temp -->
 					
 					<!-- 대댓글 달기 -->
+					<c:if test="${comment.commentBlind != 1 }">
 					<div class="write-recomment-div" id="${comment.commentCode }-recomment">
 						<form action="meetingrecommentinsert.woori" method="post" class="write-recomment">
 						<div class="write-area">
@@ -311,6 +319,8 @@
 						<button type="button" class="comment-cancel-btn">취소</button>
 						</form>	
 					</div>
+					</c:if>
+					
 						 
 					<!-- 대댓글 뽑아내기 -->
 					<c:forEach var="recomment" items="${recomments[comment.commentCode] }">
@@ -324,6 +334,7 @@
 							<div class="commenter-info">
 								<div class="commenter-name">${recomment.recommentWriterName }</div>
 								<div class="comment-create">${recomment.recommentDate }</div>
+								<c:if test="${recomment.recommentBlind != 1 }">
 								<div class="comment-menu">
 									<button type="button" class="dropdown-toggle btn" data-bs-toggle="dropdown" aria-expanded="false">
 										<i class="bi bi-three-dots"></i>
@@ -341,9 +352,11 @@
 										</c:choose>
 									</ul>
 								</div><!-- .comment-menu -->
+								</c:if>
 							</div><!-- .commenter-info -->
 							
 							<!-- 나의 대댓글 수정하기 메뉴창이다. -->
+							<c:if test="${recomment.recommentBlind != 1 }">
 							<div class="modify-comment-div" id="${recomment.recommentCode }-modify-recomment">
 								<form action="meetingrecommentupdate.woori" method="post" class="write-recomment write-area update-comment-form" >
 									<div class="write-area">
@@ -359,10 +372,12 @@
 									</div>
 								</form>
 							</div><!-- .modify-comment -->
+							</c:if>
 							
-							<div class="comment-detail recomment-detail">${recomment.recommentContent }</div>
+							<div class="comment-detail recomment-detail">${recomment.recommentBlind != 1 ? recomment.recommentContent : '블라인드 처리된 댓글입니다.'}</div>
 							
 							<!-- 대댓글 좋아요 -->
+							<c:if test="${recomment.recommentBlind != 1 }">
 							<div class="comment-like">
 								<div class="like-button position-relative">
 								
@@ -392,6 +407,7 @@
 								</div>
 								
 							</div><!-- .comment-like -->
+							</c:if>
 						</div><!-- .comment-info -->
 						 
 					</div><!-- .recomment -->

@@ -14,6 +14,7 @@ public class CommentDTO
 	private String articleCode;
 	private String commentLikeCount;
 	private String commentLikeCheck;
+	private String commentBlind;
 	
 	// getter / setter 구성
 	
@@ -89,4 +90,13 @@ public class CommentDTO
 	{
 		this.commentLikeCheck = commentLikeCheck;
 	}
+	public String getCommentBlind()
+	{
+		return commentBlind;
+	}
+	public void setCommentBlind(String commentBlind)
+	{
+		this.commentBlind = commentBlind;
+	}
+	
 }

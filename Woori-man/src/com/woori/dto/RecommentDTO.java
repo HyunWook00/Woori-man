@@ -14,6 +14,7 @@ public class RecommentDTO
 	private String commentCode;
 	private String recommentLikeCount;
 	private String recommentLikeCheck;
+	private String recommentBlind;
 	
 	// getter / setter 구성
 	
@@ -89,4 +90,13 @@ public class RecommentDTO
 	{
 		this.recommentLikeCheck = recommentLikeCheck;
 	}
+	public String getRecommentBlind()
+	{
+		return recommentBlind;
+	}
+	public void setRecommentBlind(String recommentBlind)
+	{
+		this.recommentBlind = recommentBlind;
+	}
+	
 }
