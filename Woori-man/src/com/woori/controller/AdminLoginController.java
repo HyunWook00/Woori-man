@@ -2,6 +2,10 @@ package com.woori.controller;
 
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.AdminLoginDAO;
+import com.woori.dao.AdminMainDAO;
 import com.woori.dto.AdminDTO;
 
 
@@ -46,6 +51,45 @@ public class AdminLoginController
 			model.addAttribute("msg", msg);
 			session.removeAttribute("msg");
 		}
+		
+		// 노은하 관리자 메인 페이지 관련 업무 추가
+		AdminMainDAO mainDAO = new AdminMainDAO();
+		ArrayList<String> userCount = null;
+		//ArrayList<String> userWthdr = null;
+		ArrayList<String> dateList = new ArrayList<String>();
+		
+		try
+		{
+			userCount = mainDAO.userCount();
+			//userWthdr = mainDAO.userWthdr();
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			dateList.add(sdf.format(calendar.getTime()));
+			for(int i=0; i<5; i++)
+			{
+				calendar.add(Calendar.DATE, - 1);
+				dateList.add(sdf.format(calendar.getTime()));
+			}
+			
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				mainDAO.close();
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		model.addAttribute("userCount", userCount);
+		model.addAttribute("dateList", dateList);
+		//model.addAttribute("userWthdr", userWthdr);
 		
 		return "/WEB-INF/view/AdminMain.jsp";
 		

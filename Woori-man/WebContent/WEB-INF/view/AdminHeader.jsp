@@ -49,7 +49,7 @@
 			
 			<!-- 플랫폼 로고 -->
 			<li class="nav-item">
-				<div class="icon"><a href=""><i class="bi bi-house-fill"></i><span class="menu-title">우리만 Admin</span></a></div>
+				<div class="icon"><a href="adminmain.woori"><i class="bi bi-house-fill"></i><span class="menu-title">우리만 Admin</span></a></div>
 				<div class="hover-text">관리자 메인으로 이동</div>
 			</li>
 			
