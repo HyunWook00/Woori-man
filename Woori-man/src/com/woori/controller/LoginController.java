@@ -238,19 +238,6 @@ public class LoginController
 			else
 			{
 				
-				// 액션이 처리됐다면 값을 membermain에 넘겨줌 
-				// 모달을 자동으로 띄워주는 조건문을 만들기 위함
-				// model 에 값을 담고 session 에서는 삭제
-				if (session.getAttribute("delCount") != null)
-				{
-					model.addAttribute("delCount", session.getAttribute("delCount"));
-					session.removeAttribute("delCount");
-				}
-				else if (session.getAttribute("addCount") != null)
-				{
-					model.addAttribute("addCount", session.getAttribute("addCount"));
-					session.removeAttribute("addCount");
-				}
 				
 				// 로그인한 회원의 그룹정보 담기
 				groupList = dao.groupList(us_code);

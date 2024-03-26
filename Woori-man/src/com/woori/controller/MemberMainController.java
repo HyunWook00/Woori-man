@@ -191,42 +191,42 @@ public class MemberMainController
 		@RequestMapping("/deletefriend.woori")
 		public String friendDelete(HttpSession session, Model model, @RequestParam("fr_code") String fr_code) throws SQLException, ClassNotFoundException
 		{
-			System.out.println(fr_code);
+			ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();
 			FriendsDAO dao = new FriendsDAO();
+			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+			String us_code1 = userDTO.getUs_code();
+			
 			dao.connection();	
-			int delCount = 0;
 			
+			dao.friendDelete(fr_code);
+			friendsList = dao.list(us_code1);
 			
+			model.addAttribute("friendsList", friendsList);
 			
-			delCount = dao.friendDelete(fr_code);
-			if (delCount == 1)
-			{
-				session.setAttribute("delCount", delCount);
-			}
-			
-			return "redirect:membermain.woori";
+			return "/WEB-INF/view/FriendsListAjax.jsp";
 		}
 		
 		// 친구 추가
 		@RequestMapping("/addfriend.woori")
 		public String friendAdd(HttpSession session, Model model, @RequestParam("us_code2") String us_code2) throws ClassNotFoundException, SQLException
 		{
+			ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();
 			FriendsDAO dao = new FriendsDAO();
 			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
 			String us_code1 = userDTO.getUs_code();
-			int addCount = 0; // 친구추가 액션처리 카운트
 			
 			dao.connection();
 			
-			addCount = dao.friendAdd2(us_code1, us_code2);
-			if (addCount == 1)
-			{
-				session.setAttribute("addCount", addCount);
-			}
+			dao.friendAdd2(us_code1, us_code2);
+			friendsList = dao.list(us_code1);
 			
-			return "redirect:membermain.woori";
+			model.addAttribute("friendsList", friendsList);
+			
+			return "/WEB-INF/view/FriendsListAjax.jsp";
 		}
 	
+		
+		
 	@RequestMapping(value = "/cal.woori")
 	public String cal(HttpSession session, Model model, @RequestParam("us_code") String us_code) throws ClassNotFoundException, SQLException
 	{

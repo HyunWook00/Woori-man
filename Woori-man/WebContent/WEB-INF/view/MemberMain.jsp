@@ -47,14 +47,14 @@ function enterGroup(cg_code)
 $(document).ready(function()
 {
 	
-	var delCount = '${delCount}';
+	/* var delCount = '${delCount}';
 	var addCount = '${addCount}';
 	
 	if (delCount == 1 || addCount == 1)
 	{
 		$(".modal").modal("show");	
 	}
-	
+	 */
 	
 	$(".findBtn").click(function()
 	{
@@ -114,7 +114,25 @@ function deleteFriends(fr_code, us_id)
 {
 	if (confirm(us_id + "님을 삭제 하시겠습니까?"))
 	{
-		$(location).attr("href", "deletefriend.woori?fr_code="+fr_code);
+		var params = "fr_code="+fr_code;
+		
+		document.getElementById("shearchValue").value = "";
+		
+		 $.ajax({
+	         type: "GET"
+	         , url: "deletefriend.woori"
+	         , data: params
+	         , success: function(args)
+				{
+	        	 	
+	         		document.getElementById("friendAjaxResult").innerHTML = args;
+				}
+		 		, error: function(e)
+				{
+					alert(e.responseText);
+				}
+	        
+	     });	
 	}
 }
 
@@ -128,7 +146,25 @@ function addFriends(us_code2)
 	
 	if (confirm(us_id + "님을 친구추가 하시겠습니까?"))
 	{
-		$(location).attr("href", "addfriend.woori?us_code2="+us_code2);
+		var params = "us_code2="+us_code2;
+		//alert(params);
+		
+		document.getElementById("shearchValue").value = "";
+		
+		 $.ajax({
+	         type: "GET"
+	         , url: "addfriend.woori"
+	         , data: params
+	         , success: function(args)
+				{
+	         		document.getElementById("friendAjaxResult").innerHTML = args;
+				}
+		 		, error: function(e)
+				{
+					alert(e.responseText);
+				}
+	        
+	     });	
 	}
 }
 
@@ -198,43 +234,45 @@ function addFriends(us_code2)
 				          		</div>
 				        	</form>
 			        		<!-- 검색 결과 -->
-					        <div id="friendResult">
-					        	<table  id="searchTable" class="table tbl"> 
-				            		<tr>
-				            			<th>회원코드</th>
-				            			<th>아이디</th>
-				            			<th>이름</th>
-				            			<th>친구추가</th>
-				            		</tr>
-				            		<tr id="searchFriends">
-				            			<td colspan="4">
-				            				회원코드 또는 아이디 또는 이름으로 검색 해주세요.
-				            			</td>
-				            		</tr>
-				            	</table>
-					        </div>
-					        <div class="mb-3" >
-					            <div class=" result-title ">
-					            	<div class="friend-title modal-option">친구 목록</div>
-					            	<table class="table tbl"> 
+			        		<div id="friendAjaxResult">
+						        <div id="friendResult">
+						        	<table  id="searchTable" class="table tbl"> 
 					            		<tr>
 					            			<th>회원코드</th>
 					            			<th>아이디</th>
 					            			<th>이름</th>
-					            			<th>삭제</th>
+					            			<th>친구추가</th>
 					            		</tr>
-					            		<c:forEach var="friends" items="${friendsList }">
-					            			<tr id="result-info">
-					            				<td>${friends.us_code2 }</td>
-					            				<td>${friends.us_id }</td>
-					            				<td>${friends.us_name }</td>
-					            				<td>
-					            				<button type="button" class="deleteBtn bi-btn" onclick="deleteFriends(${friends.fr_code}, '${friends.us_id }')"><i class="bi bi-trash"></i></button>
-					          	 			</td>
-						          		</tr>
-					            		</c:forEach>
-			            			</table>
-			            		</div>
+					            		<tr id="searchFriends">
+					            			<td colspan="4">
+					            				회원코드 또는 아이디 또는 이름으로 검색 해주세요.
+					            			</td>
+					            		</tr>
+					            	</table>
+						        </div>
+						        <div class="mb-3" >
+						            <div  class=" result-title ">
+						            	<div class="friend-title modal-option">친구 목록</div>
+						            	<table class="table tbl"> 
+						            		<tr>
+						            			<th>회원코드</th>
+						            			<th>아이디</th>
+						            			<th>이름</th>
+						            			<th>삭제</th>
+						            		</tr>
+						            		<c:forEach var="friends" items="${friendsList }">
+						            			<tr id="result-info">
+						            				<td>${friends.us_code2 }</td>
+						            				<td>${friends.us_id }</td>
+						            				<td>${friends.us_name }</td>
+						            				<td>
+						            				<button type="button" class="deleteBtn bi-btn" onclick="deleteFriends(${friends.fr_code}, '${friends.us_id }')"><i class="bi bi-trash"></i></button>
+						          	 			</td>
+							          		</tr>
+						            		</c:forEach>
+				            			</table>
+				            		</div>
+		       					</div>
 		       				</div>
 	   					</div>
 			     		<div class="modal-footer">
@@ -243,6 +281,7 @@ function addFriends(us_code2)
 		   		 	</div>
 		  		</div>
 			</div>
+			
 			<div id="my_gr" class="my_gr">
 				<h2>내 그룹</h2>
 				<hr>
