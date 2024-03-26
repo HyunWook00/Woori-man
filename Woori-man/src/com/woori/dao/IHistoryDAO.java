@@ -32,4 +32,5 @@ public interface IHistoryDAO
 	public int insertRecommentReport(String param1, String param2);			// 대댓글 신고
 	public int insertArticleReport(String param1, String param2);			// 게시글 신고
 	public int deleteArticle(String his_code);								// 게시글 삭제
+	public int updateArticle(HistoryDTO dto);								// 게시글 수정
 }

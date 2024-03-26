@@ -25,17 +25,20 @@
  		AND GM_CODE = ${param2}
  	</select>
  	
+ 	<!-- 히스토리 좋아요 입력 -->
  	<insert id="insertArticleLike">
  		INSERT INTO HISTORY_LIKE(HL_CODE, HIS_CODE, GM_CODE)
  		VALUES(SEQ_HISTORY_LIKE.NEXTVAL, #{param1}, #{param2})
  	</insert>
  	
+ 	<!-- 히스토리 조회수 업데이트 -->
  	<update id="updateArticleView">
  		UPDATE HISTORY
  		SET HIS_VIEW = HIS_VIEW + 1
  		WHERE HIS_CODE = #{his_code}
  	</update>
  	
+ 	<!-- 히스토리 좋아요 삭제 -->
  	<delete id="deleteArticleLike">
  		DELETE
  		FROM HISTORY_LIKE
@@ -154,5 +157,12 @@
  		FROM HISTORY
  		WHERE HIS_CODE = #{his_code}
  	</delete>
+ 	
+ 	<!-- 히스토리 게시글 수정 -->
+ 	<update id="updateArticle">
+ 		UPDATE HISTORY
+ 		SET HIS_CONTENT = #{his_content}
+ 		WHERE HIS_CODE = #{his_code}
+ 	</update>
  </mapper>
  

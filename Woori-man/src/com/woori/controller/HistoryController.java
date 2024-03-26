@@ -26,6 +26,9 @@ import com.woori.dto.HistoryDTO;
 import com.woori.dto.MeetingDTO;
 import com.woori.dto.RecommentDTO;
 
+import oracle.net.aso.s;
+import sun.print.resources.serviceui;
+
 // 히스토리 페이지 관련 컨트롤러
 
 @Controller
@@ -167,11 +170,12 @@ public class HistoryController
 	@RequestMapping(value = "/historyarticlelikejax.woori", method = RequestMethod.GET)
 	public String insertArticleLike(Model model, @RequestParam("his_code") String his_code, HttpSession session)
 	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		String articleLike = null;
 		try
 		{
 			IHistoryDAO hDao = sqlSession.getMapper(IHistoryDAO.class);
-			hDao.insertArticleLike(his_code, (String)session.getAttribute("gm_code"));
+			hDao.insertArticleLike(his_code, member.getGm_code());
 			HistoryDTO dto = hDao.getHistoryArticle(his_code);
 			articleLike = dto.getHis_like();
 			
@@ -191,11 +195,12 @@ public class HistoryController
 	@RequestMapping(value = "/historyarticleunlikejax.woori", method = RequestMethod.GET)
 	public String deleteArticleLike(Model model, @RequestParam("his_code") String his_code, HttpSession session)
 	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		String articleLike = null;
 		try
 		{
 			IHistoryDAO hDao = sqlSession.getMapper(IHistoryDAO.class);
-			hDao.deleteArticleLike(his_code, (String)session.getAttribute("gm_code"));
+			hDao.deleteArticleLike(his_code, member.getGm_code());
 			HistoryDTO dto = hDao.getHistoryArticle(his_code);
 			articleLike = dto.getHis_like();
 			
@@ -499,5 +504,24 @@ public class HistoryController
 		model.addAttribute("history", history);
 		
 		return "/WEB-INF/view/HistoryUpdateForm.jsp";
+	}
+	
+	// 수정 요청
+	// historyupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
+	@RequestMapping(value = "historyupdate.woori", method = RequestMethod.POST)
+	public String updateArticle(HistoryDTO dto)
+	{
+		dto.setHis_content(dto.getHis_content().replaceAll("\n", "<br>"));
+		try
+		{
+			IHistoryDAO dao = sqlSession.getMapper(IHistoryDAO.class);
+			dao.updateArticle(dto);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:historylist.woori";
 	}
 }

@@ -56,10 +56,11 @@
 		</div><!-- .board-info -->
 		
 		<div class="content">
-			<form action="historyinsert.woori" class="board-insert-form" id="history-insert-form" method="post">
+			<form action="historyupdate.woori" class="board-insert-form" id="history-insert-form" method="post">
 				<div class="board-content-div">
 					<textarea placeholder="내용을 입력하세요." name="his_content" id="his_content" class="board-content">${history.his_content }</textarea>
 				</div>
+				<input type="hidden" name="his_code" value="${history.his_code }">
 				<div class="board-attach-div">
 					<input type="file" class="form-control-sm board-attach" name="bf_name1" id="bf_name1">
 					<i class="bi bi-plus-square add-attach" role="button"></i>
@@ -67,7 +68,7 @@
 				<div class="warning-info">타인의 개인정보를 유출하거나, 타인을 비방하는 내용이 담긴 게시글은 무통보 삭제처리됩니다.</div>
 				<div class="btn-div">
 					<button type="button" class="board-form-btn cancel-btn" onclick="location.href='historylist.woori'">취소</button>
-					<button type="button" class="board-form-btn submit-btn" >수정</button>
+					<button type="button" class="board-form-btn submit-btn update-btn" >수정</button>
 				</div>
 			</form>
 		
