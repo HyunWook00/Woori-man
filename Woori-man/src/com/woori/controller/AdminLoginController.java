@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.woori.dao.AdminLoginDAO;
+import com.woori.dto.AdminDTO;
 
 
 
@@ -70,6 +71,17 @@ public class AdminLoginController
 		}
 		else
 		{
+			AdminDTO adminDTO = new AdminDTO(); 
+			adminDTO = dao.adminInfo(ad_code); //세션에 올릴 adminDTO 객체 담기
+			/* 로그 테스트
+			System.out.println(adminDTO.getAd_code());
+			System.out.println(adminDTO.getAd_pwd());
+			System.out.println(adminDTO.getAd_ssn1());
+			System.out.println(adminDTO.getAd_name());
+			System.out.println(adminDTO.getAd_tel());
+			System.out.println(adminDTO.getAd_create());
+			*/
+			session.setAttribute("adminDTO", adminDTO);
 			session.setAttribute("ad_code", ad_code);
 		}
 		
