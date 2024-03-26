@@ -91,7 +91,8 @@ public class AdminInquiryController
 	    	} 
 		    else if (iq_status=="")  
 		    { 
-		    	inquiryList = dao.inquiryList(); count = dao.inquiryCount(); 
+		    	inquiryList = dao.inquiryList(); 
+		    	count = dao.inquiryCount(); 
 	    	}
 			
 		} catch (Exception e)

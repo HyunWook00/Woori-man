@@ -126,7 +126,6 @@
     	$(document).ready(function()
 		{
 			var as_content = $("#as_content").html();
-			//alert(as_content.html());
 			
 			if (as_content != "")
 			{

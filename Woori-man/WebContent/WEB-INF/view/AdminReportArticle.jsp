@@ -123,7 +123,8 @@
     
     	$(document).ready(function()
 		{
-			var as_content = $("#rr_status").html();
+			var rr_status = $("#rr_status").html();
+			//alert(rr_status);
 			
 			if (rr_status != "")
 			{
@@ -165,9 +166,7 @@
 	            	작성자 : ${reportArticle.us_code2 }</td>
 	        </tr>
 	        <tr><th>신고 처리 결과</th>
-            <td id="rr_status">
-            	${reportArticle.rr_status  }
-			</td>
+            <td id="rr_status">${reportArticle.rr_status }</td>
             <tr class="admin-info">
             	<td colspan="2" style="text-align: right;">담당자: ${reportArticle.ad_code==0 ? "" : reportArticle.ad_code } 답변일 : ${reportArticle.report_process }</td>
         	</tr>
