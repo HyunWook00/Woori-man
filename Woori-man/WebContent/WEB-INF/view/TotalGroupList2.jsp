@@ -497,6 +497,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
 
 <script type="text/javascript">
+
 	
 	function invitaionAccept(gi_code)
 	{
@@ -522,13 +523,36 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 		//window.location.href="invitationacccept.woori?gi_code=" + gi_code;
 	}
 	
+	// 그룹원 정보 등록하기
+	function memberInfoInsert()
+	{
+		var params = "gi_code=" + gi_code;
+		$.ajax(
+		{
+			type: "GET"
+			, url: "invitationacccept.woori"
+			, data: params
+			, success: function(args)
+			{
+				$("#member-info-gi_code").val(gi_code);
+				$("#memberInfoModal").modal("show");
+				
+			}
+			, error: function(e)
+			{
+				alert(e.responseText);
+			}
+		});
+	}
+	
+	
 	function invitaionRefuse(gi_code)
 	{
 		//alert(gi_code);
 		//alert("초대거절만 할게용");
 		window.location.href="invitationrefuse.woori?gi_code=" + gi_code;
 	}
-	
+
 	function invitationBlock(gi_code, cg_code)
 	{
 		//alert("그룹차단도 할래용" + gi_code + ", " + cg_code+ ", " + us_code);

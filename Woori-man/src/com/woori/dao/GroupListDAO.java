@@ -269,6 +269,22 @@ public class GroupListDAO
 			
 			return result;
 		}
+		
+		// 3/27 그룹원 정보 등록하기 버튼 클릭시 그룹원 정보 등록완료
+		public int groupMember(String gi_code) throws ClassNotFoundException, SQLException
+		{
+			int result = 0;
+			
+			Connection conn = null;
+			conn = DBConn.getConnection();
+			
+			String sql = "";
+			
+			
+			
+			
+			return result;
+		}
 
 
 		// 초대 거절 버튼 클릭 시 그룹 초대 테이블 업데이트 (테스트 X)
@@ -340,6 +356,7 @@ public class GroupListDAO
 
 		// 3/26 추가
 		// 그룹 차단 해제 버튼 클릭시 → ② 초대그룹으로 돌아가도록.. gi_response , rs_code = null
+		/*
 		public int unblockBack(String us_code, String cg_code) throws ClassNotFoundException, SQLException
 		{
 			int result = 0;
@@ -359,6 +376,7 @@ public class GroupListDAO
 			
 			return result;
 		}
+		*/
 		
 		// 그룹원 정보 입력 메소드
 		public int groupMemberInsert(String gi_code, String gm_nickname, String gm_profile, String gm_intro) throws SQLException, ClassNotFoundException
