@@ -1,22 +1,23 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	ArrayList<String> dateList = (ArrayList<String>)request.getAttribute("dateList");
+	ArrayList<String> userCount = (ArrayList<String>)request.getAttribute("userCount");
+	//ArrayList<String> userWthdr = (ArrayList<String>)request.getAttribute("userWthdr");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>AdminMain</title>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style type="text/css">
@@ -92,10 +93,6 @@
 	
 	
 </style>
- <!-- 부트스트랩 js -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- 제이쿼리 적용 JS -->
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 
 
@@ -167,17 +164,17 @@
 	
 		<!-- 사원번호 div -->
 		<div class="profile-item profile-adminId">
-			<span class="profile-title adminId-title">사원번호 : </span><span class="profile-content adminId-content">AD000</span>
+			<span class="profile-title adminId-title">사원번호 : </span><span class="profile-content adminId-content">${adminDTO.ad_code }</span>
 		</div>
 		
 		<!-- 사원명 div -->
 		<div class="profile-item  profile-name">
-			<span class="profile-title name-title">사원명 : </span><span class="profile-content name-content">누구게</span>
+			<span class="profile-title name-title">사원명 : </span><span class="profile-content name-content">${adminDTO.ad_name }</span>
 		</div>
 		
 		<!-- 계정 생성일 div -->
 		<div class="profile-item  profile-date">
-			<span class="profile-title date-title">계정 생성일 : </span><span class="profile-content date-content">2022-04-08</span>
+			<span class="profile-title date-title">계정 생성일 : </span><span class="profile-content date-content">${adminDTO.ad_create }</span>
 		</div>
 		
 		<!-- 담당 신고내역 div -->
@@ -287,15 +284,15 @@
 				var chart = document.getElementById('myChart').getContext('2d');
 				var myChart = new Chart(chart,
 					{type: 'line',data:{
-						labels: ['2024-02-05', '2024-02-06', '2024-02-07', '2024-02-08', '2024-02-09', '2024-02-10'],
-					    datasets: [{
-					    	label: '신규 가입자',
-					        data: [5, 0, 2, 19, 1, 0],
-					        backgroundColor:'#ff8000',
-					        borderColor:'#ff8000',
-					        borderWidth: 2
-					        }
-					    ]}, options: {
+						labels: ['<%=dateList.get(5)%>', '<%=dateList.get(4)%>', '<%=dateList.get(3)%>', '<%=dateList.get(2)%>', '<%=dateList.get(1)%>', '<%=dateList.get(0)%>'],
+					    datasets: [ {label: '신규 가입자', data: [<%=userCount.get(5)%>, <%=userCount.get(4)%>, <%=userCount.get(3)%>, <%=userCount.get(2)%>, <%=userCount.get(1)%>, <%=userCount.get(0)%>]
+					    			, backgroundColor:'#ff8000', borderColor:'#ff8000', borderWidth: 2}
+					    			<%-- 
+					    			,{label: '탈퇴회원', data: [<%=userWthdr.get(5)%>, <%=userWthdr.get(4)%>, <%=userWthdr.get(3)%>, <%=userWthdr.get(2)%>, <%=userWthdr.get(1)%>, <%=userWthdr.get(0)%>]
+					    			, backgroundColor:'#7b7b7b', borderColor:'#7b7b7b', borderWidth: 2}
+					    			 --%>
+					    			]}
+						, options: {
 					    		scales: {
 					            	yAxes: [{
 					                	ticks: {beginAtZero: true}
