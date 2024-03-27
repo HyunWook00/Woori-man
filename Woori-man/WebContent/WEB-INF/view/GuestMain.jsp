@@ -9,160 +9,34 @@
 <head>
 <meta charset="UTF-8">
 <title>GuestMain.jsp</title>
-    <!-- 부트스트랩 적용 CSS -->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- 부트스트랩 적용 CSS -->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <!-- 부트스트랩 부가 테마 CSS -->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css">
+<!-- 부트스트랩 부가 테마 CSS -->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css">
 
-    <!-- 제이쿼리 적용 JS -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<!-- 제이쿼리 적용 JS -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
-    <!-- 부트스트랩 관련 스크립트 적용 JS -->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 관련 스크립트 적용 JS -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+<!-- 부트스트랩 JavaScript 파일 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/guestMain.css">
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.dropdown-toggle').on('click', function() {
+        var dropdownMenu = $(this).next('.dropdown-menu');
+        $('.dropdown-menu').not(dropdownMenu).removeClass('show');
+        dropdownMenu.toggleClass('show');
+    });
+});
+</script>
         
-    <!-- 부트스트랩 JavaScript 파일 -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-	
-	<script type="text/javascript">
-	    $(document).ready(function(){
-	        $('.dropdown-toggle').on('click', function() {
-	            var dropdownMenu = $(this).next('.dropdown-menu');
-	            $('.dropdown-menu').not(dropdownMenu).removeClass('show');
-	            dropdownMenu.toggleClass('show');
-	        });
-	    });
-	</script>
-        
-    <style type="text/css">
-		/* 	    
-		@font-face 
-	    {
-		    font-family: '라인Seed';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-		    font-weight: 700;
-		    font-style: normal;
-		} 
-		*/
-		.one 
-		{
-		    display: flex;
-		    flex-wrap: wrap; 
-		    justify-content: space-between;
-		}
-    	.btn-default 
-    	{
-    		background-color: #FF6F0F; 
-    		color: white;
-    		font-size: 18pt;
-    	}
-    	.item
-    	{
-    		margin-top: 140px;   
-    		width: 50%; 	
-    	}
-    	.item-img
-    	{
-    		width: 300px;
-    	}
-    	.item-button
-    	{
-    		display: flex;
-    		flex-direction: column;
-    		flex-wrap: wrap;
-   		    width: 400px;
-    		border-radius: 5px;
-    		margin-right: 20px;
-    		margin-top: 300px;
-    	}
-    	.join
-    	{
-    		font-size: medium;
-    		text-align: center;
-    	}
-    	.item-image
-    	{
-    		display: flex;
-   		    background: url(https://ssl.pstatic.net/cmstatic/webclient/dres/20240206174213/images/intro/ko/bg_intro.jpg) 50% 50% no-repeat;
-		    background-size: cover;
-		    height: 540px;
-		    width: 100%;
-		    justify-content: center;
-		    margin-top: 100px;
-		    flex-direction: column;
-		    text-align: center;
-    	}
-
-    	.image-text
-    	{
-    		color: white;
-    		text-align: center;
-    	}
-    	ul
-    	{
-    		display: flex;
-		    list-style-type: none;
-		    padding: 100px 0 0;
-		    justify-content: center;
-		    text-align: center;
-	        flex-wrap: wrap; 
-    	}
-	
-		li 
-		{
-		    flex: 1;
-		    text-align: center; 
-		    margin: 0 10px; 
-		    
-		}
-		
-		.imgList img 
-		{
-		    width: 300px;
-		    height: 160px; 
-		}
-		
-		.imgList, div 
-		{
-		    margin-bottom: 20px;
-		}
-
-		.question
-		{
-			padding-top: 100px;
-			text-align: center;
-		}
-		
-		.dropdown-toggle
-		{
-			font-size: 18pt;
-    		background-color: #FF6F0F; 
-    		width: 60%;
-		}
-	    .dropdown-menu 
-	    {
-	        position: static;
-	        display: none;
-	        float: none;
-	        min-width: 100%;
-	        padding: 0;
-	        margin: 0;
-	        background-color: transparent;
-	        border: none;
-	        box-shadow: none;
-	    }
-	    .dropdown-menu.show 
-	    {
-	        display: block;
-	    }
-		
-    </style>
-    
-    
-
-    
 </head>
-<!-- <img src="images/aaa.png"> -->
 
 <body>
 
@@ -173,8 +47,8 @@
 		</div>
 		<div class="item item-button">
 			<h2>모임이 쉽고, 재밌어진다 !<br>우.리.만</h2><br>
-			<a href="" class="btn btn-default">로그인</a><br>
-			<a href="" class="btn btn-default">회원가입</a><br>
+			<a href="loginform.woori" class="btn btn-default">로그인</a><br>
+			<a href="membershipform.woori" class="btn btn-default">회원가입</a><br>
 			<p class="join">지금 바로 무료로 회원가입 하세요!</p>
 		</div>
 	</div>
