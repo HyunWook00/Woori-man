@@ -97,6 +97,7 @@ public class AdminNoteController
 		
 		dto.setAd_code(ad_code);
 		
+		dto.setAn_content(dto.getAn_content().replaceAll("\n", "<br>"));
 			
 		try
 		{

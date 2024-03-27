@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+@font-face 
+{
+    font-family: '라인Seed';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body 
+{
+	font-family: 라인Seed;
+}
+  
+.container 
+{
+    margin-top: 50px;
+    width: 1140px;
+}
+.card 
+{
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card-header 
+{
+    background-color: #4367ad;
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+.card-body 
+{
+    padding: 20px;
+}
+.recipient-list 
+{
+    max-height: 200px;
+    overflow-y: auto;
+}
+        
+.list-btn,
+.submit-btn 
+{
+    border: none;
+    font-size: 15pt;
+    background-color: #4367ad;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+        
+.list-btn:hover,
+.submit-btn:hover 
+{
+    background-color: #395791;
+}
+       
+        
+.btns 
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 576px) 
+{
+    .btns 
+    {
+        flex-direction: column;
+    }
+}
+        
+.submit-btn 
+{
+	margin-left: 10px;
+}
+.list-btn 
+{
+	margin-right: 10px;
+}
+        
+#searchRecipient 
+{
+	width: 50%;
+}
+        
+.bi-search 
+{
+	border: none;
+    font-size: 12pt;
+    background-color: #4367ad;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+        
+.bi-search:hover 
+{
+	background-color: #395791;
+}
+

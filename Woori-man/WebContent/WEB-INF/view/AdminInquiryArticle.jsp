@@ -22,119 +22,22 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/adminHeader.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/adminInquiryArticle.css">
 
-    <style>
-    	@font-face 
-	    {
-		    font-family: '라인Seed';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-		    font-weight: 700;
-		    font-style: normal;
-		}
-    
-        th {
-            font-family: '라인Seed';
-        }
-        
-        h1 {
-            color: #4367ad;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        .container {
-            margin-top: 30px;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .table-wrap {
-            margin-top: 50px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #dee2e6;
-            font-size: 15pt;
-        }
-        
-        
-        th, td {
-            border: 1px solid #dee2e6;
-            padding: 8px;
-            text-align: center;
-        }
-        
-        .tbl-Inquiry th,
-		.tbl-answer th {
-		    width: 30%;
-		    font-weight: bold;
+<script type="text/javascript">
+  
+  	$(document).ready(function()
+	{
+		var as_content = $("#as_content").html();
+		
+		if (as_content != "")
+		{
+			$(".answer-btn").css("display", "none");
 		}
 		
-		th {background-color: #f8f9fa;}
-        
-        .list-btn,
-        .answer-btn {
-            border: none;
-            font-size: 15pt;
-            background-color: #4367ad;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        
-        .list-btn:hover,
-        .answer-btn:hover {
-            background-color: #395791;
-        }
-        
-        .answer {
-            margin-top: 50px;
-        }
-        
-        .btns {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        @media (max-width: 576px) {
-            .btns {
-                flex-direction: column;
-            }
-        }
-        
-        .answer-btn {margin-left: 10px;}
-        .list-btn {margin-right: 10px;}
-        
-        .admin-info {
-		    text-align: right;
-		    font-size: 15px;
-		    color: #6c757d;
-		}
-        
-    </style>
-    
-    <script type="text/javascript">
-    
-    	$(document).ready(function()
-		{
-			var as_content = $("#as_content").html();
-			
-			if (as_content != "")
-			{
-				$(".answer-btn").css("display", "none");
-			}
-			
-		});	
-    
-    </script>
+	});	
+  
+  </script>
 
 </head>
 <body>
