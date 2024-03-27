@@ -147,7 +147,7 @@
 					</table>
 					<table class="meeting-detail">
 						<tr>
-							<th rowspan="3" class="visit-place">우리 여기 가자!</th>
+							<th rowspan="${fn:length(places) <= 0 ? '2' : fn:length(places) +1}" class="visit-place">우리 여기 가자!</th>
 						</tr>
 						<!-- 방문장소들 -->
 						<c:choose>

@@ -1,9 +1,11 @@
 @charset "UTF-8";
 span.meeting-writer, form>div>div>span.group-name, form>div>span.meeting-category, form>div>div>.meeting-title, span.meeting-region, .meeting-date
+, span.meeting-visitied, span.meeting-etc
 {
 	display: inline-block; background-color: #ffdbb8; font-family: 라인Seed; font-size: 20pt;
 	padding: 5px 13px 0px 13px; border-radius: 10px; margin: 5px 7px; color: black;
 }
+span.meeting-visitied, span.meeting-etc {font-size: 14pt;}
 .meeting-date {border: none;}
 form>div>div>.meeting-title {border: none; font-size: 15pt; text-align: center; width: 500px;}
 div.meeting-region-div {display: flex; justify-content: center;}
@@ -21,4 +23,5 @@ button.meeting-update-btn:hover {background-color: #ff8000;}
 .visited-form-addr2 {width: 200px;}
 .meeting-visited {display: inline-block; text-align: left;}
 div.main-content-div, div.sub-content-div {display: inline-block;}
-
+form.meeting-insert-form {display: flex;}
+div.visited-content {padding: 20px; background-color: #ededed; border-radius: 10px; margin: 10px 0px;}

@@ -739,24 +739,26 @@ public class MeetingController
 	// 모임 수정 컨트롤러
 	// meetingarticleupdate.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "meetingupdate.woori", method = RequestMethod.POST)
-	public String updateMeeting(Model model, @RequestParam("mt_code") String mt_code, @RequestParam("mt_etc") String mt_etc, @RequestParam("vp_zipcode") String vp_zipcode, @RequestParam("vp_addr1") String vp_addr1
-								, @RequestParam("vp_addr2") String vp_addr2)
+	public String updateMeeting(Model model, @RequestParam("mt_code") String mt_code, @RequestParam("mt_etc") String mt_etc, String[] vp_zipcode, String[] vp_addr1, String[] vp_addr2)
 	{
 		PlaceDTO place = new PlaceDTO();
 		MeetingDAO mDao = new MeetingDAO();
 		place.setMt_code(mt_code);
-		place.setVp_addr1(vp_addr1);
-		place.setVp_addr2(vp_addr2);
-		place.setVp_zipcode(vp_zipcode);
-		
 		try
 		{
 			IPlaceDAO dao = sqlSession.getMapper(IPlaceDAO.class);
 			mDao.updateMeetingEtc(mt_code, mt_etc);
-			if (vp_addr2 == null || vp_addr2.equals(""))
-				dao.insertPlaceAddr1(place);
-			else
-				dao.insertPlaceAddr2(place);
+			for(int i=0; i<vp_zipcode.length; i++)
+			{
+				place.setVp_zipcode(vp_zipcode[i]);
+				place.setVp_addr1(vp_addr1[i]);
+				place.setVp_addr2(vp_addr2[i]);
+				
+				if (place.getVp_addr2() == null || place.getVp_addr2().equals(""))
+					dao.insertPlaceAddr1(place);
+				else
+					dao.insertPlaceAddr2(place);
+			}
 			
 		} catch (Exception e)
 		{

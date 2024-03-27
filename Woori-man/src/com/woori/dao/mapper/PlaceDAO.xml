@@ -22,6 +22,7 @@
  		, MT_CODE
  		FROM VISITED_PLACE
  		WHERE MT_CODE = #{mt_code}
+ 		ORDER BY VP_CODE ASC
  	</select>
  
  </mapper>
