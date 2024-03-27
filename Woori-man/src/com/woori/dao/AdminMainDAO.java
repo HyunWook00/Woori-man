@@ -13,7 +13,14 @@ public class AdminMainDAO
 	
 	public AdminMainDAO()
 	{
-		conn = DBConn.getConnection();
+		try
+		{
+			conn = DBConn.getConnection();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 	}
 	
 	// 플랫폼 회원가입 추이 조회
@@ -90,6 +97,13 @@ public class AdminMainDAO
 	
 	public void close()
 	{
-		DBConn.close();
+		try
+		{
+			DBConn.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 	}
 }

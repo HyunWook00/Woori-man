@@ -315,7 +315,7 @@ public class GroupListDAO
 			return result;
 		}
 		
-		// 그룹 차단 해제 버튼 클릭시 → 차단테이블에서 해당 그룹 삭제, 초대 테이블 
+		// 그룹 차단 해제 버튼 클릭시 → ① 차단테이블에서 해당 그룹 삭제
 		public int unblock(String us_code, String cg_code) throws ClassNotFoundException, SQLException
 		{
 			int result = 0;
@@ -336,6 +336,28 @@ public class GroupListDAO
 			
 			return result; 
 			
+		}
+
+		// 3/26 추가
+		// 그룹 차단 해제 버튼 클릭시 → ② 초대그룹으로 돌아가도록.. gi_response , rs_code = null
+		public int unblockBack(String us_code, String cg_code) throws ClassNotFoundException, SQLException
+		{
+			int result = 0;
+			
+			Connection conn = null;
+			conn = DBConn.getConnection();
+			
+			String sql = "UPDATE GROUP_INVITE SET GI_RESPONSE = NULL, RS_CODE = NULL WHERE CG_CODE = ?";
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(us_code));
+			
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+			DBConn.close();
+			
+			return result;
 		}
 		
 		// 그룹원 정보 입력 메소드

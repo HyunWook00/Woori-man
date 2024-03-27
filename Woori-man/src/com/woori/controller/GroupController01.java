@@ -257,8 +257,8 @@ public class GroupController01
 			return "group.woori";
 		}
 		
-		// 차단그룹 목록에서 차단해제 버튼 클릭시 (그룹차단 테이블 삭제)
-		@RequestMapping(value = "invitaionUnblock.woori", method = RequestMethod.GET)
+		// 차단그룹 목록에서 차단해제 버튼 클릭시 (그룹차단 테이블 삭제 + 그룹 초대 리스트로 돌아가야함)
+		@RequestMapping(value = "invitationUnblock.woori", method = RequestMethod.GET)
 		public String invitationUnBlock(Model model, HttpSession session, String cg_code)
 		{
 			/*
@@ -275,10 +275,14 @@ public class GroupController01
 			GroupListDAO dao = new GroupListDAO();
 			
 			int unblock = 0;
+			// 3/26 추가
+			int unblockBack = 0;
 			
 			try
 			{
 				unblock = dao.unblock(us_code, cg_code);
+				unblockBack = dao.unblockBack(us_code, cg_code);
+				
 			} catch (Exception e)
 			{
 				System.out.println(e.toString());

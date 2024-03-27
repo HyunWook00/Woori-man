@@ -342,7 +342,7 @@ a:visited  {
 
 
 .accept{
-   width: 60px;
+   width: 58px;
    height: 30px;
    /* float: right; */
    text-align: center;
@@ -364,8 +364,35 @@ a:visited  {
 }
 
 .refuse{
-	width: 60px;
+   margin-left: 5px;
+   width: 58px;
    height: 30px;
+   /* float: right; */
+   text-align: center;
+   /* border-radius: 20px; */
+   /* vertical-align: middle; */
+   padding: 19px 0 18px;
+   border-radius: 5px;
+   background-color: #959eae;
+   border: none;
+}
+
+.refuseOnly{
+   width: 80px;
+   height: 50px;
+   /* float: right; */
+   text-align: center;
+   /* border-radius: 20px; */
+   /* vertical-align: middle; */
+   padding: 19px 0 18px;
+   border-radius: 5px;
+   background-color: #adb5bd;
+   border: none;
+}
+
+.refuseAndBlock{
+   width: 80px;
+   height: 50px;
    /* float: right; */
    text-align: center;
    /* border-radius: 20px; */
@@ -389,6 +416,25 @@ a:visited  {
     align-items: center;
     display: flex;
 } 
+
+.btn_text2 {
+	font-size: 17px;
+	font-weight: 600;
+	letter-spacing: -.5px;
+	color: #fff;
+	width: 60px;
+    height: 4px;
+    margin-left: 9px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+} 
+
+.unblockBtn{
+	width: 70px;
+    margin-left: -10px;
+
+}
 
 div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 
@@ -483,16 +529,16 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 		window.location.href="invitationrefuse.woori?gi_code=" + gi_code;
 	}
 	
-	function invitationBlock(gi_code, cg_code, us_code)
+	function invitationBlock(gi_code, cg_code)
 	{
 		//alert("그룹차단도 할래용" + gi_code + ", " + cg_code+ ", " + us_code);
 		//window.location.href="invitationblock.woori?gi_code=" + gi_code;
 		window.location.href="invitationblock.woori?gi_code=" + gi_code + "&cg_code=" + cg_code;
 	}
 	
-	function invitationUnblock()
+	function invitationUnblock(cg_code)
 	{
-		window.location.href="invitationUnblock.woori";
+		window.location.href="invitationUnblock.woori?cg_code=" + cg_code;
 	}
 
 
@@ -724,7 +770,7 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 							  <div class="modal-dialog">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">그룹 초대 수락 / 거절</h1>
 							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							      </div>
 							      <div class="modal-body">
@@ -747,12 +793,14 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 							  <div class="modal-dialog">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">초대 거절 / 차단</h1>
 							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							      </div>
 							      <div class="modal-body">
-							        초대를 거절한 그룹의 초대를 더이상 받지 않을 수 있습니다.
-							        해당 그룹의 초대를 더이상 받지 않으시겠습니까?
+							      	<span style="font-weight: bold; font-size: 15px;">
+							        초대를 거절한 그룹의 초대를 더이상 받지 않을 수 있습니다.<br>
+							        해당 그룹의 초대를 더이상 받지 않으시겠습니까?<br>
+							        </span>
 							      </div>
 							      <div class="modal-footer">
 							      <!-- 
@@ -760,11 +808,11 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 							        <button type="button" class="btn btn-primary">더이상 받지 않을래용</button>
 									 -->
 									
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="invitaionRefuse(${inviteGroupList.gi_code })" value="${inviteGroupList.gi_code }">
-							        	<span class="btn_text">이번만 거절만 할게요</span>
+									<button type="button" class="refuseOnly" data-bs-dismiss="modal" onclick="invitaionRefuse(${inviteGroupList.gi_code })" value="${inviteGroupList.gi_code }">
+							        	<span class="btn_text2">거절만</span>
 							        </button>
-							        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal"  onclick="invitationBlock(${inviteGroupList.gi_code }, ${inviteGroupList.cg_code })" value="${inviteGroupList.gi_code }">
-							        	<span class="btn_text">더이상 받지 않을래용</span>
+							        <button type="button" class="refuseAndBlock"  data-bs-dismiss="modal"  onclick="invitationBlock(${inviteGroupList.gi_code }, ${inviteGroupList.cg_code })" value="${inviteGroupList.gi_code }">
+							        	<span class="btn_text2">차단도</span>
 							        </button>
 									
 																	      
@@ -845,14 +893,13 @@ div.toggleDiv { display: flex; flex-direction: row; justify-content: center;}
 									</div>	
  									-->
  									
- 									<div class="btnDiv" style="float: left;">
-									 	<button type="button" class="btn_edit" onclick="invitationUnblock()">
-									  		<span class="subIndexEdit">차단 해제</span>
+ 									<div class="btnDiv" style="float: left; margin-left: -30px;">
+									 	<button type="button" class="unblockBtn" onclick="invitationUnblock(${blockedGroupList.cg_code })">
+									  		<span class="subIndexEdit">차단해제</span>
 										</button>
 									</div>
 									</div>
 								</li>
-								
 							</c:forEach>
 						</ul>
 				      </div>
