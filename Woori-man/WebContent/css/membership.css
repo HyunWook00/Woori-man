@@ -62,6 +62,23 @@ body {
 	
 }
 
+
+.hover-text
+{
+	margin-left: 5px;
+	display:none;
+    font-size: 10pt;
+    color: red;
+}
+
+.bi-err:hover +.hover-text
+{
+	display: inline-block;
+} 
+
+
+
+
 .idtxt
 {
 	margin-bottom: -30px;

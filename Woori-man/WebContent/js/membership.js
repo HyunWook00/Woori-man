@@ -105,7 +105,7 @@ $(document).ready(function()
 function checkId()
 {
 	var flag = true;
-	
+	/*
 	if ($.trim($("#us_id").val()).length < 6 || $.trim($("#us_id").val()).length > 20)
 	{
 		alert("6 ~ 20 자리 아이디를 입력 해주세요.");
@@ -113,6 +113,18 @@ function checkId()
 		$("#us_id").focus();
 		return flag;
 	}
+	*/
+	
+	var us_id = $('#us_id').val();
+	var regId = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{6,20}$/;
+    if (!regId.test(us_id))
+    {
+    	alert('아이디는 영소문자,숫자로 구성된 6 ~ 20 글자 이상으로 조합하시오.');
+        $('#us_id').focus();
+        return false;
+    }
+    
+    
 }
 
 
@@ -188,16 +200,24 @@ function sample6_execDaumPostcode()
 function checkInfo()
 {
 	
+	var regId = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{6,20}$/; 		 								 // 아이디 정규표현식 (영문,숫자 조합 6 ~ 20 자리)
+	var regPwd = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,20}$/; // 비밀번호 정규표현식 (영문 대/소문자 + 숫자 특수 문자 조합 8 ~ 20)
+	var regBirth = /([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/;							 // 주민번호 앞 6 정규표현식
+	var regBirth2 =/^[1234]$/;																		 // 주빈번호 뒤 1 정규표현식
+	var regEmail = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;											 // 이메일 정규표현식
+	var regName = /^[가-힣]{2,4}$/;																	 // 이름 정규표현식
+	var regTel = /^\d{4}$/;																			 // 전화번호 정규표현식
 	
-	if ($.trim($("#us_id").val()).length < 6 || $.trim($("#us_id").val()).length > 20)
+	
+    if (!regId.test($("#us_id").val()))
+    {
+    	alert('올바른 조건의 아이디를 입력해주세요.');
+        $('#id-err').hover();
+        return;
+    }
+	else if(!regPwd.test($("#us_pwd").val()))
 	{
-		alert("6 ~ 20 자리 아이디를 입력 해주세요.");
-		$("#us_id").focus();
-		return;
-	}
-	else if($.trim($("#us_pwd").val()).length < 8 || $.trim($("#us_pwd").val()).length >= 20)
-	{
-		alert("8 ~ 20 자리 비밀번호를 입력 해주세요.");
+		alert("올바른 조건의 비밀번호를 입력해주세요.");
 		$("#us_pwd").focus();
 		return;
 	}
@@ -207,21 +227,21 @@ function checkInfo()
 		$("#pwd2").focus();
 		return;
 	}
-	else if(!$.trim($("#us_name").val()))
+	else if(!regName.test($("#us_name").val()))
 	{
-		alert("이름을 입력 해주세요.");
+		alert("정확한 이름을 입력 해주세요.");
 		$("#us_name").focus();
 		return;
 	}
-	else if($.trim($("#us_birthday").val()).length != 6 )
+	else if(!regBirth.test($("#us_birthday").val()))
 	{
-		alert("주민번호 앞 6자리 형식으로 입력 해주세요.");
+		alert("정확한 생년월일 6자리를 입력해주세요.");
 		$("#us_birthday").focus();
 		return;
 	}
-	else if($.trim($("#us_birthday2").val()).length != 1 )
+	else if(!regBirth2.test($("#us_birthday2").val()))
 	{
-		alert("주민번호 뒷 1자리를 입력해주세요.");
+		alert("정확한 주민번호 뒤 1자리를 입력해주세요.");
 		$("#us_birthday2").focus();
 		return;
 	}
@@ -231,15 +251,15 @@ function checkInfo()
 		$("#us_lunar1").focus();
 		return;
 	}
-	else if ($.trim($("#us_tel1").val()).length != 4 || $.trim($("#us_tel2").val()).length != 4)
+	else if (!regTel.test($("#us_tel1").val()) || !regTel.test($("#us_tel2").val()))
 	{
-		alert("올바른 전화번호를 입력해주세요.");
+		alert("정확한 전화번호를 입력해주세요.");
 		$("#us_tel1").focus();
 		return;
 	}
-	else if(!$.trim($("#us_email").val()))
+	else if(!regEmail.test($("#us_email").val()))
 	{
-		alert("이메일을 선택해주세요.");
+		alert("정확한 이메일 형식을 맞춰 입력해주세요.");
 		$("#us_email").focus();
 		return;
 	}

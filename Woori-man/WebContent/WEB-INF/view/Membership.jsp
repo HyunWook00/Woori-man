@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/membership.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 <!-- 정규표현식  -->
 <script src="js/util.js"></script>
@@ -35,14 +36,14 @@
         <div class="user-info">
         <form action="membership.woori" method="post" id="userForm">
           <div class="user-info-id ">
-            	<div class="idtxt">* 아이디</div>
+            	<div class="idtxt">* 아이디 <i class="bi bi-question-circle bi-err"></i><span class="hover-text">6 ~ 20자의 영문 소문자,숫자로 구성해주세요.</span></div>
             <div>	
-            <input type="text" id="us_id" name="us_id" value=""  class="idtext">
-            <button type="button" class="checkBtn" >중복확인</button>
+            	<input type="text" id="us_id" name="us_id" value=""  class="idtext">
+            	<button type="button" class="checkBtn" >중복확인</button>
             </div>
           </div>
           <div class="user-info-pw">
-            <div>* 비밀번호</div>
+            <div>* 비밀번호 <i class="bi bi-question-circle bi-err"></i><span class="hover-text">8 ~ 20자의 영문 대/소문자,숫자, 특수문자로 구성해주세요.</span></div>
             <input type="password" id="us_pwd" name="us_pwd">
           </div>
           <div class="user-info-pw-check">
@@ -56,7 +57,7 @@
           <div class="user-info-birthday">
           	<div>* 생년월일</div>
           	<div class="teldiv">
-          	<input class="txtbirth1" type="text" id="us_birthday" name="us_birthday"> 
+          	<input class="txtbirth1" type="text" id="us_birthday" name="us_birthday" placeholder="생년월일(YYMMDD)"> 
           	- <input class="txtbirth2" type="text"  id="us_birthday2"> &nbsp; * &nbsp; * &nbsp; * &nbsp; * &nbsp; * &nbsp; *
           	</div>  
           </div>
