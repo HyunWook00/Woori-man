@@ -315,12 +315,27 @@ a.first-page-control, a.last-page-control
 			$(".compose-btn").find(".btn-delete").attr("onclick", "deleteSendNote()");
 		});
 		
-		// 받은쪽지 탭 클릭 시 
-		/* $("#receive-tab").click(function()
-		{
-			$("#admin-tab").css("display", "block");
-			$("#friend-tab").css("display", "block");
-		}); */
+		
+		/*
+		$(".nav-link").click(function() {
+	        var tabId = $(this).attr("id");
+	        // 현재 선택된 탭에 해당하는 테이블의 체크박스들을 선택/해제
+	        $("#" + tabId).find("input[type='checkbox']").prop("checked", $("#selectAll-" + tabId).prop("checked"));
+	    });
+
+	    // 각 탭의 체크박스 중 하나라도 선택되었을 때 전체 선택/해제 버튼의 상태를 조정
+	    $("input[type='checkbox']").click(function() {
+	        var tabId = $(this).closest("table").attr("id");
+	        var totalCheckbox = $("#" + tabId).find("input[type='checkbox']").length;
+	        var checkedCheckbox = $("#" + tabId).find("input[type='checkbox']:checked").length;
+	        if (totalCheckbox === checkedCheckbox) {
+	            $("#selectAll-" + tabId).prop("checked", true);
+	        } else {
+	            $("#selectAll-" + tabId).prop("checked", false);
+	        }
+	    });
+		*/
+		
 		
 		// 전체 수신 쪽지 클릭 시
 		$("li.receive-note").click(function()
@@ -400,7 +415,7 @@ a.first-page-control, a.last-page-control
 
 			
 		// 누른 탭의 쪽지 전체 선택
-		$("#selectAll").click(function()
+		/*$("#selectAll").click(function()
 		{
 			if (".nav-link active")
 			{
@@ -430,11 +445,31 @@ a.first-page-control, a.last-page-control
 		    {
 		      $("#selectAll").prop("checked", true);
 		    }
-	   });
+	   });*/
+	   
+
 		
 		
 
 	});
+	
+	// 각 탭에서 전체 선택 체크박스를 클릭할 때 해당 탭에 있는 모든 쪽지 체크박스를 선택하는 함수
+	function selectAllMessagesInTab(tabId) {
+	    $("#" + tabId + " input[type='checkbox']").prop("checked", $("#" + tabId + " #selectAll-" + tabId).prop("checked"));
+	}
+	
+	// 각 탭에서 선택된 모든 쪽지를 삭제하는 함수
+	function deleteAllMessagesInTab(tabId) {
+	    var check = $("#" + tabId + " .form-check-input:checked");
+	    var delCode = "";
+	    for (var i = 0; i < check.length; i++) {
+	        delCode += check[i].value + "/";
+	    }
+	    var index = delCode.length;
+	    delCode = delCode.substring(0, index - 1);
+
+	    
+	}
 	
 	// 받은 쪽지 삭제
 	function deleteReceiveNote()
@@ -505,7 +540,7 @@ a.first-page-control, a.last-page-control
 						<th>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="selectAll"
-									name="selectAll"> <label class="form-check-label"
+									name="selectAll" onclick="selectAllMessagesInTab()"> <label class="form-check-label"
 									for="selectAll"></label>
 							</div>
 						</th>

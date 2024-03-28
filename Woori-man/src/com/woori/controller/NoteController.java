@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.RequestParam;
 
+import com.woori.dao.FriendsDAO;
 import com.woori.dao.NoteDAO;
+import com.woori.dto.FriendsDTO;
 import com.woori.dto.NoteDTO;
 import com.woori.dto.UserDTO;
 
@@ -238,25 +240,94 @@ public class NoteController
 	}
 
 	// 쪽지 작성(입력) 폼 불러오는 액션 처리
-	/*
-	 * @RequestMapping("/notewriteform.woori") public String noteWriteForm(Model
-	 * model) throws SQLException, ClassNotFoundException { String result = "";
-	 * 
-	 * result = "/WEB-INF/view/NoteWrite.jsp";
-	 * 
-	 * return result; }
-	 * 
-	 * // 쪽지 작성(입력) 액션
-	 * 
-	 * @RequestMapping("/notewrite.woori") public String noteWrite(Model model)
-	 * throws SQLException, ClassNotFoundException { String result = "";
-	 * 
-	 * 
-	 * 
-	 * result = "redirect:sendnote.woori";
-	 * 
-	 * return result; }
-	 */
+    @RequestMapping("/notewriteform.woori") 
+    public String noteWriteForm(Model model, HttpSession session//, @RequestParam("us_code2") String us_code2
+    		//, @RequestParam("us_id") String us_id, @RequestParam("us_name") String us_name
+			//, @RequestParam("fr_code") String fr_code
+    		) throws SQLException, ClassNotFoundException 
+    { 
+    	String result = "";
+    	
+    	//String code = "#" + us_code2 + " " + us_name + "(" + us_id + ")" ;
+		//String friend_code = fr_code;
+    	
+		FriendsDAO dao = new FriendsDAO();
+		
+		dao.connection();
+		
+		dao.close();
+		
+		//model.addAttribute("code", code);
+		//model.addAttribute("fr_code", friend_code);
+		
+	    result = "/WEB-INF/view/NoteWrite.jsp";
+	 
+	    return result; 
+    }
+    
+    // 쪽지 작성 페이지에서 검색을 통해 수신자(친구) 선택
+    @RequestMapping("/friendlistsearch.woori") 
+    public String friendList(Model model, HttpSession session, @RequestParam("searchValue") String searchValue) throws SQLException, ClassNotFoundException 
+    { 
+    	String result = "";
+    	
+    	UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
+    	String us_code = userDTO.getUs_code();
+    	
+    	NoteDAO dao = new NoteDAO();
+    	dao.connection();
+    	
+    	ArrayList<FriendsDTO> searchFriend = new ArrayList<FriendsDTO>();
+    	
+    	System.out.println("us-code : " + us_code + " / search : " + searchValue);
+    	searchFriend = dao.FriendSearch(us_code, searchValue);
+    	System.out.println(searchFriend.size());
+    	
+    	model.addAttribute("searchFriend", searchFriend);
+	  
+	    result = "/WEB-INF/view/FriendNoteModal.jsp";
+	 
+	    return result; 
+    }
+    
+    // 친구 선택...?(fr_code)
+    @RequestMapping("/friendselect.woori") 
+    public String friendSelect(Model model, NoteDTO dto, @RequestParam("fr_code") String fr_code) throws SQLException, ClassNotFoundException 
+	{ 
+		String result = "";
+	  
+		NoteDAO dao = new NoteDAO();
+		
+		dao.connection();
+		
+		dto.setFr_code(fr_code);
+		
+		dao.close();
+		
+	    result = "redirect:notewriteform.woori";
+	  
+		return result; 
+	}
+	  
+    // 쪽지 작성(입력) 액션
+	@RequestMapping("/notewrite.woori") 
+	public String noteWrite(Model model, NoteDTO dto) throws SQLException, ClassNotFoundException 
+	{ 
+		String result = "";
+	  
+		NoteDAO dao = new NoteDAO();
+		
+		dao.connection();
+		
+		dao.noteWrite(dto);
+		
+		dao.close();
+		
+	    result = "redirect:notelist.woori";
+	  
+		return result; 
+	}
+	 
 	
 	
 	
