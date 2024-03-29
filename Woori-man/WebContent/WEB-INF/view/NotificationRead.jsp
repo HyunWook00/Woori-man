@@ -36,7 +36,7 @@
 <div class="main ma">
 	<div class="container content">
 	    <div class="holding-notice">
-	    	<h1>공지사항</h1>
+	    	<h4>공지사항</h4>
 	    </div>
 	    <hr>
 	    
@@ -57,7 +57,7 @@
 			
 			<div class="section" style="">
 				<div>
-					<img style="max-width: 100%; height: auto;" src="https://coresos-phinf.pstatic.net/a/2ib6hg/h_bh3Ud018svc1owj4cq4s0oqp_2q622p.png">
+					<img style="max-width: 100%; height: auto;" src="${notice.na_name }">
 				</div>
 				<div style="font-size: 20px;"> 
 					<span>${notice.nf_content }</span>

@@ -1,7 +1,6 @@
 package com.woori.controller;
 
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,15 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;		//-- check~!!!
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.woori.dto.AdminNotificationDTO;
 import com.woori.dao.AdminNotificationDAO;
-import com.woori.dto.AdminDTO;
 
-import sun.nio.fs.DefaultFileTypeDetector;
 
   
 
@@ -62,12 +56,9 @@ public class AdminNotificationController
 			AdminNotificationDTO ad = new AdminNotificationDTO();
 			String ad_code = (String)session.getAttribute("ad_code");
 			
-			//System.out.println(nf_title);
-			//System.out.println(nf_content);
-			//System.out.println(ad_code);
-			//System.out.println(na_name);
-			
 			nf_content = nf_content.replaceAll("\r\n", "<br>");
+			na_name = "images/" + na_name;
+			
 			
 			ad.setNf_title(nf_title);
 			ad.setNf_content(nf_content);

@@ -23,6 +23,44 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 제이쿼리 적용 JS -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function()
+{
+	$("#f_btns").click(function()
+	{
+		var form = $("#fileForm")[0];
+		var data = new FormData(form);
+		$.ajax(
+		{
+			type: "POST"
+			, url: "FileReceive.jsp"
+			, data: data
+			, contentType: false
+			, processData: false
+			, success: function(args)
+			{
+				if (args != null)
+				{
+					$("#na_name").val() = args;	
+				}
+				
+			}
+			, error: function(e)
+			{
+				alert(e.responseText);
+			}
+		});	
+		
+		$("#fileForm").submit();
+		
+	});
+});
+
+
+</script>
+
+
 </head>
 <body>
 
@@ -36,7 +74,7 @@
 
 <div class="container content">
     <h2>공지사항 입력</h2>
-    <form action="notificationinsert.woori" method="post"  >
+    <form action="notificationinsert.woori" method="post" enctype="multipart-form/data" id="fileForm" >
         <div class="form-group">
             <label for="title">제목:</label>
             <input type="text" id="nf_title" name="nf_title" class="txt" required>
@@ -47,10 +85,10 @@
         </div>
         <div class="form-group">
             <label for="image">이미지 첨부:</label>
-            <input type="file" id="na_name" name="na_name">
+            <input type="file" id="na_name" name="na_name" >
         </div>
         <div class="form-group">
-            <button type="submit" class="f_btn">등록</button>
+            <button type="button" id="f_btns" class="f_btn">등록</button>
         </div>
     </form>
 </div>
