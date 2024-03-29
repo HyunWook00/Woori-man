@@ -97,6 +97,10 @@
 							<input type="button" onclick="findPostcode(this)" value="우편번호 찾기"><br>
 							<input type="text" class="visited-form-element visited-form-addr1" name="vp_addr1" placeholder="도로명주소" readonly="readonly"><br>
 							<input type="text" class="visited-form-element visited-form-addr2" name="vp_addr2" placeholder="상세주소">
+							<div class="visited-button-div">
+								<button type="button" class="article-button visited-reset">지우기</button>
+								<button type="button" class="article-button visited-delete">삭제</button>
+							</div>
 						</div>
 						</c:when>
 						
@@ -107,6 +111,10 @@
 							<input type="button" onclick="findPostcode(this)" value="우편번호 찾기"><br>
 							<input type="text" class="visited-form-element visited-form-addr1" name="vp_addr1" placeholder="도로명주소" value="${place.vp_addr1 }" readonly="readonly"><br>
 							<input type="text" class="visited-form-element visited-form-addr2" name="vp_addr2" placeholder="상세주소" value="${place.vp_addr2 }">
+							<div class="visited-button-div">
+								<button type="button" class="article-button visited-reset">지우기</button>
+								<button type="button" class="article-button visited-delete">삭제</button>
+							</div>
 						</div>
 						</c:forEach>
 						</c:otherwise>
@@ -114,7 +122,6 @@
 						
 						<div>
 						<button type="button" class="visited-add-btn article-button">추가</button>
-						<button type="button" class="visited-remove-btn article-button">삭제</button>
 						</div>
 						
 					</div>

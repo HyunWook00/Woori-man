@@ -25,3 +25,4 @@ button.meeting-update-btn:hover {background-color: #ff8000;}
 div.main-content-div, div.sub-content-div {display: inline-block;}
 form.meeting-insert-form {display: flex;}
 div.visited-content {padding: 20px; background-color: #ededed; border-radius: 10px; margin: 10px 0px;}
+div.visited-button-div {margin-top: 10px;}

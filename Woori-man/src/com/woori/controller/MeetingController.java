@@ -750,6 +750,8 @@ public class MeetingController
 			mDao.updateMeetingEtc(mt_code, mt_etc);
 			for(int i=0; i<vp_zipcode.length; i++)
 			{
+				if (vp_zipcode[i] == null || vp_zipcode[i].equals(""))
+					continue;
 				place.setVp_zipcode(vp_zipcode[i]);
 				place.setVp_addr1(vp_addr1[i]);
 				place.setVp_addr2(vp_addr2[i]);

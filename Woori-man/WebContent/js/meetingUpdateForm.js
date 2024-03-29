@@ -24,19 +24,26 @@ $(function()
 		element += "<input type=\"text\" class=\"visited-form-element visited-form-addr2\" name=\"vp_addr2\" placeholder=\"상세주소\">";
 		element += "</div>";
 		$(this).before(element);
-		
 	});
 	
 	// 방문장소 삭제 버튼 클릭
-	$(".visited-remove-btn").click(function()
+	$(".visited-delete").click(function()
 	{
 		if (($(".visited-content").length) <= 1)
 		{
 			alert("방문장소는 1개 이상 입력 가능합니다.");
 			return;
 		}
-		$(".visited-content").last().remove();
 		
+		$(this).parent().parent().remove();
+		
+	});
+	
+	// 방문장소 내용 지우기 버튼 클릭
+	$(".visited-reset").click(function()
+	{
+		var obj = $(this).parent().parent();
+		$(obj).find(".visited-form-element").val("");
 	});
 	
 });
