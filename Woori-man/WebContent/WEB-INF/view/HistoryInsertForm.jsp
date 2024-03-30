@@ -62,7 +62,9 @@
 					<input type="hidden" name="ao_code" value="${ao_code }">
 				</div>
 				<div class="board-attach-div">
-					<input type="file" class="form-control-sm board-attach" name="bf_name1" id="bf_name1">
+					<div class="board-attach">
+						<input type="file" class="form-control-sm board-attach" name="ha_name" id="ha_name">
+					</div>
 					<i class="bi bi-plus-square add-attach" role="button"></i>
 				</div>
 				<div class="warning-info">타인의 개인정보를 유출하거나, 타인을 비방하는 내용이 담긴 게시글은 무통보 삭제처리됩니다.</div>

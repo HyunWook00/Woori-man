@@ -10,9 +10,10 @@ button.submit-btn:hover {background-color: #ff8000;}
 button.cancel-btn:hover {background-color: #f2f2f2;}
 div.warning-info {color: #8f8f8f; font-size: 11pt; margin: 20px 0px; text-align: left;}
 div.board-attach-div {text-align: left;}
-input.board-attach {display: block; margin: 5px 0px;}
-i.bi-plus-square {font-size: 15pt; color: #929292;}
-i.bi-plus-square:hover {color: black;}
+input.board-attach {display: inline-block; margin: 5px 0px;}
+i.bi-plus-square {display: block;}
+i.bi-plus-square, i.bi-dash-square {font-size: 15pt; color: #929292;}
+i.bi-plus-square:hover, i.bi-dash-square:hover {color: black;}
 
 @media screen and (max-width: 900px)
 {

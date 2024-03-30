@@ -1,6 +1,4 @@
 // 히스토리 작성폼 전용 자바스크립트
-var attachNum = 2;
-
 $(function()
 {
 	
@@ -14,10 +12,13 @@ $(function()
 		}
 	});
 	
+	// 첨부파일 추가
 	$(".add-attach").click(function()
 	{
-		var name = "bf_name" + attachNum++;
-		var element = "<input type=\"file\" class=\"form-control-sm board-attach\" name=\"" + name + "\" id=\"" + name + "\">";
+		var element = "<div class=\"board-attach\">";
+		element += "<input type=\"file\" class=\"form-control-sm history-attach\" name=\"ha_name\">";
+		element += "<i class=\"bi bi-dash-square delete-attach\" role=\"button\" onclick=deleteAttach(this)></i>";
+		element += "</div>";
 		$(this).before(element);
 	});
 	
@@ -48,5 +49,11 @@ function articleInsert()
 	}
 	document.getElementById("his_content").value = content.trim();
 	document.getElementById("history-insert-form").submit();
+}
+
+//첨부파일 삭제
+function deleteAttach(obj)
+{
+	$(obj).parent().remove();
 }
 

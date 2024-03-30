@@ -1,6 +1,4 @@
 // 자유게시판 전용 자바스크립트
-var attachNum = 2;
-
 $(function()
 {
 	$(".board-title").keyup(function()
@@ -23,12 +21,16 @@ $(function()
 		}
 	});
 	
+	// 첨부파일 추가
 	$(".add-attach").click(function()
 	{
-		var name = "bf_name" + attachNum++;
-		var element = "<input type=\"file\" class=\"form-control-sm board-attach\" name=\"" + name + "\" id=\"" + name + "\">";
+		var element = "<div class=\"board-attach\">";
+		element += "<input type=\"file\" class=\"form-control-sm board-attach\" name=\"ba_name\">";
+		element += "<i class=\"bi bi-dash-square delete-attach\" role=\"button\" onclick=deleteAttach(this)></i>";
+		element += "</div>";
 		$(this).before(element);
 	});
+	
 });
 
 function articleInsert()
@@ -73,8 +75,13 @@ function articleUpdate()
 	}
 	document.getElementById("brd_subject").value = title.trim();
 	document.getElementById("brd_content").value = content.trim();
-	
 	document.getElementById("board-update-form").submit();
+}
+
+// 첨부파일 삭제
+function deleteAttach(obj)
+{
+	$(obj).parent().remove();
 }
 
 

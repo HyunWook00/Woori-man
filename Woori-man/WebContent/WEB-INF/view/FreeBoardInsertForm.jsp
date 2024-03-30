@@ -63,7 +63,9 @@
 				<div class="board-title-div"><input type="text" id="brd_subject" name="brd_subject" placeholder="제목을 입력하세요." class="board-title"></div>
 				<div class="board-content-div"><textarea placeholder="내용을 입력하세요." name="brd_content" id="brd_content" class="board-content"></textarea></div>
 				<div class="board-attach-div">
-					<input type="file" class="form-control-sm board-attach" name="bf_name1" id="bf_name1">
+					<div class="board-attach">
+						<input type="file" class="form-control-sm board-attach" name="ba_name" id="ba_name">
+					</div>
 					<i class="bi bi-plus-square add-attach" role="button"></i>
 				</div>
 				<div class="warning-info">타인의 개인정보를 유출하거나, 타인을 비방하는 내용이 담긴 게시글은 무통보 삭제처리됩니다.</div>
