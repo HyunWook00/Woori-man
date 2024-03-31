@@ -21,6 +21,60 @@
 <!-- 4. 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="js/createGroupForm.js"></script>
+<script type="text/javascript">
+
+$(function()
+{
+	var photo;
+	var allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // 허용된 이미지 파일 형식들
+	
+	$("#cg_profile").change(function()
+	{
+		photo = this.files[0];
+		if (!photo)
+		{
+		   $('.MainCover').attr('src', photo_path);
+          	return;
+		}
+		
+		if (allowedTypes.indexOf(photo.type) === -1) {
+            alert('이미지 파일만 업로드 가능합니다.');
+            // 파일 선택 초기화
+            $('#cg_profile').val('');
+            return;
+        }
+		
+		 //이미지 미리보기 처리
+        var reader = new FileReader();
+        reader.readAsDataURL(photo);
+
+        reader.onload = function(){
+            $('.MainCover').attr('src', reader.result);
+        };
+		
+	});
+	
+	
+	$(".coverImg").click(function()
+	{
+		//alert(this.getAttribute("src")); // images 명 확인
+		selImg = this.getAttribute("src"); // 바꾼 이미지의 src
+		//alert(selImg);
+		
+		// selImg로 번경
+		$('.MainCover').attr('src', selImg);
+		$('#cg_profile').val(selImg);
+		
+		alert($('#cg_profile').val());
+	});
+	
+	
+	
+});
+
+</script>
+
+
 
 
 </head>
@@ -56,7 +110,7 @@
 		<div class="selectCoverDiv ">
 			<div class="main_cover ">
 				<span class="cover">
-					<img src="https://coresos-phinf.pstatic.net/a/34g07i/1_9a3Ud018admxy2dv8suzge7_5ksoqj.png?type=cover_a640" 
+					<img src="images/cg_woori.png" 
 					class="MainCover coverImg" 
 					width="300" height="225" alt="">
 				</span>
@@ -77,35 +131,35 @@
 					</li>
 					<li class="img_list">
 						<button type="button" class="img_btn">
-                                <img class="coverImg" src="https://cdn.pixabay.com/photo/2023/11/04/15/01/maple-8365123_1280.jpg" 
+                                <img class="coverImg" src="images/cg_car.jpg" 
                                 width="120" height="90" >
                                 <span class="mask"></span>
                         </button>
 					</li>
 					<li class="img_list">
 						<button type="button" class="img_btn">
-                                <img class="coverImg" src="https://img.freepik.com/free-photo/interior-design-with-decorative-plant_23-2149551359.jpg?w=1380&t=st=1707835361~exp=1707835961~hmac=09b7fb0d3309e2e7f41030359a47a0d7ffb4f6382b7a1d37cbd8f90d541f4146" 
+                                <img class="coverImg" src="images/cg_fall.jpg" 
                                 width="120" height="90" >
                                 <span class="mask"></span>
                         </button>
 					</li>
 					<li class="img_list">
 						<button type="button" class="img_btn">
-                                <img class="coverImg" src="https://img.freepik.com/free-photo/still-life-of-minimalist-lifestyle_23-2149743899.jpg?w=1380&t=st=1707835409~exp=1707836009~hmac=a8c29057c32dea0ac2f396e92e161dea5b2474745b113ed73364d7383ae7aa33" 
+                                <img class="coverImg" src="images/cg_health.jpg" 
                                 width="120" height="90" >
                                 <span class="mask"></span>
                         </button>
 					</li>
 					<li class="img_list">
 						<button type="button" class="img_btn">
-                                <img class="coverImg" src="https://img.freepik.com/free-photo/cyclist-riding-bicycle-in-nature_23-2150815947.jpg?w=1380&t=st=1707835450~exp=1707836050~hmac=e525e674c328a110ff7772c129a63749872490bff9514a390dccd8a792d406d9" 
+                                <img class="coverImg" src="images/cg_trip.jpg" 
                                 width="120" height="90" >
                                 <span class="mask"></span>
                         </button>
 					</li>
 					<li class="img_list">
 						<button type="button" class="img_btn">
-                                <img class="coverImg" src="https://img.freepik.com/free-photo/suitcase-luggage-baggage-for-summer-travel-and-vacation_185193-109605.jpg?w=1380&t=st=1707835510~exp=1707836110~hmac=50b1cd1666c6f5816c02671b42526a216c831b9389abf0ccce41e96dad8bd3f9" 
+                                <img class="coverImg" src="images/cg_sea.jpg" 
                                 width="120" height="90" >
                                 <span class="mask"></span>
                         </button>

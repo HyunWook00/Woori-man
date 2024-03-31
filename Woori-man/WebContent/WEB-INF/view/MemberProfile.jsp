@@ -34,7 +34,7 @@ $(document).ready(function()
 	<div class="card  profile_card" >
 		<div class="card-body text-center">
             <div class="mt-3 mb-4 ">
-              <img src="https://i.namu.wiki/i/7saHRlH_KjVEOEMwky9mR_mTpdz-u1GUy7jRuwDFmS2kEVJTfoMEOy7X-ciLCrzOqGXdu-TlgaJO_TVMOgXHLg.webp"
+              <img src="images/mainProfile.png"
                 class="rounded-circle img-fluid" style="width: 100px; height: 100px; border: 1px solid #dee2e6;" />
             </div>
             
