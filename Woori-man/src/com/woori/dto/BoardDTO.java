@@ -15,6 +15,7 @@ public class BoardDTO
 	private String brd_content;		// 자유게시글 내용
 	private String brd_view;			// 자유게시글 조회수
 	private String brd_like;			// 자유게시글 좋아요수
+	private int code;
 	
 	// getter / setter 구성
 	public int getNum()
@@ -105,4 +106,13 @@ public class BoardDTO
 	{
 		this.brd_like = brd_like;
 	}
+	public int getCode()
+	{
+		return code;
+	}
+	public void setCode(int code)
+	{
+		this.code = code;
+	}
+	
 }

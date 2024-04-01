@@ -59,7 +59,7 @@
 		</div><!-- .board-info -->
 		
 		<div class="content">
-			<form action="freeboardinsert.woori" class="board-insert-form" id="board-insert-form" method="post">
+			<form action="freeboardinsert.woori" class="board-insert-form" id="board-insert-form" method="post" enctype="multipart/form-data">
 				<div class="board-title-div"><input type="text" id="brd_subject" name="brd_subject" placeholder="제목을 입력하세요." class="board-title"></div>
 				<div class="board-content-div"><textarea placeholder="내용을 입력하세요." name="brd_content" id="brd_content" class="board-content"></textarea></div>
 				<div class="board-attach-div">

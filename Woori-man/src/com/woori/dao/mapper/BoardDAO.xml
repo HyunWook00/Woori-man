@@ -56,6 +56,10 @@
  		FROM BOARD
  		WHERE BRD_CODE = #{brd_code}
  	</delete>
+ 	
+ 	<select id="prcInsertBoard" statementType="CALLABLE" resultType="java.lang.Integer">
+ 		{call PRC_INSERT_BOARD(#{brd_subject}, #{brd_content}, #{gm_code}, #{cg_code}, #{code, mode=OUT, jdbcType=INTEGER})}
+ 	</select>
  
  </mapper>
  

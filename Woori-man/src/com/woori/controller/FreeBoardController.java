@@ -1,5 +1,7 @@
 package com.woori.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oreilly.servlet.MultipartRequest;
 import com.woori.dao.BoardDAO;
 import com.woori.dao.IBoardDAO;
 import com.woori.dao.ICommentDAO;
@@ -78,17 +81,40 @@ public class FreeBoardController
 	// 자유게시판 작성 요청
 	// freeboardinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardinsert.woori", method = RequestMethod.POST)
-	public String freeBoardInsert(Model model, BoardDTO dto, HttpSession session)
+	public String freeBoardInsert(Model model, HttpSession session, HttpServletRequest httpRequest) throws IOException
 	{
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
+		BoardDTO dto = new BoardDTO();
+		String savePath = "C:/Woori-man-images/board-images/";
+		File dir = new File(savePath);
+		if(!dir.exists())
+			dir.mkdirs();
+		String encType = "UTF-8";
+		int max = 5*1024*1024;
+		
+		MultipartRequest request = new MultipartRequest(httpRequest, savePath, max, encType);
+		
+		dto.setBrd_subject(request.getParameter("brd_subject"));
+		dto.setBrd_content(request.getParameter("brd_content"));
 		dto.setCg_code(group.getCg_code());
 		dto.setGm_code(member.getGm_code());
 		try
 		{
 			IBoardDAO dao = sqlSession.getMapper(IBoardDAO.class);
 			dto.setBrd_content(dto.getBrd_content().replaceAll("\n", "<br>"));
-			dao.insertArticle(dto);
+			dao.prcInsertBoard(dto);
+			
+			//System.out.println(request.getOriginalFileName("ba_name"));
+			//System.out.println(request.getFileNames());
+			
+			
+			
+			//for(MultipartFile image : ba_name)
+			//{
+				//String fileName = image.getOriginalFilename();
+				//File file = new File(savePath + fileName);
+			//}
 			
 		} catch (Exception e)
 		{
