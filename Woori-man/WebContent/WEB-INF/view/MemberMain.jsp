@@ -301,7 +301,7 @@ function addFriends(us_code2)
 								<form action="" method="post">  
 									<div  class="gr_option" >
 										<div class="gr_img">
-											<img onclick="enterGroup(${list.cg_code})" src="https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800">
+											<img onclick="enterGroup(${list.cg_code})" src="${list.cg_profile }">
 										</div>
 										<div class="gr_name">
 											<div class="explain" onclick="enterGroup(${list.cg_code})">							

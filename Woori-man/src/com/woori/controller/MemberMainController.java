@@ -48,7 +48,8 @@ public class MemberMainController
 											 					  , @RequestParam("cg_intro") String cg_intro
 											 					  , @RequestParam("gc_code") String gc_code
 											 					  , @RequestParam("cg_profile") String cg_profile
-											 					  , @RequestParam("brd_name") String brd_name) throws SQLException, ClassNotFoundException
+											 					  , @RequestParam("brd_name") String brd_name
+											 					  , @RequestParam("basicImg") String basicImg) throws SQLException, ClassNotFoundException
 		{
 			// 액션 코드
 			MemberMainDAO dao = new MemberMainDAO();
@@ -56,20 +57,16 @@ public class MemberMainController
 			
 			UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
 			String us_code = userDTO.getUs_code();
-			System.out.println(us_code);
+			cg_profile = "images/" + cg_profile;
 			
-			dao.connection();		
-			if (cg_profile == null || cg_profile == "")
-			{
-				cg_profile = "기본프로필";
-			}
+			dao.connection();	
 			
 			if (brd_name == "" || brd_name == null)
 			{
 				brd_name = "자유 게시판";
-			}
-			
-			
+			}			
+			if (basicImg == "" || basicImg == null) // 기본 제공 프로필 사진 선택이 아닐 시
+			{
 				dto.setUs_code(us_code);
 				dto.setCg_name(cg_name);
 				dto.setCg_intro(cg_intro);
@@ -78,9 +75,23 @@ public class MemberMainController
 				dto.setBrd_name(brd_name);
 				
 				dao.createGroup(dto);
-					
 				
-			return "membermain.woori";
+				return "redirect:membermain.woori";
+			}
+			else 
+			{
+				
+				dto.setUs_code(us_code);
+				dto.setCg_name(cg_name);
+				dto.setCg_intro(cg_intro);
+				dto.setGc_code(gc_code);
+				dto.setCg_profile(basicImg);
+				dto.setBrd_name(brd_name);
+				
+				dao.createGroup(dto);
+				return "redirect:membermain.woori";
+			}
+			
 	}
 	
 	// 그룹 수정 메소드 

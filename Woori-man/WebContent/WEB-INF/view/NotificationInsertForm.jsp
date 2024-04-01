@@ -40,11 +40,7 @@ $(function()
 			, processData: false
 			, success: function(args)
 			{
-				if (args != null)
-				{
-					$("#na_name").val() = args;	
-				}
-				
+				alert("등록이 완료되었습니다.");
 			}
 			, error: function(e)
 			{

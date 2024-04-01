@@ -63,9 +63,7 @@ $(function()
 		
 		// selImg로 번경
 		$('.MainCover').attr('src', selImg);
-		$('#cg_profile').val(selImg);
-		
-		alert($('#cg_profile').val());
+		$("#basicImg").val(selImg);
 	});
 	
 	
@@ -89,7 +87,7 @@ $(function()
 
 <!-- container -->
 <div class="container content">
-	<form id="createForm" action="creategroup.woori" method="post">
+	<form id="createForm" action="creategroup.woori" enctype="multipart-form/data"  method="post" >
 	
 	
 		<!-- 그룹 이름 및 한 줄 소개 -->
@@ -125,6 +123,7 @@ $(function()
                     		<label for="cg_profile" class="labelAddPhoto">
                     		<i class="bi bi-camera-fill"></i><br>사진 추가
                     		<input type="file" class="imageUpload" id="cg_profile" name="cg_profile" >
+                    		<input type="hidden" id="basicImg" name="basicImg">
                     		</label>
                     		
                    		 </span>

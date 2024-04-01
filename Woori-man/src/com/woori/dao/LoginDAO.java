@@ -243,7 +243,7 @@ public class LoginDAO
 		
 		String sql = "SELECT MGV.CG_CODE, MGV.CG_NAME, MGV.GC_CODE, MGV.CG_INTRO, TO_CHAR(MGV.CG_DATE, 'YYYY-MM-DD') AS CG_DATE"
 				+ ", NVL(MGV.GB_CODE, 0) AS GB_CODE, MGV.GM_CODE"
-				+ ", (SELECT COUNT(MGV2.CG_CODE) FROM MY_GROUP_VIEW MGV2 WHERE MGV2.CG_CODE = MGV.CG_CODE) AS COUNT"
+				+ ", (SELECT COUNT(MGV2.CG_CODE) FROM MY_GROUP_VIEW MGV2 WHERE MGV2.CG_CODE = MGV.CG_CODE) AS COUNT, MGV.CG_PROFILE"
 				+ " FROM MY_GROUP_VIEW MGV"
 				+ " WHERE US_CODE2 = ? AND CGL_CODE IS NULL AND GW_CODE IS NULL"
 				+ " ORDER BY GB_CODE DESC";
@@ -266,6 +266,7 @@ public class LoginDAO
 			dto.setGb_code(rs.getInt("GB_CODE"));
 			dto.setGm_code(rs.getString("GM_CODE"));
 			dto.setG_count(rs.getInt("COUNT"));
+			dto.setCg_profile(rs.getString("CG_PROFILE"));
 			
 			result.add(dto);
 		}
