@@ -297,12 +297,6 @@ public class GroupMainController
 		{
 			// 계정 정보 조회
 			model.addAttribute("myInfo",dao.myProfileList(us_code));	
-			// 그룹 정보 조회
-			//model.addAttribute("groupInfo", groupInfo);
-			// 그룹 마이 정보 조회
-			//model.addAttribute("groupMyInfo", groupMyInfo);
-			// 그룹 포지션 정보 조회
-			//model.addAttribute("groupPosition", groupPostition);
 			
 			// 내가 작성한 글 조회
 			model.addAttribute("regularBoard", dao.regularBoard(gm_code));
@@ -312,15 +306,12 @@ public class GroupMainController
 						
 			// 개인 일정 조회(캘린더) (2024-03-11 추가완료)
 			groupDAO.connection();
-			
 			myPageMeeting = groupDAO.myMetting(gm_code);
-			//System.out.println(myPageMeeting.get(0).getMt_meet());
-			//System.out.println(myPageMeeting.get(0).getCt_name());
-			//System.out.println(myPageMeeting.get(0).getMt_title());
-
-			groupDAO.close();
 			
-			//System.out.println("다시 왔지롱");
+			// 그룹원 닉네임 중복 확인을 위한 그룹원 닉네임 조회
+			model.addAttribute("groupNickName", groupDAO.groupNickName(cg_code));
+			
+			groupDAO.close();
 			
 		} catch (Exception e)
 		{
@@ -329,7 +320,6 @@ public class GroupMainController
 		
 		// 마이페이지 캘린더
 		session.setAttribute("myPageMeeting", myPageMeeting);
-		
 		session.setAttribute("myInfo", dao.myProfileList(us_code));
 		
 		return "/WEB-INF/view/GroupMyPage.jsp";
@@ -343,18 +333,21 @@ public class GroupMainController
 		// 세션에서 필요한 데이터 받기
 		GroupMemberDTO groupMemberDTO = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		String gm_code = groupMemberDTO.getGm_code();
+		String pos_code = groupMemberDTO.getPos_code();
+		String pos_name = groupMemberDTO.getPos_name();
 		updateDTO.setGm_regdate(groupMemberDTO.getGm_regdate());
 		try
 		{
 			// 필요한 DAO 생성
 			MyInfoDAO dao = new MyInfoDAO();
-			GroupDAO gDao = new GroupDAO();
 			
 			// 데이터베이스 연결
 			dao.connection();
 			
 			// 그룹원 코드 넣기
 			updateDTO.setGm_code(gm_code);
+			updateDTO.setPos_name(pos_name);
+			updateDTO.setPos_code(pos_code);
 			
 			// 그룹 정보 DAO 호출
 			dao.modifyGroupProfile(updateDTO);
@@ -475,12 +468,6 @@ public class GroupMainController
 	{
 		GroupDTO groupDTO = (GroupDTO) session.getAttribute("groupDTO");
 		dto.setGm_code(groupDTO.getGm_code());
-		
-		//System.out.println("컨트롤러 진입");
-		//System.out.println(dto.getGf_amount());
-		//System.out.println(dto.getGf_code());
-		//System.out.println(dto.getGf_start());
-		//System.out.println(dto.getGm_code());
 		
 		try
 		{

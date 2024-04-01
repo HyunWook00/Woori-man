@@ -48,32 +48,45 @@
 
 <script type="text/javascript">
 
-/* 	$(function()
+	// 기간 설정 (추후 수정)
+	$(function()
 	{
-		var start = moment.subtract(29,"days");
-		var end = moment();
+		// 오늘 날짜 뽑기
+		var year = new Date().getFullYear();
+		var month = new Date().getMonth()+1;
+		var date = new Date().getDate();
 		
-		function date(start, end)
-		{
-			$("#date").html(start.format("yyyy-mm-dd") + " - " + end.format("yyyy-mm-dd"));
-		}
+		// yyyy-mm-dd 유형을 맞추기 위해 10보다 작을 경우 앞에 0을 추가
+		if(month < 10)
+			month = '0'+month; 
 		
-		$("#date").daterangepicker(function()
+		// 마지막 날짜 뽑기 (오늘)
+		var closeDate = year + '-' + month + '-' + date;
+		
+		var setMonth = month;
+		
+		// 조회 버튼 클릭 시
+		$(".btnSelect").click(function()
 		{
-			  startDate: "2024-03-14"
-		    , endDate: "2024-03-15"
-			, ranges : {
-				
-				"3개월" : [moment().subtract(1,"month").startOf("month"), moment().subtract(3,"month").endOf("month")]
-				,"6개월" : [moment().subtract(1,"month").startOf("month"), moment().subtract(6,"month").endOf("month")]
-				,"1년" : [moment().startOf("year"), moment().endOf("year")]
-				,"2년" : [moment().subtract(1,"year").startOf("year"), moment().subtract(2,"year").endOf("year")]
-			}
+			var setdate = $("#SelectDate").val();
 			
-		},date);
+			if(month-setMonth < 0)
+			{
+				year --;
+				month = 12 + (month-setMonth) ;
+			}
+		});
+
+		var startDate =  year + '-' + month + '-' + date;
+
+		$("#startDate").val(startDate);
+		$("#closeDate").val(closeDate);
+	});
 		
-		date(start,end);
-	}); */
+		
+		
+	
+
 
 </script>
 
@@ -90,19 +103,21 @@
 <div>
 	<h3 class="aaa">1:1 문의 내역</h3>
 	<hr />
-	<!-- <div class="date">
-		<select name="" id="">
+	 <div class="date">
+	 <input type="date" id="startDate"> - 
+	 <input type="date" id="closeDate">
+		<select name="SelectDate" id="SelectDate">
 			<option value="3">3개월</option>
 			<option value="6">6개월</option>
 			<option value="12">1년</option>
 			<option value="24">2년</option>
-			<option value="">직접설정</option>
+			<option value="-1">직접설정</option>
 		</select>
 		<div id="date">
 			<i class="fa fa-calendar"></i>
 		</div>
 		<button class="btn btnSelect">조회</button>
-	</div> -->
+	</div> 
 	<div class="date">
 		<button class="btn btnInsert" onclick="location.href='inquiryinsertform.woori'">1:1문의 작성</button>
 	</div>

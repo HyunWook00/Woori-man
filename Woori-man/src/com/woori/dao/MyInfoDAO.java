@@ -12,7 +12,6 @@ import com.woori.dto.UserDTO;
 public class MyInfoDAO
 {
 	private Connection conn;
-
 	
 	// 데이터베이스 연결
 	public void connection() throws ClassNotFoundException, SQLException
@@ -26,64 +25,58 @@ public class MyInfoDAO
 		DBConn.close();
 	}
 	
-	// 그룹 정보 수정 메소드
-	public int modifyGroupProfile(GroupMemberDTO dto) 
-	{
-		int result = 0;
-		String sql = "";
-		
-		System.out.println(dto.getGm_nickname());
-		System.out.println(dto.getGm_intro());
-		System.out.println(dto.getGm_code());
-		System.out.println(dto.getGm_profile());
-		
-		try
-		{
-			if (dto.getGm_profile().equals(""))
-			{
-				System.out.println("널");
-				sql = "{call PRC_GROUP_MEMBER_UPDATE(?,NULL,?,?)}";
-				CallableStatement cstmt = conn.prepareCall(sql);
-				System.out.println("프로시저 지나가요~~~");
-				
-				cstmt.setString(1, dto.getGm_nickname());
-				cstmt.setString(2, dto.getGm_intro());
-				cstmt.setInt(3, Integer.parseInt(dto.getGm_code()));
-				
-				System.out.println("셋 했어요 지나가요~~~");
-				
-				result = cstmt.executeUpdate();
-				
-				System.out.println(result);
-				
-				cstmt.close();
-			}
-			else 
-			{
-				//System.out.println("낫널");
-				sql = "{call PRC_GROUP_MEMBER_UPDATE(?,?,?,?)}";
-				CallableStatement cstmt = conn.prepareCall(sql);
-				
-				cstmt.setString(1, dto.getGm_nickname());
-				cstmt.setString(2, dto.getGm_profile());
-				cstmt.setString(3, dto.getGm_intro());
-				cstmt.setInt(4, Integer.parseInt(dto.getGm_code()));
-				
-				result = cstmt.executeUpdate();
-				cstmt.close();
-			}
-			
-			System.out.println("if문 나왔어용");
-			
-		} catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-		
-		System.out.println("try 나왔어요");
-		
-		return result;
-		
+	// 그룹원 정보 수정 메소드
+	public int modifyGroupProfile(GroupMemberDTO dto) {
+	    int result = 0;
+	    String sql = "";
+
+	    try {
+	       
+	    	if (dto.getGm_profile().equals("")) 
+	        {
+	            sql = "{call PRC_GROUP_MEMBER_UPDATE(?,NULL,?,?)}";
+	            CallableStatement cstmt = conn.prepareCall(sql);
+	            cstmt.setString(1, dto.getGm_nickname());
+	            cstmt.setString(2, dto.getGm_intro());
+	            cstmt.setInt(3, Integer.parseInt(dto.getGm_code()));
+
+
+	            result = cstmt.executeUpdate();
+
+	            System.out.println(result);
+
+	            cstmt.close();
+	        } else if (dto.getGm_intro().equals("") && dto.getGm_profile().equals("")) {
+	            //System.out.println("널");
+	            sql = "{call PRC_GROUP_MEMBER_UPDATE(?,NULL,NULL,?)}";
+	            CallableStatement cstmt = conn.prepareCall(sql);
+
+	            cstmt.setString(1, dto.getGm_nickname());
+	            cstmt.setInt(2, Integer.parseInt(dto.getGm_code())); 
+
+	            result = cstmt.executeUpdate();
+
+	            System.out.println(result);
+
+	            cstmt.close();
+	        } else {
+	            sql = "{call PRC_GROUP_MEMBER_UPDATE(?,?,?,?)}";
+	            CallableStatement cstmt = conn.prepareCall(sql);
+
+	            cstmt.setString(1, dto.getGm_nickname());
+	            cstmt.setString(2, dto.getGm_profile());
+	            cstmt.setString(3, dto.getGm_intro());
+	            cstmt.setInt(4, Integer.parseInt(dto.getGm_code()));
+
+	            result = cstmt.executeUpdate();
+	            cstmt.close();
+	        }
+
+	    } catch (Exception e) {
+	        System.out.println(e.toString());
+	    }
+
+	    return result;
 	}
 	
 	// 계정 정보 수정 메소드

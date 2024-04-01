@@ -113,15 +113,36 @@
         }).open();
 	}
 	
+		/* // 그룹 프로필 수정
 		$(function()
 			{
 				$("#updateMyInfo").click(function()
 				{
-					//alert($("#iqc_code").val());
+					if($("#gm_nickname").val()=="")
+					{
+						alert("수정할 닉네임을 입력해주세요!");
+						$("#gm_nickname").focus();
+						return;
+					}
+					
+					${groupNickName}.each(function(index, nickname)
+					{
+						var nickTemp = $("#nickNameTemp").val();
+						
+						if ($("#gm_nickname").val() != nickTemp && $("#gm_nickname").val()==nickname)
+						{
+							alert("중복된 닉네임입니다.");
+							$("#gm_nickname").focus();
+							return;
+						}
+					})
+					
+					$("#updateMyForm").submit();
+					
 				});
 				
 			});
-	
+	  */
 	
 </script>
 </head>
@@ -169,6 +190,7 @@
 						<span class="header">그룹가입일</span> <span class="body">${groupMemberDTO.gm_regdate }</span>
 						<button type="button" class="mybtn" onclick="updateFormMyInfo()">정보 변경</button>				
 					</p>
+					</p>
 				</div>
 			</div>
 			<div class="myPage_MyInfo" id="updateMyInfo">
@@ -181,6 +203,7 @@
 				</div>
 				<div>
 					<p><span class="header">닉네임</span><span class="body"><input type="text" name="gm_nickname" value="${groupMemberDTO.gm_nickname }" placeholder="닉네임을 변경하세요!"/></span></p>
+					<input type="hidden" id="nickNameTemp" value="${groupMemberDTO.gm_nickname }">
 				</div>
 				<div>
 					<p><span class="header">상태메세지</span> <span class="body"><input type="text" name="gm_intro" value="${groupMemberDTO.gm_intro }" placeholder="상태메세지를 변경하세요" /> </span></p>
@@ -252,7 +275,7 @@
 						 <input type="text" id="postcode" name="us_zipcode" placeholder="우편번호" value="${myInfo.us_zipcode}">
 						 <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 					 <div id="addr">
-						 <input type="text" id="address" name="us_addr" placeholder="주소" value="${myInfo.us_addr1}"><br>
+						 <input type="text" id="address" name="us_addr1" placeholder="주소" value="${myInfo.us_addr1}"><br>
 						 <input type="text" id="detailAddress" name="us_addr2" placeholder="상세주소" value="${myInfo.us_addr2 }">
 					 </div>
 					 </span>

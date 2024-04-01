@@ -96,7 +96,7 @@ public class GroupDAO
 	   }
 	   
 	   
-	// 선택한 내 그룹에 진입할 때 해당 그룹원 정보GroupMemberDTO 를 구성하여 세션으로 넘기기
+	   // 선택한 내 그룹에 진입할 때 해당 그룹원 정보GroupMemberDTO 를 구성하여 세션으로 넘기기
 	   public GroupMemberDTO groupMyInfo(String gm_code) throws SQLException
 	   {
 	      GroupMemberDTO result = new GroupMemberDTO();
@@ -324,6 +324,35 @@ public class GroupDAO
 			   System.out.println(e.toString());
 		   }
 		   return result;
+	   }
+	   
+	   
+	   // 그룹원 닉네임 조회
+	   public ArrayList<String> groupNickName(String cg_code)
+	   {
+		   ArrayList<String> nickname = new ArrayList<String>();
+		   
+		   try
+		   {
+			   String sql = "SELECT GM_NICKNAME FROM GROUP_MEMBER GM JOIN GROUP_INVITE GI ON GM.GI_CODE = GI.GI_CODE WHERE GI.CG_CODE = ?";
+			   PreparedStatement pstmt = conn.prepareStatement(sql);
+			   pstmt.setInt(1, Integer.parseInt(cg_code));
+			   
+			   ResultSet rs = pstmt.executeQuery();
+			   while (rs.next())
+			   {
+				   nickname.add(rs.getString("GM_NICKNAME"));
+			   }
+			   
+			   rs.close();
+			   pstmt.close();
+			
+		   } catch (Exception e)
+		   {
+			   System.out.println(e.toString());
+		   }
+		   
+		   return nickname;
 	   }
 	   
 	  
