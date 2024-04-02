@@ -279,9 +279,9 @@ public class NoteController
     	
     	ArrayList<FriendsDTO> searchFriend = new ArrayList<FriendsDTO>();
     	
-    	System.out.println("us-code : " + us_code + " / search : " + searchValue);
+    	//System.out.println("us-code : " + us_code + " / search : " + searchValue);
     	searchFriend = dao.FriendSearch(us_code, searchValue);
-    	System.out.println(searchFriend.size());
+    	//System.out.println(searchFriend.size());
     	
     	model.addAttribute("searchFriend", searchFriend);
 	  

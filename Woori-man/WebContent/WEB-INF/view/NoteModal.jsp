@@ -22,7 +22,7 @@
 	// 받은 쪽지면 답장하기 버튼
 	if (temp != null)
 	{
-		sb.append("<div class='btns text-center'><button type='button' class='btn btn-answer'>답장하기</button></div>");
+		sb.append("<div class='btns text-center'><button type='button' class='btn btn-answer' onclick=\"location.href='notewriteform.woori'\">답장하기</button></div>");
 	}
 	
 	// 제목 보낸사람 받은사람 날짜 내용 

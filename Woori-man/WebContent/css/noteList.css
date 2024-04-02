@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+@font-face 
+{
+	font-family: '라인Seed';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2')
+	    format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+	
+body 
+{
+	font-family: 라인Seed;
+	font-size: 15pt;
+	margin: 0;
+	padding: 0;
+}
+	
+.container 
+{
+	max-width: 70%;
+	margin: 20px auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+	
+h2 
+{
+	text-align: center;
+}
+	
+.message-table th, .message-table td 
+{
+	border: 1px solid #ddd;
+	padding: 10px;
+	border-left: none;
+	border-right: none;
+}
+	
+.message-table th 
+{
+	text-align: center;
+	border-color: #ff8000;
+}
+	
+.message-table td 
+{
+	text-align: center;
+}
+	
+.message-item:hover 
+{
+	background-color: #f9f9f9;
+}
+	
+.message-item .sender 
+{
+	font-weight: bold;
+}
+	
+.message-item .date 
+{
+	color: #999;
+	font-size: 12px;
+}
+	
+.message-item .subject 
+{
+	margin-top: 5px;
+}
+	
+.btn 
+{
+	padding: 10px 20px;
+	background-color: #ff8000;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
+	
+.btn:hover 
+{
+	color: black;
+	background-color: #ff8000;
+}
+	
+.compose-btn 
+{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+	
+.message 
+{
+	background-color: #ff8000;
+	color: white;
+	border-radius: 10px;
+}
+	
+.message:hover 
+{
+	color: black;
+}
+	
+.header-menu 
+{
+	padding-bottom: 100px;
+}
+	
+.bi-envelope 
+{
+	font-size: 25pt;
+	color: #ff8000;
+}
+	
+select 
+{
+	border-radius: 10px;
+	color: black;
+	border: 1px solid #ff8000;
+	height: 25px;
+}
+
+option 
+{
+	background-color: white;
+	color: black;
+}
+	
+.table-wrap 
+{
+	box-sizing: border-box;
+}
+	
+.nav-link 
+{
+	color: black;
+}
+	
+.message-kind 
+{
+	display: flex;
+	justify-content: space-between;
+}
+	
+a 
+{
+	color: black;
+	text-decoration: none;
+}
+	
+.table.active 
+{
+	display: table;
+}
+	
+.title 
+{
+	cursor: pointer;
+}
+	
+.modal-body
+{
+	overflow-y: auto; /* 수직 스크롤바 설정 */
+    max-height: 400px; /* 최대 높이 설정 */
+}
+   
+::-webkit-scrollbar 
+{
+   width: 10px;
+   height: 10px;
+}
+
+::-webkit-scrollbar-track 
+{
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb 
+{
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover 
+{
+    background: #555;
+} 
+
+table.table.note-article>tr>th 
+{
+	width: 100px;
+}
+	
+div.paging
+{
+	margin-top: 50px;
+}
+
+nav.page-nav
+{
+	display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+ul.page-list
+{
+	display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+a.page-control
+{
+	padding: 3.5px 6px;
+	border: 1px solid #b5b5b5;
+	margin: 4px;
+	text-decoration: none;
+	color: #363636;
+	font-size: 10pt;
+	border-radius: 4px;
+	display: inline-flex;
+}
+
+a.page-control:hover
+{
+	background-color: #ff8a3d;
+	border: 1px solid #ff8a3d;
+	color: white;
+}
+
+a.page-control.now-page
+{
+	background-color: #ff8000;
+	border: 1px solid #ff8000;
+	color: white;
+	font-weight: bold;
+}
+
+a.first-page-control, a.last-page-control
+{ 
+	margin: 4px 20px;
+}
