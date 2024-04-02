@@ -66,6 +66,14 @@
  		INSERT INTO BOARD_ATTACH(BA_CODE, BRD_CODE, BA_NAME)
  		VALUES(SEQ_BOARD_ATTACH.NEXTVAL, #{param1}, #{param2})
  	</insert>
+ 	
+ 	<!-- 첨부파일 검색 -->
+ 	<select id="searchAttach" resultType="java.lang.String">
+ 		SELECT BA_NAME
+ 		FROM BOARD_ATTACH
+ 		WHERE BRD_CODE = #{brd_code}
+ 		ORDER BY BA_CODE
+ 	</select>
  
  </mapper>
  

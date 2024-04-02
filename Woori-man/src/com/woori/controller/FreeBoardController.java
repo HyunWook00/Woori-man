@@ -89,12 +89,6 @@ public class FreeBoardController
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
 		BoardDTO dto = new BoardDTO();
-		String savePath = "C:/Woori-man-images/board-images/";
-		File dir = new File(savePath);
-		if(!dir.exists())
-			dir.mkdirs();
-		String encType = "UTF-8";
-		int max = 5*1024*1024;
 		
 		dto.setBrd_subject(request.getParameter("brd_subject"));
 		dto.setBrd_content(request.getParameter("brd_content"));
@@ -106,13 +100,15 @@ public class FreeBoardController
 			dto.setBrd_content(dto.getBrd_content().replaceAll("\n", "<br>"));
 			dao.prcInsertBoard(dto);
 			
+			String savePath = "C:/Woori-man-images/board-images/" + dto.getCode() + "/";
+			File dir = new File(savePath);
+			if(!dir.exists())
+				dir.mkdirs();
+			
 			for(MultipartFile file : request.getFiles("ba_name"))
 			{
-				// 파일 업로드가 된다면
-				File myFile = new File(savePath + file.getOriginalFilename());
-				
-				// 이거 주석 해제하면 되는데 파일 업로드가 갑자기 안 됨~ㅠㅠ;;
-				//dao.insertAttach(dto.getCode(), myFile.getPath());
+				file.transferTo(new File(savePath + file.getOriginalFilename()));
+				dao.insertAttach(dto.getCode(), savePath + file.getOriginalFilename());
 			}
 			
 		} catch (Exception e)
@@ -131,8 +127,9 @@ public class FreeBoardController
 		BoardDTO boardArticle = new BoardDTO();
 		BoardDAO dao = new BoardDAO();
 		IBoardDAO iDao = sqlSession.getMapper(IBoardDAO.class);
-		ArrayList<CommentDTO> comments = null;
-		HashMap<String, ArrayList<RecommentDTO>> recomments = new HashMap<String, ArrayList<RecommentDTO>>();
+		ArrayList<CommentDTO> comments = null;	// 댓글
+		HashMap<String, ArrayList<RecommentDTO>> recomments = new HashMap<String, ArrayList<RecommentDTO>>();	// 대댓글
+		ArrayList<String> attach = null;	// 첨부파일
  		int commentCount = 0;
  		int checkArticleLike = 0;
 		
@@ -147,7 +144,7 @@ public class FreeBoardController
 			{
 				recomments.put(dto.getCommentCode(), dao.getRecommentList(dto.getCommentCode(), ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code()));
 			}
-			
+			attach = iDao.searchAttach(brd_code);
 			
 			// 조회수 처리용 쿠키 작업
 			Cookie[] cookie = request.getCookies();
@@ -176,7 +173,6 @@ public class FreeBoardController
 			boardArticle = iDao.getBoardArticle(brd_code);
 			checkArticleLike = dao.checkArticleLike(brd_code, ((GroupMemberDTO)session.getAttribute("groupMemberDTO")).getGm_code());
 			
-			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
@@ -200,7 +196,7 @@ public class FreeBoardController
 		model.addAttribute("commentCount", commentCount);
 		model.addAttribute("checkArticleLike", checkArticleLike);
 		model.addAttribute("pageNum", pageNum);
-		
+		model.addAttribute("attach", attach);
 		
 		return "/WEB-INF/view/FreeBoardArticle.jsp";
 	}

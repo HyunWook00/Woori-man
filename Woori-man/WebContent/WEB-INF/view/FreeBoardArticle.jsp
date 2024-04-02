@@ -106,6 +106,15 @@
 				<div class="article-detail">
 					${boardArticle.brd_content }
 				</div>
+				
+				<!-- 게시글 이미지 -->
+				<div class="article-attach">
+					<c:forEach items="${attach }" var="image">
+						<div class="image">
+							<img alt="image" src="${image }">
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 			
 			<!-- 게시글 좋아요 영역 -->
