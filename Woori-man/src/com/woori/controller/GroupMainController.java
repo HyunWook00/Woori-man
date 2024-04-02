@@ -3,6 +3,7 @@ package com.woori.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +31,8 @@ import com.woori.dto.GroupMemberDTO;
 import com.woori.dto.MeetingDTO;
 import com.woori.dto.UserDTO;
 
+import sun.misc.Request;
+
 @Controller
 public class GroupMainController
 {
@@ -45,12 +48,8 @@ public class GroupMainController
 		GroupMemberDTO groupMemberDTO = null;				// GroupMemberDTO 변수 생성
 		ArrayList<MeetingDTO> groupMeetingDTO = null;		// ArrayList<MeetingDTO> 변수 생성
 		ArrayList<GroupMemberDTO> groupPostition = null;
-		//String us_codeTemp = "8872984";					// 로그인 연결 전 임시 데이터
-		//session.setAttribute("us_code", us_codeTemp);
 		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
 		String us_code = usdto.getUs_code();
-		//session.setAttribute("us_code", us_code);
-		//System.out.println(us_code);
 		
 		try
 		{
@@ -64,25 +63,16 @@ public class GroupMainController
 	         // 데이터 베이스 연결 (DBConn)
 	         groupDAO.connection();
 	         
-	         //System.out.println(us_code);
-	         
 	         // 그룹 정보 DTO에 데이터 넣기
 	         groupDTO = groupDAO.groupInfo(us_code, cg_code);	
-	         // 출력 정보 (cg_code, gi_code, cg_intro, cg_profile, cg_name, cg_date
-	         //            brd_name, gm_count(멤버 수), gm_code)
 	         String gm_code = groupDTO.getGm_code(); 
-	         
-	         //System.out.println(gm_code);
 	         
 	         // 그룹 포인트 데이터 넣기
 	         groupDTO.setGroup_point(groupDAO.groupPoint(cg_code));
 	         
-	         //System.out.println(groupDTO.getGroup_point());
-	         
 	         // 그룹 멤버 DTO에 데이터 넣기 (그룹 마이정보)
 	         groupMemberDTO = groupDAO.groupMyInfo(gm_code);
 	         groupPostition = groupDAO.groupPosition(cg_code);
-	         // 출력 정보 (cg_code, gm_code, gm_nickname, gm_profile, gm_intro, pos_code, pos_name)
 	         
 	         // 그룹 모임 정보 넣기
 	         groupMeetingDTO = groupDAO.Groupmetting(cg_code);
@@ -119,13 +109,7 @@ public class GroupMainController
 	{
 		// 세션에서 필요한 값 받아오기
 		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
-		//GroupMemberDTO groupMyInfo = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
-		//ArrayList<GroupMemberDTO> groupPostition = (ArrayList<GroupMemberDTO>) session.getAttribute("groupPosition");
-		
 		String cg_code = groupDTO.getCg_code();
-		
-		//System.out.println(cg_code);
-		//System.out.println(groupInfo.getGm_code());
 		
 		try
 		{
@@ -144,11 +128,6 @@ public class GroupMainController
 			// 공지사항 최신글
 			model.addAttribute("noticesList", csDao.noticesList());
 			
-			// 그룹정보(groupInfo), 그룹 마이정보(groupMyInfo)
-			//model.addAttribute("groupInfo", groupInfo);
-			//model.addAttribute("groupMyInfo", groupMyInfo);
-			//model.addAttribute("groupPosition", groupPostition);
-			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
@@ -166,11 +145,7 @@ public class GroupMainController
 		UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
 		String cg_code = groupDTO.getCg_code();
 		String us_code = userDTO.getUs_code();
-		//String us_code = groupDTO.getUs_code();
-		
-		//GroupInviteDAO dao = new GroupInviteDAO();
-		
-		//System.out.println("ㅇㅇㅇㅇㅇ");
+
 		GroupDAO dao = new GroupDAO();
 		GroupInviteDAO dao2 = new GroupInviteDAO();
 		
@@ -179,11 +154,12 @@ public class GroupMainController
 		
 		try
 		{
+			// 그룹원 멤버 리스트
 			dao.connection();
-			//System.out.println("여기");
-			//System.out.println(us_code + cg_code);
 			groupMemberList = dao.groupMemberList(cg_code);
 			dao.close();
+			
+			// 친구 수
 			dao2.connection();
 			count = dao2.count(us_code, cg_code);
 			dao2.close();
@@ -196,9 +172,6 @@ public class GroupMainController
 		
 		model.addAttribute("groupMemberList", groupMemberList);
 		model.addAttribute("count", count);
-		//System.out.println(cg_code);
-		//model.addAttribute("us_code", us_code);
-		//model.addAttribute("cg_code", cg_code);
 		
 		return "/WEB-INF/view/GroupMemberList.jsp";
 	}
@@ -212,7 +185,6 @@ public class GroupMainController
 		ArrayList<FriendsDTO> friendsList = new ArrayList<FriendsDTO>();		
 		
 		GroupInviteDAO dao = new GroupInviteDAO();
-		
 		
 		GroupDTO groupDTO = (GroupDTO)session.getAttribute("groupDTO");
 		UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
@@ -241,7 +213,6 @@ public class GroupMainController
 				System.out.println(e.toString());
 			}
 		}
-		
 		
 		model.addAttribute("friendsList", friendsList);
 		
@@ -308,9 +279,6 @@ public class GroupMainController
 			groupDAO.connection();
 			myPageMeeting = groupDAO.myMetting(gm_code);
 			
-			// 그룹원 닉네임 중복 확인을 위한 그룹원 닉네임 조회
-			model.addAttribute("groupNickName", groupDAO.groupNickName(cg_code));
-			
 			groupDAO.close();
 			
 		} catch (Exception e)
@@ -325,6 +293,32 @@ public class GroupMainController
 		return "/WEB-INF/view/GroupMyPage.jsp";
 	}
 	
+	// 닉네임 중복확인 컨트롤러 
+	@RequestMapping(value = "/groupnicknamecheck.woori")
+	public String nickNameCheck(HttpSession session, ModelMap model, HttpServletRequest request)
+	{
+		// 세션에서 필요한 값 받아오기
+		GroupMemberDTO groupMemberDTO = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		
+		String cg_code = groupMemberDTO.getCg_code();
+		String gm_code = groupMemberDTO.getGm_code();
+		String gm_nickname = request.getParameter("gm_nickname");
+		
+		try
+		{
+			GroupDAO dao = new GroupDAO();
+			dao.connection();
+			model.addAttribute("count",dao.groupNickName(cg_code, gm_code, gm_nickname));
+			dao.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "/WEB-INF/view/GroupNickNameCheckAjax.jsp";
+	}
+	
 	
 	// 그룹 마이 정보 수정 컨트롤러
 	@RequestMapping(value = "/mypageupdate.woori")
@@ -335,16 +329,22 @@ public class GroupMainController
 		String gm_code = groupMemberDTO.getGm_code();
 		String pos_code = groupMemberDTO.getPos_code();
 		String pos_name = groupMemberDTO.getPos_name();
-		updateDTO.setGm_regdate(groupMemberDTO.getGm_regdate());
+		String cg_code = groupMemberDTO.getCg_code();
+		
+		// 세션 재설정
+		ArrayList<GroupMemberDTO> groupPosition = new ArrayList<GroupMemberDTO>();
+		
 		try
 		{
 			// 필요한 DAO 생성
 			MyInfoDAO dao = new MyInfoDAO();
+			GroupDAO groupDAO = new GroupDAO();
 			
 			// 데이터베이스 연결
 			dao.connection();
 			
 			// 그룹원 코드 넣기
+			updateDTO.setGm_regdate(groupMemberDTO.getGm_regdate());
 			updateDTO.setGm_code(gm_code);
 			updateDTO.setPos_name(pos_name);
 			updateDTO.setPos_code(pos_code);
@@ -352,6 +352,10 @@ public class GroupMainController
 			// 그룹 정보 DAO 호출
 			dao.modifyGroupProfile(updateDTO);
 			
+			// 그룹장 및 부그룹장 닉네임 재설정 추후 수정해야됨
+			//groupPosition = groupDAO.groupPosition(cg_code);
+			
+
 			// 데이터베이스 해제
 			dao.close();
 			
@@ -359,9 +363,14 @@ public class GroupMainController
 		{
 			System.out.println(e.toString());
 		}
+		
+		// 세션 재 설정
 		session.removeAttribute("groupMemberDTO");
 		session.setAttribute("groupMemberDTO", updateDTO);
-	
+		
+		//session.removeAttribute("groupPosition");
+		//session.setAttribute("groupPosition", groupPosition);
+		
 		return "redirect:groupmypage.woori";
 	}
 	

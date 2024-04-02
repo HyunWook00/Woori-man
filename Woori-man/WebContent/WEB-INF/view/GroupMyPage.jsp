@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -112,37 +113,75 @@
             }
         }).open();
 	}
-	
-		/* // 그룹 프로필 수정
-		$(function()
-			{
-				$("#updateMyInfo").click(function()
+
+	// 그룹 프로필 수정
+	$(function() 
+	{
+	    $("#updateFormMyInfo").click(function() 
+	    {
+	        // 닉네임이 공백 일 경우
+	        if ($("#gm_nickname").val() == "") 
+	        {
+	            alert("수정할 닉네임을 입력해주세요!");
+	            $("#gm_nickname").focus();
+	            return;
+	        }
+	        
+	        if($("#gm_nickname").val().length > 8)
+	        {
+	        	alert("닉네임은 최대 8글자까지 가능합니다.");
+	        	$("#gm_nickname").focus();
+		        return;
+	        }	
+
+	        var gm_nickname = $("#gm_nickname").val();
+	        var check = "";
+
+	        nicknameCheck(gm_nickname);
+
+	    });
+
+	    // 폼 제출 이벤트 가로채기
+	    $("#updateMyForm").submit(function(event) 
+	    {
+	        event.preventDefault(); // 폼 제출 기본 동작 막기
+	    });
+
+	});
+
+	// 닉네임 중복 체크
+	function nicknameCheck(gm_nickname) 
+	{
+	    var params = "gm_nickname=" + gm_nickname;
+
+	    // 닉네임 중복 체크
+	    $.ajax(
+	    {
+	        type: "get"
+	        ,url: "groupnicknamecheck.woori"
+	        ,data: params
+	        ,success: function(count) 
+	        {
+	            //alert(count);
+	            if (count == 1) 
+	            {
+	                alert("중복되는 닉네임입니다.");
+	            } 
+	            else
 				{
-					if($("#gm_nickname").val()=="")
-					{
-						alert("수정할 닉네임을 입력해주세요!");
-						$("#gm_nickname").focus();
-						return;
-					}
-					
-					${groupNickName}.each(function(index, nickname)
-					{
-						var nickTemp = $("#nickNameTemp").val();
-						
-						if ($("#gm_nickname").val() != nickTemp && $("#gm_nickname").val()==nickname)
-						{
-							alert("중복된 닉네임입니다.");
-							$("#gm_nickname").focus();
-							return;
-						}
-					})
-					
-					$("#updateMyForm").submit();
-					
-				});
-				
-			});
-	  */
+	                $("#updateMyForm").unbind('submit').submit(); // 중복이 없을 경우 폼 제출
+	            }
+	        }
+	        ,beforeSend : false
+	        ,error: function(e) 
+	        {
+	            alert(e.responseText);
+	        }
+
+	    });
+	
+	};
+
 	
 </script>
 </head>
@@ -202,7 +241,7 @@
 					</p>
 				</div>
 				<div>
-					<p><span class="header">닉네임</span><span class="body"><input type="text" name="gm_nickname" value="${groupMemberDTO.gm_nickname }" placeholder="닉네임을 변경하세요!"/></span></p>
+					<p><span class="header">닉네임</span><span class="body"><input type="text" id="gm_nickname" name="gm_nickname" value="${groupMemberDTO.gm_nickname }" placeholder="닉네임을 변경하세요!"/></span></p>
 					<input type="hidden" id="nickNameTemp" value="${groupMemberDTO.gm_nickname }">
 				</div>
 				<div>
@@ -211,7 +250,7 @@
 				<div>
 					<p>
 						<span class="header">그룹가입일</span> <span class="body">${groupMemberDTO.gm_regdate }</span>
-						<button type="submit" class="mybtn" id="updateMyInfo" >변경하기</button>				
+						<button type="submit" class="mybtn" id="updateFormMyInfo" >변경하기</button>				
 						<button type="button" class="mybtn" onclick="location.href='groupmypage.woori'">취소</button>				
 					</p>
 				</div>

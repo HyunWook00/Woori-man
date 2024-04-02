@@ -40,10 +40,9 @@ public class MyInfoDAO
 	            cstmt.setString(2, dto.getGm_intro());
 	            cstmt.setInt(3, Integer.parseInt(dto.getGm_code()));
 
-
 	            result = cstmt.executeUpdate();
 
-	            System.out.println(result);
+	            //System.out.println(result);
 
 	            cstmt.close();
 	        } else if (dto.getGm_intro().equals("") && dto.getGm_profile().equals("")) {
@@ -56,7 +55,7 @@ public class MyInfoDAO
 
 	            result = cstmt.executeUpdate();
 
-	            System.out.println(result);
+	            //System.out.println(result);
 
 	            cstmt.close();
 	        } else {
@@ -72,7 +71,8 @@ public class MyInfoDAO
 	            cstmt.close();
 	        }
 
-	    } catch (Exception e) {
+	    } catch (Exception e) 
+	    {
 	        System.out.println(e.toString());
 	    }
 

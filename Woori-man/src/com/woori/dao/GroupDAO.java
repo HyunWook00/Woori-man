@@ -252,7 +252,7 @@ public class GroupDAO
 			   PreparedStatement pstmt = conn.prepareStatement(sql);
 			   pstmt.setInt(1, Integer.parseInt(gm_code));
 			   
-			   System.out.println(gm_code);
+			   //System.out.println(gm_code);
 			   
 			   ResultSet rs = pstmt.executeQuery();
 			   while (rs.next())
@@ -327,22 +327,25 @@ public class GroupDAO
 	   }
 	   
 	   
-	   // 그룹원 닉네임 조회
-	   public ArrayList<String> groupNickName(String cg_code)
+	   // 그룹원 닉네임 중복 조회
+	   public int groupNickName(String cg_code, String gm_code, String gm_nickname)
 	   {
-		   ArrayList<String> nickname = new ArrayList<String>();
+		   int result = 0;
 		   
 		   try
 		   {
-			   String sql = "SELECT GM_NICKNAME FROM GROUP_MEMBER GM JOIN GROUP_INVITE GI ON GM.GI_CODE = GI.GI_CODE WHERE GI.CG_CODE = ?";
+			   String sql = "SELECT COUNT(GM_NICKNAME) AS COUNT FROM GROUP_MEMBER GM JOIN GROUP_INVITE GI ON GM.GI_CODE = GI.GI_CODE WHERE GI.CG_CODE = ? AND GM.GM_CODE != ? AND GM_NICKNAME = ?";
 			   PreparedStatement pstmt = conn.prepareStatement(sql);
 			   pstmt.setInt(1, Integer.parseInt(cg_code));
+			   pstmt.setInt(2, Integer.parseInt(gm_code));
+			   pstmt.setString(3, gm_nickname);
+			   
+			   //System.out.println(gm_nickname);
 			   
 			   ResultSet rs = pstmt.executeQuery();
-			   while (rs.next())
-			   {
-				   nickname.add(rs.getString("GM_NICKNAME"));
-			   }
+			   
+			   if(rs.next())
+				  result = rs.getInt("COUNT");
 			   
 			   rs.close();
 			   pstmt.close();
@@ -352,7 +355,7 @@ public class GroupDAO
 			   System.out.println(e.toString());
 		   }
 		   
-		   return nickname;
+		   return result;
 	   }
 	   
 	  
