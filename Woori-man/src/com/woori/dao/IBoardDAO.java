@@ -16,4 +16,5 @@ public interface IBoardDAO
 	public int deleteArticle(String brd_code);
 	public int countArticle(String cg_code);
 	public Integer prcInsertBoard(BoardDTO dto);
+	public int insertAttach(int param1, String param2);	// 게시글코드, 파일명
 }

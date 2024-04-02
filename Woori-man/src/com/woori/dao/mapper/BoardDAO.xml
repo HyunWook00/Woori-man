@@ -60,6 +60,12 @@
  	<select id="prcInsertBoard" statementType="CALLABLE" resultType="java.lang.Integer">
  		{call PRC_INSERT_BOARD(#{brd_subject}, #{brd_content}, #{gm_code}, #{cg_code}, #{code, mode=OUT, jdbcType=INTEGER})}
  	</select>
+ 	
+ 	<!-- 첨부파일 등록 -->
+ 	<insert id="insertAttach">
+ 		INSERT INTO BOARD_ATTACH(BA_CODE, BRD_CODE, BA_NAME)
+ 		VALUES(SEQ_BOARD_ATTACH.NEXTVAL, #{param1}, #{param2})
+ 	</insert>
  
  </mapper>
  

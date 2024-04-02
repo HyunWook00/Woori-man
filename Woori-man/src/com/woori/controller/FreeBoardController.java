@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.woori.dao.BoardDAO;
@@ -81,7 +84,7 @@ public class FreeBoardController
 	// 자유게시판 작성 요청
 	// freeboardinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardinsert.woori", method = RequestMethod.POST)
-	public String freeBoardInsert(Model model, HttpSession session, HttpServletRequest httpRequest) throws IOException
+	public String freeBoardInsert(Model model, HttpSession session, MultipartHttpServletRequest request)
 	{
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
@@ -93,8 +96,6 @@ public class FreeBoardController
 		String encType = "UTF-8";
 		int max = 5*1024*1024;
 		
-		MultipartRequest request = new MultipartRequest(httpRequest, savePath, max, encType);
-		
 		dto.setBrd_subject(request.getParameter("brd_subject"));
 		dto.setBrd_content(request.getParameter("brd_content"));
 		dto.setCg_code(group.getCg_code());
@@ -105,16 +106,14 @@ public class FreeBoardController
 			dto.setBrd_content(dto.getBrd_content().replaceAll("\n", "<br>"));
 			dao.prcInsertBoard(dto);
 			
-			//System.out.println(request.getOriginalFileName("ba_name"));
-			//System.out.println(request.getFileNames());
-			
-			
-			
-			//for(MultipartFile image : ba_name)
-			//{
-				//String fileName = image.getOriginalFilename();
-				//File file = new File(savePath + fileName);
-			//}
+			for(MultipartFile file : request.getFiles("ba_name"))
+			{
+				// 파일 업로드가 된다면
+				File myFile = new File(savePath + file.getOriginalFilename());
+				
+				// 이거 주석 해제하면 되는데 파일 업로드가 갑자기 안 됨~ㅠㅠ;;
+				//dao.insertAttach(dto.getCode(), myFile.getPath());
+			}
 			
 		} catch (Exception e)
 		{
