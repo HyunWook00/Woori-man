@@ -35,7 +35,7 @@
 		sb.append("<div class='group col-6 col-md-4 col-xl-3'>");
 		sb.append("			<div  class='gr_option' >");
 		sb.append("				<div class='gr_img'>");
-		sb.append("					<img onclick=enterGroup(" + groupList.get(i).getCg_code() + ") src=https://mblogthumb-phinf.pstatic.net/MjAyMjAxMjVfMjAy/MDAxNjQzMTAyOTk2NjE0.gw_H_jjBM64svaftcnheR6-mHHlmGOyrr6htAuxPETsg.8JJSQNEA5HX2WmrshjZ-VjmJWqhmgE40Qm5csIud9VUg.JPEG.minziminzi128/IMG_7374.JPG?type=w800>");
+		sb.append("					<img onclick=enterGroup(" + groupList.get(i).getCg_code() + ") src=" + groupList.get(i).getCg_profile() + ">");
 		sb.append("				</div>");
 		sb.append("				<div class='gr_name'>");
 		sb.append("					<div class='explain' onclick=enterGroup("+ groupList.get(i).getCg_code() + ")>");
