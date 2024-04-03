@@ -84,7 +84,7 @@ public class FreeBoardController
 	// 자유게시판 작성 요청
 	// freeboardinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboardinsert.woori", method = RequestMethod.POST)
-	public String freeBoardInsert(Model model, HttpSession session, MultipartHttpServletRequest request)
+	public String freeBoardInsert(HttpSession session, MultipartHttpServletRequest request)
 	{
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");

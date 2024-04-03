@@ -4,3 +4,4 @@
 .meeting-info {border: 1px solid #ddd; border-radius: 5px; padding: 10px 20px; display: inline-block;}
 .article-detail {margin: 0px 50px;}
 .article-content {text-align: left; padding: 0px 50px; display: flex; flex-direction: row; align-items: flex-start;}
+.article-attach {margin-top: 50px;}

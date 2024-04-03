@@ -17,6 +17,7 @@ public class HistoryDTO
 	private String mt_code;			// 히스토리 관련 모임 코드
 	private String mt_title;		// 히스토리 관련 모임명
 	private String cg_code;			// 그룹 코드
+	private int code;
 	
 	// getter / setter
 	
@@ -116,6 +117,13 @@ public class HistoryDTO
 	{
 		this.his_like = his_like;
 	}
-	
+	public int getCode()
+	{
+		return code;
+	}
+	public void setCode(int code)
+	{
+		this.code = code;
+	}
 	
 }

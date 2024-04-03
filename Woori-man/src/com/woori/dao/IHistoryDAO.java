@@ -8,7 +8,6 @@ import com.woori.dto.MeetingDTO;
 import com.woori.dto.RecommentDTO;
 
 // 히스토리 관련 dao
-
 public interface IHistoryDAO
 {
 	public ArrayList<HistoryDTO> getHistoryList(String mt_code);			// 히스토리 글목록
@@ -20,6 +19,8 @@ public interface IHistoryDAO
 	public ArrayList<MeetingDTO> getMeetingList(String cg_code);			// 모임 리스트
 	public String checkHistory(String param1, String param2);				// 히스토리 작성 가능여부 확인
 	public int insertArticle(HistoryDTO dto);								// 히스토리 작성
+	public Integer prcInsertHistory(HistoryDTO dto);						// 히스토리 작성(프로시저)
+	public int insertAttach(int param1, String param2);						// 게시글코드, 파일명
 	public int insertHistoryComment(CommentDTO dto);						// 댓글 작성
 	public int insertHistoryRecomment(RecommentDTO dto);					// 대댓글 작성
 	public ArrayList<CommentDTO> getHistoryComment(String his_code);		// 댓글 목록
@@ -33,4 +34,5 @@ public interface IHistoryDAO
 	public int insertArticleReport(String param1, String param2);			// 게시글 신고
 	public int deleteArticle(String his_code);								// 게시글 삭제
 	public int updateArticle(HistoryDTO dto);								// 게시글 수정
+	public ArrayList<String> searchAttach(String his_code);					// 첨부파일 검색
 }

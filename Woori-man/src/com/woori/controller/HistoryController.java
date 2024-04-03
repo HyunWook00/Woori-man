@@ -1,5 +1,6 @@
 package com.woori.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.woori.dao.ICommentDAO;
 import com.woori.dao.IHistoryDAO;
@@ -97,6 +100,7 @@ public class HistoryController
 		ArrayList<CommentDTO> commentList = null;
 		HashMap<String, ArrayList<RecommentDTO>> recommentList = new HashMap<String, ArrayList<RecommentDTO>>();
 		int totalCommentCount = 0;
+		ArrayList<String> attach = null;	// 첨부파일
 		
 		String articleCookie = "historyArticle" + his_code;
 		
@@ -108,6 +112,7 @@ public class HistoryController
 			checkArticleLike = hDao.getArticleLike(his_code, member.getGm_code());
 			commentList = hDao.getHistoryComment(his_code);
 			totalCommentCount += commentList.size();
+			attach = hDao.searchAttach(his_code);
 			for(CommentDTO dto : commentList)
 			{
 				recommentList.put(dto.getCommentCode(), hDao.getHistoryRecomment(dto.getCommentCode()));
@@ -160,7 +165,7 @@ public class HistoryController
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("recommentList", recommentList);
 		model.addAttribute("totalCommentCount", totalCommentCount);
-	
+		model.addAttribute("attach", attach);
 		
 		return "/WEB-INF/view/HistoryArticle.jsp";
 	}
@@ -247,17 +252,32 @@ public class HistoryController
 	// 히스토리 입력
 	// historyinsert.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "historyinsert.woori", method = RequestMethod.POST)
-	public String insertHistory(HistoryDTO dto, HttpSession session)
+	public String insertHistory(HttpSession session, MultipartHttpServletRequest request)
 	{
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		HistoryDTO dto = new HistoryDTO();
+		
+		dto.setHis_content(request.getParameter("his_content"));
+		dto.setAo_code(request.getParameter("ao_code"));
 		dto.setHis_content(dto.getHis_content().replaceAll("\n", "<br>"));
 		dto.setCg_code(member.getCg_code());
 		dto.setGm_code(member.getGm_code());
-		
 		try
 		{
 			IHistoryDAO dao = sqlSession.getMapper(IHistoryDAO.class);
-			dao.insertArticle(dto);
+			dao.prcInsertHistory(dto);
+			
+			String savePath = "C:/Woori-man-images/history-images/" + dto.getCode() + "/";
+			File dir = new File(savePath);
+			if(!dir.exists())
+				dir.mkdirs();
+			
+			for(MultipartFile file : request.getFiles("ha_name"))
+			{
+				file.transferTo(new File(savePath + file.getOriginalFilename()));
+				dao.insertAttach(dto.getCode(), savePath + file.getOriginalFilename());
+			}
+			
 			
 		} catch (Exception e)
 		{

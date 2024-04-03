@@ -16,7 +16,7 @@ $(function()
 	$(".add-attach").click(function()
 	{
 		var element = "<div class=\"board-attach\">";
-		element += "<input type=\"file\" class=\"form-control-sm history-attach\" name=\"ha_name\">";
+		element += "<input type=\"file\" class=\"form-control-sm board-attach\" name=\"ha_name\">";
 		element += "<i class=\"bi bi-dash-square delete-attach\" role=\"button\" onclick=deleteAttach(this)></i>";
 		element += "</div>";
 		$(this).before(element);

@@ -103,8 +103,18 @@
 			
 				<!-- 게시글 내용 -->
 				<div class="article-detail">
-					${historyArticle.his_content }<br>
+					${historyArticle.his_content }
+					
+					<!-- 게시글 이미지 -->
+					<div class="article-attach">
+						<c:forEach items="${attach }" var="image">
+							<div class="image">
+								<img alt="image" src="${image }">
+							</div>
+						</c:forEach>
+					</div>
 				</div>
+				
 			</div><!-- .article-content -->
 			
 			<!-- 게시글 좋아요 영역 -->

@@ -164,5 +164,24 @@
  		SET HIS_CONTENT = #{his_content}
  		WHERE HIS_CODE = #{his_code}
  	</update>
+ 	
+ 	<!-- 히스토리 작성 -->
+ 	<select id="prcInsertHistory" statementType="CALLABLE" resultType="java.lang.Integer">
+ 		{call PRC_INSERT_HISTORY(#{his_content}, #{ao_code}, #{cg_code}, #{code, mode=OUT, jdbcType=INTEGER})}
+ 	</select>
+ 	
+ 	<!-- 첨부파일 등록 -->
+ 	<insert id="insertAttach">
+ 		INSERT INTO HISTORY_ATTACH(HA_CODE, HIS_CODE, HA_NAME)
+ 		VALUES(SEQ_HISTORY_ATTACH.NEXTVAL, #{param1}, #{param2})
+ 	</insert>
+ 	
+ 	<!-- 첨부파일 검색 -->
+ 	<select id="searchAttach" resultType="java.lang.String">
+ 		SELECT HA_NAME
+ 		FROM HISTORY_ATTACH
+ 		WHERE HIS_CODE = #{his_code}
+ 		ORDER BY HA_CODE
+ 	</select>
  </mapper>
  

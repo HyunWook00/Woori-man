@@ -56,7 +56,7 @@
 		</div><!-- .board-info -->
 		
 		<div class="content">
-			<form action="historyinsert.woori" class="board-insert-form" id="history-insert-form" method="post">
+			<form action="historyinsert.woori" class="board-insert-form" id="history-insert-form" method="post" enctype="multipart/form-data">
 				<div class="board-content-div">
 					<textarea placeholder="내용을 입력하세요." name="his_content" id="his_content" class="board-content"></textarea>
 					<input type="hidden" name="ao_code" value="${ao_code }">
