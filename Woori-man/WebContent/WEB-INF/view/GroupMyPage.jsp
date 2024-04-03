@@ -162,7 +162,7 @@
 	        ,data: params
 	        ,success: function(count) 
 	        {
-	            //alert(count);
+	            alert(count);
 	            if (count == 1) 
 	            {
 	                alert("중복되는 닉네임입니다.");

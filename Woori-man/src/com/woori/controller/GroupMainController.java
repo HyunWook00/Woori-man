@@ -47,7 +47,7 @@ public class GroupMainController
 		GroupDTO groupDTO = null;							// GroupDTO 변수 생성
 		GroupMemberDTO groupMemberDTO = null;				// GroupMemberDTO 변수 생성
 		ArrayList<MeetingDTO> groupMeetingDTO = null;		// ArrayList<MeetingDTO> 변수 생성
-		ArrayList<GroupMemberDTO> groupPostition = null;
+		ArrayList<GroupMemberDTO> groupPosition = null;
 		UserDTO usdto = (UserDTO) session.getAttribute("userDTO");
 		String us_code = usdto.getUs_code();
 		
@@ -72,7 +72,7 @@ public class GroupMainController
 	         
 	         // 그룹 멤버 DTO에 데이터 넣기 (그룹 마이정보)
 	         groupMemberDTO = groupDAO.groupMyInfo(gm_code);
-	         groupPostition = groupDAO.groupPosition(cg_code);
+	         groupPosition = groupDAO.groupPosition(cg_code);
 	         
 	         // 그룹 모임 정보 넣기
 	         groupMeetingDTO = groupDAO.Groupmetting(cg_code);
@@ -89,7 +89,7 @@ public class GroupMainController
 	         //그룹 멤버 DTO 
 	         session.setAttribute("groupMemberDTO", groupMemberDTO);
 	         //그룹 직위(그룹장, 부그룹장)
-	         session.setAttribute("groupPosition", groupPostition);
+	         session.setAttribute("groupPosition", groupPosition);
 	         //그룹 모임 
 	         session.setAttribute("groupMeetingDTO", groupMeetingDTO);
 	         //그룹 탈퇴 가능 여부
@@ -332,13 +332,13 @@ public class GroupMainController
 		String cg_code = groupMemberDTO.getCg_code();
 		
 		// 세션 재설정
-		ArrayList<GroupMemberDTO> groupPosition = new ArrayList<GroupMemberDTO>();
+		//ArrayList<GroupMemberDTO> groupPosition = null;
 		
 		try
 		{
 			// 필요한 DAO 생성
 			MyInfoDAO dao = new MyInfoDAO();
-			GroupDAO groupDAO = new GroupDAO();
+			//GroupDAO groupDAO = new GroupDAO();
 			
 			// 데이터베이스 연결
 			dao.connection();
@@ -354,7 +354,6 @@ public class GroupMainController
 			
 			// 그룹장 및 부그룹장 닉네임 재설정 추후 수정해야됨
 			//groupPosition = groupDAO.groupPosition(cg_code);
-			
 
 			// 데이터베이스 해제
 			dao.close();
