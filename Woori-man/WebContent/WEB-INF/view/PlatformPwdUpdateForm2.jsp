@@ -11,104 +11,13 @@
 <title>PlatformPwdUpdateForm.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
+<link rel="stylesheet" href="/Woori-man/css/PlatformMyPageMain2.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-
-#PPU_Container{
-    /* position: relative; */
-    z-index: 20;
-    width: 100%;
-    height: 817px;
-    margin: 0 auto;
-    background-color: #fafafa;
-}
-
-#PPU_Content{
-	width: 80%;
-	height: 80%;
-	margin: 0 auto;
-	margin-top: 50px;
-	padding: 32px 51px 95px 50px;
-	/* background-color: blue; */
-}
-
-.PwdForm{
-	line-height: 14px;
-    width: 356px;
-    margin: 0 auto;
-    padding: 32px 29px 32px;
-    border: 1px solid #dadada;
-    background: #fff;
-    height: 500px;
-}
-
-.PwdForm_header{
-	width: 356px;
-	height: 105px;
-	/* background-color: yellow; */
-}
-
-.PwdForm_header h2{
-	font-size: 20px;
-	line-height: 22px;
-}
-
-.PwdForm_header_p{
-	margin-top: 8px;
-	padding-left: 5px;
-	color: #666;
-	font-size: 12px;
-}
-
-.PwdForm_header_p em{
-	color: #ff6020;
-	font-style: normal;
-}
-
-.PwdForm_update{
-	width: 356px;
-	height: 470px;
-	margin-top: 20px;
-}
-
-
-
-
-.PwdForm_update [class^=update_row1] {
-    position: relative;
-    height: 43px;
-    border: 1px solid #ccc;
-}
-
-.PwdForm_update [class^=update_row1] input[type=password]{
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 16px;
-    height: 16px;
-    margin: 15px 9px 0;
-    vertical-align: top;
-    color: #333;
-    border: 0;
-}
-
-.PwdForm_update .btn_area{
-	margin-top: 31px;
-	padding: 0;
-}
-
-.PwdForm_update .btn_area button{
-	width: 100px;
-	height: 40px;
-    margin-top: 0;
-    color: #fff;
-    border: none;
-    /* background: #ff8a3d; */
-}
-
 
 
 </style>
