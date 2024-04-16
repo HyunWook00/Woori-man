@@ -103,6 +103,7 @@
 <div>
 	<h3 class="aaa">1:1 문의 내역</h3>
 	<hr />
+	<!--
 	 <div class="date">
 	 <input type="date" id="startDate"> - 
 	 <input type="date" id="closeDate">
@@ -117,7 +118,8 @@
 			<i class="fa fa-calendar"></i>
 		</div>
 		<button class="btn btnSelect">조회</button>
-	</div> 
+	</div>
+	--> 
 	<div class="date">
 		<button class="btn btnInsert" onclick="location.href='inquiryinsertform.woori'">1:1문의 작성</button>
 	</div>

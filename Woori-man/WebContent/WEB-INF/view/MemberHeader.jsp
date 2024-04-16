@@ -16,7 +16,8 @@
 <body>
 
 <!-- 로그인 성공한 회원들 페이지에 띄워주는 헤더 메뉴들 -->
-<!-- 2023-02-09 노은하 -->
+<!-- 2023-02-09 노은하  -->
+<!-- 수정전으로 롤백 -->
 
 <div class="header-menu row">
 	<nav class="navbar member-header bg-body-tertiary">
