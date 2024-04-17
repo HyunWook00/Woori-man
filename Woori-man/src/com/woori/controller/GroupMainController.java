@@ -406,8 +406,7 @@ public class GroupMainController
 		return "redirect:groupmypage.woori";
 	}
 	
-	// 링크 연결 용
-	
+	// Ajax 링크 연결 용
 	@RequestMapping(value = "/mypagecalendarajax.woori")
 	public String myPageCalendarAjax(ModelMap model)
 	{
@@ -419,7 +418,6 @@ public class GroupMainController
 	{
 		return "/WEB-INF/view/SideCalendarAjax.jsp";
 	}
-	
 	
 	// 회비 페이지 컨트롤러
 	@RequestMapping(value = "/groupfee.woori")
@@ -443,7 +441,6 @@ public class GroupMainController
 		}
 		
 		//System.out.println("페이지로 이동~~");
-		
 		return "/WEB-INF/view/GroupFee.jsp";
 	}
 	
@@ -467,7 +464,7 @@ public class GroupMainController
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:groupfee.woori";
+		return "redirect:groupfee.woori";9
 	}
 	
 	// 회비 수정 컨트롤러
