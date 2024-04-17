@@ -23,12 +23,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.woori.dao.BoardDAO;
+import com.woori.dao.GroupDAO;
 import com.woori.dao.IBoardDAO;
 import com.woori.dao.ICommentDAO;
+import com.woori.dao.IPointDAO;
 import com.woori.dto.BoardDTO;
 import com.woori.dto.CommentDTO;
 import com.woori.dto.GroupDTO;
 import com.woori.dto.GroupMemberDTO;
+import com.woori.dto.PointDTO;
 import com.woori.dto.RecommentDTO;
 
 // 자유게시판 관련 컨트롤러
@@ -89,14 +92,20 @@ public class FreeBoardController
 		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
 		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
 		BoardDTO dto = new BoardDTO();
+		PointDTO point = new PointDTO();
 		
 		dto.setBrd_subject(request.getParameter("brd_subject"));
 		dto.setBrd_content(request.getParameter("brd_content"));
 		dto.setCg_code(group.getCg_code());
 		dto.setGm_code(member.getGm_code());
+		point.setCg_code(group.getCg_code());
+		point.setGm_code(member.getGm_code());
+		point.setPk_code(String.valueOf(2));
+		point.setScore(2);
 		try
 		{
 			IBoardDAO dao = sqlSession.getMapper(IBoardDAO.class);
+			IPointDAO pointDao = sqlSession.getMapper(IPointDAO.class);
 			dto.setBrd_content(dto.getBrd_content().replaceAll("\n", "<br>"));
 			dao.prcInsertBoard(dto);
 			
@@ -107,9 +116,20 @@ public class FreeBoardController
 			
 			for(MultipartFile file : request.getFiles("ba_name"))
 			{
+				if (file.getOriginalFilename().equals(""))
+					break;
 				file.transferTo(new File(savePath + file.getOriginalFilename()));
 				dao.insertAttach(dto.getCode(), savePath + file.getOriginalFilename());
 			}
+			
+			pointDao.insertPoint(point);
+			
+			// 세션에 올라간 그룹정보에 변경된 포인트 점수 적용
+			GroupDAO groupDao = new GroupDAO();
+			groupDao.connection();
+			group.setGroup_point(groupDao.groupPoint(group.getCg_code()));
+			session.setAttribute("groupDTO", group);
+			groupDao.close();
 			
 		} catch (Exception e)
 		{
@@ -316,12 +336,30 @@ public class FreeBoardController
 	// 자유게시판 게시글 삭제 관련 컨트롤러
 	// freeboarddelete.woori 라는 요청이 들어오면 연결되는 컨트롤러
 	@RequestMapping(value = "/freeboarddelete.woori", method = RequestMethod.GET)
-	public String deleteArticle(Model model, @RequestParam("brd_code") String brd_code)
+	public String deleteArticle(Model model, @RequestParam("brd_code") String brd_code, HttpSession session)
 	{
+		GroupMemberDTO member = (GroupMemberDTO)session.getAttribute("groupMemberDTO");
+		GroupDTO group = (GroupDTO)session.getAttribute("groupDTO");
+		PointDTO point = new PointDTO();
+		point.setCg_code(group.getCg_code());
+		point.setGm_code(member.getGm_code());
+		point.setPk_code(String.valueOf(2));
+		point.setScore(2);
+		
 		try
 		{
-			IBoardDAO iDao = sqlSession.getMapper(IBoardDAO.class);
-			iDao.deleteArticle(brd_code);
+			IBoardDAO dao = sqlSession.getMapper(IBoardDAO.class);
+			IPointDAO pointDAO = sqlSession.getMapper(IPointDAO.class);
+			
+			dao.deleteArticle(brd_code);
+			pointDAO.cancelPoint(point);
+			
+			// 세션에 올라간 그룹정보에 변경된 포인트 점수 적용
+			GroupDAO groupDao = new GroupDAO();
+			groupDao.connection();
+			group.setGroup_point(groupDao.groupPoint(group.getCg_code()));
+			session.setAttribute("groupDTO", group);
+			groupDao.close();
 			
 		} catch (Exception e)
 		{

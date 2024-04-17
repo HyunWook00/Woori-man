@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.woori.dao.IPointDAO">
+ 
+ 	<!-- 포인트 획득 -->
+ 	<insert id="insertPoint">
+ 		INSERT INTO GROUP_POINT(GP_CODE, GP_SCORE, CG_CODE, PS_CODE, GM_CODE, PK_CODE)
+ 		VALUES(SEQ_GROUP_POINT.NEXTVAL, #{score}, #{cg_code}, 2, #{gm_code}, #{pk_code})
+ 	</insert>
+ 	
+ 	<!-- 포인트 획득 취소 -->
+ 	<insert id="cancelPoint">
+ 		INSERT INTO GROUP_POINT(GP_CODE, GP_SCORE, CG_CODE, PS_CODE, GM_CODE, PK_CODE)
+ 		VALUES(SEQ_GROUP_POINT.NEXTVAL, #{score}, #{cg_code}, 3, #{gm_code}, #{pk_code})
+ 	</insert>
+ 
+ </mapper>
