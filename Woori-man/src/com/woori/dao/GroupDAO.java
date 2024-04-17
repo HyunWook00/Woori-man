@@ -134,13 +134,17 @@ public class GroupDAO
 		   
 			try
 			{
-				   String sql = "SELECT TO_NUMBER(누적포인트) - TO_NUMBER(사용포인트) AS GROUP_POINT"
-				   			 + " FROM (SELECT (SELECT SUM(GP_SCORE)FROM GROUP_POINT WHERE PS_CODE = 2) AS 누적포인트"
-				   			 + ", (SELECT SUM(GP_SCORE) FROM GROUP_POINT WHERE PS_CODE = 1) AS 사용포인트"
-				   			 + " FROM CREATE_GROUP WHERE CG_CODE = ?)";
+				   String sql = "SELECT TO_NUMBER(누적포인트) - (TO_NUMBER(사용포인트) + TO_NUMBER(취소포인트)) AS GROUP_POINT"
+				   		+ " FROM (SELECT NVL((SELECT SUM(GP_SCORE) FROM GROUP_POINT WHERE PS_CODE = 2 AND CG_CODE = ?),0) AS 누적포인트"
+				   		+ ", NVL((SELECT SUM(GP_SCORE) FROM GROUP_POINT WHERE PS_CODE = 1 AND CG_CODE = ?),0) AS 사용포인트"
+				   		+ ", NVL((SELECT SUM(GP_SCORE) FROM GROUP_POINT WHERE PS_CODE = 3 AND CG_CODE = ?),0) AS 취소포인트"
+				   		+ " FROM CREATE_GROUP WHERE CG_CODE = ?)";
 				   
 				   PreparedStatement pstmt = conn.prepareStatement(sql);
 				   pstmt.setString(1, cg_code);
+				   pstmt.setString(2, cg_code);
+				   pstmt.setString(3, cg_code);
+				   pstmt.setString(4, cg_code);
 				   
 				   ResultSet rs = pstmt.executeQuery();
 				   
@@ -154,7 +158,7 @@ public class GroupDAO
 			{
 				System.out.println(e.toString());
 			}
-			   
+			 
 		   return result;
 	   }
 	   
