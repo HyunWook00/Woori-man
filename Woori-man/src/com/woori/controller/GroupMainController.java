@@ -464,7 +464,7 @@ public class GroupMainController
 			System.out.println(e.toString());
 		}
 		
-		return "redirect:groupfee.woori";9
+		return "redirect:groupfee.woori";
 	}
 	
 	// 회비 수정 컨트롤러
