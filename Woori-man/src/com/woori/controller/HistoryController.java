@@ -274,6 +274,8 @@ public class HistoryController
 			
 			for(MultipartFile file : request.getFiles("ha_name"))
 			{
+				if(file.getOriginalFilename().equals(""))
+					break;
 				file.transferTo(new File(savePath + file.getOriginalFilename()));
 				dao.insertAttach(dto.getCode(), savePath + file.getOriginalFilename());
 			}
