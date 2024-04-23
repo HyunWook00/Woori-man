@@ -10,11 +10,23 @@
 </tr>
 <tr>
   <th>기간</th>
-  <td>2024.02.19 ~ 2024.03.19<br>2024.03.21 ~ (추가 진행)</td>
+  <td>2024.02.19 ~ 2024.03.19<br>2024.03.21 ~ 2024.04.04 (추가 진행)<br>2024.04.09 ~ (버전업)</td>
 </tr>
 <tr>
   <th>작업 툴</th>
   <td>Eclipse, SQLDeveloper</td>
+</tr>
+<tr>
+  <th>사용 기술</th>
+  <td>HTML, CSS, Javascript, JAVA, Mybatis, Jquery,<br>AJAX, Spring Framework, Bootstrap</td>
+</tr>
+<tr>
+  <th>데이터베이스</th>
+  <td>Orable 11g Express</td>
+</tr>
+<tr>
+  <th>웹 서버</th>
+  <td>Apache Tomcat 8.5</td>
 </tr>
 </table>
 <br><br>
