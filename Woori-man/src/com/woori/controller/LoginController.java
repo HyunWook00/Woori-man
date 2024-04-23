@@ -154,7 +154,13 @@ public class LoginController
 		
 		userDTO = dao.setUser(us_code);
 		
-		session.setAttribute("userDTO", userDTO); 
+		// 미열람 쪽지 갯수, 등록한 친구 수 세션 구성 - 노은하 추가(2024-04-23)
+		int messageCount = dao.countMessage(us_code);
+		int friendsCount = dao.countFriends(us_code);
+		
+		session.setAttribute("userDTO", userDTO);
+		session.setAttribute("messageCount", messageCount);
+		session.setAttribute("friendsCount", friendsCount);
 		
 		dao.close();
 	
@@ -253,6 +259,7 @@ public class LoginController
 				
 				
 				session.setAttribute("allMeeting", allMeeting);
+				session.setAttribute("groupCount", groupList.size());
 				model.addAttribute("userDTO", userDTO);
 				model.addAttribute("groupList", groupList);
 				model.addAttribute("friendsList", friendsList);

@@ -276,5 +276,58 @@ public class LoginDAO
 		
 		return result;
 	}
+	
+	// 헤더용 미열람 쪽지 갯수 출력 메소드 - 노은하 추가(2024-04-23)
+	public int countMessage(String us_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "SELECT COUNT(*) AS COUNT FROM NOTE_VIEW WHERE NOTE_READ IS NULL AND NOTE_RECEIVEDELETE IS NULL AND RECEIVER = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(us_code));
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				result = rs.getInt("COUNT");
+			}
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 헤더용 내가 등록한 친구 갯수 출력 메소드 - 노은하 추가(2024-04-23)
+	public int countFriends(String us_code)
+	{
+		int result = 0;
+		
+		try
+		{
+			String sql = "SELECT COUNT(*) AS COUNT FROM FRIENDS_LIST_VIEW WHERE US_CODE1 = ? AND US_CODE2 != ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(us_code));
+			pstmt.setInt(2, Integer.parseInt(us_code));
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				result = rs.getInt("COUNT");
+			}
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
 
 }
