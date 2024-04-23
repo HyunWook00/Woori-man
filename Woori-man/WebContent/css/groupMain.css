@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-*
+/* *
 {
 	font-family: 라인Seed;
 }
-
+ */
 h4
 {
 	font-family: 라인Seed;
@@ -19,6 +19,7 @@ h4
 {
 	width: 280px;
     margin-inline-start: 140px;
+    font-family: 라인Seed;
 }
 
 .groupMain_main {
@@ -137,6 +138,7 @@ h4
 .more
 {
 	color: black;
+	font-family: 라인Seed;
 	text-decoration: none;
 	text-align: right;		
 }
