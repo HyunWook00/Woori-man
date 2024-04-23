@@ -19,7 +19,7 @@
 			
 				<li class="nav-item member-header-item">
 					<div class="icon member-header-icon-div position-relative">
-						<a href="notelist.woori"><i class="bi bi-envelope-fill member-header-icon"></i></a>
+						<a href="notelist.woori"><i class="bi bi-envelope-fill member-header-icon member-header-message"></i></a>
 						<!-- 미확인 쪽지 갯수 -->
 						<c:if test="${messageCount > 0 }">
 							<span class="position-absolute translate-middle badge rounded-pill bg-danger message-count">
@@ -32,7 +32,8 @@
 				
 				<!-- 웹 브라우저가 625 이상 일때 보여지는 메뉴들 -->
 				<li class="nav-item default-menu member-header-item">
-					<div class="icon member-header-icon-div member-info-icon"><i class="bi bi-person-circle member-header-icon"></i></div>
+					<div class="icon member-header-icon-div member-info-icon" role="button"><i class="bi bi-person-circle member-header-icon"></i></div>
+					<div class="member-header-hover-text">회원정보</div>
 					<div class="member-header-user-info">
 						<div class="profile-close">
 							<i class="bi bi-x-square" role="button" id="header-user-info-closed-btn"></i>
@@ -60,20 +61,30 @@
 					<script type="text/javascript">
 						$(function()
 						{
-							$(".member-info-icon").mouseenter(function()
+							var infoFlag = false;
+							
+							$(".member-info-icon").click(function()
 							{
-								$(".member-header-user-info").slideDown();
+								if(!infoFlag)
+								{
+									$(".member-header-user-info").slideDown();
+									infoFlag = true;
+								}
+								else if(infoFlag)
+								{
+									$(".member-header-user-info").slideUp();
+									infoFlag = false;
+								}
 							});
 							$("#header-user-info-closed-btn").click(function()
 							{
 								$(".member-header-user-info").slideUp();
 							});
-							
 						});
 					</script>
 				</li>
 				<li class="nav-item default-menu member-header-item">
-					<div class="icon member-header-icon-div"><i class="bi bi-door-open-fill member-header-icon" onclick="location.href='logout.woori'" role="button"></i></div>
+					<div class="icon member-header-icon-div"><i class="bi bi-door-open-fill member-header-icon member-header-log-out" onclick="location.href='logout.woori'" role="button"></i></div>
 					<div class="member-header-hover-text">로그아웃</div>
 				</li>
 				

@@ -9,7 +9,7 @@
 }
 
 /* 공통 css */
-#member-header-wrap {height: 70px;}
+#member-header-wrap {height: 70px; font-weight: normal;}
 #member-header-wrap>.navbar {background-color: white !important; padding: 0; height: inherit;}
 
 /* 호버텍스트 */
@@ -38,7 +38,7 @@ span.message-count {left: 90%; top: -50%;}
 div.member-header-user-info {position: absolute; background-color: white; border: 1px solid #ff8000; z-index: 2000;
 							 border-radius: 5px; font-family: 프리텐다드; top:55px; right: -10px; width: 250px;
 							 font-size: 12pt; line-height: normal; display: none;}
-div.member-header-user-info>div {width: inherit; padding: 0 15px;}
+div.member-header-user-info>div {width: inherit; padding: 0 15px; text-align: left;}
 div.member-header-user-info>div.profile-close {text-align: right; padding-top: 5px; color: #838383;}
 div.member-header-user-info>div.profile-image {text-align: center; margin-bottom: 10px 0;}
 div.profile-image>img {width: 55px;}
@@ -47,11 +47,12 @@ div.member-header-user-info>div.profile-name>span {font-size: 18pt; font-weight:
 span#user-id {font-size: 14pt;}
 span#user-code {font-size: 10pt; font-weight: 100; color: #838383; padding-left: 5px;}
 div.member-header-user-info>div.profile-button {padding: 10px 15px; text-align: center; display: flex; justify-content: space-evenly;}
-div.member-header-user-info>div.profile-button>a.button-user-modify {background-color: #ff8a3d; font-size: 11pt; padding: 5px; 
+div.member-header-user-info>div.profile-button>a.button-user-modify {background-color: #ff8a3d; font-size: 11pt; padding: 5px; text-decoration: none; 
 															 		 display: inline-block; border-radius: 7px; color: white;}
 div.member-header-user-info>div.profile-button>a.button-logout {border: 1px solid #ff8a3d !important; font-size: 11pt; padding: 5px; display: inline-block;
-																border-radius: 7px; color: black !important;}
-span#friends-edit>a {color: #ababab !important; font-size: 8.5pt; border: 1px solid #ababab; border-radius: 3px; padding: 1px 4px; margin-left: 3px;}
+																border-radius: 7px; color: black !important; text-decoration: none;}
+span#friends-edit>a {color: #ababab !important; font-size: 8.5pt; border: 1px solid #ababab; border-radius: 3px;
+					 padding: 1px 4px; margin-left: 3px; text-decoration: none;}
 
 /* 화면 크기 클때 css */
 @media screen and (min-width: 625px)
