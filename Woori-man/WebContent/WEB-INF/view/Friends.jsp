@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FriendSearch.jsp</title>
+<title>친구관리 - 우리만!</title>
     
 <!-- 부트스트랩 적용 CSS -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
@@ -23,7 +23,6 @@
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 	
-<link rel="stylesheet" href="css/memberHeader.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/friends.css">
     
@@ -89,10 +88,9 @@
 	</script>
 </head>
 <body>
-
-<div class="header">
+<header>
 	<c:import url="MemberHeader.jsp"></c:import>
-</div>
+</header>
 
 <div><h1 class="nav justify-content-center" style="padding-top: 20px;">친구 관리</h1></div><br><hr>
 <div class="container">
@@ -100,10 +98,25 @@
         <div class="col-md-4">
             <div class="friend-list">
                 <div class="profile">
-                    <img src="${myProfile.us_profile }" alt="profile picture">
+                	<div class="profile-title">내 프로필 <a class="profile-edit" href="user.woori"><i class="bi bi-gear"></i></a></div>
+                	<div class="profile-info">
+	                	<div class="profile-picture">
+		                	<img src="${userDTO.us_profile == null ? 'images/basic-profile.png' : us_profile }">
+	                	</div>
+	                    <div class="profile-detail">
+	                    	<div class="profile-user"><span id="profile-name">${userDTO.us_name }</span><span id="profile-id">(${userDTO.us_id })</span>
+	                    	<span id="profile-code">#${userDTO.us_code }</span></div>
+		                    <div class="profile-signup">가입일 : ${userDTO.us_signup }</div>
+	                    </div>
+                	</div>
+                	<%-- 
+                    <img src="${userDTO.us_profile }" alt="profile picture">
+                     --%>
+                   	<%-- 
                     <h3 class="myName">이름 : ${myProfile.us_name }</h3>
                     <h3 class="myName">ID : ${myProfile.us_id }</h3>
                     <h3 class="myName">가입일 : ${myProfile.us_signup }</h3>
+                     --%>
                 </div>
             </div>
         </div>
@@ -126,13 +139,25 @@
                 <ul class="lists">
                 	<c:forEach var="friend" items="${friendsList }">
                 	<li>
-                		<div class="friend-profile"><img src="${friend.us_profile }" alt="profile picture">
-	                     # ${friend.us_code2 } ${friend.us_name } (${friend.us_id })</div>
+                		<div class="friend-profile">
+                			<div class="friend-picture">
+		                		<img src="${friend.us_profile == null ? 'images/basic-profile.png' : friend.us_profile}" alt="profile picture">
+                			</div>
+                			<div class="friend-user">
+                				<span class="friend-name">${friend.us_name }</span><span class="friend-id">(${friend.us_id })</span> <span class="friend-code">#${friend.us_code2 }</span> 
+                			</div>
+	                       </div>
 	                    <div class="btns">
-	                    <button type="button" class="message_btn" 
-	                    onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }&us_id=${friend.us_id }&us_name=${friend.us_name }'"><i class="bi bi-envelope"></i></button>
-	                    <button type="button" class="delete_btn" value="${friend.fr_code }"><i class="bi bi-x-circle"></i></button>
-                    </div>
+	                    	<div class="btns-btn">
+			                    <button type="button" class="message_btn" 
+			                    onclick="location.href='friendnotewriteform.woori?us_code2=${friend.us_code2}&fr_code=${friend.fr_code }&us_id=${friend.us_id }&us_name=${friend.us_name }'"><i class="bi bi-envelope"></i></button>
+			                    <div class="friend-hover-text">쪽지전송</div>
+	                    	</div>
+	                    	<div class="btns-btn">
+			                    <button type="button" class="delete_btn" value="${friend.fr_code }"><i class="bi bi-x-circle"></i></button>
+			                    <div class="friend-hover-text">친구삭제</div>
+	                    	</div>
+                    	</div>
                 	</li>
                 	</c:forEach>
                     
