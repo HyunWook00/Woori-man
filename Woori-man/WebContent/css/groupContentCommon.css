@@ -9,6 +9,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: '프리텐다드';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
 body
 { text-align: center;}
 

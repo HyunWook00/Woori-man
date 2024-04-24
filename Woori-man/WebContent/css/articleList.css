@@ -6,6 +6,11 @@ span.group-name {color: #ff8000; font-size: 30pt;}
 div.count-article {font-family: 맑은 고딕; display: flex; align-items: center; margin: 0px 10px;}
 #new-article, #total-article {padding: 0px 5px;}
 
+/* 게시판 정보(설명) */
+div.board-explanation {background-color: #f3f3f3; text-align: left; font-family: 프리텐다드; color: #a1a1a1;}
+div.board-explanation>ul {padding: 5px 10px; margin: 0; margin-bottom: 10px;}
+li {list-style: none;}
+
 /* 검색 메뉴창 */
 div.content-search {margin-bottom: 10px; text-align: right; display: flex; justify-content: space-between;}
 button.btn-search {background-color: #ff8000; border-radius: 30px; width: 50px; border: none;}

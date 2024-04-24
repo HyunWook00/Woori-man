@@ -116,9 +116,9 @@
 <!-- 각 그룹별 모임 목록 페이지 -->
 
 <!-- 헤더 영역 -->
-<div class="header">
+<header>
 	<c:import url="MemberHeader.jsp"></c:import>
-</div>
+</header>
 
 <!-- 상단메뉴 영역 -->
 <div class="menuList">
@@ -140,8 +140,17 @@
 		<!-- 게시판 정보 -->
 		<div class="board-info">
 		
-			<!-- 추후 세션에서 그룹명 받아오기 -->
 			<div class="board-title">[ <span class="group-name">${groupDTO.cg_name }</span> ] 모임 게시판</div>
+			
+			<!-- 게시판 설명 -->
+			<div class="board-explanation">
+				<ul>
+					<li>1. 정기모임은 그룹장, 부그룹장만 발의가 가능합니다.</li>
+					<li>2. 모임 발의자는 자동으로 참석 처리됩니다.</li>
+					<li>3. 모임 발의자가 모임 세부사항을 수정하면 참석 여부 확인은 초기화됩니다.</li>
+					<li>4. 모임일 5일 전 모임 확정 처리가 되며, 모임 세부사항 수정, 철회, 참석 여부 변경이 불가능합니다.</li>
+				</ul>
+			</div>
 		
 		</div>
 		
